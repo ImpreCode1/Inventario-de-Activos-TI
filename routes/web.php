@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::resource('cargos', App\Http\Controllers\CargoController::class);
+Route::resource('cargos', App\Http\Controllers\CargoController::class)->middleware('auth');
 
 
 

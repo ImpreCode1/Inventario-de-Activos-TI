@@ -318,7 +318,7 @@ return [
                 ],
                 [
                     'text' => 'Registro cargo',
-                    'url'  => 'cargo',
+                    'url'  => 'cargos',
                     'icon' => 'far fa fa-address-card'
                 ],
                 [

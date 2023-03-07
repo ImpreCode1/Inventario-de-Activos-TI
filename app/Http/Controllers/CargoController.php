@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cargo;
 
 class CargoController extends Controller
 {
@@ -13,7 +14,10 @@ class CargoController extends Controller
      */
     public function index()
     {
-        //
+
+
+        $cargos = Cargo::all();
+        return view('cargo.index')->with('cargos', $cargos);
     }
 
     /**
@@ -23,7 +27,7 @@ class CargoController extends Controller
      */
     public function create()
     {
-        //
+        return view('cargo.create');
     }
 
     /**
@@ -34,7 +38,13 @@ class CargoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cargos = new Cargo();
+        $cargos-> cargo = $request->get('cargo');
+        $cargos-> detalle = $request->get('detalle');
+
+        $cargos->save();
+
+        return redirect('/cargos');
     }
 
     /**
@@ -56,7 +66,8 @@ class CargoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cargo = Cargo::find($id);
+        return view('cargo.edit')->with('cargo',$cargo);
     }
 
     /**
@@ -68,7 +79,13 @@ class CargoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cargo = Cargo::find($id);
+        $cargo-> cargo = $request->get('cargo');
+        $cargo-> detalle = $request->get('detalle');
+
+        $cargo->save();
+
+        return redirect('/cargos');
     }
 
     /**
@@ -79,6 +96,8 @@ class CargoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cargo = Cargo::find($id);
+        $cargo->delete();
+        return redirect('/cargos');
     }
 }
