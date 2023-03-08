@@ -5,37 +5,33 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css">
 @stop
 
-@section('title', 'Dashboard')
+@section('title', 'Departamentos')
 
 @section('content_header')
-    <h1>Registro de Cargos</h1>
+    <h1>Registro de Departamentos</h1>
 @stop
 
 @section('content')
 <div class="card">
 <div class="card-body">
-    <a href="cargos/create" class="btn btn-primary">CREAR</a>
+    <a href="departamentos/create" class="btn btn-primary">CREAR</a>
     <p></p>
-    <table id="cargos" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+    <table id="departametos" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
         <thead class="bg-prymary">
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Cargo</th>
-                <th scope="col">Detalle</th>
-                <th>Acciones</th>
-                
+                <th>Acciones</th>       
             </tr>
         </thead>
         <tbody>
-            @foreach ($cargos as $cargo)
+            @foreach ($departamentos as $departamento)
             <tr>
-                <td>{{ $cargo->id }}</td>
-                <td>{{ $cargo->cargo }}</td>
-                <td>{{ $cargo->detalle }}</td>
+                <td>{{ $departamento->id }}</td>
+                <td>{{ $departamento->nombre }}</td>
                 <td>
-                    <form action="{{ route ('cargos.destroy', $cargo->id) }}" method="POST">
-                    <a  href="/cargos/{{ $cargo->id }}/edit" class="btn btn-info">Editar</a>
-                    
+                    <form action="{{ route ('departamentos.destroy', $departamento->id) }}" method="POST">
+                    <a  href="/departamentos/{{ $departamento->id }}/edit" class="btn btn-info">Editar</a>
                     @csrf
                     @method('DELETE')
                     <Button type="submit" class="btn btn-danger">Eliminar</Button>
@@ -60,7 +56,7 @@
 
 <script>
     $(document).ready(function () {
-    $('#cargos').DataTable({
+    $('#departametos').DataTable({
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "Nada encontrado - disculpa",

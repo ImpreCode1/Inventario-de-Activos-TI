@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Departamento;
 
 class DepartamentoController extends Controller
 {
@@ -13,7 +14,8 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        //
+        $departamentos = Departamento::all();
+        return view('departamento.index')->with('departamentos', $departamentos);
     }
 
     /**
@@ -23,7 +25,7 @@ class DepartamentoController extends Controller
      */
     public function create()
     {
-        //
+        return view('departamento.create');
     }
 
     /**
@@ -34,7 +36,12 @@ class DepartamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $departamentos = new Departamento();
+        $departamentos-> nombre = $request->get('nombre');
+
+        $departamentos->save();
+
+        return redirect('/departamentos');
     }
 
     /**
@@ -56,7 +63,8 @@ class DepartamentoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $departamento = Departamento::find($id);
+        return view('departamento.edit')->with('departamento',$departamento);
     }
 
     /**
@@ -68,7 +76,12 @@ class DepartamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $departamento = Departamento::find($id);
+        $departamento-> nombre = $request->get('nombre');
+
+        $departamento->save();
+
+        return redirect('/departamentos');
     }
 
     /**
@@ -79,6 +92,8 @@ class DepartamentoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $departamento = Departamento::find($id);
+        $departamento->delete();
+        return redirect('/departamentos');
     }
 }

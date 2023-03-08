@@ -323,7 +323,7 @@ return [
                 ],
                 [
                     'text' => 'Registro departamento',
-                    'url'  => 'departamento',
+                    'url'  => 'departamentos',
                     'icon' => 'far fa fa-users'
                 ],
                 [
