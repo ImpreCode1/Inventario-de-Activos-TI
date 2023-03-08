@@ -31,7 +31,6 @@ class EmpleadoController extends Controller
         $cargos = Cargo::all();
         $departamentos = Departamento::all();
         $modoUsuarios = ModoUsuario::all();
-        
         return view('empleado.create', compact('cargos', 'departamentos', 'modoUsuarios'));
     }
 
@@ -82,7 +81,10 @@ class EmpleadoController extends Controller
     public function edit($id)
     {
         $empleado = Empleado::find($id);
-        return view('empleado.edit')->with('empleado',$empleado);
+        $cargo = Cargo::all();
+        $departamento = Departamento::all();
+        $modoUsuario = ModoUsuario::all();
+        return view('empleado.edit', compact( 'empleado', 'cargo', 'departamento', 'modoUsuario'));
     }
 
     /**
@@ -94,7 +96,23 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $empleado = Empleado::find($id);
+        $empleado-> nombre = $request->get('nombre');
+        $empleado-> id_cargo = $request->get('id_cargo');
+        $empleado-> id_depto = $request->get('id_depto');
+        $empleado-> clave_tel = $request->get('clave_tel');
+        $empleado-> num_exten = $request->get('num_exten');
+        $empleado-> retirado = $request->get('retirado');
+        $empleado-> usu_dominio = $request->get('usu_dominio');
+        $empleado-> clave_dominio = $request->get('clave_dominio');
+        $empleado-> email = $request->get('email');
+        $empleado-> nom_usu = $request->get('nom_usu');
+        $empleado-> clave_usu = $request->get('clave_usu');
+        $empleado-> id_modo_usuario = $request->get('id_modo_usuario');
+
+        $empleado->save();
+
+        return redirect('/empleados');
     }
 
     /**
@@ -105,6 +123,8 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $empleado = Empleado::find($id);
+        $empleado->delete();
+        return redirect('/empleados');
     }
 }
