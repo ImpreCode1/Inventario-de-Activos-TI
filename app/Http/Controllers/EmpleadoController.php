@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empleado;
+use App\Models\Cargo;
+use App\Models\ModoUsuario;
+use App\Models\Departamento;
 use Illuminate\Http\Request;
 
 class EmpleadoController extends Controller
@@ -13,7 +17,8 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        //
+        $empleados = Empleado::all();
+        return view('empleado.index')->with('empleados', $empleados);
     }
 
     /**
@@ -23,7 +28,11 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        //
+        $cargos = Cargo::all();
+        $departamentos = Departamento::all();
+        $modoUsuarios = ModoUsuario::all();
+        
+        return view('empleado.create', compact('cargos', 'departamentos', 'modoUsuarios'));
     }
 
     /**
@@ -34,7 +43,23 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $empleados = new Empleado();
+        $empleados-> nombre = $request->get('nombre');
+        $empleados-> id_cargo = $request->get('id_cargo');
+        $empleados-> id_depto = $request->get('id_depto');
+        $empleados-> clave_tel = $request->get('clave_tel');
+        $empleados-> num_exten = $request->get('num_exten');
+        $empleados-> retirado = $request->get('retirado');
+        $empleados-> usu_dominio = $request->get('usu_dominio');
+        $empleados-> clave_dominio = $request->get('clave_dominio');
+        $empleados-> email = $request->get('email');
+        $empleados-> nom_usu = $request->get('nom_usu');
+        $empleados-> clave_usu = $request->get('clave_usu');
+        $empleados-> id_modo_usuario = $request->get('id_modo_usuario');
+
+        $empleados->save();
+
+        return redirect('/empleados');
     }
 
     /**
@@ -56,7 +81,8 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $empleado = Empleado::find($id);
+        return view('empleado.edit')->with('empleado',$empleado);
     }
 
     /**

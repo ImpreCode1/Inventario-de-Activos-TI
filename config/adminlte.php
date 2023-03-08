@@ -304,7 +304,7 @@ return [
         ],
         [
             'text'        => 'Empleados',
-            'url'         => 'empleado',
+            'url'         => 'empleados',
             'icon'        => 'far fa fa-search',
         ],
         [
