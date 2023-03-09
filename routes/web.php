@@ -21,6 +21,8 @@ Route::get('/', function () {
 Route::resource('cargos', App\Http\Controllers\CargoController::class)->middleware('auth');
 Route::resource('departamentos', App\Http\Controllers\DepartamentoController::class)->middleware('auth');
 Route::resource('empleados', App\Http\Controllers\EmpleadoController::class)->middleware('auth');
+Route::resource('marcas', App\Http\Controllers\MarcaController::class)->middleware('auth');
+
 
 
 

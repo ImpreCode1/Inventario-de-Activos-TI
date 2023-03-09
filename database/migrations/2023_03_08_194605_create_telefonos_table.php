@@ -24,13 +24,12 @@ class CreateTelefonosTable extends Migration
             $table->string('ram', 50);
             $table->string('rom', 50);
             $table->unsignedBigInteger('id_empleado');
+            $table->softDeletes();
 
             $table->timestamps();
 
             $table->foreign('id_marca')->references('id')->on('marcas');
             $table->foreign('id_empleado')->references('id')->on('empleados');
-
-
         });
     }
 

@@ -24,6 +24,7 @@ class CreateAccesoriosTable extends Migration
             $table->string('observaciones', 150)->nullable(true);
             $table->unsignedBigInteger('id_empleado');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('id_categoria')->references('id')->on('categorias');
             $table->foreign('id_marca')->references('id')->on('marcas');

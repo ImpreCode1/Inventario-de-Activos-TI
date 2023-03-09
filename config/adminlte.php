@@ -308,14 +308,9 @@ return [
             'icon'        => 'far fa fa-search',
         ],
         [
-            'text'    => 'Registros',
+            'text'    => 'Registros Varios',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
-                [
-                    'text' => 'Registro producto',
-                    'url'  => '#',
-                    'icon' => 'far fa fa-desktop'
-                ],
                 [
                     'text' => 'Registro cargo',
                     'url'  => 'cargos',
@@ -328,10 +323,33 @@ return [
                 ],
                 [
                     'text' => 'Registro marca',
+                    'url'  => 'marcas',
+                    'icon' => 'far fa fa-bars'
+                ],
+            ],
+            
+        ],
+        [
+            'text'    => 'Inventario Activos',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Portatiles y Cpus',
+                    'url'  => '#',
+                    'icon' => 'far fa fa-address-card'
+                ],
+                [
+                    'text' => 'Accesorios',
+                    'url'  => '#',
+                    'icon' => 'far fa fa-users'
+                ],
+                [
+                    'text' => 'Celulares',
                     'url'  => '#',
                     'icon' => 'far fa fa-bars'
                 ],
             ],
+            
         ],
         [
             'text'        => 'Carta de responsabilidad',

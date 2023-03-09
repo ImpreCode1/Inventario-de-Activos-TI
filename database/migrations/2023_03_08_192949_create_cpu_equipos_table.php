@@ -28,6 +28,7 @@ class CreateCpuEquiposTable extends Migration
             $table->unsignedBigInteger('id_empleado');
             $table->timestamps();
             $table->string('nom_equipo', 50);
+            $table->softDeletes();
 
             $table->foreign('id_categoria')->references('id')->on('categorias');
             $table->foreign('id_marca')->references('id')->on('marcas');
