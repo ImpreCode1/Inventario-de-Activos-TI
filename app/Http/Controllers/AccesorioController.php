@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Accesorio;
+use App\Models\Categoria;
+use App\Models\Marca;
+use App\Models\Empleado;
 
 class AccesorioController extends Controller
 {
@@ -13,7 +17,8 @@ class AccesorioController extends Controller
      */
     public function index()
     {
-        //
+        $accesorios = Accesorio::all();
+        return view('accesorio.index')->with('accesorios', $accesorios);
     }
 
     /**
@@ -23,7 +28,10 @@ class AccesorioController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Categoria::all();
+        $marcas = Marca::all();
+        $empleados = Empleado::all();
+        return view('accesorio.create', compact('categorias', 'marcas', 'empleados')); 
     }
 
     /**
@@ -34,7 +42,19 @@ class AccesorioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $accesorio = new Accesorio();
+        $accesorio-> id_categoria = $request->get('id_categoria');
+        $accesorio-> id_marca = $request->get('id_marca');
+        $accesorio-> serie = $request->get('serie');
+        $accesorio-> n_activo = $request->get('n_activo');
+        $accesorio-> n_serial = $request->get('n_serial');
+        $accesorio-> n_parte = $request->get('n_parte');
+        $accesorio-> observaciones = $request->get('observaciones');
+        $accesorio-> id_empleado = $request->get('id_empleado');
+
+        $accesorio->save();
+
+        return redirect('/accesorio$accesorio');
     }
 
     /**
@@ -56,7 +76,11 @@ class AccesorioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $accesorio = Accesorio::find($id);
+        $categoria = Categoria::all();
+        $marca = Marca::all();
+        $empleado = Empleado::all();
+        return view('accesorio.edit', compact( 'accesorio', 'categoria', 'marca', 'empleado'));
     }
 
     /**
@@ -68,7 +92,19 @@ class AccesorioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $accesorio = Accesorio::find($id);
+        $accesorio-> id_categoria = $request->get('id_categoria');
+        $accesorio-> id_marca = $request->get('id_marca');
+        $accesorio-> serie = $request->get('serie');
+        $accesorio-> n_activo = $request->get('n_activo');
+        $accesorio-> n_serial = $request->get('n_serial');
+        $accesorio-> n_parte = $request->get('n_parte');
+        $accesorio-> observaciones = $request->get('observaciones');
+        $accesorio-> id_empleado = $request->get('id_empleado');
+
+        $accesorio->save();
+
+        return redirect('/accesorios');
     }
 
     /**
@@ -79,6 +115,8 @@ class AccesorioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $accesorio = Accesorio::find($id);
+        $accesorio->delete();
+        return redirect('/accesorios');
     }
 }

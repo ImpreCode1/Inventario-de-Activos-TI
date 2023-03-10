@@ -12,4 +12,8 @@ class Marca extends Model
     public function cpuEquipo(){
         return $this->hasMany(CpuEquipo::class, 'id');
     }
+
+    public function accesorio(){
+        return $this->hasMany(Accesorio::class, 'id');
+    }
 }

@@ -23,11 +23,7 @@ Route::resource('departamentos', App\Http\Controllers\DepartamentoController::cl
 Route::resource('empleados', App\Http\Controllers\EmpleadoController::class)->middleware('auth');
 Route::resource('marcas', App\Http\Controllers\MarcaController::class)->middleware('auth');
 Route::resource('equipos', App\Http\Controllers\CpuEquipoController::class)->middleware('auth');
-
-
-
-
-
+Route::resource('accesorios', App\Http\Controllers\AccesorioController::class)->middleware('auth');
 
 
 Auth::routes();

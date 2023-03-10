@@ -340,7 +340,7 @@ return [
                 ],
                 [
                     'text' => 'Accesorios',
-                    'url'  => '#',
+                    'url'  => 'accesorios',
                     'icon' => 'far fa fa-users'
                 ],
                 [
