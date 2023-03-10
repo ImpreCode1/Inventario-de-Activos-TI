@@ -42,20 +42,20 @@ class TelefonoController extends Controller
      */
     public function store(Request $request)
     {
-        $telefono = new Telefono();
-        $telefono-> id_categoria = $request->get('id_categoria');
-        $telefono-> id_marca = $request->get('id_marca');
-        $telefono-> modelo = $request->get('modelo');
-        $telefono-> n_telefono = $request->get('n_telefono');
-        $telefono-> email_1 = $request->get('email_1');
-        $telefono-> email_2 = $request->get('email_2');
-        $telefono-> serial_sim = $request->get('serial_sim');
-        $telefono-> ram = $request->get('ram');
-        $telefono-> rom = $request->get('rom');
-        $telefono-> observaciones = $request->get('observaciones');
-        $telefono-> id_empleado = $request->get('id_empleado');
+        $celular = new Telefono();
+        $celular-> id_categoria = $request->get('id_categoria');
+        $celular-> id_marca = $request->get('id_marca');
+        $celular-> modelo = $request->get('modelo');
+        $celular-> n_telefono = $request->get('n_telefono');
+        $celular-> email_1 = $request->get('email_1');
+        $celular-> email_2 = $request->get('email_2');
+        $celular-> serial_sim = $request->get('serial_sim');
+        $celular-> ram = $request->get('ram');
+        $celular-> rom = $request->get('rom');
+        $celular-> observaciones = $request->get('observaciones');
+        $celular-> id_empleado = $request->get('id_empleado');
 
-        $telefono->save();
+        $celular->save();
 
         return redirect('/celulares');
     }
@@ -79,7 +79,11 @@ class TelefonoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $celular = Telefono::find($id);
+        $categoria = Categoria::all();
+        $marca = Marca::all();
+        $empleado = Empleado::all();
+        return view('celular.edit', compact( 'celular', 'categoria', 'marca', 'empleado'));
     }
 
     /**
@@ -91,7 +95,22 @@ class TelefonoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $celular = Telefono::find($id);
+        $celular-> id_categoria = $request->get('id_categoria');
+        $celular-> id_marca = $request->get('id_marca');
+        $celular-> modelo = $request->get('modelo');
+        $celular-> n_telefono = $request->get('n_telefono');
+        $celular-> email_1 = $request->get('email_1');
+        $celular-> email_2 = $request->get('email_2');
+        $celular-> serial_sim = $request->get('serial_sim');
+        $celular-> ram = $request->get('ram');
+        $celular-> rom = $request->get('rom');
+        $celular-> observaciones = $request->get('observaciones');
+        $celular-> id_empleado = $request->get('id_empleado');
+
+        $celular->save();
+
+        return redirect('/celulares');
     }
 
     /**
@@ -102,6 +121,8 @@ class TelefonoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $celular = Telefono::find($id);
+        $celular->delete();
+        return redirect('/celulares');
     }
 }

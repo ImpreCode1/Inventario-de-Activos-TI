@@ -38,8 +38,8 @@
                 <td>{{ $celular->modelo }}</td>
                 <td>{{ $celular->n_telefono }}</td>
                 <td>
-                    <form action="{{ route ('celulares.destroy', $accesorio->id) }}" method="POST">
-                    <a  href="/celulares/{{ $accesorio->id }}/edit" class="btn btn-info">Editar</a>
+                    <form action="{{ route ('celulares.destroy', $celular->id) }}" method="POST">
+                    <a  href="/celulares/{{ $celular->id }}/edit" class="btn btn-info">Editar</a>
                     
                     @csrf
                     @method('DELETE')

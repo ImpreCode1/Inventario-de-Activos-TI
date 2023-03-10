@@ -15,19 +15,19 @@ class CreateCpuEquiposTable extends Migration
     {
         Schema::create('cpu_equipos', function (Blueprint $table) {
             $table->id('id');
-            $table->unsignedBigInteger('id_categoria');
-            $table->unsignedBigInteger('id_marca');
-            $table->string('serie', 80);
-            $table->string('n_activo', 80);
-            $table->string('n_serial', 80);
-            $table->string('n_parte', 80);
-            $table->string('memoria_ram', 80);
-            $table->string('procesador', 80);
-            $table->string('discoduro', 100);
+            $table->unsignedBigInteger('id_categoria')->nullable(true);
+            $table->unsignedBigInteger('id_marca')->nullable(true);
+            $table->string('serie', 80)->nullable(true);
+            $table->string('n_activo', 80)->nullable(true);
+            $table->string('n_serial', 80)->nullable(true);
+            $table->string('n_parte', 80)->nullable(true);
+            $table->string('memoria_ram', 80)->nullable(true);
+            $table->string('procesador', 80)->nullable(true);
+            $table->string('discoduro', 100)->nullable(true);
             $table->string('observaciones', 100)->nullable(true);
-            $table->unsignedBigInteger('id_empleado');
+            $table->unsignedBigInteger('id_empleado')->nullable(true);
             $table->timestamps();
-            $table->string('nom_equipo', 50);
+            $table->string('nom_equipo', 50)->nullable(true);
             $table->softDeletes();
 
             $table->foreign('id_categoria')->references('id')->on('categorias');

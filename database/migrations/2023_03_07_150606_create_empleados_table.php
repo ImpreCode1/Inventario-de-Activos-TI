@@ -15,18 +15,18 @@ class CreateEmpleadosTable extends Migration
     {
         Schema::create('empleados', function (Blueprint $table) {
             $table->id('id');
-            $table->string('nombre', 100);
-            $table->unsignedBigInteger('id_cargo');
-            $table->unsignedBigInteger('id_depto');
-            $table->string('clave_tel', 20);
-            $table->string('num_exten', 40);
-            $table->string('retirado', 30);
-            $table->string('usu_dominio', 30);
-            $table->string('clave_dominio', 20);
-            $table->string('email', 80);
-            $table->string('nom_usu', 30);
-            $table->string('clave_usu', 60);
-            $table->unsignedBigInteger('id_modo_usuario');
+            $table->string('nombre', 100)->nullable(true);
+            $table->unsignedBigInteger('id_cargo')->nullable(true);
+            $table->unsignedBigInteger('id_depto')->nullable(true);
+            $table->string('clave_tel', 20)->nullable(true);
+            $table->string('num_exten', 40)->nullable(true);
+            $table->string('retirado', 30)->nullable(true);
+            $table->string('usu_dominio', 30)->nullable(true);
+            $table->string('clave_dominio', 20)->nullable(true);
+            $table->string('email', 80)->nullable(true);
+            $table->string('nom_usu', 30)->nullable(true);
+            $table->string('clave_usu', 60)->nullable(true);
+            $table->unsignedBigInteger('id_modo_usuario')->nullable(true);
             $table->softDeletes();
             $table->timestamps();
             

@@ -33,9 +33,9 @@
             @foreach ($equipos as $equipo)
             <tr>
                 <td>{{ $equipo->id }}</td>
-                <td>{{ $equipo->empleado->nombre }}</td>
-                <td>{{ $equipo->categoria->nombre }}</td>
-                <td>{{ $equipo->marca->marca }}</td>
+                <td>{{ $equipo->empleado->nombre ?? 'El empleado no existe'}}</td>
+                <td>{{ $equipo->categoria->nombre ?? 'La categoria no existe'}}</td>
+                <td>{{ $equipo->marca->marca ?? 'La marca no Existe'}}</td>
                 <td>{{ $equipo->n_serial }}</td>
                 <td>
                     <form action="{{ route ('equipos.destroy', $equipo->id) }}" method="POST">

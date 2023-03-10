@@ -38,8 +38,8 @@
                 <td>{{ $empleado->usu_dominio }}</td>
                 <td>{{ $empleado->num_exten }}</td>
                 <td>{{ $empleado->email }}</td>
-                <td>{{ $empleado->cargos->cargo }}</td>
-                <td>{{ $empleado->departamentos->nombre }}</td>
+                <td>{{ $empleado->cargos->cargo ?? 'El cargo no existe'}}</td>
+                <td>{{ $empleado->departamentos->nombre ?? 'El departamento no existe' }}</td>
                 <td>
                     <form action="{{ route ('empleados.destroy', $empleado->id) }}" method="POST">
                     <a  href="/empleados/{{ $empleado->id }}/edit" class="btn btn-info">Editar</a>

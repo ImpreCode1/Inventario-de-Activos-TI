@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'empleados',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -336,38 +336,28 @@ return [
                 [
                     'text' => 'Portatiles y Cpus',
                     'url'  => 'equipos',
-                    'icon' => 'far fa fa-address-card'
+                    'icon' => 'fa fa-laptop'
                 ],
                 [
                     'text' => 'Accesorios',
                     'url'  => 'accesorios',
-                    'icon' => 'far fa fa-users'
+                    'icon' => 'fa fa-random'
                 ],
                 [
                     'text' => 'Celulares',
                     'url'  => 'celulares',
-                    'icon' => 'far fa fa-bars'
+                    'icon' => 'fa fa-mobile'
                 ],
             ],
             
         ],
         [
-            'text'        => 'Carta de responsabilidad',
-            'url'         => 'home',
-            'icon'        => 'fa fa-address-card',
-        ],
-        [
-            'text'        => 'Busqueda de activos',
-            'url'         => 'home',
-            'icon'        => 'far fa fa-desktop',
-        ],
-        [
-            'text'        => 'Datos de usuario',
+            'text'        => 'Memorandos Bodega',
             'url'         => 'home',
             'icon'        => 'far fa fa-address-book',
         ],
         [
-            'text'        => 'Generar etiqueta',
+            'text'        => 'Responsabilidad de Software',
             'url'         => 'home',
             'icon'        => 'fa fa-barcode',
         ],

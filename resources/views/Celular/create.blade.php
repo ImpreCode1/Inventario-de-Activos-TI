@@ -43,13 +43,13 @@
                         tabindex="4">
                 </div>
                 <div>
-                    <label for="" class="form-label">Email 1</label>
-                    <input type="text" name="email_1" id="email_1" class="form-control" placeholder="Email"
+                    <label for="" class="form-label">IMEI 1</label>
+                    <input type="text" name="email_1" id="email_1" class="form-control" placeholder="IMEI 1"
                         tabindex="5">
                 </div>
                 <div>
-                    <label for="" class="form-label">Email 2</label>
-                    <input type="text" name="email_2" id="email_2" class="form-control" placeholder="email"
+                    <label for="" class="form-label">IMEI 2</label>
+                    <input type="text" name="email_2" id="email_2" class="form-control" placeholder="IMEI 2"
                         tabindex="6">
                 </div>
                 <div>
