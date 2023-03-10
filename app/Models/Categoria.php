@@ -16,4 +16,7 @@ class Categoria extends Model
     public function accesorio(){
         return $this->hasMany(Accesorio::class, 'id');
     }
+    public function celular(){
+        return $this->hasMany(Telefono::class, 'id');
+    }
 }

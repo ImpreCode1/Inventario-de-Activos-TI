@@ -24,6 +24,7 @@ Route::resource('empleados', App\Http\Controllers\EmpleadoController::class)->mi
 Route::resource('marcas', App\Http\Controllers\MarcaController::class)->middleware('auth');
 Route::resource('equipos', App\Http\Controllers\CpuEquipoController::class)->middleware('auth');
 Route::resource('accesorios', App\Http\Controllers\AccesorioController::class)->middleware('auth');
+Route::resource('celulares', App\Http\Controllers\TelefonoController::class)->middleware('auth');
 
 
 Auth::routes();

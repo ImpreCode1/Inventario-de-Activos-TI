@@ -15,6 +15,7 @@ class CreateTelefonosTable extends Migration
     {
         Schema::create('telefonos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_categoria');
             $table->unsignedBigInteger('id_marca');
             $table->string('modelo', 50);
             $table->string('n_telefono', 50);
@@ -28,6 +29,7 @@ class CreateTelefonosTable extends Migration
 
             $table->timestamps();
 
+            $table->foreign('id_categoria')->references('id')->on('categorias');
             $table->foreign('id_marca')->references('id')->on('marcas');
             $table->foreign('id_empleado')->references('id')->on('empleados');
         });

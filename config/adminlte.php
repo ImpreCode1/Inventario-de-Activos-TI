@@ -345,7 +345,7 @@ return [
                 ],
                 [
                     'text' => 'Celulares',
-                    'url'  => '#',
+                    'url'  => 'celulares',
                     'icon' => 'far fa fa-bars'
                 ],
             ],

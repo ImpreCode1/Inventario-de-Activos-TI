@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Telefono;
+use App\Models\Categoria;
+use App\Models\Marca;
+use App\Models\Empleado;
 
 class TelefonoController extends Controller
 {
@@ -13,7 +17,8 @@ class TelefonoController extends Controller
      */
     public function index()
     {
-        //
+        $celulares = Telefono::all();
+        return view('celular.index')->with('celulares', $celulares);
     }
 
     /**
@@ -23,7 +28,10 @@ class TelefonoController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Categoria::all();
+        $marcas = Marca::all();
+        $empleados = Empleado::all();
+        return view('telefono.create', compact('categorias', 'marcas', 'empleados')); 
     }
 
     /**
@@ -34,7 +42,7 @@ class TelefonoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
