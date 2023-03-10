@@ -54,7 +54,7 @@ class AccesorioController extends Controller
 
         $accesorio->save();
 
-        return redirect('/accesorio$accesorio');
+        return redirect('/accesorios');
     }
 
     /**

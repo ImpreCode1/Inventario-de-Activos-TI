@@ -31,7 +31,7 @@ class TelefonoController extends Controller
         $categorias = Categoria::all();
         $marcas = Marca::all();
         $empleados = Empleado::all();
-        return view('telefono.create', compact('categorias', 'marcas', 'empleados')); 
+        return view('celular.create', compact('categorias', 'marcas', 'empleados')); 
     }
 
     /**
@@ -42,7 +42,22 @@ class TelefonoController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $telefono = new Telefono();
+        $telefono-> id_categoria = $request->get('id_categoria');
+        $telefono-> id_marca = $request->get('id_marca');
+        $telefono-> modelo = $request->get('modelo');
+        $telefono-> n_telefono = $request->get('n_telefono');
+        $telefono-> email_1 = $request->get('email_1');
+        $telefono-> email_2 = $request->get('email_2');
+        $telefono-> serial_sim = $request->get('serial_sim');
+        $telefono-> ram = $request->get('ram');
+        $telefono-> rom = $request->get('rom');
+        $telefono-> observaciones = $request->get('observaciones');
+        $telefono-> id_empleado = $request->get('id_empleado');
+
+        $telefono->save();
+
+        return redirect('/celulares');
     }
 
     /**

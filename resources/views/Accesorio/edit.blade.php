@@ -54,7 +54,7 @@
                         tabindex="6">
                 </div>
                 <div>
-                    <label for="" class="form-label">Observaciones hacerca del accesorio</label>
+                    <label for="" class="form-label">Observaciones acerca del accesorio</label>
                     <input type="text" name="observaciones" id="observaciones" class="form-control" placeholder="Observaciones" value="{{$accesorio->observaciones}}"
                         tabindex="7">
                 </div>

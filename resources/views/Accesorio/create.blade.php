@@ -53,7 +53,7 @@
                         tabindex="6">
                 </div>
                 <div>
-                    <label for="" class="form-label">Observaciones hacerca del Accesorio</label>
+                    <label for="" class="form-label">Observaciones acerca del Accesorio</label>
                     <input type="text" name="observaciones" id="observaciones" class="form-control" placeholder="Observaciones"
                         tabindex="7">
                 </div>

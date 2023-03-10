@@ -21,7 +21,6 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Categoria</th>
                 <th scope="col">Marca</th>
                 <th scope="col">Modelo</th>
                 <th scope="col">N° Telefono</th>
@@ -35,7 +34,6 @@
             <tr>
                 <td>{{ $celular->id }}</td>
                 <td>{{ $celular->empleado->nombre }}</td>
-                <td>{{ $celular->categoria->nombre }}</td>
                 <td>{{ $celular->marca->marca }}</td>
                 <td>{{ $celular->modelo }}</td>
                 <td>{{ $celular->n_telefono }}</td>

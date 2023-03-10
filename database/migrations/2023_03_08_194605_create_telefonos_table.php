@@ -24,6 +24,7 @@ class CreateTelefonosTable extends Migration
             $table->string('serial_sim', 50);
             $table->string('ram', 50);
             $table->string('rom', 50);
+            $table->string('observaciones', 100)->nullable(true);
             $table->unsignedBigInteger('id_empleado');
             $table->softDeletes();
 

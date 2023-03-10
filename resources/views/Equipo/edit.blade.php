@@ -69,7 +69,7 @@
                         tabindex="9">
                 </div>
                 <div>
-                    <label for="" class="form-label">Observaciones hacerca del equipo</label>
+                    <label for="" class="form-label">Observaciones acerca del equipo</label>
                     <input type="text" name="observaciones" id="observaciones" class="form-control" placeholder="Observaciones" value="{{$equipo->observaciones}}"
                         tabindex="10">
                 </div>
