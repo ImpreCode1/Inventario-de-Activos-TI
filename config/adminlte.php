@@ -335,7 +335,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Portatiles y Cpus',
-                    'url'  => '#',
+                    'url'  => 'equipos',
                     'icon' => 'far fa fa-address-card'
                 ],
                 [

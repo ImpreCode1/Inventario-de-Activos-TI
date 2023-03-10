@@ -20,4 +20,9 @@ class Empleado extends Model
     public function modoUsuarios(){
         return $this->belongsTo(ModoUsuario::class, 'id_modo_usuario');
     }
+
+    
+    public function cpuEquipo(){
+        return $this->hasMany(CpuEquipo::class, 'id');
+    }
 }

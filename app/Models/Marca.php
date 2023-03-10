@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Marca extends Model
 {
     use HasFactory;
+
+    public function cpuEquipo(){
+        return $this->hasMany(CpuEquipo::class, 'id');
+    }
 }
