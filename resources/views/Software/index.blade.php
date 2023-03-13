@@ -16,7 +16,7 @@
 <div class="card-body">
     <a href="softwares/create" class="btn btn-primary">CREAR</a>
     <p></p>
-    <table id="softwares" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+    <table id="softwar" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
         <thead class="bg-prymary">
             <tr>
                 <th scope="col">ID</th>
@@ -57,7 +57,7 @@
 
 <script>
     $(document).ready(function () {
-    $('#softwares').DataTable({
+    $('#softwar').DataTable({
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "Nada encontrado - disculpa",

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Software;
 use Illuminate\Http\Request;
-use App\Models\Empleado;
 
-class SoftwareController extends Controller
+class HistorialEquipoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +13,7 @@ class SoftwareController extends Controller
      */
     public function index()
     {
-        $softwares = Software::all();
-        return view('Software.index')->with('softwares', $softwares);
+        //
     }
 
     /**
@@ -26,9 +23,7 @@ class SoftwareController extends Controller
      */
     public function create()
     {
-        $empleados = Empleado::all();
-        return view('software.create', compact('empleados'));  
-
+        //
     }
 
     /**
@@ -39,12 +34,7 @@ class SoftwareController extends Controller
      */
     public function store(Request $request)
     {
-        $softwares = new Software();
-        $softwares -> id_empleado = $request->get('id_empleado');
-
-        $softwares->save();
-
-        return redirect('/softwares');
+        //
     }
 
     /**
@@ -66,9 +56,7 @@ class SoftwareController extends Controller
      */
     public function edit($id)
     {
-        $software = Software::find($id);
-        $empleado = Empleado::all();
-        return view('software.edit', compact( 'software', 'empleado'));
+        //
     }
 
     /**
@@ -80,9 +68,7 @@ class SoftwareController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $software = Software::find($id);
-        $software-> id_empleado = $request->get('id_empleado');
-
+        //
     }
 
     /**
@@ -93,8 +79,6 @@ class SoftwareController extends Controller
      */
     public function destroy($id)
     {
-        $software = Software::find($id);
-        $software->delete();
-        return redirect('/softwares');
+        //
     }
 }

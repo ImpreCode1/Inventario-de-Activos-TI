@@ -12,19 +12,19 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form action="/cargos" method="POST">
+            <form action="/softwares" method="POST">
                 @csrf
                 <div>
                     <label for="" class="form-label">Empleado</label>
                     <select name="id_empleado" id="id_empleado"  class="form-control" tabindex="1">
-                        <option value="">-- Escoja el empleado --</option>
+                        <option value="">-- Seleccione el empleado --</option>
                         @foreach ($empleados as $empleado)
                             <option value="{{$empleado['id']}}">{{$empleado['nombre']}}</option>
                         @endforeach
                     </select>
                 </div>
                 <br>
-                <a href="/softwares" class="btn btn-secondary" tabindex="2">Cancelar</a>
+                <a href="/softwar" class="btn btn-secondary" tabindex="2">Cancelar</a>
                 <button type="submit" class="btn btn-primary" tabindex="3">Guardar</button>
             </form>
         </div>

@@ -127,4 +127,10 @@ class EmpleadoController extends Controller
         $empleado->delete();
         return redirect('/empleados');
     }
+
+    public function pdf(){
+
+        $empleados = Empleado::paginate();
+        return view('empleado.pdf');
+    }
 }
