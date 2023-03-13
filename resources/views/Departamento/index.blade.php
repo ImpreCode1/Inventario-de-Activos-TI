@@ -28,7 +28,7 @@
             @foreach ($departamentos as $departamento)
             <tr>
                 <td>{{ $departamento->id }}</td>
-                <td>{{ $departamento->nombre }}</td>
+                <td>{{ $departamento->nombre ?? 'El departamento no existe' }}</td>
                 <td>
                     <form action="{{ route ('departamentos.destroy', $departamento->id) }}" method="POST">
                     <a  href="/departamentos/{{ $departamento->id }}/edit" class="btn btn-info">Editar</a>

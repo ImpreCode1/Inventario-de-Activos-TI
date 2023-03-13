@@ -34,10 +34,10 @@
             @foreach ($empleados as $empleado)
             <tr>
                 <td>{{ $empleado->id }}</td>
-                <td>{{ $empleado->nombre }}</td>
-                <td>{{ $empleado->usu_dominio }}</td>
-                <td>{{ $empleado->num_exten }}</td>
-                <td>{{ $empleado->email }}</td>
+                <td>{{ $empleado->nombre ?? 'El nombre no existe'}}</td>
+                <td>{{ $empleado->usu_dominio ?? 'El usuario dominio no existe'}}</td>
+                <td>{{ $empleado->num_exten ?? 'El numero de extencion no existe'}}</td>
+                <td>{{ $empleado->email ?? 'El email no existe'}}</td>
                 <td>{{ $empleado->cargos->cargo ?? 'El cargo no existe'}}</td>
                 <td>{{ $empleado->departamentos->nombre ?? 'El departamento no existe' }}</td>
                 <td>
