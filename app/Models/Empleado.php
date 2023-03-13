@@ -32,4 +32,7 @@ class Empleado extends Model
     public function celular(){
         return $this->hasMany(Telefono::class, 'id');
     }
+    public function software(){
+        return $this->hasMany(Software::class, 'id');
+    }
 }

@@ -31,7 +31,8 @@ class CpuEquipoController extends Controller
         $categorias = Categoria::all();
         $marcas = Marca::all();
         $empleados = Empleado::all();
-        return view('equipo.create', compact('categorias', 'marcas', 'empleados'));    }
+        return view('equipo.create', compact('categorias', 'marcas', 'empleados'));    
+    }
 
     /**
      * Store a newly created resource in storage.

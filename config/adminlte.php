@@ -331,7 +331,7 @@ return [
         ],
         [
             'text'    => 'Inventario Activos',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fa fa-book',
             'submenu' => [
                 [
                     'text' => 'Portatiles y Cpus',
@@ -352,14 +352,36 @@ return [
             
         ],
         [
+            'text'    => 'Historial de activos',
+            'icon'    => 'fas fa-fw fa-clock',
+            'submenu' => [
+                [
+                    'text' => 'Historial Portatiles',
+                    'url'  => '#',
+                    'icon' => 'fa fa-laptop'
+                ],
+                [
+                    'text' => 'Historial Accesorios',
+                    'url'  => '#',
+                    'icon' => 'fa fa-random'
+                ],
+                [
+                    'text' => 'Historial Celulares',
+                    'url'  => '#',
+                    'icon' => 'fa fa-mobile'
+                ],
+            ],
+            
+        ],
+        [
             'text'        => 'Memorandos Bodega',
             'url'         => 'home',
-            'icon'        => 'far fa fa-address-book',
+            'icon'        => 'fa fa-paper-plane',
         ],
         [
             'text'        => 'Responsabilidad de Software',
-            'url'         => 'home',
-            'icon'        => 'fa fa-barcode',
+            'url'         => 'softwares',
+            'icon'        => 'fa fa-microchip',
         ],
     ],
 
