@@ -8,6 +8,8 @@ use App\Models\ModoUsuario;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Str;
+
 
 class EmpleadoController extends Controller
 {
@@ -129,12 +131,9 @@ class EmpleadoController extends Controller
         return redirect('/empleados');
     }
 
-    public function pdf(){
-
-        $empleados = Empleado::paginate();
-        $pdf = Pdf::loadView('empleado.pdf', compact('empleados'));
-        return $pdf->stream();
-
-        //return view('empleado.pdf');
+    public function pdf($id){
+        $empleado = Empleado::find($id);
+        $pdf = Pdf::loadView('empleado.pdf', compact('empleado'));
+        return $pdf->stream('Acta_contraseñas.pdf');
     }
 }

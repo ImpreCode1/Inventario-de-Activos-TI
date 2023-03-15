@@ -42,8 +42,8 @@
                 <td>{{ $empleado->departamentos->nombre ?? 'El departamento no existe' }}</td>
                 <td>
                     <form action="{{ route ('empleados.destroy', $empleado->id) }}" method="POST">
-                    <a  href="/empleados/{{ $empleado->id }}/edit" class="btn btn-info">Editar</a>
-                    <a href="/empleados/pdf" class="btn btn-success btn-sm">Act Contraseñas</a>
+                    <a href="/empleados/{{ $empleado->id }}/edit" class="btn btn-info">Editar</a>
+                    <a href="/empleados/{{$empleado->id}}/pdf" class="btn btn-success btn-sm">Act Contraseñas</a>
                     @csrf
                     @method('DELETE')
                     <Button type="submit" class="btn btn-danger">Eliminar</Button>
