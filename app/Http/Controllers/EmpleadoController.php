@@ -7,6 +7,7 @@ use App\Models\Cargo;
 use App\Models\ModoUsuario;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class EmpleadoController extends Controller
 {
@@ -131,6 +132,9 @@ class EmpleadoController extends Controller
     public function pdf(){
 
         $empleados = Empleado::paginate();
-        return view('empleado.pdf');
+        $pdf = Pdf::loadView('empleado.pdf', compact('empleados'));
+        return $pdf->stream();
+
+        //return view('empleado.pdf');
     }
 }
