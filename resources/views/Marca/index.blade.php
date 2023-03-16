@@ -32,11 +32,11 @@
                 <td>{{ $marca->marca }}</td>
                 <td>
                     <form action="{{ route ('marcas.destroy', $marca->id) }}" method="POST">
-                    <a  href="/marcas/{{ $marca->id }}/edit" class="btn btn-info">Editar</a>
+                    <a  href="/marcas/{{ $marca->id }}/edit" class="btn btn-info btn-sm">Editar</a>
                     
                     @csrf
                     @method('DELETE')
-                    <Button type="submit" class="btn btn-danger">Eliminar</Button>
+                    <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>
                 </form>
                 </td>
             </tr>

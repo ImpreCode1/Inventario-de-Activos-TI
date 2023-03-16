@@ -132,8 +132,10 @@ class EmpleadoController extends Controller
     }
 
     public function pdf($id){
-        $empleado = Empleado::find($id);
-        $pdf = Pdf::loadView('empleado.pdf', compact('empleado'));
+        $empleados =  Empleado::where('id', $id)->get();
+
+
+        $pdf = Pdf::loadView('empleado.pdf', compact('empleados'));
         return $pdf->stream('Acta_contraseñas.pdf');
     }
 }

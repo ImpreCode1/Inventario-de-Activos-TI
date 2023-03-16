@@ -34,11 +34,11 @@
                 <td>{{ $cargo->detalle ?? 'El detalle no existe'}}</td>
                 <td>
                     <form action="{{ route ('cargos.destroy', $cargo->id) }}" method="POST">
-                    <a  href="/cargos/{{ $cargo->id }}/edit" class="btn btn-info">Editar</a>
+                    <a  href="/cargos/{{ $cargo->id }}/edit" class="btn btn-info btn-sm">Editar</a>
                     
                     @csrf
                     @method('DELETE')
-                    <Button type="submit" class="btn btn-danger">Eliminar</Button>
+                    <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>
                 </form>
                 </td>
             </tr>

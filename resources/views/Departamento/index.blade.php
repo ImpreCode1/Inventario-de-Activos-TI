@@ -31,10 +31,10 @@
                 <td>{{ $departamento->nombre ?? 'El departamento no existe' }}</td>
                 <td>
                     <form action="{{ route ('departamentos.destroy', $departamento->id) }}" method="POST">
-                    <a  href="/departamentos/{{ $departamento->id }}/edit" class="btn btn-info">Editar</a>
+                    <a  href="/departamentos/{{ $departamento->id }}/edit" class="btn btn-info btn-sm">Editar</a>
                     @csrf
                     @method('DELETE')
-                    <Button type="submit" class="btn btn-danger">Eliminar</Button>
+                    <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>
                 </form>
                 </td>
             </tr>

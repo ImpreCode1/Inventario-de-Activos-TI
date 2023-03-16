@@ -10,10 +10,12 @@
 </head>
 
 <body>
+    @foreach ($empleados as $empleado)
     <main>
-        <h1>Nombre: {{ $empleado['nombre'] }}</h1>
+        <h1>Nombre: {{ $empleado->nombre }} <br>
+            {{$empleado->departamentos->nombre }}
     </main>
-
+    @endforeach
 </body>
 
 </html>
