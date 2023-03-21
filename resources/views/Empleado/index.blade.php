@@ -43,16 +43,14 @@
                 <td>
                     <form action="{{ route ('empleados.destroy', $empleado->id) }}" method="POST">
                     <a href="/empleados/{{ $empleado->id }}/edit" class="btn btn-info btn-sm">Editar</a>
-                    <a href="/empleados/{{$empleado->id}}/pdf" class="btn btn-success btn-sm">Act contraseñas</a>
+                    <a href="/empleados/{{$empleado->id}}/pdf" target="_blank" class="btn btn-success btn-sm">Act contraseñas</a>
                     @csrf
                     @method('DELETE')
                     <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>
                 </form>
                 </td>
             </tr>
-                
             @endforeach
-
         </tbody>
     </table>
 </div>

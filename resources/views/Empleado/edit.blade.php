@@ -66,13 +66,6 @@
                     <input type="text" name="email" id="email" class="form-control" value="{{$empleado->email}}" placeholder="Email" tabindex="9" value="">
                 </div>
                 <div>
-                    <label for="" class="form-label">Nombre de Usuario</label>
-                    <input type="text" name="nom_usu" id="nom_usu" class="form-control" value="{{$empleado->nom_usu}}" placeholder="Nombre de Usuario" tabindex="10" value="">
-                </div>
-                <div>
-                    <label for="" class="form-label">Clave de usuario</label>
-                    <input type="text" name="clave_usu" id="clave_usu" class="form-control" value="{{$empleado->clave_usu}}" placeholder="Clave de usuario" tabindex="11" value="">
-                </div>
                 <div>
                     <label for="" class="form-label">Modo de Usuario</label>
                     <select name="id_modo_usuario" id="id_modo_usuario"  class="form-control" tabindex="12" value="{{$empleado->id_modo_usuario}}">

@@ -24,8 +24,6 @@ class CreateEmpleadosTable extends Migration
             $table->string('usu_dominio', 30)->nullable(true);
             $table->string('clave_dominio', 20)->nullable(true);
             $table->string('email', 80)->nullable(true);
-            $table->string('nom_usu', 30)->nullable(true);
-            $table->string('clave_usu', 60)->nullable(true);
             $table->unsignedBigInteger('id_modo_usuario')->nullable(true);
             $table->softDeletes();
             $table->timestamps();

@@ -55,8 +55,6 @@ class EmpleadoController extends Controller
         $empleados-> usu_dominio = $request->get('usu_dominio');
         $empleados-> clave_dominio = $request->get('clave_dominio');
         $empleados-> email = $request->get('email');
-        $empleados-> nom_usu = $request->get('nom_usu');
-        $empleados-> clave_usu = $request->get('clave_usu');
         $empleados-> id_modo_usuario = $request->get('id_modo_usuario');
 
         $empleados->save();
@@ -109,8 +107,6 @@ class EmpleadoController extends Controller
         $empleado-> usu_dominio = $request->get('usu_dominio');
         $empleado-> clave_dominio = $request->get('clave_dominio');
         $empleado-> email = $request->get('email');
-        $empleado-> nom_usu = $request->get('nom_usu');
-        $empleado-> clave_usu = $request->get('clave_usu');
         $empleado-> id_modo_usuario = $request->get('id_modo_usuario');
 
         $empleado->save();
@@ -136,6 +132,6 @@ class EmpleadoController extends Controller
 
 
         $pdf = Pdf::loadView('empleado.pdf', compact('empleados'));
-        return $pdf->stream('Acta_contraseñas.pdf');
+        return $pdf->setPaper('a4', 'landscape')-> stream('Acta_contraseñas.pdf');
     }
 }

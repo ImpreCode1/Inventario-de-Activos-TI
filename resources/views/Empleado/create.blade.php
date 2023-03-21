@@ -71,16 +71,6 @@
                         tabindex="9">
                 </div>
                 <div>
-                    <label for="" class="form-label">Nombre de Usuario</label>
-                    <input type="text" name="nom_usu" id="nom_usu" class="form-control" placeholder="Detalle"
-                        tabindex="10">
-                </div>
-                <div>
-                    <label for="" class="form-label">Clave de usuario</label>
-                    <input type="text" name="clave_usu" id="clave_usu" class="form-control" placeholder="Clave de Usuario"
-                        tabindex="11">
-                </div>
-                <div>
                     <label for="" class="form-label">Modo de Usuario</label>
                     <select name="id_modo_usuario" id="id_modo_usuario"  class="form-control" tabindex="12">
                         <option value="">-- Modo Usuario del empleado --</option>
