@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Empleado extends Model
 {
+    protected $fillable = ['nombre', 'id_cargo', 'id_depto', 'num_exten', 'retirado', 'usu_dominio', 'clave_dominio', 'email', 'id_modo_usuario' ];
+
     use HasFactory;
 
+
     public function cargos(){
-        return $this->belongsTo(Cargo::class, 'id_cargo');
+        return $this->belongsTo(Cargo::class);
     }
 
     public function departamentos(){

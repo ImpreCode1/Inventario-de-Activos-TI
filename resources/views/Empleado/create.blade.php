@@ -23,8 +23,8 @@
                     <label for="" class="form-label">Cargo</label>
                     <select name="id_cargo" id="id_cargo"  class="form-control" tabindex="2">
                         <option value="">-- Escoja el cargo al que pertenecera el empleado --</option>
-                        @foreach ($cargos as $cargo)
-                            <option value="{{$cargo['id']}}">{{$cargo['cargo']}}</option>
+                        @foreach ($cargos_ordenados as $id => $cargo)
+                            <option value="{{$id}}">{{$cargo}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -32,15 +32,10 @@
                     <label for="" class="form-label">Departamento</label>
                     <select name="id_depto" id="id_depto"  class="form-control" tabindex="3">
                     <option value="">-- Escoja el Departamento al que pertenecera el empleado --</option>
-                    @foreach ($departamentos as $departamento)
-                        <option value="{{$departamento['id']}}">{{$departamento['nombre']}}</option>
+                    @foreach ($departamentos_ordenados as $id => $nombre)
+                        <option value="{{$id}}">{{$nombre}}</option>
                     @endforeach
                 </select>
-                </div>
-                <div>
-                    <label for="" class="form-label">Clave del telefono</label>
-                    <input type="text" name="clave_tel" id="clave_tel" class="form-control" placeholder="Clave del telefono"
-                        tabindex="4">
                 </div>
                 <div>
                     <label for="" class="form-label">Numero de Extencion</label>
@@ -61,18 +56,8 @@
                         tabindex="7">
                 </div>
                 <div>
-                    <label for="" class="form-label">Clave de dominio</label>
-                    <input type="text" name="clave_dominio" id="clave_dominio" class="form-control" placeholder="Clave de dominio"
-                        tabindex="8">
-                </div>
-                <div>
-                    <label for="" class="form-label">Email</label>
-                    <input type="text" name="email" id="email" class="form-control" placeholder="Email"
-                        tabindex="9">
-                </div>
-                <div>
                     <label for="" class="form-label">Modo de Usuario</label>
-                    <select name="id_modo_usuario" id="id_modo_usuario"  class="form-control" tabindex="12">
+                    <select name="id_modo_usuario" id="id_modo_usuario"  class="form-control" tabindex="9">
                         <option value="">-- Modo Usuario del empleado --</option>
                         @foreach ($modoUsuarios as $modoUsuario)
                             <option value="{{$modoUsuario['id']}}">{{$modoUsuario['cargo']}}</option>
@@ -80,8 +65,8 @@
                     </select>
                 </div>
                 <br>
-                <a href="/empleados" class="btn btn-secondary" tabindex="13">Cancelar</a>
-                <button type="submit" class="btn btn-primary" tabindex="14">Guardar</button>
+                <a href="/empleados" class="btn btn-secondary" tabindex="10">Cancelar</a>
+                <button type="submit" class="btn btn-primary" tabindex="11">Guardar</button>
             </form>
         </div>
     </div>

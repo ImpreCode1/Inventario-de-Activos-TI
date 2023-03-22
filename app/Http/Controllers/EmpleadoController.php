@@ -9,6 +9,11 @@ use App\Models\Departamento;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
+
+
 
 
 class EmpleadoController extends Controller
@@ -31,10 +36,21 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        $cargos = Cargo::all();
-        $departamentos = Departamento::all();
+        $cargos =  DB::table('cargos')->orderBy('cargo', 'asc')->get();
+        $cargos_ordenados = array();
+        foreach ($cargos as $cargo) {
+            $cargos_ordenados[$cargo->id] = $cargo->cargo;
+        }
+
+        $departamentos = DB::table('departamentos')->orderBy('nombre', 'asc')->get();
+        $departamentos_ordenados = array();
+        foreach ($departamentos as $departamento) {
+            $departamentos_ordenados[$departamento->id] = $departamento->nombre;
+        }
+
+
         $modoUsuarios = ModoUsuario::all();
-        return view('empleado.create', compact('cargos', 'departamentos', 'modoUsuarios'));
+        return view('empleado.create', compact('cargos_ordenados', 'departamentos_ordenados', 'modoUsuarios'));
     }
 
     /**
@@ -43,19 +59,21 @@ class EmpleadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
+
         $empleados = new Empleado();
-        $empleados-> nombre = $request->get('nombre');
-        $empleados-> id_cargo = $request->get('id_cargo');
-        $empleados-> id_depto = $request->get('id_depto');
-        $empleados-> clave_tel = $request->get('clave_tel');
-        $empleados-> num_exten = $request->get('num_exten');
-        $empleados-> retirado = $request->get('retirado');
-        $empleados-> usu_dominio = $request->get('usu_dominio');
-        $empleados-> clave_dominio = $request->get('clave_dominio');
-        $empleados-> email = $request->get('email');
-        $empleados-> id_modo_usuario = $request->get('id_modo_usuario');
+        $empleados-> nombre = $request->input('nombre');
+        $empleados-> id_cargo = $request->input('id_cargo');
+        $empleados-> id_depto = $request->input('id_depto');
+        $empleados-> num_exten = $request->input('num_exten');
+        $empleados-> retirado = $request->input('retirado');
+        $empleados-> usu_dominio = $request->input('usu_dominio'); 
+        $password = str::random(10);
+        $empleados-> clave_dominio = $password;
+        $empleados-> email = $request->input('usu_dominio') . '@impresistem.com';
+        $empleados-> id_modo_usuario = $request->input('id_modo_usuario');
 
         $empleados->save();
 

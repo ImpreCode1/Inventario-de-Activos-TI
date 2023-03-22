@@ -35,22 +35,21 @@
                             <th></th>
                     </tr>
                     <tr>
-                    <td><div style="padding-bottom:-5px; padding-left: 10px;"> <b> Nombre :</b><br>{{ $empleado->nombre }} </div></td>
-                    <td><div style="padding-bottom:-5px; padding-left: 10px;"><b>N° Extencion:</b><br>{{$empleado->num_exten}}</div></td>
+                    <td><div style="padding-bottom:-5px; padding-left: 10px;"> <b> Nombre :</b><br>{{ $empleado->nombre ?? ' '}} </div></td>
+                    <td><div style="padding-bottom:-5px; padding-left: 10px;"><b>N° Extencion:</b><br>{{$empleado->num_exten ?? ' '}}</div></td>
                     <td><div style="padding-bottom:-5px; padding-left: 10px;"><b>Usuario SAP:</b><br>Asignada por el Area de Desarrollo</div></td>
                     </tr>
                     <tr>
-                    <td><div style="padding-top: 20px; padding-left: 10px;"><b>Email :</b><br>{{ $empleado->email }}</div></td>
-                    <td><div style="padding-top: 20px; padding-left: 10px;"><b>Clave Telefono</b><br>{{$empleado->clave_tel}}</div></td>
+                    <td><div style="padding-top: 20px; padding-left: 10px;"><b>Email :</b><br>{{ $empleado->email ?? ' '}}</div></td>
+                    <td><div style="padding-top: 20px; padding-left: 10px"><b>Usuario Office:</b><br>{{$empleado->email ?? ' '}}</div></td>
                     <td><div style="padding-top: 20px; padding-left: 10px;"><b>Clave Incial SAP</b><br>Asignada por el Area de Desarrollo</div></td>
                     </tr>
                     <tr>
-                    <td><div style="padding-top: 20px; padding-left: 10px"><b>Usuario Dominio:</b><br>{{$empleado->usu_dominio}}</div></td>
-                    <td><div style="padding-top: 20px; padding-left: 10px"><b>Usuario Office:</b><br>{{$empleado->email}}</div></td>
+                    <td><div style="padding-top: 20px; padding-left: 10px"><b>Usuario Dominio:</b><br>{{$empleado->usu_dominio ?? ' '}}</div></td>
+                    <td><div style="padding-top: 20px; padding-left: 10px"><b>Clave Office:</b><br>{{$empleado->clave_dominio ?? ' '}}</div></td>
                     </tr>
                     <tr>
-                    <td><div style="padding-top: 20px; padding-left: 10px"><b>Clave Dominio:</b><br>{{$empleado->clave_dominio}}</div></td>
-                    <td><div style="padding-top: 20px; padding-left: 10px"><b>Clave Office:</b><br>{{$empleado->clave_dominio}}</div></td>
+                    <td><div style="padding-top: 20px; padding-left: 10px"><b>Clave Dominio:</b><br>{{$empleado->clave_dominio ?? ' '}}</div></td>
                     </tr>
                 </table>
                 <div style="text-align: center">

@@ -18,11 +18,10 @@ class CreateEmpleadosTable extends Migration
             $table->string('nombre', 100)->nullable(true);
             $table->unsignedBigInteger('id_cargo')->nullable(true);
             $table->unsignedBigInteger('id_depto')->nullable(true);
-            $table->string('clave_tel', 20)->nullable(true);
             $table->string('num_exten', 40)->nullable(true);
             $table->string('retirado', 30)->nullable(true);
             $table->string('usu_dominio', 30)->nullable(true);
-            $table->string('clave_dominio', 20)->nullable(true);
+            $table->string('clave_dominio', 200)->nullable(true);
             $table->string('email', 80)->nullable(true);
             $table->unsignedBigInteger('id_modo_usuario')->nullable(true);
             $table->softDeletes();
