@@ -30,7 +30,7 @@ class TelefonoController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::all();
+        $categorias = Categoria::whereIn('nombre', ['CELULAR'])->get();
         $marcas = Marca::all();
         $empleados = Empleado::all();
         return view('celular.create', compact('categorias', 'marcas', 'empleados')); 
@@ -82,7 +82,7 @@ class TelefonoController extends Controller
     public function edit($id)
     {
         $celular = Telefono::find($id);
-        $categoria = Categoria::all();
+        $categoria = Categoria::whereIn('nombre', ['CELULAR'])->get();
         $marca = Marca::all();
         $empleado = Empleado::all();
         return view('celular.edit', compact( 'celular', 'categoria', 'marca', 'empleado'));

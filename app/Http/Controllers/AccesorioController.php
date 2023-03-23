@@ -31,7 +31,7 @@ class AccesorioController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::all();
+        $categorias = Categoria::whereIn('nombre', ['DIADEMA', 'MOUSE', 'MONITOR', 'TECLADO', 'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH'])->get();
         $marcas = Marca::all();
         $empleados = Empleado::all();
         return view('accesorio.create', compact('categorias', 'marcas', 'empleados')); 
@@ -80,7 +80,7 @@ class AccesorioController extends Controller
     public function edit($id)
     {
         $accesorio = Accesorio::find($id);
-        $categoria = Categoria::all();
+        $categoria = Categoria::whereIn('nombre', ['DIADEMA', 'MOUSE', 'MONITOR', 'TECLADO', 'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH'])->get();
         $marca = Marca::all();
         $empleado = Empleado::all();
         return view('accesorio.edit', compact( 'accesorio', 'categoria', 'marca', 'empleado'));

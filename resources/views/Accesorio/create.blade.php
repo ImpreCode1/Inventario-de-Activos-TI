@@ -6,7 +6,7 @@
 @stop
 
 @section('content_header')
-    <h1>Crear nuevo equipo</h1>
+    <h1>Crear nuevo Accesorio</h1>
 @stop
 
 @section('content')

@@ -32,7 +32,7 @@ class CpuEquipoController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::all();
+        $categorias = Categoria::whereIn('nombre', ['CPU', 'PORTATIL', 'ALL-IN-ONE'])->get();
         $marcas = Marca::all();
         $empleados = Empleado::all();
         return view('equipo.create', compact('categorias', 'marcas', 'empleados'));
@@ -86,7 +86,7 @@ class CpuEquipoController extends Controller
     public function edit($id)
     {
         $equipo = CpuEquipo::find($id);
-        $categoria = Categoria::all();
+        $categoria = Categoria::whereIn('nombre', ['CPU', 'PORTATIL', 'ALL-IN-ONE'])->get();
         $marca = Marca::all();
         $empleado = Empleado::all();
         return view('equipo.edit', compact('equipo', 'categoria', 'marca', 'empleado'));

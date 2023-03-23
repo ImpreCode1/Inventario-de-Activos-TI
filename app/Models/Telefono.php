@@ -10,7 +10,7 @@ class Telefono extends Model
     use HasFactory;
 
     public function categoria(){
-        return $this->belongsTo(Categoria::class, 'id_categoria');
+        return $this->belongsTo(Categoria::class, 'id_categoria')->whereIn('nombre', ['CELULAR']);;
     }
 
     public function empleado(){
