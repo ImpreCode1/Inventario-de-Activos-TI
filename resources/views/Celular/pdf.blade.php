@@ -44,46 +44,52 @@
             <h3 class="fecha">{{ $fechaActual }}</h3>
         </div>
         <br><br><br><br><br><br>
-        @foreach ($accesorios as $accesorio)
+        @foreach ($celulares as $celular)
             <p>Señor (a):</p>
-            <h4>{{ $accesorio->empleado->nombre ?? 'El empleado no existe' }}</h4>
+            <h4>{{ $celular->empleado->nombre ?? 'El empleado no existe' }}</h4>
             <p>Entrega de: </p>
-            <h4>{{ $accesorio->categoria->nombre ?? 'No existe' }}</h4>
+            <h4>{{ $celular->categoria->nombre ?? 'No existe' }}</h4>
             <p>Distinguido Señor (a):</p>
-            <p>Adjunto hacemos entrega de un(a) {{ $accesorio->categoria->nombre ?? 'No existe' }} con las
+            <p>Adjunto hacemos entrega de un(a) {{ $celular->categoria->nombre ?? 'No existe' }} con las
                 siguientes caracteristicas como parte de su dotación
                 laboral.</p>
             <table>
                 <tr>
-                    <td>Tipo Accesorio</td>
+                    <td>Catgeoria</td>
                     <td>Marca</td>
                     <td>Modelo</td>
-                    <td>N° de Serial</td>
-                    <td>N° de Activo</td>
-                    <td>N° Parte</td>
+                    <td>N° Telefono</td>
+                    <td>Email 1</td>
+                    <td>Email 2</td>
+                    <td>Serial SIM</td>
+                    <td>RAM</td>
+                    <td>Memoria</td>
                 </tr>
                 <tr>
-                    <td>{{ $accesorio->categoria->nombre ?? '' }}</td>
-                    <td>{{ $accesorio->marca->marca ?? '' }}</td>
-                    <td>{{ $accesorio->serie ?? '' }}</td>
-                    <td>{{ $accesorio->n_serial ?? '' }}</td>
-                    <td>{{ $accesorio->n_activo ?? '' }}</td>
-                    <td>{{ $accesorio->n_parte ?? '' }}</td>
+                    <td>{{ $celular->categoria->nombre ?? '' }}</td>
+                    <td>{{ $celular->marca->marca ?? '' }}</td>
+                    <td>{{ $celular->modelo ?? '' }}</td>
+                    <td>{{ $celular->n_telefono ?? '' }}</td>
+                    <td>{{ $celular->email_1 ?? '' }}</td>
+                    <td>{{ $celular->email_2 ?? '' }}</td>
+                    <td>{{ $celular->serial_sim ?? '' }}</td>
+                    <td>{{ $celular->ram ?? '' }}</td>
+                    <td>{{ $celular->rom ?? '' }}</td>
                 </tr>
             </table>
             <br>
-            <p>Dicho accesorio puede ser utilizado de acuerdo a sus criterios en pro de los trabajos derivados de su
+            <p>Dicho telefono celular puede ser utilizado de acuerdo a sus criterios en pro de los trabajos derivados de su
                 actividad dentro de la compañía.
             </p>
             <br>
             <p>La responsabilidad del manejo adecuado del mismo y de la pérdida total o parcial del mismo es
-                del usuario. El accesorio se encuentra asegurado, en caso de pérdida cuando este sea retirado de la
+                del usuario. El telefono celular se encuentra asegurado, en caso de pérdida cuando este sea retirado de la
                 compañía, el usuario deberá pagar el valor deducible del seguro</p>
             <br>
             <p>Agradezco su amable y acostumbrada atención <br>
                 Atentamente.
             </p>
-            <br><br><br>
+            <br><br>
             <div style="display: flex; align-items: center;">
                 <div style="float: left;">
                     <p><strong> Freddy Javier Alonso </strong></p>
@@ -92,8 +98,8 @@
                     <p>C.C ___________________________</p>
                 </div>
                 <div style="float:right; text-align: left;">
-                    <p> <strong> {{$accesorio->empleado->nombre ?? '' }}</strong></p>
-                    <p>{{ $accesorio->empleado->cargos->nombre ?? ''}}</p>
+                    <p> <strong> {{$celular->empleado->nombre ?? '' }}</strong></p>
+                    <p>{{ $celular->empleado->cargos->nombre ?? ''}}</p>
                     <p>FIRMA _____________________________</p>
                     <p>C.C ________________________________</p>
                 </div>

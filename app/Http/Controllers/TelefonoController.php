@@ -7,6 +7,8 @@ use App\Models\Telefono;
 use App\Models\Categoria;
 use App\Models\Marca;
 use App\Models\Empleado;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Carbon;
 
 class TelefonoController extends Controller
 {
@@ -125,4 +127,14 @@ class TelefonoController extends Controller
         $celular->delete();
         return redirect('/celulares');
     }
+
+    public function pdf($id)
+    {
+        $fechaActual = Carbon::now()->format('d/m/Y');
+        $celulares = Telefono::where('id', $id)->get();
+
+        $pdf = Pdf::loadView('celular.pdf', compact('celulares', 'fechaActual'));
+        return $pdf->stream('Responsabilidad_equipos.pdf');
+    }
+    
 }

@@ -40,7 +40,7 @@
                 <td>
                     <form action="{{ route ('celulares.destroy', $celular->id) }}" method="POST">
                     <a  href="/celulares/{{ $celular->id }}/edit" class="btn btn-info btn-sm">Editar</a>
-                    
+                    <a href="/celulares/{{$celular->id}}/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad usu</a>
                     @csrf
                     @method('DELETE')
                     <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>

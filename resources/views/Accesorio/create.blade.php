@@ -33,7 +33,7 @@
                     </select>
                 </div>
                 <div>
-                    <label for="" class="form-label">Escriba la serie del accesorio</label>
+                    <label for="" class="form-label">Escriba el Modelo del accesorio</label>
                     <input type="text" name="serie" id="serie" class="form-control" placeholder="Serie del accesorio"
                         tabindex="3">
                 </div>
