@@ -37,6 +37,7 @@
                     @csrf
                     @method('DELETE')
                     <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>
+                    <a href="/softwares/{{$software->id}}/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad Software</a>
                 </form>
                 </td>
             </tr>

@@ -32,11 +32,11 @@
         <tbody>
             @foreach ($celulares as $celular)
             <tr>
-                <td>{{ $celular->id }}</td>
-                <td>{{ $celular->empleado->nombre }}</td>
-                <td>{{ $celular->marca->marca }}</td>
-                <td>{{ $celular->modelo }}</td>
-                <td>{{ $celular->n_telefono }}</td>
+                <td>{{ $celular->id ?? 'No existe'}}</td>
+                <td>{{ $celular->empleado->nombre ?? 'No existe' }}</td>
+                <td>{{ $celular->marca->marca ?? 'No existe'}}</td>
+                <td>{{ $celular->modelo ?? 'No existe'}}</td>
+                <td>{{ $celular->n_telefono ?? 'No existe' }}</td>
                 <td>
                     <form action="{{ route ('celulares.destroy', $celular->id) }}" method="POST">
                     <a  href="/celulares/{{ $celular->id }}/edit" class="btn btn-info btn-sm">Editar</a>

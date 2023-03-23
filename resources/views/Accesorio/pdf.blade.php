@@ -55,7 +55,7 @@
                 laboral.</p>
             <table>
                 <tr>
-                    <td>Tipo Accesorio</td>
+                    <td>Categoria</td>
                     <td>Marca</td>
                     <td>Modelo</td>
                     <td>N° de Serial</td>

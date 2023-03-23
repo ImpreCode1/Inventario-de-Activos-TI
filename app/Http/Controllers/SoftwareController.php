@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Software;
 use Illuminate\Http\Request;
 use App\Models\Empleado;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Carbon;
 
 class SoftwareController extends Controller
 {
@@ -97,4 +99,14 @@ class SoftwareController extends Controller
         $software->delete();
         return redirect('/softwares');
     }
+
+    public function pdf($id)
+    {
+        $fechaActual = Carbon::now()->format('d/m/Y');
+        $softwares = Software::where('id', $id)->get();
+
+        $pdf = Pdf::loadView('software.pdf', compact('softwares', 'fechaActual'));
+        return $pdf->stream('Responsabilidad_equipos.pdf');
+    }
+    
 }

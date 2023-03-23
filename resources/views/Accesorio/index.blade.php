@@ -33,10 +33,10 @@
             @foreach ($accesorios as $accesorio)
             <tr>
                 <td>{{ $accesorio->id }}</td>
-                <td>{{ $accesorio->empleado->nombre }}</td>
-                <td>{{ $accesorio->categoria->nombre }}</td>
-                <td>{{ $accesorio->marca->marca }}</td>
-                <td>{{ $accesorio->n_serial }}</td>
+                <td>{{ $accesorio->empleado->nombre ?? 'No existe'}}</td>
+                <td>{{ $accesorio->categoria->nombre ?? 'No existe'}}</td>
+                <td>{{ $accesorio->marca->marca ?? 'No existe'}}</td>
+                <td>{{ $accesorio->n_serial ?? 'No existe'}}</td>
                 <td>
                     <form action="{{ route ('accesorios.destroy', $accesorio->id) }}" method="POST">
                     <a  href="/accesorios/{{ $accesorio->id }}/edit" class="btn btn-info btn-sm">Editar</a>
