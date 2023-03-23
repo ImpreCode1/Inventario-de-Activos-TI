@@ -19,6 +19,8 @@ Route::get('/', function () {
 });
 
 Route::get('empleados/{id}/pdf',  [App\Http\Controllers\EmpleadoController::class, 'pdf' ])->name('empleados.pdf');
+Route::get('equipos/{id}/pdf',  [App\Http\Controllers\CpuEquipoController::class, 'pdf' ])->name('equipos.pdf');
+
 
 Route::resource('cargos', App\Http\Controllers\CargoController::class)->middleware('auth');
 Route::resource('departamentos', App\Http\Controllers\DepartamentoController::class)->middleware('auth');

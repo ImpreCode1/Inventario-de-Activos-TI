@@ -38,7 +38,7 @@
                 <td>{{ $empleado->usu_dominio ?? 'El usuario dominio no existe'}}</td>
                 <td>{{ $empleado->num_exten ?? 'El numero de extencion no existe'}}</td>
                 <td>{{ $empleado->email ?? 'El email no existe'}}</td>
-                <td>{{ $empleado->cargos->cargo ?? 'El cargo no existe'}}</td>
+                <td>{{ $empleado->cargos->nombre ?? 'El cargo no existe'}}</td>
                 <td>{{ $empleado->departamentos->nombre ?? 'El departamento no existe' }}</td>
                 <td>
                     <form action="{{ route ('empleados.destroy', $empleado->id) }}" method="POST">

@@ -13,7 +13,7 @@ class Empleado extends Model
 
 
     public function cargos(){
-        return $this->belongsTo(Cargo::class);
+        return $this->belongsTo(Cargo::class, 'id_cargo');
     }
 
     public function departamentos(){

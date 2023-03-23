@@ -36,11 +36,11 @@
                 <td>{{ $equipo->empleado->nombre ?? 'El empleado no existe'}}</td>
                 <td>{{ $equipo->categoria->nombre ?? 'La categoria no existe'}}</td>
                 <td>{{ $equipo->marca->marca ?? 'La marca no Existe'}}</td>
-                <td>{{ $equipo->n_serial }}</td>
+                <td>{{ $equipo->n_serial ?? 'No existe numero de serial'}}</td>
                 <td>
                     <form action="{{ route ('equipos.destroy', $equipo->id) }}" method="POST">
                     <a  href="/equipos/{{ $equipo->id }}/edit" class="btn btn-info btn-sm">Editar</a>
-                    
+                    <a href="/equipos/{{$equipo->id}}/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad usu</a>
                     @csrf
                     @method('DELETE')
                     <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>

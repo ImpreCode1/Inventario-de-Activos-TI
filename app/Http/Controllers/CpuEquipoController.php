@@ -7,6 +7,10 @@ use App\Models\CpuEquipo;
 use App\Models\Categoria;
 use App\Models\Marca;
 use App\Models\Empleado;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Carbon;
+
+
 
 class CpuEquipoController extends Controller
 {
@@ -31,7 +35,7 @@ class CpuEquipoController extends Controller
         $categorias = Categoria::all();
         $marcas = Marca::all();
         $empleados = Empleado::all();
-        return view('equipo.create', compact('categorias', 'marcas', 'empleados'));    
+        return view('equipo.create', compact('categorias', 'marcas', 'empleados'));
     }
 
     /**
@@ -43,18 +47,18 @@ class CpuEquipoController extends Controller
     public function store(Request $request)
     {
         $equipos = new CpuEquipo();
-        $equipos-> id_categoria = $request->get('id_categoria');
-        $equipos-> id_marca = $request->get('id_marca');
-        $equipos-> serie = $request->get('serie');
-        $equipos-> n_activo = $request->get('n_activo');
-        $equipos-> n_serial = $request->get('n_serial');
-        $equipos-> n_parte = $request->get('n_parte');
-        $equipos-> memoria_ram = $request->get('memoria_ram');
-        $equipos-> procesador = $request->get('procesador');
-        $equipos-> discoduro = $request->get('discoduro');
-        $equipos-> observaciones = $request->get('observaciones');
-        $equipos-> id_empleado = $request->get('id_empleado');
-        $equipos-> nom_equipo = $request->get('nom_equipo');
+        $equipos->id_categoria = $request->get('id_categoria');
+        $equipos->id_marca = $request->get('id_marca');
+        $equipos->serie = $request->get('serie');
+        $equipos->n_activo = $request->get('n_activo');
+        $equipos->n_serial = $request->get('n_serial');
+        $equipos->n_parte = $request->get('n_parte');
+        $equipos->memoria_ram = $request->get('memoria_ram');
+        $equipos->procesador = $request->get('procesador');
+        $equipos->discoduro = $request->get('discoduro');
+        $equipos->observaciones = $request->get('observaciones');
+        $equipos->id_empleado = $request->get('id_empleado');
+        $equipos->nom_equipo = $request->get('nom_equipo');
 
 
         $equipos->save();
@@ -85,7 +89,7 @@ class CpuEquipoController extends Controller
         $categoria = Categoria::all();
         $marca = Marca::all();
         $empleado = Empleado::all();
-        return view('equipo.edit', compact( 'equipo', 'categoria', 'marca', 'empleado'));
+        return view('equipo.edit', compact('equipo', 'categoria', 'marca', 'empleado'));
     }
 
     /**
@@ -98,18 +102,18 @@ class CpuEquipoController extends Controller
     public function update(Request $request, $id)
     {
         $equipo = CpuEquipo::find($id);
-        $equipo-> id_categoria = $request->get('id_categoria');
-        $equipo-> id_marca = $request->get('id_marca');
-        $equipo-> serie = $request->get('serie');
-        $equipo-> n_activo = $request->get('n_activo');
-        $equipo-> n_serial = $request->get('n_serial');
-        $equipo-> n_parte = $request->get('n_parte');
-        $equipo-> memoria_ram = $request->get('memoria_ram');
-        $equipo-> procesador = $request->get('procesador');
-        $equipo-> discoduro = $request->get('discoduro');
-        $equipo-> observaciones = $request->get('observaciones');
-        $equipo-> id_empleado = $request->get('id_empleado');
-        $equipo-> nom_equipo = $request->get('nom_equipo');
+        $equipo->id_categoria = $request->get('id_categoria');
+        $equipo->id_marca = $request->get('id_marca');
+        $equipo->serie = $request->get('serie');
+        $equipo->n_activo = $request->get('n_activo');
+        $equipo->n_serial = $request->get('n_serial');
+        $equipo->n_parte = $request->get('n_parte');
+        $equipo->memoria_ram = $request->get('memoria_ram');
+        $equipo->procesador = $request->get('procesador');
+        $equipo->discoduro = $request->get('discoduro');
+        $equipo->observaciones = $request->get('observaciones');
+        $equipo->id_empleado = $request->get('id_empleado');
+        $equipo->nom_equipo = $request->get('nom_equipo');
 
         $equipo->save();
 
@@ -128,4 +132,14 @@ class CpuEquipoController extends Controller
         $equipo->delete();
         return redirect('/equipos');
     }
+
+    public function pdf($id)
+    {
+        $fechaActual = Carbon::now()->format('d/m/Y');
+        $equipos = CpuEquipo::where('id', $id)->get();
+
+        $pdf = Pdf::loadView('equipo.pdf', compact('equipos', 'fechaActual'));
+        return $pdf->stream('Reprote_de_responsabilidad.pdf');
+    }
+    
 }

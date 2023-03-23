@@ -16,7 +16,7 @@
                 @csrf
                 <div>
                     <label for="" class="form-label">Cargo</label>
-                    <input type="text" name="cargo" id="cargo" class="form-control" placeholder="Cargo"
+                    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Cargo"
                         tabindex="1">
                 </div>
                 <div>

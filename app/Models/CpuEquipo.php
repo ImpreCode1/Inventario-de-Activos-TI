@@ -16,8 +16,9 @@ class CpuEquipo extends Model
     public function empleado(){
         return $this->belongsTo(Empleado::class, 'id_empleado');
     }
-
     public function marca(){
         return $this->belongsTo(Marca::class, 'id_marca');
     }
+
+
 }

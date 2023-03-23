@@ -36,17 +36,17 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        $cargos =  DB::table('cargos')->orderBy('cargo', 'asc')->get();
+        $cargos =  DB::table('cargos')->orderBy('nombre', 'asc')->get();
         $cargos_ordenados = array();
         foreach ($cargos as $cargo) {
-            $cargos_ordenados[$cargo->id] = $cargo->cargo;
-        }
+            $cargos_ordenados[$cargo->id] = $cargo->nombre;
+        };
 
         $departamentos = DB::table('departamentos')->orderBy('nombre', 'asc')->get();
         $departamentos_ordenados = array();
         foreach ($departamentos as $departamento) {
             $departamentos_ordenados[$departamento->id] = $departamento->nombre;
-        }
+        };
 
 
         $modoUsuarios = ModoUsuario::all();
@@ -147,7 +147,6 @@ class EmpleadoController extends Controller
 
     public function pdf($id){
         $empleados =  Empleado::where('id', $id)->get();
-
 
         $pdf = Pdf::loadView('empleado.pdf', compact('empleados'));
         return $pdf->setPaper('a4', 'landscape')-> stream('Acta_contraseñas.pdf');

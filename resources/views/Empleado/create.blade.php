@@ -23,8 +23,8 @@
                     <label for="" class="form-label">Cargo</label>
                     <select name="id_cargo" id="id_cargo"  class="form-control" tabindex="2">
                         <option value="">-- Escoja el cargo al que pertenecera el empleado --</option>
-                        @foreach ($cargos_ordenados as $id => $cargo)
-                            <option value="{{$id}}">{{$cargo}}</option>
+                        @foreach ($cargos_ordenados as $id => $nombre)
+                            <option value="{{$id}}">{{$nombre}}</option>
                         @endforeach
                     </select>
                 </div>

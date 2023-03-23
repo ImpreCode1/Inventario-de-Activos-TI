@@ -37,7 +37,7 @@ class CargoController extends Controller
     public function store(Request $request)
     {
         $cargos = new Cargo();
-        $cargos-> cargo = $request->get('cargo');
+        $cargos-> nombre = $request->get('nombre');
         $cargos-> detalle = $request->get('detalle');
 
         $cargos->save();
@@ -78,7 +78,7 @@ class CargoController extends Controller
     public function update(Request $request, $id)
     {
         $cargo = Cargo::find($id);
-        $cargo-> cargo = $request->get('cargo');
+        $cargo-> nombre = $request->get('nombre');
         $cargo-> detalle = $request->get('detalle');
 
         $cargo->save();

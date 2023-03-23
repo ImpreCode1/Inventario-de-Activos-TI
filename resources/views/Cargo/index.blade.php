@@ -30,7 +30,7 @@
             @foreach ($cargos as $cargo)
             <tr>
                 <td>{{ $cargo->id }}</td>
-                <td>{{ $cargo->cargo ?? 'EL cargo no existe'}}</td>
+                <td>{{ $cargo->nombre ?? 'EL cargo no existe'}}</td>
                 <td>{{ $cargo->detalle ?? 'El detalle no existe'}}</td>
                 <td>
                     <form action="{{ route ('cargos.destroy', $cargo->id) }}" method="POST">
