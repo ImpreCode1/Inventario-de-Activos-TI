@@ -39,11 +39,11 @@
                 <td>{{ $accesorio->n_serial }}</td>
                 <td>
                     <form action="{{ route ('accesorios.destroy', $accesorio->id) }}" method="POST">
-                    <a  href="/accesorios/{{ $accesorio->id }}/edit" class="btn btn-info">Editar</a>
-                    
+                    <a  href="/accesorios/{{ $accesorio->id }}/edit" class="btn btn-info btn-sm">Editar</a>
+                    <a href="/accesorios/{{$accesorio->id}}/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad usu</a>
                     @csrf
                     @method('DELETE')
-                    <Button type="submit" class="btn btn-danger">Eliminar</Button>
+                    <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>
                 </form>
                 </td>
             </tr>

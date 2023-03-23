@@ -139,7 +139,7 @@ class CpuEquipoController extends Controller
         $equipos = CpuEquipo::where('id', $id)->get();
 
         $pdf = Pdf::loadView('equipo.pdf', compact('equipos', 'fechaActual'));
-        return $pdf->stream('Reprote_de_responsabilidad.pdf');
+        return $pdf->stream('Responsabilidad_equipos.pdf');
     }
     
 }

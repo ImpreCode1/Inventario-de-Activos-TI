@@ -7,6 +7,9 @@ use App\Models\Accesorio;
 use App\Models\Categoria;
 use App\Models\Marca;
 use App\Models\Empleado;
+use Illuminate\Support\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class AccesorioController extends Controller
 {
@@ -118,5 +121,14 @@ class AccesorioController extends Controller
         $accesorio = Accesorio::find($id);
         $accesorio->delete();
         return redirect('/accesorios');
+    }
+
+    public function pdf($id)
+    {
+        $fechaActual = Carbon::now()->format('d/m/Y');
+        $accesorios = Accesorio::where('id', $id)->get();
+
+        $pdf = Pdf::loadView('accesorio.pdf', compact('accesorios', 'fechaActual'));
+        return $pdf->stream('Responsabilidad_accesorio.pdf');
     }
 }

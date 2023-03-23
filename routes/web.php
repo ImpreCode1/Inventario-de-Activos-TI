@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Route::get('empleados/{id}/pdf',  [App\Http\Controllers\EmpleadoController::class, 'pdf' ])->name('empleados.pdf');
 Route::get('equipos/{id}/pdf',  [App\Http\Controllers\CpuEquipoController::class, 'pdf' ])->name('equipos.pdf');
+Route::get('accesorios/{id}/pdf',  [App\Http\Controllers\AccesorioController::class, 'pdf' ])->name('accesorios.pdf');
+
 
 
 Route::resource('cargos', App\Http\Controllers\CargoController::class)->middleware('auth');
