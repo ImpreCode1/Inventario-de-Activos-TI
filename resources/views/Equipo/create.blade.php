@@ -31,8 +31,8 @@
                             <label for="" class="form-label">Marca</label>
                             <select name="id_marca" id="id_marca" class="form-control" tabindex="2">
                                 <option value="">-- Escoja la marca del equipo --</option>
-                                @foreach ($marcas as $marca)
-                                    <option value="{{ $marca['id'] }}">{{ $marca['marca'] }}</option>
+                                @foreach ($marcas_ordenadas as $id => $nombre)
+                                    <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -80,8 +80,8 @@
                             <label for="" class="form-label">Empleado al que se le asigna</label>
                             <select name="id_empleado" id="id_empleado" class="form-control" tabindex="11">
                                 <option value="">-- Escoja el empleado al que pertenecera el equipo --</option>
-                                @foreach ($empleados as $empleado)
-                                    <option value="{{ $empleado['id'] }}">{{ $empleado['nombre'] }}</option>
+                                @foreach ($empleados_ordenados as $id => $nombre)
+                                    <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Empleado;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class SoftwareController extends Controller
 {
@@ -28,8 +29,12 @@ class SoftwareController extends Controller
      */
     public function create()
     {
-        $empleados = Empleado::all();
-        return view('software.create', compact('empleados'));  
+        $empleados =  DB::table('empleados')->orderBy('nombre', 'asc')->get();
+        $empleados_ordenados = array();
+        foreach ($empleados as $empleado) {
+            $empleados_ordenados[$empleado->id] = $empleado->nombre;
+        };
+        return view('software.create', compact('empleados_ordenados'));  
 
     }
 

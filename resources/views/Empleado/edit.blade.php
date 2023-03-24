@@ -55,7 +55,7 @@
                                 tabindex="5">
                         </div>
                         <div>
-                            <label for="" class="form-label">Estado del empleado</label>
+                            <label for="" class="form-label">Esta Retirado el empleado de la empresa?</label>
                             <select name="retirado" id="retirado" class="form-control" tabindex="6"
                                 value="{{ $empleado->retirado ?? 'No existe' }}">
                                 <option value="">-- Seleccione si esta retirado el empleado o no --</option>

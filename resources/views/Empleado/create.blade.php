@@ -47,7 +47,7 @@
                                 tabindex="5">
                         </div>
                         <div>
-                            <label for="" class="form-label">Estado del empleado</label>
+                            <label for="" class="form-label">Esta Retirado el empleado de la empresa?</label>
                             <select name="retirado" id="retirado" class="form-control" tabindex="6">
                                 <option value="">-- Seleccione si esta retirado el empleado o no --</option>
                                 <option value="SI">SI</option>

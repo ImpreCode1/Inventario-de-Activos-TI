@@ -9,6 +9,7 @@ use App\Models\Marca;
 use App\Models\Empleado;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 
 class AccesorioController extends Controller
@@ -32,9 +33,17 @@ class AccesorioController extends Controller
     public function create()
     {
         $categorias = Categoria::whereIn('nombre', ['DIADEMA', 'MOUSE', 'MONITOR', 'TECLADO', 'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH'])->get();
-        $marcas = Marca::all();
-        $empleados = Empleado::all();
-        return view('accesorio.create', compact('categorias', 'marcas', 'empleados')); 
+        $marcas =  DB::table('marcas')->orderBy('marca', 'asc')->get();
+        $marcas_ordenadas = array();
+        foreach ($marcas as $marca) {
+            $marcas_ordenadas[$marca->id] = $marca->marca;
+        };
+        $empleados =  DB::table('empleados')->orderBy('nombre', 'asc')->get();
+        $empleados_ordenados = array();
+        foreach ($empleados as $empleado) {
+            $empleados_ordenados[$empleado->id] = $empleado->nombre;
+        };
+        return view('accesorio.create', compact('categorias', 'marcas_ordenadas', 'empleados_ordenados')); 
     }
 
     /**

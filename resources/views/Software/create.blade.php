@@ -21,8 +21,8 @@
                             <select name="id_empleado" id="id_empleado" class="form-control" tabindex="1"
                                 style="width: 450px;">
                                 <option value="">-- Seleccione el empleado --</option>
-                                @foreach ($empleados as $empleado)
-                                    <option value="{{ $empleado['id'] }}">{{ $empleado['nombre'] }}</option>
+                                @foreach ($empleados_ordenados as $id => $nombre)
+                                    <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
                             </select>
                         </div>
