@@ -24,7 +24,6 @@ class Empleado extends Model
         return $this->belongsTo(ModoUsuario::class, 'id_modo_usuario');
     }
 
-    
     public function cpuEquipo(){
         return $this->hasMany(CpuEquipo::class, 'id');
     }
@@ -37,5 +36,16 @@ class Empleado extends Model
     }
     public function software(){
         return $this->hasMany(Software::class, 'id');
+    }
+
+    public function historialEquipo(){
+        return $this->hasMany(HistorialEquipo::class, 'id');
+    }
+
+    public function historialAccesorio(){
+        return $this->hasMany(HistorialAccesorio::class, 'id');
+    }
+    public function historialTelefono(){
+        return $this->hasMany(HistorialTelefono::class, 'id');
     }
 }

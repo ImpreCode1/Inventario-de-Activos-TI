@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HistorialTelefono;
+use App\Models\Telefono;
 use Illuminate\Http\Request;
 
 class HistorialTelefonoController extends Controller
@@ -13,7 +15,8 @@ class HistorialTelefonoController extends Controller
      */
     public function index()
     {
-        //
+        $telefonosHistorial = HistorialTelefono::all();
+        return view('HistorialTelefono.index')->with('telefonosHistorial', $telefonosHistorial);
     }
 
     /**
@@ -79,6 +82,8 @@ class HistorialTelefonoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $telefono = HistorialTelefono::find($id);
+        $telefono->delete();
+        return redirect('/telefonosHistorial');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HistorialEquipo;
 use Illuminate\Http\Request;
 
 class HistorialEquipoController extends Controller
@@ -13,7 +14,8 @@ class HistorialEquipoController extends Controller
      */
     public function index()
     {
-        //
+        $equiposHistorial = HistorialEquipo::all();
+        return view('HistorialEquipo.index')->with('equiposHistorial', $equiposHistorial);
     }
 
     /**
@@ -79,6 +81,8 @@ class HistorialEquipoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $equipo = HistorialEquipo::find($id);
+        $equipo->delete();
+        return redirect('/equiposHistorial');
     }
 }

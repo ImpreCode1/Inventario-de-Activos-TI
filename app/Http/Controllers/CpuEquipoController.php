@@ -112,22 +112,24 @@ class CpuEquipoController extends Controller
     public function update(Request $request, $id)
     {
         $equipo = CpuEquipo::find($id);
-        $equipo->id_categoria = $request->get('id_categoria');
-        $equipo->id_marca = $request->get('id_marca');
-        $equipo->serie = $request->get('serie');
-        $equipo->n_activo = $request->get('n_activo');
-        $equipo->n_serial = $request->get('n_serial');
-        $equipo->n_parte = $request->get('n_parte');
-        $equipo->memoria_ram = $request->get('memoria_ram');
-        $equipo->procesador = $request->get('procesador');
-        $equipo->discoduro = $request->get('discoduro');
-        $equipo->observaciones = $request->get('observaciones');
-        $equipo->id_empleado = $request->get('id_empleado');
-        $equipo->nom_equipo = $request->get('nom_equipo');
+        $equipo->id_categoria = $request->input('id_categoria');
+        $equipo->id_marca = $request->input('id_marca');
+        $equipo->serie = $request->input('serie');
+        $equipo->n_activo = $request->input('n_activo');
+        $equipo->n_serial = $request->input('n_serial');
+        $equipo->n_parte = $request->input('n_parte');
+        $equipo->memoria_ram = $request->input('memoria_ram');
+        $equipo->procesador = $request->input('procesador');
+        $equipo->discoduro = $request->input('discoduro');
+        $equipo->observaciones = $request->input('observaciones');
+        $equipo->id_empleado = $request->input('id_empleado');
+        $equipo->nom_equipo = $request->input('nom_equipo');
 
         $equipo->save();
+        CpuEquipo::actualizarHistorial($id, $request->get('id_empleado'));
+        
 
-        return redirect('/empleados');
+        return redirect('/equipos');
     }
 
     /**

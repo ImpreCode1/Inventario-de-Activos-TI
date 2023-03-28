@@ -357,17 +357,17 @@ return [
             'submenu' => [
                 [
                     'text' => 'Historial Portatiles',
-                    'url'  => '#',
+                    'url'  => 'equiposHistorial',
                     'icon' => 'fa fa-laptop'
                 ],
                 [
                     'text' => 'Historial Accesorios',
-                    'url'  => '#',
+                    'url'  => 'accesesoriosHistorial',
                     'icon' => 'fa fa-random'
                 ],
                 [
                     'text' => 'Historial Celulares',
-                    'url'  => '#',
+                    'url'  => 'telefonosHistorial',
                     'icon' => 'fa fa-mobile'
                 ],
             ],

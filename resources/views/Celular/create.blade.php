@@ -35,6 +35,11 @@
                             </select>
                         </div>
                         <div>
+                            <label for="" class="form-label">Escriba el Serial del celular</label>
+                            <input type="text" name="serial" id="serial" class="form-control"
+                                placeholder="Modelo del celular" tabindex="3">
+                        </div>
+                        <div>
                             <label for="" class="form-label">Escriba el modelo del celular</label>
                             <input type="text" name="modelo" id="modelo" class="form-control"
                                 placeholder="Modelo del celular" tabindex="3">

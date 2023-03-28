@@ -56,6 +56,7 @@ class TelefonoController extends Controller
         $celular = new Telefono();
         $celular-> id_categoria = $request->get('id_categoria');
         $celular-> id_marca = $request->get('id_marca');
+        $celular-> serial = $request->get('serial');
         $celular-> modelo = $request->get('modelo');
         $celular-> n_telefono = $request->get('n_telefono');
         $celular-> email_1 = $request->get('email_1');
@@ -107,19 +108,22 @@ class TelefonoController extends Controller
     public function update(Request $request, $id)
     {
         $celular = Telefono::find($id);
-        $celular-> id_categoria = $request->get('id_categoria');
-        $celular-> id_marca = $request->get('id_marca');
-        $celular-> modelo = $request->get('modelo');
-        $celular-> n_telefono = $request->get('n_telefono');
-        $celular-> email_1 = $request->get('email_1');
-        $celular-> email_2 = $request->get('email_2');
-        $celular-> serial_sim = $request->get('serial_sim');
-        $celular-> ram = $request->get('ram');
-        $celular-> rom = $request->get('rom');
-        $celular-> observaciones = $request->get('observaciones');
-        $celular-> id_empleado = $request->get('id_empleado');
+        $celular->id_categoria = $request->input('id_categoria');
+        $celular->id_marca = $request->input('id_marca');
+        $celular->serial = $request->input('serial');
+        $celular->modelo = $request->input('modelo');
+        $celular->n_telefono = $request->input('n_telefono');
+        $celular->email_1 = $request->input('email_1');
+        $celular->email_2 = $request->input('email_2');
+        $celular->serial_sim = $request->input('serial_sim');
+        $celular->ram = $request->input('ram');
+        $celular->rom = $request->input('rom');
+        $celular->observaciones = $request->input('observaciones');
+        $celular->id_empleado = $request->input('id_empleado');
+
 
         $celular->save();
+        Telefono::actualizarTelefono($id, $request->get('id_empleado'));
 
         return redirect('/celulares');
     }

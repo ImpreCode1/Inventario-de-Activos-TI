@@ -17,6 +17,8 @@ class CreateHistorialAccesoriosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_empleado');
             $table->unsignedBigInteger('id_accesorio');
+            $table->date('fecha_asignacion')->nullable();
+            $table->date('fecha_devolucion')->nullable();
 
             $table->foreign('id_empleado')->references('id')->on('empleados');
             $table->foreign('id_accesorio')->references('id')->on('accesorios');

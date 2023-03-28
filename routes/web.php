@@ -35,6 +35,9 @@ Route::resource('equipos', App\Http\Controllers\CpuEquipoController::class)->mid
 Route::resource('accesorios', App\Http\Controllers\AccesorioController::class)->middleware('auth');
 Route::resource('celulares', App\Http\Controllers\TelefonoController::class)->middleware('auth');
 Route::resource('softwares', App\Http\Controllers\SoftwareController::class)->middleware('auth');
+Route::resource('equiposHistorial', App\Http\Controllers\HistorialEquipoController::class)->middleware('auth');
+Route::resource('accesesoriosHistorial', App\Http\Controllers\HistorialAccesorioController::class)->middleware('auth');
+Route::resource('telefonosHistorial', App\Http\Controllers\HistorialTelefonoController::class)->middleware('auth');
 
 
 Auth::routes();

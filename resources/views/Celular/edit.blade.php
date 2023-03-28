@@ -14,7 +14,7 @@
         <div class="col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-body">
-                    <form action="/equipos/{{ $celular->id }}" method="POST">
+                    <form action="/celulares/{{ $celular->id }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div>
@@ -22,7 +22,7 @@
                             <select name="id_categoria" id="id_categoria" class="form-control" tabindex="1">
                                 <option value="">-- Seleccione la categoria del equipo --</option>
                                 @foreach ($categoria as $categoria)
-                                    <option value="{{ $categoria->id }}" @if(old('id_categoria', $celular->id_categoria ??'No existe') == $categoria->id) selected @endif>{{ $categoria->nombre }}</option>
+                                    <option value="{{ $categoria->id }}" @if(old('id_categoria', $celular->id_categoria ?? 'No existe') == $categoria->id) selected @endif>{{ $categoria->nombre }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -34,6 +34,11 @@
                                     <option value="{{ $marca->id }}" @if(old('id_marca', $celular->id_marca ?? 'No Existe') == $marca->id) selected @endif>{{ $marca->marca }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div>
+                            <label for="" class="form-label">Escriba el nuevo serial del celular</label>
+                            <input type="text" name="serial" id="serial" class="form-control" placeholder="serie"
+                                value="{{ $celular->serial ?? 'No existe' }}" tabindex="3">
                         </div>
                         <div>
                             <label for="" class="form-label">Escriba el modelo del celular</label>
@@ -88,7 +93,7 @@
                             </select>
                         </div>
                         <br>
-                        <a href="/equipos" class="btn btn-secondary" tabindex="13">Cancelar</a>
+                        <a href="/celulares" class="btn btn-secondary" tabindex="13">Cancelar</a>
                         <button type="submit" class="btn btn-primary" tabindex="14">Guardar</button>
                     </form>
                 </div>

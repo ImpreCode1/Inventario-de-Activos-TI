@@ -80,10 +80,12 @@
                 del usuario. El accesorio se encuentra asegurado, en caso de pérdida cuando este sea retirado de la
                 compañía, el usuario deberá pagar el valor deducible del seguro</p>
             <br>
-            <p>Agradezco su amable y acostumbrada atención <br>
-                Atentamente.
+            <p>Agradezco su amable y acostumbrada atención 
+                
             </p>
-            <br><br><br>
+            <br>
+            <p>Atentamente.</p>
+            <br>
             <div style="display: flex; align-items: center;">
                 <div style="float: left;">
                     <p><strong> Freddy Javier Alonso </strong></p>

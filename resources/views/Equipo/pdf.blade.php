@@ -87,7 +87,7 @@
             <p>Agradezco su amable y acostumbrada atención <br>
                 Atentamente.
             </p>
-            <br><br><br>
+            <br><br>
             <div style="display: flex; align-items: center;">
                 <div style="float: left;">
                     <p><strong> Freddy Javier Alonso </strong></p>

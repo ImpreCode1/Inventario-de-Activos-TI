@@ -115,7 +115,7 @@ class AccesorioController extends Controller
         $accesorio-> id_empleado = $request->get('id_empleado');
 
         $accesorio->save();
-
+        Accesorio::actualizarAccesesorio($id, $request->get('id_empleado'));
         return redirect('/accesorios');
     }
 
