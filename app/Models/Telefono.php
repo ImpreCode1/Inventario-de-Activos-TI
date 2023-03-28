@@ -9,6 +9,22 @@ class Telefono extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id_categoria',
+        'id_marca',
+        'serial',
+        'modelo',
+        'n_telefono',
+        'email_1',
+        'email_2',
+        'serial_sim',
+        'ram',
+        'rom',
+        'observaciones',
+        'id_empleado',
+    ];
+    
+
     public function categoria(){
         return $this->belongsTo(Categoria::class, 'id_categoria')->whereIn('nombre', ['CELULAR']);;
     }

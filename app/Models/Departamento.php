@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Departamento extends Model
 {
+    protected $fillable = [
+        'id', 'nombre'
+    ];
     use HasFactory;
 
     public function empleados(){

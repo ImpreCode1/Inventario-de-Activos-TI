@@ -14,10 +14,25 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        $departamentos = Departamento::all();
-        return view('departamento.index')->with('departamentos', $departamentos);
+        return view('departamento.index');
     }
 
+    public function departamentos()
+    {
+        $departamentos = Departamento::select('id', 'nombre')->get();
+        return datatables()->of($departamentos)
+            ->addColumn('action', function ($departamento) {
+                return '
+                <form id="form-eliminar-' . $departamento->id . '" action="' . route('departamentos.destroy', $departamento->id) . '" method="POST">
+                    <a href="/departamentos/' . $departamento->id . '/edit" class="btn btn-info btn-sm">Editar</a>
+                    ' . csrf_field() . '
+                    ' . method_field('DELETE') . '
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$departamento->id.')">Eliminar</button>
+                </form>';
+            })
+            ->rawColumns(['action'])
+            ->toJson();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -37,7 +52,7 @@ class DepartamentoController extends Controller
     public function store(Request $request)
     {
         $departamentos = new Departamento();
-        $departamentos-> nombre = $request->get('nombre');
+        $departamentos->nombre = $request->get('nombre');
 
         $departamentos->save();
 
@@ -64,7 +79,7 @@ class DepartamentoController extends Controller
     public function edit($id)
     {
         $departamento = Departamento::find($id);
-        return view('departamento.edit')->with('departamento',$departamento);
+        return view('departamento.edit')->with('departamento', $departamento);
     }
 
     /**
@@ -77,7 +92,7 @@ class DepartamentoController extends Controller
     public function update(Request $request, $id)
     {
         $departamento = Departamento::find($id);
-        $departamento-> nombre = $request->get('nombre');
+        $departamento->nombre = $request->get('nombre');
 
         $departamento->save();
 

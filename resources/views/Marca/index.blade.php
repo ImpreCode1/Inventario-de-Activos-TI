@@ -25,24 +25,6 @@
                 
             </tr>
         </thead>
-        <tbody>
-            @foreach ($marcas as $marca)
-            <tr>
-                <td>{{ $marca->id }}</td>
-                <td>{{ $marca->marca }}</td>
-                <td>
-                    <form action="{{ route ('marcas.destroy', $marca->id) }}" method="POST">
-                    <a  href="/marcas/{{ $marca->id }}/edit" class="btn btn-info btn-sm">Editar</a>
-                    
-                    @csrf
-                    @method('DELETE')
-                    <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>
-                </form>
-                </td>
-            </tr>
-                
-            @endforeach
-
         </tbody>
     </table>
 </div>
@@ -57,8 +39,25 @@
 <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
+    function confirmDelete(marcaId) {
+        if (confirm("¿Estás seguro de que quieres eliminar esta marca?")) {
+            document.getElementById('form-eliminar-' + marcaId).submit();
+        }
+    }
+    </script>
+    
+
+<script>
     $(document).ready(function () {
     $('#marcas').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('marcas.lista') }}",
+        columns: [
+            {data: 'id'},
+            {data: 'marca'},
+            {data: 'acciones', orderable: false, searchable: false}
+        ],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "Nada encontrado - disculpa",

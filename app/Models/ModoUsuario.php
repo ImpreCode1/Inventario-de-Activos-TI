@@ -9,6 +9,11 @@ class ModoUsuario extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'cargo',
+    ];
+    
+
     public function empleados(){
         return $this->hasMany(Empleado::class, 'id');
     }

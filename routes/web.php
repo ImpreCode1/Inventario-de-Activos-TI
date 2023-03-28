@@ -26,6 +26,10 @@ Route::get('softwares/{id}/pdf',  [App\Http\Controllers\SoftwareController::clas
 
 
 
+Route::get('cargos/lista', [App\Http\Controllers\CargoController::class, 'datos'])->name('cargos.lista');
+Route::get('departamentos/lista', [App\Http\Controllers\DepartamentoController::class, 'departamentos'])->name('departamentos.lista');
+Route::get('marcas/lista', [App\Http\Controllers\MarcaController::class, 'marcas'])->name('marcas.lista');
+
 
 Route::resource('cargos', App\Http\Controllers\CargoController::class)->middleware('auth');
 Route::resource('departamentos', App\Http\Controllers\DepartamentoController::class)->middleware('auth');

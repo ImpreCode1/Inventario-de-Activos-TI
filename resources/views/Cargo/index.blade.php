@@ -23,28 +23,9 @@
                 <th scope="col">Cargo</th>
                 <th scope="col">Detalle</th>
                 <th>Acciones</th>
-                
             </tr>
         </thead>
         <tbody>
-            @foreach ($cargos as $cargo)
-            <tr>
-                <td>{{ $cargo->id }}</td>
-                <td>{{ $cargo->nombre ?? 'EL cargo no existe'}}</td>
-                <td>{{ $cargo->detalle ?? 'El detalle no existe'}}</td>
-                <td>
-                    <form action="{{ route ('cargos.destroy', $cargo->id) }}" method="POST">
-                    <a  href="/cargos/{{ $cargo->id }}/edit" class="btn btn-info btn-sm">Editar</a>
-                    
-                    @csrf
-                    @method('DELETE')
-                    <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>
-                </form>
-                </td>
-            </tr>
-                
-            @endforeach
-
         </tbody>
     </table>
 </div>
@@ -57,10 +38,25 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
-
 <script>
-    $(document).ready(function () {
+    function confirmDelete(cargoId) {
+        if (confirm("¿Estás seguro de que quieres eliminar este cargo?")) {
+            document.getElementById('form-eliminar-' + cargoId).submit();
+        }
+    }
+    </script>
+<script>
+  $(document).ready(function () {
     $('#cargos').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('cargos.lista') }}",
+        columns: [
+            {data: 'id'},
+            {data: 'nombre'},
+            {data: 'detalle'},
+            {data: 'acciones', orderable: false, searchable: false}
+        ],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "Nada encontrado - disculpa",

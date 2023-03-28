@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Accesorio extends Model
 {
+    protected $fillable = [
+        'id_categoria',
+        'id_marca',
+        'serie',
+        'n_activo',
+        'n_serial',
+        'n_parte',
+        'observaciones',
+        'id_empleado',
+    ];
     use HasFactory;
 
     public function categoria(){

@@ -9,6 +9,10 @@ class Categoria extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id', 'nombre'
+    ];
+
     public function cpuEquipo(){
         return $this->hasMany(CpuEquipo::class, 'id');
     }

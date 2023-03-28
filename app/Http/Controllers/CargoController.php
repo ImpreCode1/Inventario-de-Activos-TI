@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cargo;
 
+
+
+
 class CargoController extends Controller
 {
     /**
@@ -14,9 +17,20 @@ class CargoController extends Controller
      */
     public function index()
     {
-        $cargos = Cargo::all();
-        return view('cargo.index')->with('cargos', $cargos);
+        return view('cargo.index');
     }
+
+    public function datos(){
+    $cargos = Cargo::select('id', 'nombre', 'detalle')->get();
+    return datatables()->of($cargos)->addColumn('acciones', function($cargo){
+        return '<a href="/cargos/'.$cargo->id.'/edit" class="btn btn-info btn-sm">Editar</a>' .
+            '<form id="form-eliminar-' . $cargo->id . '" action="'. route('cargos.destroy', $cargo->id) .'" method="POST" style="display: inline-block;">
+                '.csrf_field().'
+                '.method_field('DELETE').'
+                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $cargo->id . ')">Eliminar</button>
+            </form>';
+    })->rawColumns(['acciones'])->toJson();
+}
 
     /**
      * Show the form for creating a new resource.

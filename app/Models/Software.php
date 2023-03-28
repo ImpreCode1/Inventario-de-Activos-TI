@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Software extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'id_empleado'
+    ];
 
     public function empleado(){
         return $this->belongsTo(Empleado::class, 'id_empleado');

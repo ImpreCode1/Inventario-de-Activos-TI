@@ -25,38 +25,33 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($departamentos as $departamento)
-            <tr>
-                <td>{{ $departamento->id }}</td>
-                <td>{{ $departamento->nombre ?? 'El departamento no existe' }}</td>
-                <td>
-                    <form action="{{ route ('departamentos.destroy', $departamento->id) }}" method="POST">
-                    <a  href="/departamentos/{{ $departamento->id }}/edit" class="btn btn-info btn-sm">Editar</a>
-                    @csrf
-                    @method('DELETE')
-                    <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>
-                </form>
-                </td>
-            </tr>
-                
-            @endforeach
-
         </tbody>
     </table>
 </div>
 </div>
 @stop
-
-
-
 @section('js')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
-
+<script>
+    function confirmDelete(departamentoId) {
+        if (confirm("¿Estás seguro de que quieres eliminar este departamento?")) {
+            document.getElementById('form-eliminar-' + departamentoId).submit();
+        }
+    }
+    </script>
 <script>
     $(document).ready(function () {
     $('#departametos').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('departamentos.lista') }}",
+        columns: [
+            {data: 'id'},
+            {data: 'nombre'},
+            {data: 'action', orderable: false, searchable: false}
+        ],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "Nada encontrado - disculpa",

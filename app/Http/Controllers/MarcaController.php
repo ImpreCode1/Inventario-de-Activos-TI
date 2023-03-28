@@ -14,10 +14,25 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        $marcas = Marca::all();
-        return view('marca.index')->with('marcas', $marcas);
-    }
+        return view('marca.index');
 
+    }
+    public function marcas(){
+        $marcas = Marca::select('id', 'marca')->get();
+        return datatables()->of($marcas)
+            ->addColumn('acciones', function ($marca) {
+                return '<td>
+                            <form action="'.route('marcas.destroy', $marca->id).'" method="POST" id="form-eliminar-'.$marca->id.'">
+                                <a href="/marcas/'.$marca->id.'/edit" class="btn btn-info btn-sm">Editar</a>
+                                '.csrf_field().'
+                                '.method_field('DELETE').'
+                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$marca->id.')">Eliminar</button>
+                            </form>
+                        </td>';
+            })
+            ->rawColumns(['acciones'])
+            ->toJson();
+    }
     /**
      * Show the form for creating a new resource.
      *

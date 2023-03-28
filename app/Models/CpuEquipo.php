@@ -9,6 +9,21 @@ use Illuminate\Support\Carbon;
 class CpuEquipo extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'id_categoria',
+        'id_marca',
+        'serie',
+        'n_activo',
+        'n_serial',
+        'n_parte',
+        'memoria_ram',
+        'procesador',
+        'discoduro',
+        'observaciones',
+        'id_empleado',
+        'nom_equipo'
+    ];
 
 
 
