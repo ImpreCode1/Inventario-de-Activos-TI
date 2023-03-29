@@ -20,10 +20,25 @@ class TelefonoController extends Controller
      */
     public function index()
     {
-        $celulares = Telefono::all();
-        return view('celular.index')->with('celulares', $celulares);
+        return view('celular.index');
     }
 
+    public function celulares(){
+        $celulares = Telefono::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria', 'id_marca', 'serial', 'modelo')->get();
+        return datatables()->of($celulares)
+        ->addColumn('action', function ($celulares) {
+            return '
+                <form id="form-eliminar-' . $celulares->id . '" action="' . route('celulares.destroy', $celulares->id) . '" method="POST">
+                    <a href="/celulares/' . $celulares->id . '/edit" class="btn btn-info btn-sm">Editar</a>
+                    <a href="/celulares/' . $celulares->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad usu</a>
+                    ' . csrf_field() . '
+                    ' . method_field('DELETE') . '
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$celulares->id.')">Eliminar</button>
+                </form>';
+        })
+        ->rawColumns(['action'])->toJson();
+
+    }
     /**
      * Show the form for creating a new resource.
      *

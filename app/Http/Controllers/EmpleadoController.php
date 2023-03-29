@@ -23,10 +23,26 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $empleados = Empleado::all();
-        return view('empleado.index')->with('empleados', $empleados);
+       return view('empleado.index');
+        // return view('empleado.index')->with('empleados', $empleados);
     }
 
+    public function empleados(){
+        $empleados = Empleado::with(['departamentos', 'cargos'])->select('id', 'nombre', 'usu_dominio', 'num_exten', 'email', 'id_cargo', 'id_depto')->get();
+        return datatables()->of($empleados)
+        ->addColumn('acciones', function ($empleado) {
+            return '
+            <form id="form-eliminar-' . $empleado->id . '" action="' . route('empleados.destroy', $empleado->id) . '" method="POST">
+                <a href="/empleados/' . $empleado->id . '/edit" class="btn btn-info btn-sm">Editar</a>
+                <a href="/empleados/' . $empleado->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Act contraseñas</a>
+                ' . csrf_field() . '
+                ' . method_field('DELETE') . '
+                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $empleado->id . ')">Eliminar</button>
+            </form>';
+        })
+        ->rawColumns(['acciones'])
+        ->toJson();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -117,7 +133,6 @@ class EmpleadoController extends Controller
         $empleado-> nombre = $request->get('nombre');
         $empleado-> id_cargo = $request->get('id_cargo');
         $empleado-> id_depto = $request->get('id_depto');
-        $empleado-> clave_tel = $request->get('clave_tel');
         $empleado-> num_exten = $request->get('num_exten');
         $empleado-> retirado = $request->get('retirado');
         $empleado-> usu_dominio = $request->get('usu_dominio');

@@ -23,14 +23,17 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Categoria</th>
                 <th scope="col">Marca</th>
+                <th scope="col">N° de Activo</th>
                 <th scope="col">N° de Serial</th>
-
                 <th>Acciones</th>
+                
+
+                {{-- <th>Acciones</th> --}}
                 
             </tr>
         </thead>
         <tbody>
-            @foreach ($equipos as $equipo)
+         {{--    @foreach ($equipos as $equipo)
             <tr>
                 <td>{{ $equipo->id }}</td>
                 <td>{{ $equipo->empleado->nombre ?? 'El empleado no existe'}}</td>
@@ -48,8 +51,7 @@
                 </td>
             </tr>
                 
-            @endforeach
-
+            @endforeach --}}
         </tbody>
     </table>
 </div>
@@ -62,10 +64,28 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
-
+<script>
+    function confirmDelete(id) {
+        if (confirm('¿Estás seguro de que deseas eliminar este Equipo?')) {
+            $('#form-eliminar-' + id).submit();
+        }
+    }
+</script>
 <script>
     $(document).ready(function () {
     $('#equipos').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('equipos.lista') }}",
+        columns: [
+        {data: 'id'},
+        {data: 'empleado.nombre', name: 'empleado.nombre'},
+        {data: 'categoria.nombre', name:'categoria.nombre'},
+        {data: 'marca.marca', name:'marca.marca'},
+        {data: 'n_activo'},
+        {data: 'n_serial'},
+        { data: 'action', name: 'acciones', orderable: false, searchable: false },
+    ],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "Nada encontrado - disculpa",

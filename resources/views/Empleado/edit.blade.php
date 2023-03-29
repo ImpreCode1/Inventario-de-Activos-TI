@@ -43,12 +43,6 @@
                             </select>
                         </div>
                         <div>
-                            <label for="" class="form-label">Clave del telefono</label>
-                            <input type="text" name="clave_tel" id="clave_tel" class="form-control"
-                                value="{{ $empleado->clave_tel ?? 'No existe' }}" placeholder="Clave del telefono"
-                                tabindex="4">
-                        </div>
-                        <div>
                             <label for="" class="form-label">Numero de Extencion</label>
                             <input type="text" name="num_exten" id="num_exten" class="form-control"
                                 value="{{ $empleado->num_exten ?? 'No existe' }}" placeholder="Numero de Extencion"

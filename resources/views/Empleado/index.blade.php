@@ -27,30 +27,9 @@
                 <th scope="col">Cargo</th>
                 <th scope="col">Departamento</th>
                 <th>Acciones</th>
-                
             </tr>
         </thead>
         <tbody>
-            @foreach ($empleados as $empleado)
-            <tr>
-                <td>{{ $empleado->id }}</td>
-                <td>{{ $empleado->nombre ?? 'El nombre no existe'}}</td>
-                <td>{{ $empleado->usu_dominio ?? 'El usuario dominio no existe'}}</td>
-                <td>{{ $empleado->num_exten ?? 'El numero de extencion no existe'}}</td>
-                <td>{{ $empleado->email ?? 'El email no existe'}}</td>
-                <td>{{ $empleado->cargos->nombre ?? 'El cargo no existe'}}</td>
-                <td>{{ $empleado->departamentos->nombre ?? 'El departamento no existe' }}</td>
-                <td>
-                    <form action="{{ route ('empleados.destroy', $empleado->id) }}" method="POST">
-                    <a href="/empleados/{{ $empleado->id }}/edit" class="btn btn-info btn-sm">Editar</a>
-                    <a href="/empleados/{{$empleado->id}}/pdf" target="_blank" class="btn btn-success btn-sm">Act contraseñas</a>
-                    @csrf
-                    @method('DELETE')
-                    <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>
-                </form>
-                </td>
-            </tr>
-            @endforeach
         </tbody>
     </table>
 </div>
@@ -60,10 +39,29 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
-
+<script>
+    function confirmDelete(id) {
+        if (confirm('¿Estás seguro de que deseas eliminar este empleado?')) {
+            $('#form-eliminar-' + id).submit();
+        }
+    }
+</script>
 <script>
     $(document).ready(function () {
     $('#empleados').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('empleados.lista') }}",
+        columns: [
+        {data: 'id'},
+        {data: 'nombre'},
+        {data: 'usu_dominio'},
+        {data: 'num_exten'},
+        {data: 'email'},
+        {data: 'cargos.nombre', name: 'cargos.nombre'},
+        {data: 'departamentos.nombre', name: 'departamentos.nombre'},
+        { data: 'acciones', name: 'acciones', orderable: false, searchable: false },
+    ],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "Nada encontrado - disculpa",

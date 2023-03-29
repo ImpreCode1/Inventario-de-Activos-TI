@@ -36,7 +36,7 @@
 <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
 <script>
     function confirmDelete(departamentoId) {
-        if (confirm("¿Estás seguro de que quieres eliminar este departamento?")) {
+        if (confirm("¿Estás seguro de que quieres eliminar este Deapartamento?")) {
             document.getElementById('form-eliminar-' + departamentoId).submit();
         }
     }

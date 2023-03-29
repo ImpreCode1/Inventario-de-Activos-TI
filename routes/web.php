@@ -29,6 +29,11 @@ Route::get('softwares/{id}/pdf',  [App\Http\Controllers\SoftwareController::clas
 Route::get('cargos/lista', [App\Http\Controllers\CargoController::class, 'datos'])->name('cargos.lista');
 Route::get('departamentos/lista', [App\Http\Controllers\DepartamentoController::class, 'departamentos'])->name('departamentos.lista');
 Route::get('marcas/lista', [App\Http\Controllers\MarcaController::class, 'marcas'])->name('marcas.lista');
+Route::get('empleados/lista', [App\Http\Controllers\EmpleadoController::class, 'empleados'])->name('empleados.lista');
+Route::get('equipos/lista', [App\Http\Controllers\CpuEquipoController::class, 'equipos'])->name('equipos.lista');
+Route::get('accesesorios/lista', [App\Http\Controllers\AccesorioController::class, 'accesesorios'])->name('accesesorios.lista');
+Route::get('celulares/lista', [App\Http\Controllers\TelefonoController::class, 'celulares'])->name('celulares.lista');
+
 
 
 Route::resource('cargos', App\Http\Controllers\CargoController::class)->middleware('auth');

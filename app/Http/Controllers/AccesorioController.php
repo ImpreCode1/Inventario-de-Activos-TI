@@ -21,10 +21,23 @@ class AccesorioController extends Controller
      */
     public function index()
     {
-        $accesorios = Accesorio::all();
-        return view('accesorio.index')->with('accesorios', $accesorios);
+        return view('accesorio.index');
     }
-
+        public function accesesorios(){
+            $accesorios = Accesorio::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria', 'id_marca', 'n_activo', 'n_serial')->get();
+            return datatables()->of($accesorios)
+            ->addColumn('action', function ($accesorio) {
+                return '
+                    <form id="form-eliminar-' . $accesorio->id . '" action="' . route('accesorios.destroy', $accesorio->id) . '" method="POST">
+                        <a href="/accesorios/' . $accesorio->id . '/edit" class="btn btn-info btn-sm">Editar</a>
+                        <a href="/accesorios/' . $accesorio->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad usu</a>
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$accesorio->id.')">Eliminar</button>
+                    </form>';
+            })
+            ->rawColumns(['action'])->toJson();
+        }
     /**
      * Show the form for creating a new resource.
      *

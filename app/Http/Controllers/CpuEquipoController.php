@@ -22,8 +22,24 @@ class CpuEquipoController extends Controller
      */
     public function index()
     {
-        $equipos = CpuEquipo::all();
-        return view('equipo.index')->with('equipos', $equipos);
+        return view('equipo.index');
+    }
+
+    public function equipos(){
+        $equipos = CpuEquipo::with(['marca', 'categoria', 'empleado'])->select('id','id_empleado' ,'id_categoria', 'id_marca', 'n_activo', 'n_serial')->get();
+        return datatables()->of($equipos)
+            ->addColumn('action', function ($equipo) {
+                return '
+                    <form id="form-eliminar-' . $equipo->id . '" action="' . route('equipos.destroy', $equipo->id) . '" method="POST">
+                        <a href="/equipos/' . $equipo->id . '/edit" class="btn btn-info btn-sm">Editar</a>
+                        <a href="/equipos/' . $equipo->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad usu</a>
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$equipo->id.')">Eliminar</button>
+                    </form>';
+            })
+            ->rawColumns(['action'])
+            ->toJson();
     }
 
     /**
