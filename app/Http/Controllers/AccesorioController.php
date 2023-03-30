@@ -51,7 +51,7 @@ class AccesorioController extends Controller
         foreach ($marcas as $marca) {
             $marcas_ordenadas[$marca->id] = $marca->marca;
         };
-        $empleados =  DB::table('empleados')->orderBy('nombre', 'asc')->get();
+        $empleados =  DB::table('empleados')->orderByRaw("CASE WHEN id=0 THEN 0 ELSE 1 END, nombre ASC")->get();
         $empleados_ordenados = array();
         foreach ($empleados as $empleado) {
             $empleados_ordenados[$empleado->id] = $empleado->nombre;
@@ -103,8 +103,8 @@ class AccesorioController extends Controller
     {
         $accesorio = Accesorio::find($id);
         $categoria = Categoria::whereIn('nombre', ['DIADEMA', 'MOUSE', 'MONITOR', 'TECLADO', 'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH'])->get();
-        $marca = Marca::all();
-        $empleado = Empleado::all();
+        $marca = Marca::orderBy('marca', 'asc')->get();
+        $empleado =  DB::table('empleados')->orderByRaw("CASE WHEN id=0 THEN 0 ELSE 1 END, nombre ASC")->get();
         return view('accesorio.edit', compact( 'accesorio', 'categoria', 'marca', 'empleado'));
     }
 
@@ -128,9 +128,14 @@ class AccesorioController extends Controller
         $accesorio-> id_empleado = $request->get('id_empleado');
 
         $accesorio->save();
-        Accesorio::actualizarAccesesorio($id, $request->get('id_empleado'));
+        if ($request->input('id_empleado') == 0) {
+            $accesorio->setEstadoDisponible();
+        } else {
+            Accesorio::actualizarAccesesorio($id, $request->get('id_empleado'));
+        }        
         return redirect('/accesorios');
     }
+
 
     /**
      * Remove the specified resource from storage.

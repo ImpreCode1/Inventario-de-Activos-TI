@@ -82,8 +82,8 @@
                         <div>
                             <label for="" class="form-label">Empleado al que se le asigna</label>
                             <select name="id_empleado" id="id_empleado" class="form-control" tabindex="11">
-                                <option value="">-- Escoja el empleado al que pertenecera el equipo --</option>
-                                @foreach ($empleado as $empleado)
+                                <option value="">-- Escoja el empleado al que pertenecerá el equipo --</option>
+                                @foreach ($empleados as $empleado)
                                     <option value="{{ $empleado->id }}" @if(old('id_marca', $equipo->id_empleado) == $empleado->id) selected @endif>{{ $empleado->nombre }}</option>
                                 @endforeach
                             </select>

@@ -52,7 +52,7 @@ class TelefonoController extends Controller
         foreach ($marcas as $marca) {
             $marcas_ordenadas[$marca->id] = $marca->marca;
         };
-        $empleados =  DB::table('empleados')->orderBy('nombre', 'asc')->get();
+        $empleados =  DB::table('empleados')->orderByRaw("CASE WHEN id=0 THEN 0 ELSE 1 END, nombre ASC")->get();
         $empleados_ordenados = array();
         foreach ($empleados as $empleado) {
             $empleados_ordenados[$empleado->id] = $empleado->nombre;
@@ -108,8 +108,8 @@ class TelefonoController extends Controller
     {
         $celular = Telefono::find($id);
         $categoria = Categoria::whereIn('nombre', ['CELULAR'])->get();
-        $marca = Marca::all();
-        $empleado = Empleado::all();
+        $marca = Marca::orderBy('marca', 'asc')->get();
+        $empleado =  DB::table('empleados')->orderByRaw("CASE WHEN id=0 THEN 0 ELSE 1 END, nombre ASC")->get();
         return view('celular.edit', compact( 'celular', 'categoria', 'marca', 'empleado'));
     }
 
@@ -138,8 +138,11 @@ class TelefonoController extends Controller
 
 
         $celular->save();
-        Telefono::actualizarTelefono($id, $request->get('id_empleado'));
-
+        if ($request->input('id_empleado') == 0) {
+            $celular->setEstadoDisponible();
+        } else {
+            Telefono::actualizarTelefono($id, $request->get('id_empleado'));
+        }        
         return redirect('/celulares');
     }
 

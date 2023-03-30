@@ -50,13 +50,17 @@ class SoftwareController extends Controller
      */
     public function create()
     {
-        $empleados =  DB::table('empleados')->orderBy('nombre', 'asc')->get();
-        $empleados_ordenados = array();
+        $empleados =  DB::table('empleados')
+                        ->where('id', '<>', 0) // excluye el empleado con id 0
+                        ->orderBy('nombre', 'asc')
+                        ->get();
+    
+        $empleados_ordenados = [];
         foreach ($empleados as $empleado) {
             $empleados_ordenados[$empleado->id] = $empleado->nombre;
-        };
-        return view('software.create', compact('empleados_ordenados'));  
-
+        }
+    
+        return view('software.create', compact('empleados_ordenados'));
     }
 
     /**

@@ -56,7 +56,7 @@ class CpuEquipoController extends Controller
         foreach ($marcas as $marca) {
             $marcas_ordenadas[$marca->id] = $marca->marca;
         };
-        $empleados =  DB::table('empleados')->orderBy('nombre', 'asc')->get();
+        $empleados =  DB::table('empleados')->orderByRaw("CASE WHEN id=0 THEN 0 ELSE 1 END, nombre ASC")->get();
         $empleados_ordenados = array();
         foreach ($empleados as $empleado) {
             $empleados_ordenados[$empleado->id] = $empleado->nombre;
@@ -110,13 +110,13 @@ class CpuEquipoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $equipo = CpuEquipo::find($id);
-        $categoria = Categoria::whereIn('nombre', ['CPU', 'PORTATIL', 'ALL-IN-ONE'])->get();
-        $marca = Marca::all();
-        $empleado = Empleado::all();
-        return view('equipo.edit', compact('equipo', 'categoria', 'marca', 'empleado'));
-    }
+{
+    $equipo = CpuEquipo::find($id);
+    $categoria = Categoria::whereIn('nombre', ['CPU', 'PORTATIL', 'ALL-IN-ONE'])->get();
+    $marca = Marca::orderBy('marca', 'asc')->get();
+    $empleados =  DB::table('empleados')->orderByRaw("CASE WHEN id=0 THEN 0 ELSE 1 END, nombre ASC")->get();
+    return view('equipo.edit', compact('equipo', 'categoria', 'marca', 'empleados'));
+}
 
     /**
      * Update the specified resource in storage.
@@ -142,8 +142,12 @@ class CpuEquipoController extends Controller
         $equipo->nom_equipo = $request->input('nom_equipo');
 
         $equipo->save();
-        CpuEquipo::actualizarHistorial($id, $request->get('id_empleado'));
-        
+
+        if ($request->input('id_empleado') == 0) {
+            $equipo->setEstadoDisponible();
+        } else {
+            CpuEquipo::actualizarHistorial($id, $request->get('id_empleado'));
+        }        
 
         return redirect('/equipos');
     }

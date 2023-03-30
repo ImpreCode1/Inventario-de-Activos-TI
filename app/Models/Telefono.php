@@ -41,39 +41,64 @@ class Telefono extends Model
         return $this->hasMany(HistorialTelefono::class, 'id');
     }
 
+
     public static function boot()
     {
         parent::boot();
-
+    
         self::created(function ($telefono) {
-            $historialtelefono = new HistorialTelefono();
-            $historialtelefono->id_empleado = $telefono->id_empleado;
-            $historialtelefono->id_telefonos = $telefono->id;
-            $historialtelefono->fecha_asignacion = now();
-            $historialtelefono->save();
+            if ($telefono->id_empleado > 0) { // Se asigna a un empleado específico
+                $historialtelefono = new HistorialTelefono();
+                $historialtelefono->id_empleado = $telefono->id_empleado;
+                $historialtelefono->id_telefonos = $telefono->id;
+                $historialtelefono->fecha_asignacion = now();
+                $historialtelefono->save();
+            }
         });
     }
 
-    public static function actualizarTelefono($celular_id, $empleado_id){
-        //Buscar el registro de historial del equipo actual
-        $historialActual = HistorialTelefono::where('id_telefonos', $celular_id)->whereNull('fecha_devolucion')->first();
-    
-        if($historialActual){
-            // Si el empleado es el mismo, no hacemos nada
-            if($historialActual->id_empleado == $empleado_id){
-                return;
-            }
-            //Actualizar la fecha de devolución en el registro actual de historial del equipo
+    public function setEstadoDisponible()
+{
+    if ($this->id_empleado !== 0) { // Se asigna a un empleado específico
+        $this->actualizarTelefono($this->id, 0); // Agregar fecha de devolución en el historial
+    }
+    $this->id_empleado = 0;
+    $this->save();
+}
+
+
+
+    public static function actualizarTelefono($celular_id, $empleado_id)
+{
+    //Buscar el registro de historial del equipo actual
+    $historialActual = HistorialTelefono::where('id_telefonos', $celular_id)->whereNull('fecha_devolucion')->first();
+
+    if ($empleado_id === 0) { // Cambiar estado a disponible
+        if ($historialActual) {
+            // Agregar fecha de devolución en el registro actual de historial del equipo
             $historialActual->fecha_devolucion = now()->format('Y-m-d');
             $historialActual->save();
         }
-    
-        //Crear un nuevo registro de historial del equipo para el nuevo empleado
-        $nuevoHistorial = new HistorialTelefono();
-        $nuevoHistorial->id_empleado = $empleado_id;
-        $nuevoHistorial->id_telefonos = $celular_id;
-        $nuevoHistorial->fecha_asignacion = now()->format('Y-m-d');
-        $nuevoHistorial->save();
+        return;
     }
+
+    if ($historialActual) {
+        // Si el empleado es el mismo, no hacemos nada
+        if ($historialActual->id_empleado == $empleado_id) {
+            return;
+        }
+        //Actualizar la fecha de devolución en el registro actual de historial del equipo
+        $historialActual->fecha_devolucion = now()->format('Y-m-d');
+        $historialActual->save();
+    }
+
+    //Crear un nuevo registro de historial del equipo para el nuevo empleado
+    $nuevoHistorial = new HistorialTelefono();
+    $nuevoHistorial->id_empleado = $empleado_id;
+    $nuevoHistorial->id_telefonos = $celular_id;
+    $nuevoHistorial->fecha_asignacion = now()->format('Y-m-d');
+    $nuevoHistorial->save();
+}
+
     
 }

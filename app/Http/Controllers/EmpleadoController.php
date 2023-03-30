@@ -28,7 +28,7 @@ class EmpleadoController extends Controller
     }
 
     public function empleados(){
-        $empleados = Empleado::with(['departamentos', 'cargos'])->select('id', 'nombre', 'usu_dominio', 'num_exten', 'email', 'id_cargo', 'id_depto')->get();
+        $empleados = Empleado::with(['departamentos', 'cargos'])->select('id', 'nombre', 'usu_dominio', 'num_exten', 'email', 'id_cargo', 'id_depto')->where('id', '<>', 0)->get();
         return datatables()->of($empleados)
         ->addColumn('acciones', function ($empleado) {
             return '

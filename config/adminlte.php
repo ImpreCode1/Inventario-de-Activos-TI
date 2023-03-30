@@ -307,8 +307,9 @@ return [
             'url'         => 'empleados',
             'icon'        => 'far fa fa-search',
         ],
+        ['header' => 'REGISTROS VARIOS'],
         [
-            'text'    => 'Registros Varios',
+            'text'    => 'Registros',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
@@ -329,8 +330,9 @@ return [
             ],
             
         ],
+        ['header' => 'INVENTARIO ACTIVOS'],
         [
-            'text'    => 'Inventario Activos',
+            'text'    => 'Inventario',
             'icon'    => 'fa fa-book',
             'submenu' => [
                 [
@@ -351,8 +353,9 @@ return [
             ],
             
         ],
+        ['header' => 'HISTORIAL ACTIVOS'],
         [
-            'text'    => 'Historial de activos',
+            'text'    => 'Historiales',
             'icon'    => 'fas fa-fw fa-clock',
             'submenu' => [
                 [
@@ -373,6 +376,7 @@ return [
             ],
             
         ],
+        ['header' => 'VARIOS'],
         [
             'text'        => 'Memorandos Bodega',
             'url'         => 'home',
