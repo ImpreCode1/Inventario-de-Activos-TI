@@ -27,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($softwares as $software)
+            {{-- @foreach ($softwares as $software)
             <tr>
                 <td>{{ $software->id }}</td>
                 <td>{{ $software->empleado->nombre ?? 'El empleado no existe' }}</td>
@@ -41,8 +41,7 @@
                 </form>
                 </td>
             </tr>
-            @endforeach
-
+            @endforeach --}}
         </tbody>
     </table>
 </div>
@@ -55,10 +54,25 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
-
+<script>
+    function confirmDelete(id) {
+        if (confirm('¿Estás seguro de que deseas eliminar este dato de software?')) {
+            $('#form-eliminar-' + id).submit();
+        }
+    }
+</script>
 <script>
     $(document).ready(function () {
     $('#softwar').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('softwares.lista') }}",
+        columns: [
+            {data: 'id'},
+            {data: 'empleado.nombre', name:'empleado.nombre'},
+            {data: 'created_at'},
+            { data: 'action', name: 'acciones', orderable: false, searchable: false }
+        ],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "Nada encontrado - disculpa",

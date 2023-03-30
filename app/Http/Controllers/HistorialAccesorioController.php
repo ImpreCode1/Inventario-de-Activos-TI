@@ -14,9 +14,26 @@ class HistorialAccesorioController extends Controller
      */
     public function index()
     {
-        $accesesoriosHistorial = HistorialAccesorio::all();
-        return view('HistorialAccesesorio.index')->with('accesesoriosHistorial', $accesesoriosHistorial);
+        
+        return view('HistorialAccesesorio.index');
     }
+
+    public function historialaccesesorio()
+{
+    $historialAccesesorio = HistorialAccesorio::with(['empleado', 'accesesorio.categoria'])
+        ->select('id','id_empleado', 'id_accesorio', 'fecha_asignacion', 'fecha_devolucion')->get();
+
+    return datatables()->of($historialAccesesorio)
+        ->addColumn('action', function ($historial) {
+            return '<form id="form-eliminar-' . $historial->id . '" action="' . route('accesesoriosHistorial.destroy', $historial->id) . '" method="POST">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$historial->id.')">Eliminar</button>
+                    </form>';
+        })
+        ->rawColumns(['action'])
+        ->toJson();
+}
 
     /**
      * Show the form for creating a new resource.
@@ -81,8 +98,8 @@ class HistorialAccesorioController extends Controller
      */
     public function destroy($id)
     {
-        $equipo = HistorialAccesorio::find($id);
-        $equipo->delete();
+        $accesesorio = HistorialAccesorio::find($id);
+        $accesesorio->delete();
         return redirect('/accesesoriosHistorial');
     }
 }

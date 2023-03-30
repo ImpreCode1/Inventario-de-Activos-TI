@@ -15,8 +15,23 @@ class HistorialTelefonoController extends Controller
      */
     public function index()
     {
-        $telefonosHistorial = HistorialTelefono::all();
-        return view('HistorialTelefono.index')->with('telefonosHistorial', $telefonosHistorial);
+        
+        return view('HistorialTelefono.index');
+    }
+
+    public function historialTelefonos(){
+        $telefonosHistorial = HistorialTelefono::with(['empleado', 'telefono'])->select('id', 'id_empleado', 'id_telefonos', 'fecha_asignacion', 'fecha_devolucion')->get();
+        return datatables()->of($telefonosHistorial)
+        ->addColumn('action', function ($telefono) {
+            return '
+                <form id="form-eliminar-' . $telefono->id . '" action="' . route('telefonosHistorial.destroy', $telefono->id) . '" method="POST">
+                    ' . csrf_field() . '
+                    ' . method_field('DELETE') . '
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$telefono->id.')">Eliminar</button>
+                </form>';
+        })
+        ->rawColumns(['action'])->toJson();
+
     }
 
     /**

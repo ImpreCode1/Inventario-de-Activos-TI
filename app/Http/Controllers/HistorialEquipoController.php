@@ -14,8 +14,22 @@ class HistorialEquipoController extends Controller
      */
     public function index()
     {
-        $equiposHistorial = HistorialEquipo::all();
-        return view('HistorialEquipo.index')->with('equiposHistorial', $equiposHistorial);
+        return view('HistorialEquipo.index');
+    }
+
+    public function historialEquipos(){
+        $equiposHistorial = HistorialEquipo::with(['empleado', 'cpuequipo.categoria'])->select('id', 'id_empleado', 'id_portatiles', 'fecha_asignacion', 'fecha_devolucion');
+        return datatables()->of($equiposHistorial)
+        ->addColumn('action', function ($equipo) {
+            return '
+                <form id="form-eliminar-' . $equipo->id . '" action="' . route('equiposHistorial.destroy', $equipo->id) . '" method="POST">
+                    ' . csrf_field() . '
+                    ' . method_field('DELETE') . '
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$equipo->id.')">Eliminar</button>
+                </form>';
+        })
+        ->rawColumns(['action'])
+        ->toJson();
     }
 
     /**
@@ -25,7 +39,7 @@ class HistorialEquipoController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

@@ -81,13 +81,12 @@
             </p>
             <br>
             <p>La responsabilidad del manejo adecuado del mismo y de la pérdida total o parcial del mismo es
-                del usuario. El equipo se encuentra asegurado, en caso de pérdida cuando este sea retirado de la
-                compañía, el usuario deberá pagar el valor deducible del seguro</p>
-            <br>
-            <p>Agradezco su amable y acostumbrada atención <br>
-                Atentamente.
+                del usuario. El equipo se encuentra asegurado, en caso de pérdida, el usuario debera pagar el valor deducible
+                del seguro. En caso de averia por daños causados por el ususario, el costo de los repuestos sera asumido por el ususario.
             </p>
-            <br><br>
+            <p>Agradezco su amable y acostumbrada atención </p>
+            <p>Atentamente.</p>
+            <br>
             <div style="display: flex; align-items: center;">
                 <div style="float: left;">
                     <p><strong> Freddy Javier Alonso </strong></p>

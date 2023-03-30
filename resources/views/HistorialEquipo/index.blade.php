@@ -20,6 +20,7 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Empleado</th>
+                <th scope="col">Categoria</th>
                 <th scope="col">N° de activo del Equipo</th>
                 <th scope="col">Fecha Asignacion</th>
                 <th  scope="col">Fecha Devolucion</th>
@@ -28,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($equiposHistorial as $h)
+        {{--     @foreach ($equiposHistorial as $h)
             <tr>
                 <td>{{ $h->id }}</td>
                 <td>{{ $h->empleado->nombre ?? 'No existe'}}</td>
@@ -37,7 +38,6 @@
                 <td>{{ $h->fecha_devolucion ?? 'No existe' }}</td>
                 <td>
                     <form action="{{ route ('equiposHistorial.destroy', $h->id) }}" method="POST">
-                    <a  href="/equiposHistorial/{{ $h->id }}/edit" class="btn btn-info btn-sm">Editar</a>
                     
                     @csrf
                     @method('DELETE')
@@ -45,7 +45,7 @@
                 </form>
                 </td>
             </tr>
-            @endforeach
+            @endforeach --}}
         </tbody>
     </table>
 </div>
@@ -58,10 +58,28 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
-
+<script>
+    function confirmDelete(id) {
+        if (confirm('¿Estás seguro de que deseas eliminar este historial?')) {
+            $('#form-eliminar-' + id).submit();
+        }
+    }
+</script>
 <script>
     $(document).ready(function () {
     $('#historialEquipos').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('historialequipos.lista') }}",
+        columns: [
+        {data: 'id'},
+        {data: 'empleado.nombre', name: 'empleado.nombre'},
+        {data: 'cpuequipo.categoria.nombre', name: 'cpuequipo.categoria.nombre'},
+        {data: 'cpuequipo.n_activo', name:'cpuequipo.n_activo'},
+        {data: 'fecha_asignacion'},
+        {data: 'fecha_devolucion'},
+        { data: 'action', name: 'acciones', orderable: false, searchable: false },
+    ],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "Nada encontrado - disculpa",

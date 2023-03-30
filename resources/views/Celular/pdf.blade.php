@@ -79,16 +79,15 @@
                 </tr>
             </table>
             <br>
-            <p>Dicho telefono celular puede ser utilizado de acuerdo a sus criterios en pro de los trabajos derivados de su
+            <p>Dicho celular puede ser utilizado de acuerdo a sus criterios en pro de los trabajos derivados de su
                 actividad dentro de la compañía.
             </p>
             <p>La responsabilidad del manejo adecuado del mismo y de la pérdida total o parcial del mismo es
-                del usuario. El telefono celular se encuentra asegurado, en caso de pérdida, el usuario debera pagar el valor deducible
+                del usuario. El celular se encuentra asegurado, en caso de pérdida, el usuario debera pagar el valor deducible
                 del seguro. En caso de averia por daños causados por el ususario, el costo de los repuestos sera asumido por el ususario.
             </p>
             <br>
-            <p>Agradezco su amable y acostumbrada atención 
-            </p>
+            <p>Agradezco su amable y acostumbrada atención</p>
             <p>Atentamente.</p>
             <br>
             <div style="display: flex; align-items: center;">

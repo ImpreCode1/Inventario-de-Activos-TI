@@ -33,6 +33,12 @@ Route::get('empleados/lista', [App\Http\Controllers\EmpleadoController::class, '
 Route::get('equipos/lista', [App\Http\Controllers\CpuEquipoController::class, 'equipos'])->name('equipos.lista');
 Route::get('accesesorios/lista', [App\Http\Controllers\AccesorioController::class, 'accesesorios'])->name('accesesorios.lista');
 Route::get('celulares/lista', [App\Http\Controllers\TelefonoController::class, 'celulares'])->name('celulares.lista');
+Route::get('historialequipos/lista', [App\Http\Controllers\HistorialEquipoController::class, 'historialEquipos'])->name('historialequipos.lista');
+Route::get('accesesorioshistorial/lista', [App\Http\Controllers\HistorialAccesorioController::class, 'historialaccesesorio'])->name('accesesorioshistorial.lista');
+Route::get('historialtelefonos/lista', [App\Http\Controllers\HistorialTelefonoController::class, 'historialTelefonos'])->name('historialtelefonos.lista');
+Route::get('softwares/lista', [App\Http\Controllers\SoftwareController::class, 'softwares'])->name('softwares.lista');
+
+
 
 
 

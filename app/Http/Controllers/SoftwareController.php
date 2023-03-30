@@ -9,6 +9,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
+
 class SoftwareController extends Controller
 {
     /**
@@ -18,10 +19,30 @@ class SoftwareController extends Controller
      */
     public function index()
     {
-        $softwares = Software::all();
-        return view('Software.index')->with('softwares', $softwares);
+       
+        return view('Software.index');
     }
 
+    public function softwares(){
+        $softwares = Software::with(['empleado'])->select('id', 'id_empleado', 'created_at')->get();
+        return datatables()->of($softwares)
+            ->addColumn('created_at', function ($software) {
+                return $software->created_at->format('Y-m-d');
+            })
+            ->addColumn('action', function ($software) {
+                return '
+                <form id="form-eliminar-' . $software->id . '" action="' . route('softwares.destroy', $software->id) . '" method="POST">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$software->id.')">Eliminar</button>
+                        <a href="/softwares/' . $software->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad Software</a>
+                    </form>
+                ';
+            })
+            ->rawColumns(['action'])
+            ->toJson();
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
