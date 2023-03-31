@@ -55,6 +55,11 @@ class Empleado extends Model
         return $this->hasMany(Software::class, 'id');
     }
 
+    public function memorando()
+    {
+        return $this->hasMany(Memorando::class, 'id');
+    }
+
     public function historialEquipo()
     {
         return $this->hasMany(HistorialEquipo::class, 'id');

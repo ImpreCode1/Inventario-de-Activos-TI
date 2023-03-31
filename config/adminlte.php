@@ -379,7 +379,7 @@ return [
         ['header' => 'VARIOS'],
         [
             'text'        => 'Memorandos Bodega',
-            'url'         => 'home',
+            'url'         => 'memorandos',
             'icon'        => 'fa fa-paper-plane',
         ],
         [

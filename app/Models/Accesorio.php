@@ -20,7 +20,7 @@ class Accesorio extends Model
     use HasFactory;
 
     public function categoria(){
-        return $this->belongsTo(Categoria::class, 'id_categoria')->whereIn('nombre', ['DIADEMA', 'MOUSE', 'MONITOR', 'TECLADO', 'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH']);
+        return $this->belongsTo(Categoria::class, 'id_categoria')->whereIn('nombre', ['DIADEMA', 'MOUSE',  'TECLADO', 'MONITOR', 'BASE REFRIGERANTE',  'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH']);
     }
 
     public function empleado(){
@@ -33,6 +33,10 @@ class Accesorio extends Model
 
     public function historialAccesorio(){
         return $this->hasMany(HistorialAccesorio::class, 'id');
+    }
+
+    public function accesesoriosMemorando(){
+        return $this->hasMany(AccesesoriosMemorando::class, 'id');
     }
 
     public static function boot()

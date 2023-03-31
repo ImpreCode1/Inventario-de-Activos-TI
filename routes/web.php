@@ -37,6 +37,7 @@ Route::get('historialequipos/lista', [App\Http\Controllers\HistorialEquipoContro
 Route::get('accesesorioshistorial/lista', [App\Http\Controllers\HistorialAccesorioController::class, 'historialaccesesorio'])->name('accesesorioshistorial.lista');
 Route::get('historialtelefonos/lista', [App\Http\Controllers\HistorialTelefonoController::class, 'historialTelefonos'])->name('historialtelefonos.lista');
 Route::get('softwares/lista', [App\Http\Controllers\SoftwareController::class, 'softwares'])->name('softwares.lista');
+Route::get('memorandos/lista', [App\Http\Controllers\MemorandoController::class, 'memorandos'])->name('memorandos.lista');
 
 
 
@@ -53,6 +54,7 @@ Route::resource('softwares', App\Http\Controllers\SoftwareController::class)->mi
 Route::resource('equiposHistorial', App\Http\Controllers\HistorialEquipoController::class)->middleware('auth');
 Route::resource('accesesoriosHistorial', App\Http\Controllers\HistorialAccesorioController::class)->middleware('auth');
 Route::resource('telefonosHistorial', App\Http\Controllers\HistorialTelefonoController::class)->middleware('auth');
+Route::resource('memorandos', App\Http\Controllers\MemorandoController::class)->middleware('auth');
 
 
 Auth::routes();

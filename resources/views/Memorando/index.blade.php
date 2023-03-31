@@ -8,48 +8,30 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Responsabilidades de Software</h1>
+    <h1>Memorandos Bodega</h1>
 @stop
 
 @section('content')
 <div class="card">
 <div class="card-body">
-    <a href="softwares/create" class="btn btn-primary">CREAR</a>
+    <a href="memorandos/create" class="btn btn-primary">CREAR</a>
     <p></p>
-    <table id="softwar" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+    <table id="memorandos" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
         <thead class="bg-prymary">
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Empleado</th>
-                <th scope="col">Fecha de creacion</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">N° Contacto</th>
                 <th>Acciones</th>
-                
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($softwares as $software)
-            <tr>
-                <td>{{ $software->id }}</td>
-                <td>{{ $software->empleado->nombre ?? 'El empleado no existe' }}</td>
-                <td>{{ $software->created_at}}</td>
-                <td>
-                    <form action="{{ route ('softwares.destroy', $software->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>
-                    <a href="/softwares/{{$software->id}}/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad Software</a>
-                </form>
-                </td>
-            </tr>
-            @endforeach --}}
         </tbody>
     </table>
 </div>
 </div>
 @stop
-
-
-
 @section('js')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
@@ -63,15 +45,16 @@
 </script>
 <script>
     $(document).ready(function () {
-    $('#softwar').DataTable({
+    $('#memorandos').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('softwares.lista') }}",
+        ajax: "{{ route('memorandos.lista') }}",
         columns: [
             {data: 'id'},
             {data: 'empleado.nombre', name:'empleado.nombre', defaultContent: ''},
-            {data: 'created_at'},
-            { data: 'action', name: 'acciones', orderable: false, searchable: false }
+            {data: 'direccion', defaultContent: ''},
+            {data: 'n_contacto', defaultContent: ''},
+            // { data: 'action', name: 'acciones', orderable: false, searchable: false }
         ],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
