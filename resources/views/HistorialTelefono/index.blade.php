@@ -74,11 +74,11 @@
         ajax: "{{ route('historialtelefonos.lista') }}",
         columns: [
         {data: 'id'},
-        {data: 'empleado.nombre', name: 'empleado.nombre'},
-        {data: 'telefono.serial', name:'telefono.serial'},
-        {data: 'telefono.modelo', name:'telefono.modelo'},
-        {data: 'fecha_asignacion'},
-        {data: 'fecha_devolucion'},
+        {data: 'empleado.nombre', name: 'empleado.nombre', defaultContent: ''},
+        {data: 'telefono.serial', name:'telefono.serial', defaultContent: ''},
+        {data: 'telefono.modelo', name:'telefono.modelo', defaultContent: ''},
+        {data: 'fecha_asignacion', defaultContent: ''},
+        {data: 'fecha_devolucion', defaultContent: ''},
         { data: 'action', name: 'acciones', orderable: false, searchable: false },
     ],
         "language": {

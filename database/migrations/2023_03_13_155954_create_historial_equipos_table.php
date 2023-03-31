@@ -15,13 +15,13 @@ class CreateHistorialEquiposTable extends Migration
     {
         Schema::create('historial_equipos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_empleado');
-            $table->unsignedBigInteger('id_portatiles');
-            $table->date('fecha_asignacion')->nullable();
-            $table->date('fecha_devolucion')->nullable();
+            $table->unsignedBigInteger('id_empleado')->nullable(true);
+            $table->unsignedBigInteger('id_portatiles')->nullable(true);
+            $table->date('fecha_asignacion')->nullable(true);
+            $table->date('fecha_devolucion')->nullable(true);
 
-            $table->foreign('id_empleado')->references('id')->on('empleados');
-            $table->foreign('id_portatiles')->references('id')->on('cpu_equipos');
+            $table->foreign('id_empleado')->references('id')->on('empleados')->onDelete('set null');
+            $table->foreign('id_portatiles')->references('id')->on('cpu_equipos')->onDelete('set null');
 
             $table->timestamps();
         });

@@ -54,9 +54,6 @@
 </div>
 </div>
 @stop
-
-
-
 @section('js')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
@@ -76,11 +73,11 @@
         ajax: "{{ route('accesesorios.lista') }}",
         columns: [
         {data: 'id'},
-        {data: 'empleado.nombre', name: 'empleado.nombre'},
-        {data: 'categoria.nombre', name:'categoria.nombre'},
-        {data: 'marca.marca', name:'marca.marca'},
-        {data: 'n_activo'},
-        {data: 'n_serial'},
+        {data: 'empleado.nombre', name: 'empleado.nombre', defaultContent: ''},
+        {data: 'categoria.nombre', name:'categoria.nombre', defaultContent: ''},
+        {data: 'marca.marca', name:'marca.marca', defaultContent: ''},
+        {data: 'n_activo', defaultContent: ''},
+        {data: 'n_serial', defaultContent: ''},
         { data: 'action', name: 'acciones', orderable: false, searchable: false },
     ],
         "language": {

@@ -49,7 +49,7 @@
         ajax: "{{ route('departamentos.lista') }}",
         columns: [
             {data: 'id'},
-            {data: 'nombre'},
+            {data: 'nombre', defaultContent: ''},
             {data: 'action', orderable: false, searchable: false}
         ],
         "language": {

@@ -18,7 +18,7 @@ class HistorialEquipoController extends Controller
     }
 
     public function historialEquipos(){
-        $equiposHistorial = HistorialEquipo::with(['empleado', 'cpuequipo.categoria'])->select('id', 'id_empleado', 'id_portatiles', 'fecha_asignacion', 'fecha_devolucion');
+        $equiposHistorial = HistorialEquipo::with(['empleado', 'cpuequipo.categoria'])->select('id', 'id_empleado', 'id_portatiles', 'fecha_asignacion', 'fecha_devolucion')->get();
         return datatables()->of($equiposHistorial)
         ->addColumn('action', function ($equipo) {
             return '

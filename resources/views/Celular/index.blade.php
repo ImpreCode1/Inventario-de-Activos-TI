@@ -76,11 +76,11 @@
         ajax: "{{ route('celulares.lista') }}",
         columns: [
         {data: 'id'},
-        {data: 'empleado.nombre', name: 'empleado.nombre'},
-        {data: 'categoria.nombre', name:'categoria.nombre'},
-        {data: 'marca.marca', name:'marca.marca'},
-        {data: 'serial'},
-        {data: 'modelo'},
+        {data: 'empleado.nombre', name: 'empleado.nombre', defaultContent: ''},
+        {data: 'categoria.nombre', name:'categoria.nombre', defaultContent: ''},
+        {data: 'marca.marca', name:'marca.marca', defaultContent: ''},
+        {data: 'serial', defaultContent: ''},
+        {data: 'modelo', defaultContent: ''},
         { data: 'action', name: 'acciones', orderable: false, searchable: false },
     ],
         "language": {

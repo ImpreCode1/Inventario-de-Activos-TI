@@ -28,9 +28,9 @@ class CreateEmpleadosTable extends Migration
             $table->timestamps();
             
 
-            $table->foreign('id_cargo')->references('id')->on('cargos');
-            $table->foreign('id_depto')->references('id')->on('departamentos');
-            $table->foreign('id_modo_usuario')->references('id')->on('modo_usuarios');
+            $table->foreign('id_cargo')->references('id')->on('cargos')->onDelete('set null');
+            $table->foreign('id_depto')->references('id')->on('departamentos')->onDelete('set null');
+            $table->foreign('id_modo_usuario')->references('id')->on('modo_usuarios')->onDelete('set null');
         }); 
     }
 

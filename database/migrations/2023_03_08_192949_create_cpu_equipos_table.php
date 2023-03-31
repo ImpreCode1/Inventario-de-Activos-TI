@@ -30,9 +30,9 @@ class CreateCpuEquiposTable extends Migration
             $table->string('nom_equipo', 50)->nullable(true);
             $table->softDeletes();
 
-            $table->foreign('id_categoria')->references('id')->on('categorias');
-            $table->foreign('id_marca')->references('id')->on('marcas');
-            $table->foreign('id_empleado')->references('id')->on('empleados');
+            $table->foreign('id_categoria')->references('id')->on('categorias')->onDelete('set null');
+            $table->foreign('id_marca')->references('id')->on('marcas')->onDelete('set null');
+            $table->foreign('id_empleado')->references('id')->on('empleados')->onDelete('set null');
         });
     }
 

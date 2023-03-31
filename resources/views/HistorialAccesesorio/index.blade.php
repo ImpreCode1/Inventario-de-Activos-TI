@@ -72,11 +72,11 @@
         ajax: "{{ route('accesesorioshistorial.lista') }}",
         columns: [
         {data: 'id'},
-        {data: 'empleado.nombre', name: 'empleado.nombre'},
-        {data: 'accesesorio.categoria.nombre', name: 'accesesorio.categoria.nombre'},
-        {data: 'accesesorio.n_activo', name:'accesesorio.n_activo'},
-        {data: 'fecha_asignacion'},
-        {data: 'fecha_devolucion'},
+        {data: 'empleado.nombre', name: 'empleado.nombre', defaultContent: ''},
+        {data: 'accesesorio.categoria.nombre', name: 'accesesorio.categoria.nombre', defaultContent: ''},
+        {data: 'accesesorio.n_activo', name:'accesesorio.n_activo', defaultContent: ''},
+        {data: 'fecha_asignacion', defaultContent: ''},
+        {data: 'fecha_devolucion', defaultContent: ''},
         { data: 'action', name: 'acciones', orderable: false, searchable: false },
     ],
         "language": {

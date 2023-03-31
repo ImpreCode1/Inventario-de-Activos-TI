@@ -15,13 +15,13 @@ class CreateHistorialTelefonosTable extends Migration
     {
         Schema::create('historial_telefonos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_empleado');
-            $table->unsignedBigInteger('id_telefonos');
-            $table->date('fecha_asignacion')->nullable();
-            $table->date('fecha_devolucion')->nullable();
+            $table->unsignedBigInteger('id_empleado')->nullable(true);
+            $table->unsignedBigInteger('id_telefonos')->nullable(true);
+            $table->date('fecha_asignacion')->nullable(true);
+            $table->date('fecha_devolucion')->nullable(true);
 
-            $table->foreign('id_empleado')->references('id')->on('empleados');
-            $table->foreign('id_telefonos')->references('id')->on('telefonos');
+            $table->foreign('id_empleado')->references('id')->on('empleados')->onDelete('set null');
+            $table->foreign('id_telefonos')->references('id')->on('telefonos')->onDelete('set null');
 
 
             $table->timestamps();

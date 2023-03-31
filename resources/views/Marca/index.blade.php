@@ -55,7 +55,7 @@
         ajax: "{{ route('marcas.lista') }}",
         columns: [
             {data: 'id'},
-            {data: 'marca'},
+            {data: 'marca', defaultContent: ''},
             {data: 'acciones', orderable: false, searchable: false}
         ],
         "language": {

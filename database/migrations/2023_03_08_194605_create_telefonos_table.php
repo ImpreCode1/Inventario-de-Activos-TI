@@ -15,8 +15,8 @@ class CreateTelefonosTable extends Migration
     {
         Schema::create('telefonos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_categoria');
-            $table->unsignedBigInteger('id_marca');
+            $table->unsignedBigInteger('id_categoria')->nullable(true);
+            $table->unsignedBigInteger('id_marca')->nullable(true);
             $table->string('serial', 70)->nullable(true);
             $table->string('modelo', 50)->nullable(true);
             $table->string('n_telefono', 50)->nullable(true);
@@ -26,14 +26,14 @@ class CreateTelefonosTable extends Migration
             $table->string('ram', 50)->nullable(true);
             $table->string('rom', 50)->nullable(true);
             $table->string('observaciones', 100)->nullable(true);
-            $table->unsignedBigInteger('id_empleado');
+            $table->unsignedBigInteger('id_empleado')->nullable(true);
             $table->softDeletes();
 
             $table->timestamps();
 
-            $table->foreign('id_categoria')->references('id')->on('categorias');
-            $table->foreign('id_marca')->references('id')->on('marcas');
-            $table->foreign('id_empleado')->references('id')->on('empleados');
+            $table->foreign('id_categoria')->references('id')->on('categorias')->onDelete('set null');
+            $table->foreign('id_marca')->references('id')->on('marcas')->onDelete('set null');
+            $table->foreign('id_empleado')->references('id')->on('empleados')->onDelete('set null');
         });
     }
 

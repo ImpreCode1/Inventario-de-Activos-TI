@@ -15,10 +15,10 @@ class CreateSoftwareTable extends Migration
     {
         Schema::create('software', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_empleado');
+            $table->unsignedBigInteger('id_empleado')->nullable(true);
 
 
-            $table->foreign('id_empleado')->references('id')->on('empleados');
+            $table->foreign('id_empleado')->references('id')->on('empleados')->onDelete('set null');
             $table->timestamps();
         });
     }

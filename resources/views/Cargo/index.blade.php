@@ -53,8 +53,8 @@
         ajax: "{{ route('cargos.lista') }}",
         columns: [
             {data: 'id'},
-            {data: 'nombre'},
-            {data: 'detalle'},
+            {data: 'nombre', defaultContent: ''},
+            {data: 'detalle', defaultContent: ''},
             {data: 'acciones', orderable: false, searchable: false}
         ],
         "language": {

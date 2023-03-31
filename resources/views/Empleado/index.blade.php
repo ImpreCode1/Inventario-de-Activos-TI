@@ -54,12 +54,12 @@
         ajax: "{{ route('empleados.lista') }}",
         columns: [
         {data: 'id'},
-        {data: 'nombre'},
-        {data: 'usu_dominio'},
-        {data: 'num_exten'},
-        {data: 'email'},
-        {data: 'cargos.nombre', name: 'cargos.nombre'},
-        {data: 'departamentos.nombre', name: 'departamentos.nombre'},
+        {data: 'nombre', defaultContent: ''},
+        {data: 'usu_dominio', defaultContent: ''},
+        {data: 'num_exten', defaultContent: ''},
+        {data: 'email', defaultContent: ''},
+        {data: 'cargos.nombre', name: 'cargos.nombre', defaultContent: ''},
+        {data: 'departamentos.nombre', name: 'departamentos.nombre', defaultContent: ''},
         { data: 'acciones', name: 'acciones', orderable: false, searchable: false },
     ],
         "language": {

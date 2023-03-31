@@ -73,11 +73,11 @@
         ajax: "{{ route('historialequipos.lista') }}",
         columns: [
         {data: 'id'},
-        {data: 'empleado.nombre', name: 'empleado.nombre'},
-        {data: 'cpuequipo.categoria.nombre', name: 'cpuequipo.categoria.nombre'},
-        {data: 'cpuequipo.n_activo', name:'cpuequipo.n_activo'},
-        {data: 'fecha_asignacion'},
-        {data: 'fecha_devolucion'},
+        {data: 'empleado.nombre', name: 'empleado.nombre', defaultContent: ''},
+        {data: 'cpuequipo.categoria.nombre', name: 'cpuequipo.categoria.nombre', defaultContent: ''},
+        {data: 'cpuequipo.n_activo', name:'cpuequipo.n_activo', defaultContent: ''},
+        {data: 'fecha_asignacion', defaultContent: ''},
+        {data: 'fecha_devolucion', defaultContent: ''},
         { data: 'action', name: 'acciones', orderable: false, searchable: false },
     ],
         "language": {
