@@ -21,7 +21,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Empleado</th>
                 <th scope="col">Categoria</th>
-                <th scope="col">N° Activo</th>
+                <th scope="col">N° Serial</th>
                 <th scope="col">Fecha Asignacion</th>
                 <th  scope="col">Fecha Devolucion</th>
                 <th>Acciones</th>
@@ -29,30 +29,11 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($accesesoriosHistorial as $h)
-            <tr>
-                <td>{{ $h->id }}</td>
-                <td>{{ $h->empleado->nombre ?? 'No existe'}}</td>
-                <td>{{ $h->accesesorio->n_activo ?? 'No existe'}}</td>
-                <td>{{ $h->fecha_asignacion ?? 'No existe' }}</td>
-                <td>{{ $h->fecha_devolucion ?? 'No existe' }}</td>
-                <td>
-                    <form action="{{ route ('accesesoriosHistorial.destroy', $h->id) }}" method="POST"> 
-                    @csrf
-                    @method('DELETE')
-                    <Button type="submit" class="btn btn-danger btn-sm">Eliminar</Button>
-                </form>
-                </td>
-            </tr>
-            @endforeach --}}
         </tbody>
     </table>
 </div>
 </div>
 @stop
-
-
-
 @section('js')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
@@ -74,7 +55,7 @@
         {data: 'id'},
         {data: 'empleado.nombre', name: 'empleado.nombre', defaultContent: ''},
         {data: 'accesesorio.categoria.nombre', name: 'accesesorio.categoria.nombre', defaultContent: ''},
-        {data: 'accesesorio.n_activo', name:'accesesorio.n_activo', defaultContent: ''},
+        {data: 'accesesorio.n_serial', name:'accesesorio.n_serial', defaultContent: ''},
         {data: 'fecha_asignacion', defaultContent: ''},
         {data: 'fecha_devolucion', defaultContent: ''},
         { data: 'action', name: 'acciones', orderable: false, searchable: false },

@@ -26,7 +26,7 @@
         table {
 			border: 5px double gray; 
 			border-collapse: collapse;
-			font-size: 14px; 
+			font-size: 10px; 
 		}
 		td, th {
 			border: 2px solid gray; 
@@ -56,7 +56,6 @@
                 laboral.</p>
             <table>
                 <tr>
-                    <td>Catgeoria</td>
                     <td>Marca</td>
                     <td>Modelo</td>
                     <td>N° Telefono</td>
@@ -67,7 +66,6 @@
                     <td>Memoria</td>
                 </tr>
                 <tr>
-                    <td>{{ $celular->categoria->nombre ?? '' }}</td>
                     <td>{{ $celular->marca->marca ?? '' }}</td>
                     <td>{{ $celular->modelo ?? '' }}</td>
                     <td>{{ $celular->n_telefono ?? '' }}</td>

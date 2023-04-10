@@ -40,11 +40,6 @@
                                 placeholder="Serie del accesorio" tabindex="3">
                         </div>
                         <div>
-                            <label for="" class="form-label">Numero de Activo</label>
-                            <input type="text" name="n_activo" id="n_activo" class="form-control"
-                                placeholder="Numero de Activo" tabindex="4">
-                        </div>
-                        <div>
                             <label for="" class="form-label">Serial del Accesorio</label>
                             <input type="text" name="n_serial" id="n_serial" class="form-control" placeholder="Serial"
                                 tabindex="5">

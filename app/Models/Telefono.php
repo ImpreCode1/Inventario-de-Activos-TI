@@ -41,11 +41,6 @@ class Telefono extends Model
         return $this->hasMany(HistorialTelefono::class, 'id');
     }
 
-    public function telefonosMemorando(){
-        return $this->hasMany(TelefonosMemorando::class, 'id');
-    }
-
-
     public static function boot()
     {
         parent::boot();

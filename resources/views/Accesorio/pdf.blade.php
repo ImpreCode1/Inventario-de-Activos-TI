@@ -59,7 +59,6 @@
                     <td>Marca</td>
                     <td>Modelo</td>
                     <td>N° de Serial</td>
-                    <td>N° de Activo</td>
                     <td>N° Parte</td>
                 </tr>
                 <tr>
@@ -67,7 +66,6 @@
                     <td>{{ $accesorio->marca->marca ?? '' }}</td>
                     <td>{{ $accesorio->serie ?? '' }}</td>
                     <td>{{ $accesorio->n_serial ?? '' }}</td>
-                    <td>{{ $accesorio->n_activo ?? '' }}</td>
                     <td>{{ $accesorio->n_parte ?? '' }}</td>
                 </tr>
             </table>
@@ -75,14 +73,11 @@
             <p>Dicho accesorio puede ser utilizado de acuerdo a sus criterios en pro de los trabajos derivados de su
                 actividad dentro de la compañía.
             </p>
-            <br>
             <p>La responsabilidad del manejo adecuado del mismo y de la pérdida total o parcial del mismo es
                 del usuario. El accesesorio se encuentra asegurado, en caso de pérdida, el usuario debera pagar el valor deducible
                 del seguro. En caso de averia por daños causados por el ususario, el costo de los repuestos sera asumido por el ususario.
             </p>
-            <br>
             <p>Agradezco su amable y acostumbrada atención</p>
-            <p>Atentamente.</p>
             <br>
             <p>Atentamente.</p>
             <br>

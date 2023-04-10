@@ -19,7 +19,7 @@
                         <div>
                             <label for="" class="form-label">Nombre del departamento</label>
                             <input type="text" name="nombre" id="nombre" class="form-control"
-                                placeholder="Departamento" tabindex="1">
+                                placeholder="Departamento" tabindex="1" required>
                         </div>
                         <br>
                         <a href="/cargos" class="btn btn-secondary" tabindex="2">Cancelar</a>

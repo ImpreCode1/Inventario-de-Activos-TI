@@ -41,12 +41,6 @@
                                 value="{{ $accesorio->serie ?? 'No existe' }}" tabindex="3">
                         </div>
                         <div>
-                            <label for="" class="form-label">Numero de Activo</label>
-                            <input type="text" name="n_activo" id="n_activo" class="form-control"
-                                placeholder="Numero de Activo" value="{{ $accesorio->n_activo ?? 'No existe' }}"
-                                tabindex="4">
-                        </div>
-                        <div>
                             <label for="" class="form-label">Serial del accesorio</label>
                             <input type="text" name="n_serial" id="n_serial" class="form-control" placeholder="Serial"
                                 value="{{ $accesorio->n_serial ?? 'No existe' }}" tabindex="5">

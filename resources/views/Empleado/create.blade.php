@@ -21,11 +21,11 @@
                         <div>
                             <label for="" class="form-label">Nombre del empleado</label>
                             <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre"
-                                tabindex="1">
+                                tabindex="1" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Cargo</label>
-                            <select name="id_cargo" id="id_cargo" class="form-control" tabindex="2">
+                            <select name="id_cargo" id="id_cargo" class="form-control" tabindex="2" required>
                                 <option value="">-- Escoja el cargo al que pertenecera el empleado --</option>
                                 @foreach ($cargos_ordenados as $id => $nombre)
                                     <option value="{{ $id }}">{{ $nombre }}</option>
@@ -34,7 +34,7 @@
                         </div>
                         <div>
                             <label for="" class="form-label">Departamento</label>
-                            <select name="id_depto" id="id_depto" class="form-control" tabindex="3">
+                            <select name="id_depto" id="id_depto" class="form-control" tabindex="3" required>
                                 <option value="">-- Escoja el Departamento al que pertenecera el empleado --</option>
                                 @foreach ($departamentos_ordenados as $id => $nombre)
                                     <option value="{{ $id }}">{{ $nombre }}</option>
@@ -44,7 +44,7 @@
                         <div>
                             <label for="" class="form-label">Numero de Extencion</label>
                             <input type="text" name="num_exten" id="num_exten" class="form-control" placeholder="Numero"
-                                tabindex="5">
+                                tabindex="5" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Esta Retirado el empleado de la empresa?</label>
@@ -57,11 +57,11 @@
                         <div>
                             <label for="" class="form-label">Usuario de dominio</label>
                             <input type="text" name="usu_dominio" id="usu_dominio" class="form-control"
-                                placeholder="Usuario de dominio" tabindex="7">
+                                placeholder="Usuario de dominio" tabindex="7" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Modo de Usuario</label>
-                            <select name="id_modo_usuario" id="id_modo_usuario" class="form-control" tabindex="9">
+                            <select name="id_modo_usuario" id="id_modo_usuario" class="form-control" tabindex="9" required>
                                 <option value="">-- Modo Usuario del empleado --</option>
                                 @foreach ($modoUsuarios as $modoUsuario)
                                     <option value="{{ $modoUsuario['id'] }}">{{ $modoUsuario['cargo'] }}</option>

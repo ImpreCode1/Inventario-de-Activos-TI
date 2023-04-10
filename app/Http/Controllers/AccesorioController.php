@@ -24,7 +24,7 @@ class AccesorioController extends Controller
         return view('accesorio.index');
     }
         public function accesesorios(){
-            $accesorios = Accesorio::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria', 'id_marca', 'n_activo', 'n_serial')->get();
+            $accesorios = Accesorio::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria', 'id_marca', 'n_serial')->get();
             return datatables()->of($accesorios)
             ->addColumn('action', function ($accesorio) {
                 return '
@@ -71,7 +71,6 @@ class AccesorioController extends Controller
         $accesorio-> id_categoria = $request->get('id_categoria');
         $accesorio-> id_marca = $request->get('id_marca');
         $accesorio-> serie = $request->get('serie');
-        $accesorio-> n_activo = $request->get('n_activo');
         $accesorio-> n_serial = $request->get('n_serial');
         $accesorio-> n_parte = $request->get('n_parte');
         $accesorio-> observaciones = $request->get('observaciones');
@@ -121,7 +120,6 @@ class AccesorioController extends Controller
         $accesorio-> id_categoria = $request->get('id_categoria');
         $accesorio-> id_marca = $request->get('id_marca');
         $accesorio-> serie = $request->get('serie');
-        $accesorio-> n_activo = $request->get('n_activo');
         $accesorio-> n_serial = $request->get('n_serial');
         $accesorio-> n_parte = $request->get('n_parte');
         $accesorio-> observaciones = $request->get('observaciones');

@@ -19,7 +19,7 @@
                         <div>
                             <label for="" class="form-label">Registre la nueva Marca</label>
                             <input type="text" name="marca" id="marca" class="form-control" style="width:450px;"
-                                placeholder="Marca" tabindex="1">
+                                placeholder="Marca" tabindex="1" required>
                         </div>
                         <br>
                         <a href="/marcas" class="btn btn-secondary" tabindex="2">Cancelar</a>

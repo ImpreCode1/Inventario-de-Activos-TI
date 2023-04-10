@@ -28,17 +28,22 @@
                         <div>
                             <label for="" class="form-label">Ciudad</label>
                             <input type="text" name="ciudad" id="ciudad" class="form-control"
-                                placeholder="Ciudad" tabindex="2">
+                                placeholder="Ciudad" tabindex="2" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Direccion</label>
                             <input type="text" name="direccion" id="direccion" class="form-control"
-                                placeholder="Usuario de dominio" tabindex="3">
+                                placeholder="Direccion" tabindex="3" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Numero de contacto</label>
                             <input type="text" name="n_contacto" id="n_contacto" class="form-control"
-                                placeholder="Usuario de dominio" tabindex="4">
+                                placeholder="Numero de Contacto" tabindex="4" >
+                        </div>
+                        <div>
+                            <label for="" class="form-label">Correo de quien envia el memorando</label>
+                            <input type="text" name="correo_encargado" id="correo_encargado" class="form-control"
+                                placeholder="Correo del encargado" tabindex="4" required>
                         </div>
                         <br>
                         <a href="/memorandos" class="btn btn-secondary" tabindex="5">Cancelar</a>

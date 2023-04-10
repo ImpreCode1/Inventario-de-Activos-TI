@@ -11,7 +11,6 @@ class Accesorio extends Model
         'id_categoria',
         'id_marca',
         'serie',
-        'n_activo',
         'n_serial',
         'n_parte',
         'observaciones',
@@ -33,10 +32,6 @@ class Accesorio extends Model
 
     public function historialAccesorio(){
         return $this->hasMany(HistorialAccesorio::class, 'id');
-    }
-
-    public function accesesoriosMemorando(){
-        return $this->hasMany(AccesesoriosMemorando::class, 'id');
     }
 
     public static function boot()

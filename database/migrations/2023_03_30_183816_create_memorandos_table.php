@@ -17,8 +17,9 @@ class CreateMemorandosTable extends Migration
             $table->id('id');
             $table->unsignedBigInteger('id_empleado');
             $table->string('ciudad', 60)->nullable();
-            $table->string('direccion', 150)->nullable();
+            $table->string('direccion', 250)->nullable();
             $table->string('n_contacto', 40)->nullable();
+            $table->string('correo_encargado', 50)->nullable();
             $table->timestamps();
             
             $table->foreign('id_empleado')->references('id')->on('empleados');

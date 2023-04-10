@@ -54,7 +54,7 @@
             {data: 'empleado.nombre', name:'empleado.nombre', defaultContent: ''},
             {data: 'direccion', defaultContent: ''},
             {data: 'n_contacto', defaultContent: ''},
-            // { data: 'action', name: 'acciones', orderable: false, searchable: false }
+            { data: 'acciones', name: 'acciones', orderable: false, searchable: false }
         ],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",

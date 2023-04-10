@@ -18,7 +18,6 @@ class CreateAccesoriosTable extends Migration
             $table->unsignedBigInteger('id_categoria')->nullable(true);
             $table->unsignedBigInteger('id_marca')->nullable(true);
             $table->string('serie', 100)->nullable(true);
-            $table->string('n_activo', 100)->nullable(true);
             $table->string('n_serial', 100)->nullable(true);
             $table->string('n_parte', 100)->nullable(true);
             $table->string('observaciones', 150)->nullable(true);

@@ -23,6 +23,7 @@ Route::get('equipos/{id}/pdf',  [App\Http\Controllers\CpuEquipoController::class
 Route::get('accesorios/{id}/pdf',  [App\Http\Controllers\AccesorioController::class, 'pdf' ])->name('accesorios.pdf');
 Route::get('celulares/{id}/pdf',  [App\Http\Controllers\TelefonoController::class, 'pdf' ])->name('celulares.pdf');
 Route::get('softwares/{id}/pdf',  [App\Http\Controllers\SoftwareController::class, 'pdf' ])->name('softwares.pdf');
+Route::get('memorandos/{id_memorando}-{id_empleado}/pdf', [App\Http\Controllers\MemorandoController::class, 'pdf'])->name('memorandos.pdf');
 
 
 

@@ -10,20 +10,10 @@ class Memorando extends Model
     use HasFactory;
 
     protected $fillable = [
-    'id_empleado', 'ciudad', 'direccion' , 'n_contacto'
+    'id_empleado', 'ciudad', 'direccion' , 'n_contacto', 'correo_encargado'
     ];
 
     public function empleado(){
         return $this->belongsTo(Empleado::class, 'id_empleado');
-    }
-
-    public function portatilesMemorando(){
-        return $this->hasMany(PortatilesMemorando::class, 'id');
-    }
-    public function telefonosMemorando(){
-        return $this->hasMany(TelefonosMemorando::class, 'id');
-    }
-    public function accesesoriosMemorando(){
-        return $this->hasMany(AccesesoriosMemorando::class, 'id');
     }
 }

@@ -23,7 +23,6 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Categoria</th>
                 <th scope="col">Marca</th>
-                <th scope="col">N° de Activo</th>
                 <th scope="col">N° de Serial</th>
                 <th>Acciones</th>
                 
@@ -76,7 +75,6 @@
         {data: 'empleado.nombre', name: 'empleado.nombre', defaultContent: ''},
         {data: 'categoria.nombre', name:'categoria.nombre', defaultContent: ''},
         {data: 'marca.marca', name:'marca.marca', defaultContent: ''},
-        {data: 'n_activo', defaultContent: ''},
         {data: 'n_serial', defaultContent: ''},
         { data: 'action', name: 'acciones', orderable: false, searchable: false },
     ],

@@ -19,12 +19,12 @@
                         <div>
                             <label for="" class="form-label">Cargo</label>
                             <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Cargo"
-                                tabindex="1">
+                                tabindex="1" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Detalle</label>
                             <input type="text" name="detalle" id="detalle" class="form-control" placeholder="Detalle"
-                                tabindex="2">
+                                tabindex="2" >
                         </div>
                         <br>
                         <a href="/cargos" class="btn btn-secondary" tabindex="3">Cancelar</a>

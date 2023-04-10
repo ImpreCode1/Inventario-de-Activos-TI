@@ -40,9 +40,6 @@ class CpuEquipo extends Model
     public function historialEquipo(){
         return $this->hasMany(HistorialEquipo::class, 'id');
     }
-    public function portatilesMemorando(){
-        return $this->hasMany(PortatilesMemorando::class, 'id');
-    }
 
     public static function boot()
     {

@@ -19,7 +19,7 @@
                         <div>
                             <label for="" class="form-label">Empleado</label>
                             <select name="id_empleado" id="id_empleado" class="form-control" tabindex="1"
-                                style="width: 450px;">
+                                style="width: 450px;" required>
                                 <option value="">-- Seleccione el empleado --</option>
                                 @foreach ($empleados_ordenados as $id => $nombre)
                                     <option value="{{ $id }}">{{ $nombre }}</option>
