@@ -23,7 +23,7 @@ class MemorandoController extends Controller
     }
 
     public function memorandos(){
-        $memorandos = Memorando::with(['empleado'])->select('id', 'id_empleado', 'ciudad', 'direccion', 'n_contacto')->get();
+        $memorandos = Memorando::with(['empleado'])->select('id', 'id_empleado', 'ciudad', 'direccion', 'n_contacto', 'correo_encargado')->get();
         return datatables()->of($memorandos)->addColumn('acciones', function ($memorando) {
             $id_memorando = $memorando->id;
             $id_empleado = $memorando->id_empleado;

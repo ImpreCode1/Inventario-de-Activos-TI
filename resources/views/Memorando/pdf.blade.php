@@ -43,16 +43,17 @@
             <img src="{{ public_path('/img/LogoIMpreAltaconfondo.jpg') }}" class="logo" alt="">
             <h3 class="fecha">{{ $fechaActual }}</h3>
         </div>
-        <br><br><br><br><br>
+        <br><br><br><br><br><br>
         <strong> Señor (a): <br> Cristina Garzon <br>
         Logistica </strong>
-        <br> <br>
+        <br><br>
+        @foreach ($memorandos as $memorando)
         <p> <b>Asunto:</b>  Envío de herramienta(s) de trabajo. <br>
-        <b>Entrega a:</b>                <br>
-        <b> Direccion:</b>               <br>
-        <b> Contacto:</b>                </p>
+        <b>Entrega a: </b> {{$memorando->empleado->nombre}}  <br>
+        <b> Direccion:</b> {{$memorando->direccion}}              <br>
+        <b> Contacto:</b> {{$memorando->n_contacto}}              </p>
         @if(count($resultados) > 0)
-                <p>Acontinuacion, relaciono la(s) herramientas de trabajo:</p>
+                <p>Acontinuacion, relaciono la(s) herramienta(s) de trabajo:</p>
                 <table>
                     <thead>
                         <tr>
@@ -127,20 +128,22 @@
                 <p>No se encontraron equipos y accesorios asignados para este empleado.</p>
             @endif
             <br>
-            <p>Se eniva el equipo a NOMBRE EMPLEADO, como parte de su dotacion laboral, las herramientas de trabajo se entregan en perfectas condiciones.
+            <p>Se eniva(n) la(s) herramienta(s) a <b>{{$memorando->empleado->nombre}}</b>, como parte de su dotacion laboral, la(s) herramienta(s) de trabajo se entregan en perfectas condiciones.
             </p>
-            <p>Nota: Por favor firmar carta de eresponsabilidad anexa al envio y renviarla o escanearla al correo soporteit@impresistem.com.
+            <p>Nota: Por favor firmar carta de responsabilidad anexa al envio y renviarla o escanearla al correo <b>{{$memorando->correo_encargado }}</b>
             </p>
             <p>Agradezco su amable y acostumbrada atención</p>
             <p>Atentamente.</p>
             <div style="display: flex; align-items: center;">
                 <div style="float: left;">
-                    <p><strong> Freddy Javier Alonso </strong></p>
-                    <p>Ingeniero de Soporte</p>
-                    <p>FIRMA ________________________</p>
-                    <p>C.C ___________________________</p>
+                    <p><b>Freddy Javier Alonso<br>
+                    Ingeniero de Soporte<br>
+                    IMPRESISTEM S.A.S
+                    </b>
+                </p>
                 </div>
             </div>
+        @endforeach
     </main>
 </body>
 </html>

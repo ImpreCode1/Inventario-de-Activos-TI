@@ -84,7 +84,8 @@ class EmpleadoController extends Controller
         $empleados-> num_exten = $request->input('num_exten');
         $empleados-> retirado = $request->input('retirado');
         $empleados-> usu_dominio = $request->input('usu_dominio'); 
-        $password = str::random(10);
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+        $password = substr(str_shuffle($chars), 0, 10);
         $empleados-> clave_dominio = $password;
         $empleados-> email = $request->input('usu_dominio') . '@impresistem.com';
         $empleados-> id_modo_usuario = $request->input('id_modo_usuario');

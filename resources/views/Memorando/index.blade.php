@@ -23,6 +23,7 @@
                 <th scope="col">Empleado</th>
                 <th scope="col">Direccion</th>
                 <th scope="col">N° Contacto</th>
+                <th scope="col">Correo Encargado</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -54,6 +55,7 @@
             {data: 'empleado.nombre', name:'empleado.nombre', defaultContent: ''},
             {data: 'direccion', defaultContent: ''},
             {data: 'n_contacto', defaultContent: ''},
+            {data: 'correo_encargado', defaultContent: ''},
             { data: 'acciones', name: 'acciones', orderable: false, searchable: false }
         ],
         "language": {
