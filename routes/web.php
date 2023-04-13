@@ -40,6 +40,7 @@ Route::get('historialtelefonos/lista', [App\Http\Controllers\HistorialTelefonoCo
 Route::get('softwares/lista', [App\Http\Controllers\SoftwareController::class, 'softwares'])->name('softwares.lista');
 Route::get('memorandos/lista', [App\Http\Controllers\MemorandoController::class, 'memorandos'])->name('memorandos.lista');
 
+Route::get('/empleados/{id}/clave', 'EmpleadoController@getClaveDominio')->name('empleados.clave');
 
 
 

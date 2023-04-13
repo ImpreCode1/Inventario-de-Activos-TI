@@ -24,7 +24,8 @@ class TelefonoController extends Controller
     }
 
     public function celulares(){
-        $celulares = Telefono::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria', 'id_marca', 'serial', 'modelo')->get();
+        $celulares = Telefono::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria', 
+        'id_marca', 'serial', 'modelo', 'n_telefono', 'email_1', 'email_2', 'serial_sim', 'ram', 'rom')->get();
         return datatables()->of($celulares)
         ->addColumn('action', function ($celulares) {
             return '

@@ -26,7 +26,8 @@ class CpuEquipoController extends Controller
     }
 
     public function equipos(){
-        $equipos = CpuEquipo::with(['marca', 'categoria', 'empleado'])->select('id','id_empleado' ,'id_categoria', 'id_marca', 'n_activo', 'n_serial')->get();
+        $equipos = CpuEquipo::with(['marca', 'categoria', 'empleado'])->select('id','id_empleado' ,'id_categoria', 
+        'id_marca', 'n_activo', 'n_serial', 'serie', 'n_parte', 'memoria_ram', 'procesador', 'discoduro')->get();
         return datatables()->of($equipos)
             ->addColumn('action', function ($equipo) {
                 return '

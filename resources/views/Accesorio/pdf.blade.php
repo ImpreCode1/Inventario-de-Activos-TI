@@ -26,7 +26,7 @@
         table {
 			border: 5px double gray; 
 			border-collapse: collapse;
-			font-size: 14px; 
+			font-size: 12px; 
 		}
 		td, th {
 			border: 2px solid gray; 
@@ -43,14 +43,14 @@
             <img src="{{ public_path('/img/LogoIMpreAltaconfondo.jpg') }}" class="logo" alt="">
             <h3 class="fecha">{{ $fechaActual }}</h3>
         </div>
-        <br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
         @foreach ($accesorios as $accesorio)
             <p>Señor (a):</p>
-            <h4>{{ $accesorio->empleado->nombre ?? 'El empleado no existe' }}</h4>
+            <h4>{{ $accesorio->empleado->nombre ?? '' }}</h4>
             <p>Entrega de: </p>
-            <h4>{{ $accesorio->categoria->nombre ?? 'No existe' }}</h4>
+            <h4>{{ $accesorio->categoria->nombre ?? '' }}</h4>
             <p>Distinguido Señor (a):</p>
-            <p>Adjunto hacemos entrega de un(a) {{ $accesorio->categoria->nombre ?? 'No existe' }} con las
+            <p>Adjunto hacemos entrega de un(a) {{ $accesorio->categoria->nombre ?? '' }} con las
                 siguientes caracteristicas como parte de su dotación
                 laboral.</p>
             <table>
@@ -77,22 +77,22 @@
                 del usuario. El accesesorio se encuentra asegurado, en caso de pérdida, el usuario debera pagar el valor deducible
                 del seguro. En caso de averia por daños causados por el ususario, el costo de los repuestos sera asumido por el ususario.
             </p>
-            <p>Agradezco su amable y acostumbrada atención</p>
             <br>
+            <p>Agradezco su amable y acostumbrada atención</p>
             <p>Atentamente.</p>
             <br>
             <div style="display: flex; align-items: center;">
                 <div style="float: left;">
-                    <p><strong> Freddy Javier Alonso </strong></p>
-                    <p>Ingeniero de Soporte</p>
-                    <p>FIRMA ________________________</p>
-                    <p>C.C ___________________________</p>
+                    <p style="font-size: 16px;"> <b>Freddy Javier Alonso </b><br>
+                    Ingeniero de Soporte</p>
+                    <p style="font-size: 13px;">FIRMA _____________________________ <br><br>
+                        C.C ________________________________</p>
                 </div>
                 <div style="float:right; text-align: left;">
-                    <p> <strong> {{$accesorio->empleado->nombre ?? '' }}</strong></p>
-                    <p>{{ $accesorio->empleado->cargos->nombre ?? ''}}</p>
-                    <p>FIRMA _____________________________</p>
-                    <p>C.C ________________________________</p>
+                    <p style="font-size: 14px;"> <b>{{$accesorio->empleado->nombre ?? '' }}</b> <br>
+                        {{ $accesorio->empleado->cargos->nombre ?? ''}}</p>
+                    <p style="font-size: 13px;">FIRMA __________________________________ <br><br>
+                    C.C _____________________________________</p>
                 </div>
             </div>
         @endforeach

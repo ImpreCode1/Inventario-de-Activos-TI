@@ -52,12 +52,12 @@
                                 tabindex="4">
                         </div>
                         <div>
-                            <label for="" class="form-label">Email 1</label>
+                            <label for="" class="form-label">IMEI 1</label>
                             <input type="text" name="email_1" id="email_1" class="form-control" placeholder="Serial"
                                 value="{{ $celular->email_1 ?? 'No existe' }}" tabindex="5">
                         </div>
                         <div>
-                            <label for="" class="form-label">Email 2</label>
+                            <label for="" class="form-label">IMEI 2</label>
                             <input type="text" name="Email 2" id="Email 2" class="form-control"
                                 placeholder="Numero de parte" value="{{ $celular->email_2 ?? 'No existe' }}"
                                 tabindex="6">

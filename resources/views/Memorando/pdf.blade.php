@@ -41,7 +41,7 @@
         <br>
         <div>
             <img src="{{ public_path('/img/LogoIMpreAltaconfondo.jpg') }}" class="logo" alt="">
-            <h3 class="fecha">{{ $fechaActual }}</h3>
+            <h3 class="fecha">{{ $fechaActual ?? '' }}</h3>
         </div>
         <br><br><br><br><br><br>
         <strong> Señor (a): <br> Cristina Garzon <br>
@@ -49,9 +49,9 @@
         <br><br>
         @foreach ($memorandos as $memorando)
         <p> <b>Asunto:</b>  Envío de herramienta(s) de trabajo. <br>
-        <b>Entrega a: </b> {{$memorando->empleado->nombre}}  <br>
-        <b> Direccion:</b> {{$memorando->direccion}}              <br>
-        <b> Contacto:</b> {{$memorando->n_contacto}}              </p>
+        <b>Entrega a: </b> {{$memorando->empleado->nombre ?? ''}}  <br>
+        <b> Direccion:</b> {{$memorando->direccion ?? ''}}              <br>
+        <b> Contacto:</b> {{$memorando->n_contacto ?? ''}}              </p>
         @if(count($resultados) > 0)
                 <p>Acontinuacion, relaciono la(s) herramienta(s) de trabajo:</p>
                 <table>
@@ -77,11 +77,11 @@
                         @endphp
                         @foreach($equipos as $key => $equipo)
                             <tr>
-                                <td>{{$categorias1[$key] ?: ''}}</td>
-                                <td>{{$marcas[$key] ?: ''}}</td>
-                                <td>{{$series[$key] ?: ''}}</td>
-                                <td>{{$seriales[$key] ?: ''}}</td>
-                                <td>{{$activos[$key] ?: ''}}</td>
+                                <td>{{$categorias1[$key] ?? ''}}</td>
+                                <td>{{$marcas[$key] ?? ''}}</td>
+                                <td>{{$series[$key] ?? ''}}</td>
+                                <td>{{$seriales[$key] ?? ''}}</td>
+                                <td>{{$activos[$key] ?? ''}}</td>
                             </tr>
                         @endforeach
                         @endif
@@ -95,10 +95,10 @@
                             @endphp
                             @foreach($accesorios as $key => $accesorio)
                                 <tr>
-                                    <td>{{$categorias2[$key] ?: ''}}</td>
-                                    <td>{{$marcas2[$key] ?: ''}}</td>
-                                    <td>{{$series[$key] ?: ''}}</td>
-                                    <td>{{$seriales[$key] ?: ''}}</td>
+                                    <td>{{$categorias2[$key] ?? ''}}</td>
+                                    <td>{{$marcas2[$key] ?? ''}}</td>
+                                    <td>{{$series[$key] ?? ''}}</td>
+                                    <td>{{$seriales[$key] ?? ''}}</td>
                                     <td>N/A</td>
                                 </tr>
                             @endforeach
@@ -113,10 +113,10 @@
                             @endphp
                             @foreach($telefonos as $key => $telefono)
                             <tr>
-                                <td>{{$categorias3[$key] ?: ''}}</td>
-                                <td>{{$marcas3[$key] ?: ''}}</td>
-                                <td>{{$modelo[$key] ?: ''}}</td>
-                                <td>{{$serial[$key] ?: ''}}</td>
+                                <td>{{$categorias3[$key] ?? ''}}</td>
+                                <td>{{$marcas3[$key] ?? ''}}</td>
+                                <td>{{$modelo[$key] ?? ''}}</td>
+                                <td>{{$serial[$key] ?? ''}}</td>
                                 <td>N/A</td>
                             </tr>
                             @endforeach
@@ -128,9 +128,9 @@
                 <p>No se encontraron equipos y accesorios asignados para este empleado.</p>
             @endif
             <br>
-            <p>Se eniva(n) la(s) herramienta(s) a <b>{{$memorando->empleado->nombre}}</b>, como parte de su dotacion laboral, la(s) herramienta(s) de trabajo se entregan en perfectas condiciones.
+            <p>Se eniva(n) la(s) herramienta(s) a <b>{{$memorando->empleado->nombre ?? ''}}</b>, como parte de su dotacion laboral, la(s) herramienta(s) de trabajo se entregan en perfectas condiciones.
             </p>
-            <p>Nota: Por favor firmar carta de responsabilidad anexa al envio y renviarla o escanearla al correo <b>{{$memorando->correo_encargado }}</b>
+            <p>Nota: Por favor firmar carta de responsabilidad anexa al envio y renviarla o escanearla al correo <b>{{$memorando->correo_encargado ?? ''}}</b>
             </p>
             <p>Agradezco su amable y acostumbrada atención</p>
             <p>Atentamente.</p>

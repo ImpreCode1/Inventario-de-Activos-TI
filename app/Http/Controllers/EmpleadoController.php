@@ -26,9 +26,17 @@ class EmpleadoController extends Controller
        return view('empleado.index');
         // return view('empleado.index')->with('empleados', $empleados);
     }
+    public function getClaveDominio($id)
+{
+    $empleado = Empleado::findOrFail($id);
+    return response()->json([
+        'clave' => $empleado->clave_dominio
+    ]);
+}
+
 
     public function empleados(){
-        $empleados = Empleado::with(['departamentos', 'cargos'])->select('id', 'nombre', 'usu_dominio', 'num_exten', 'email', 'id_cargo', 'id_depto')->where('id', '<>', 0)->get();
+        $empleados = Empleado::with(['departamentos', 'cargos'])->select('id', 'nombre', 'usu_dominio', 'num_exten', 'email', 'id_cargo', 'id_depto', 'clave_dominio')->where('id', '<>', 0)->get();
         return datatables()->of($empleados)
         ->addColumn('acciones', function ($empleado) {
             return '
@@ -85,7 +93,7 @@ class EmpleadoController extends Controller
         $empleados-> retirado = $request->input('retirado');
         $empleados-> usu_dominio = $request->input('usu_dominio'); 
         $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
-        $password = substr(str_shuffle($chars), 0, 10);
+        $password = substr(str_shuffle($chars), 0, 8);
         $empleados-> clave_dominio = $password;
         $empleados-> email = $request->input('usu_dominio') . '@impresistem.com';
         $empleados-> id_modo_usuario = $request->input('id_modo_usuario');

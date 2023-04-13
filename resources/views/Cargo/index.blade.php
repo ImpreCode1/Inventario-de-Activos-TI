@@ -51,6 +51,7 @@
         processing: true,
         serverSide: true,
         ajax: "{{ route('cargos.lista') }}",
+        lengthMenu: [[25, 50, 100, -1], ['25', '50', '100', 'Todos']],
         columns: [
             {data: 'id'},
             {data: 'nombre', defaultContent: ''},

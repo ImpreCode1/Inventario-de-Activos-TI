@@ -53,6 +53,7 @@
         processing: true,
         serverSide: true,
         ajax: "{{ route('marcas.lista') }}",
+        lengthMenu: [[25, 50, 100, -1], ['25', '50', '100', 'Todos']],
         columns: [
             {data: 'id'},
             {data: 'marca', defaultContent: ''},

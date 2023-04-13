@@ -46,6 +46,7 @@
     $('#departametos').DataTable({
         processing: true,
         serverSide: true,
+        lengthMenu: [[25, 50, 100, -1], ['25', '50', '100', 'Todos']],
         ajax: "{{ route('departamentos.lista') }}",
         columns: [
             {data: 'id'},

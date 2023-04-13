@@ -26,7 +26,7 @@
         table {
 			border: 5px double gray; 
 			border-collapse: collapse;
-			font-size: 10px; 
+			font-size: 12px; 
 		}
 		td, th {
 			border: 2px solid gray; 
@@ -90,16 +90,16 @@
             <br>
             <div style="display: flex; align-items: center;">
                 <div style="float: left;">
-                    <p><strong> Freddy Javier Alonso </strong></p>
-                    <p>Ingeniero de Soporte</p>
-                    <p>FIRMA ________________________</p>
-                    <p>C.C ___________________________</p>
+                    <p style="font-size: 16px;"> <b>Freddy Javier Alonso </b><br>
+                    Ingeniero de Soporte</p>
+                    <p style="font-size: 13px;">FIRMA _____________________________ <br><br>
+                        C.C ________________________________</p>
                 </div>
                 <div style="float:right; text-align: left;">
-                    <p> <strong> {{$celular->empleado->nombre ?? '' }}</strong></p>
-                    <p>{{ $celular->empleado->cargos->nombre ?? ''}}</p>
-                    <p>FIRMA _____________________________</p>
-                    <p>C.C ________________________________</p>
+                    <p style="font-size: 14px;"> <b>{{$celular->empleado->nombre ?? '' }}</b> <br>
+                        {{ $celular->empleado->cargos->nombre ?? ''}}</p>
+                    <p style="font-size: 13px;">FIRMA __________________________________ <br><br>
+                    C.C _____________________________________</p>
                 </div>
             </div>
         @endforeach

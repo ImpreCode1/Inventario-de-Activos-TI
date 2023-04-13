@@ -24,7 +24,7 @@ class AccesorioController extends Controller
         return view('accesorio.index');
     }
         public function accesesorios(){
-            $accesorios = Accesorio::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria', 'id_marca', 'n_serial')->get();
+            $accesorios = Accesorio::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria', 'id_marca', 'n_serial', 'n_parte', 'observaciones', 'serie')->get();
             return datatables()->of($accesorios)
             ->addColumn('action', function ($accesorio) {
                 return '
