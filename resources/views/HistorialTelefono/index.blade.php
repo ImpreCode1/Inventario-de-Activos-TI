@@ -60,9 +60,9 @@
         processing: true,
         serverSide: true,
         ajax: "{{ route('historialtelefonos.lista') }}",
+        dom: '<"dt-buttons d-flex justify-content-between"B<"ml-3"l>>frtip',
         lengthChange: true,
         lengthMenu: [[25, 50, 100, -1], ['25', '50', '100', 'Todos']],
-        dom: 'Blfrtip',
         buttons: [
             {
                 extend: 'excelHtml5',

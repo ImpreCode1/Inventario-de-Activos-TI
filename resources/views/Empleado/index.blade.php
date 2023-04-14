@@ -24,7 +24,6 @@
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Usuario Dominio</th>
-                <th scope="col">Contraseña</th>
                 <th scope="col">N° Ext</th>
                 <th scope="col">Email</th>
                 <th scope="col">Cargo</th>
@@ -61,15 +60,14 @@
         processing: true,
         serverSide: true,
         ajax: "{{ route('empleados.lista') }}",
-        lengthChange: true,
         lengthMenu: [[25, 50, 100, -1], ['25', '50', '100', 'Todos']],
-        dom: 'Blfrtip',
+        dom: '<"dt-buttons d-flex justify-content-between"B<"ml-3"l>>frtip',
         buttons: [
             {
                 extend: 'excelHtml5',
                 title: 'Reporte de empleados',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6 ]
                 }
             }
         ],
@@ -77,7 +75,6 @@
         {data: 'id'},
         {data: 'nombre', defaultContent: ''},
         {data: 'usu_dominio', defaultContent: ''},
-        {data: 'clave_dominio', visible: false},
         {data: 'num_exten', defaultContent: ''},
         {data: 'email', defaultContent: ''},
         {data: 'cargos.nombre', name: 'cargos.nombre', defaultContent: ''},

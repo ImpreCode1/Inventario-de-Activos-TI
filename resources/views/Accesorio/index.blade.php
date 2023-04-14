@@ -83,7 +83,7 @@
         ajax: "{{ route('accesesorios.lista') }}",
         lengthChange: true,
         lengthMenu: [[25, 50, 100, -1], ['25', '50', '100', 'Todos']],
-        dom: 'Blfrtip',
+        dom: '<"dt-buttons d-flex justify-content-between"B<"ml-3"l>>frtip',
         buttons: [
             {
                 extend: 'excelHtml5',
