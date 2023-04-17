@@ -24,6 +24,7 @@ Route::get('accesorios/{id}/pdf',  [App\Http\Controllers\AccesorioController::cl
 Route::get('celulares/{id}/pdf',  [App\Http\Controllers\TelefonoController::class, 'pdf' ])->name('celulares.pdf');
 Route::get('softwares/{id}/pdf',  [App\Http\Controllers\SoftwareController::class, 'pdf' ])->name('softwares.pdf');
 Route::get('memorandos/{id_memorando}-{id_empleado}/pdf', [App\Http\Controllers\MemorandoController::class, 'pdf'])->name('memorandos.pdf');
+Route::put('destinatarios/{id}',  [App\Http\Controllers\CpuEquipoController::class, 'updateDestinatario' ])->name('destinatarios.update');
 
 
 

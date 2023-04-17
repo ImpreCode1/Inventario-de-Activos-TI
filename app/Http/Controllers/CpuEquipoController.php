@@ -10,6 +10,7 @@ use App\Models\Empleado;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Models\Destinatario;
 
 
 
@@ -22,7 +23,8 @@ class CpuEquipoController extends Controller
      */
     public function index()
     {
-        return view('equipo.index');
+        $destinatario = Destinatario::findOrFail(1); // Obtener el correo destinatario con id 1
+        return view('equipo.index')->with('destinatario', $destinatario);
     }
 
     public function equipos(){
@@ -152,6 +154,16 @@ class CpuEquipoController extends Controller
 
         return redirect('/equipos');
     }
+
+    public function updateDestinatario(Request $request, $id)
+{
+    $destinatario = Destinatario::find($id);
+    $destinatario->correo_notificacion = $request->input('destinatario');
+    $destinatario->save();
+
+    return redirect('/equipos')->with('success', 'Destinatario actualizado exitosamente.');
+}
+
 
     /**
      * Remove the specified resource from storage.

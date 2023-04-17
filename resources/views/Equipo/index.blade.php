@@ -17,6 +17,9 @@
 <div class="card">
 <div class="card-body">
     <a href="equipos/create" class="btn btn-primary">CREAR</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editDestinatarioModal">
+        Editar correo destinatario
+    </button>
     <p></p>
     <table id="equipos" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
         <thead class="bg-prymary">
@@ -40,6 +43,43 @@
     </table>
 </div>
 </div>
+
+<div class="modal fade" id="editDestinatarioModal" tabindex="-1" role="dialog" aria-labelledby="editDestinatarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="editDestinatarioModalLabel">Editar correo destinatario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <form id="editDestinatarioForm" action="{{ route('destinatarios.update', $destinatario->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="destinatario">Correo destinatario</label>
+                        <input type="email" class="form-control" id="destinatario" name="destinatario" value="{{ $destinatario->correo_notificacion }}" required>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
 @stop
 
 @section('js')

@@ -47,7 +47,7 @@
         @foreach ($equipos as $equipo)
             <p>Señor (a):</p>
             <h4>{{ $equipo->empleado->nombre ?? '' }}</h4>
-            <p>Entrega de: </p>
+            <p>Ref-:Entrega de: </p>
             <h4>{{ $equipo->categoria->nombre ?? '' }}</h4>
             <p>Distinguido Señor (a):</p>
             <p>Adjunto hacemos entrega de un(a) {{ $equipo->categoria->nombre ?? '' }} con las
