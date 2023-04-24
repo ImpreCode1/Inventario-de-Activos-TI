@@ -19,6 +19,7 @@ class CreateCpuEquiposTable extends Migration
             $table->unsignedBigInteger('id_marca')->nullable(true);
             $table->string('serie', 80)->nullable(true);
             $table->string('n_activo', 80)->nullable(true);
+            $table->string('costo', 80)->nullable(true);
             $table->string('n_serial', 80)->nullable(true);
             $table->string('n_parte', 80)->nullable(true);
             $table->string('memoria_ram', 80)->nullable(true);

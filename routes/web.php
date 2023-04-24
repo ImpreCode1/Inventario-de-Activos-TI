@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use  Illuminate\Support\Facades\Auth;
+use App\Mail\CambioEquipo;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,7 @@ Route::get('celulares/{id}/pdf',  [App\Http\Controllers\TelefonoController::clas
 Route::get('softwares/{id}/pdf',  [App\Http\Controllers\SoftwareController::class, 'pdf' ])->name('softwares.pdf');
 Route::get('memorandos/{id_memorando}-{id_empleado}/pdf', [App\Http\Controllers\MemorandoController::class, 'pdf'])->name('memorandos.pdf');
 Route::put('destinatarios/{id}',  [App\Http\Controllers\CpuEquipoController::class, 'updateDestinatario' ])->name('destinatarios.update');
+Route::put('encargados/{id}',  [App\Http\Controllers\MemorandoController::class, 'updateEncargado' ])->name('encargado.update');
 
 
 
@@ -42,7 +45,11 @@ Route::get('softwares/lista', [App\Http\Controllers\SoftwareController::class, '
 Route::get('memorandos/lista', [App\Http\Controllers\MemorandoController::class, 'memorandos'])->name('memorandos.lista');
 
 Route::get('/empleados/{id}/clave', 'EmpleadoController@getClaveDominio')->name('empleados.clave');
-
+//Route::get('prueba', function(){
+    //$correo = new CambioEquipo;
+  //  Mail::to('johnny1678m@gmail.com')->send($correo);
+//    return "Mensaje enviado"
+//});
 
 
 

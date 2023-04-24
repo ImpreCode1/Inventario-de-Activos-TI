@@ -44,27 +44,32 @@
                         <div>
                             <label for="" class="form-label">Numero de Activo</label>
                             <input type="text" name="n_activo" id="n_activo" class="form-control"
-                                placeholder="Numero de Activo" tabindex="4" required>
+                                placeholder="Numero de Activo" tabindex="4" >
+                        </div>
+                        <div>
+                            <label for="" class="form-label">Costo  del Equipo</label>
+                            <input type="text" name="costo" id="costo" class="form-control"
+                                placeholder="Costo  del Equipo" tabindex="5" >
                         </div>
                         <div>
                             <label for="" class="form-label">Serial del equipo</label>
                             <input type="text" name="n_serial" id="n_serial" class="form-control" placeholder="Serial"
-                                tabindex="5" required>
+                                tabindex="6" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Numero de parte</label>
                             <input type="text" name="n_parte" id="n_parte" class="form-control"
-                                placeholder="Numero de parte" tabindex="6">
+                                placeholder="Numero de parte" tabindex="7">
                         </div>
                         <div>
                             <label for="" class="form-label">Memoria Ram</label>
                             <input type="text" name="memoria_ram" id="memoria_ram" class="form-control"
-                                placeholder="Memoria Ram" tabindex="7" required>
+                                placeholder="Memoria Ram" tabindex="8" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Procesador</label>
                             <input type="text" name="procesador" id="procesador" class="form-control"
-                                placeholder="Procesador" tabindex="8" required>
+                                placeholder="Procesador" tabindex="10" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Discoduro</label>

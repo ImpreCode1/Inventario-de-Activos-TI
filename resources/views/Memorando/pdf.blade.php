@@ -43,10 +43,10 @@
             <img src="{{ public_path('/img/LogoIMpreAltaconfondo.jpg') }}" class="logo" alt="">
             <h3 class="fecha">{{ $fechaActual ?? '' }}</h3>
         </div>
-        <br><br><br><br><br><br>
-        <strong> Señor (a): <br> Cristina Garzon <br>
+        <br><br><br><br><br><br><br>
+        <strong> Señor (a): <br>{{ $encargado->encargado_bodega }}<br>
         Logistica </strong>
-        <br><br>
+        <br><br><br>
         @foreach ($memorandos as $memorando)
         <p> <b>Asunto:</b>  Envío de herramienta(s) de trabajo. <br>
         <b>Entrega a: </b> {{$memorando->empleado->nombre ?? ''}}  <br>

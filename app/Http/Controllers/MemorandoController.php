@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Empleado;
 use Illuminate\Support\Carbon;
-
+use App\Models\Encargado;
 
 class MemorandoController extends Controller
 {
@@ -19,7 +19,8 @@ class MemorandoController extends Controller
      */
     public function index()
     {
-        return view('Memorando.index');
+        $encargado = Encargado::findOrFail(1);
+        return view('Memorando.index')->with('encargado', $encargado);;
     }
 
     public function memorandos(){
@@ -80,6 +81,15 @@ class MemorandoController extends Controller
     
      
     }
+    public function updateEncargado(Request $request, $id)
+    {
+        $encargado = Encargado::find($id);
+        $encargado->encargado_bodega = $request->input('encargado');
+        $encargado->save();
+    
+        return redirect('/memorandos')->with('success', 'Encargado actualizado exitosamente.');
+    }
+    
 
     /**
      * Display the specified resource.
@@ -145,19 +155,19 @@ class MemorandoController extends Controller
         ->leftJoin('marcas as mar3', 'mar3.id', '=', 'telefonos.id_marca')
         ->select('empleados.nombre as empleado_nombre',
             DB::raw('GROUP_CONCAT(DISTINCT cpu_equipos.id SEPARATOR ", ") as cpu_id'),
-            DB::raw('GROUP_CONCAT(DISTINCT categorias.nombre SEPARATOR ", ") as cpu_categoria'),
-            DB::raw('GROUP_CONCAT(DISTINCT marcas.marca SEPARATOR ", ") as cpu_marca'),
+            DB::raw('GROUP_CONCAT(categorias.nombre SEPARATOR ", ") as cpu_categoria'),
+            DB::raw('GROUP_CONCAT(marcas.marca SEPARATOR ", ") as cpu_marca'),
             DB::raw('GROUP_CONCAT(DISTINCT cpu_equipos.serie SEPARATOR ", ") as cpu_serie'),
             DB::raw('GROUP_CONCAT(DISTINCT cpu_equipos.n_serial SEPARATOR ", ") as cpu_serial'),
             DB::raw('GROUP_CONCAT(DISTINCT cpu_equipos.n_activo SEPARATOR ", ") as n_activo'),
             DB::raw('GROUP_CONCAT(DISTINCT accesorios.id SEPARATOR ", ") as accesorio_id'),
-            DB::raw('GROUP_CONCAT(DISTINCT cat2.nombre SEPARATOR ", ") as accesorio_categoria'),
-            DB::raw('GROUP_CONCAT(DISTINCT mar2.marca SEPARATOR ", ") as accesorio_marca'),
+            DB::raw('GROUP_CONCAT(cat2.nombre SEPARATOR ", ") as accesorio_categoria'),
+            DB::raw('GROUP_CONCAT(mar2.marca SEPARATOR ", ") as accesorio_marca'),
             DB::raw('GROUP_CONCAT(DISTINCT accesorios.n_serial SEPARATOR ", ") as accesorio_n_serial'),
             DB::raw('GROUP_CONCAT(DISTINCT accesorios.serie SEPARATOR ", ") as accesorio_serie'),
             DB::raw('GROUP_CONCAT(DISTINCT telefonos.id SEPARATOR ", ") as telefono_id'),
-            DB::raw('GROUP_CONCAT(DISTINCT cat3.nombre SEPARATOR ", ") as telefono_categoria'),
-            DB::raw('GROUP_CONCAT(DISTINCT mar3.marca SEPARATOR ", ") as telefono_marca'),
+            DB::raw('GROUP_CONCAT(cat3.nombre SEPARATOR ", ") as telefono_categoria'),
+            DB::raw('GROUP_CONCAT(mar3.marca SEPARATOR ", ") as telefono_marca'),
             DB::raw('GROUP_CONCAT(DISTINCT telefonos.modelo SEPARATOR ", ") as telefono_modelo'),
             DB::raw('GROUP_CONCAT(DISTINCT telefonos.serial SEPARATOR ", ") as telefono_serial'))
         ->where('empleados.id', '=', $id_empleado)
@@ -165,8 +175,8 @@ class MemorandoController extends Controller
         ->get();
     
     $memorandos = Memorando::where('id', $id_memorando)->get();
-    
-    $pdf = Pdf::loadView('memorando.pdf', compact('resultados', 'memorandos', 'fechaActual'));
+    $encargado = DB::table('encargados')->where('id', 1)->first();
+    $pdf = Pdf::loadView('memorando.pdf', compact('resultados', 'memorandos', 'fechaActual', 'encargado'));
     return $pdf->stream('Memorando.pdf');
     
     }

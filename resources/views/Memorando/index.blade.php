@@ -15,6 +15,9 @@
 <div class="card">
 <div class="card-body">
     <a href="memorandos/create" class="btn btn-primary">CREAR</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editEncargadoModal">
+        Editar Nombre Encargado
+    </button>
     <p></p>
     <table id="memorandos" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
         <thead class="bg-prymary">
@@ -31,6 +34,40 @@
         </tbody>
     </table>
 </div>
+</div>
+<div class="modal fade" id="editEncargadoModal" tabindex="-1" role="dialog" aria-labelledby="editEncargadoModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="editEncargadoModalLabel">Editar nombre encargado de bodega</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <form id="editEncargadoForm" action="{{ route('encargado.update', $encargado->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="destinatario">Nombre Encargado</label>
+                        <input type="text" class="form-control" id="encargado" name="encargado" value="{{ $encargado->encargado_bodega }}">
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <a href="/memorandos" class="btn btn-secondary" >Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
 </div>
 @stop
 @section('js')

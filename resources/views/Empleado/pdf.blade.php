@@ -60,7 +60,7 @@
                   <br>
                   <br>
                   <center>
-                    <div class="inf"><center class="style4"><em>ESTA INFORMACIÓN ES PERSONAL Y CONFIDENCIAL, EL ADECUADO USO DE LA MISMA ES SU RESPONSABILIDAD</em></center><em>
+                    <div class="inf"><center class="style4"><em>ESTA INFORMACIÓN ES PERSONAL Y CONFIDENCIAL, EL ADECUADO USO DE LA MISMA ES SU RESPONSABILIDAD.</em></center><em>
                     <center class="style4">
                 <br>
                 </div>

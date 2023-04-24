@@ -35,6 +35,7 @@
                 <th scope="col">N° de Activo</th>
                 <th scope="col">N° de Serial</th>
                 <th scope="col">N° de Parte</th>
+                <th scope="col">Costo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -64,13 +65,13 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="destinatario">Correo destinatario</label>
-                        <input type="email" class="form-control" id="destinatario" name="destinatario" value="{{ $destinatario->correo_notificacion }}" required>
+                        <input type="email" class="form-control" id="destinatario" name="destinatario" value="{{ $destinatario->correo_notificacion }}">
                     </div>
                 </div>
 
                 <!-- Modal Footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <a href="/equipos" class="btn btn-secondary" >Cancelar</a>
                     <button type="submit" class="btn btn-primary">Guardar cambios</button>
                 </div>
             </form>
@@ -113,7 +114,7 @@
                 extend: 'excelHtml5',
                 title: 'Reporte de Equipos',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
                 }
             }
         ],
@@ -129,6 +130,7 @@
         {data: 'n_activo', defaultContent: ''},
         {data: 'n_serial', defaultContent: ''},
         {data: 'n_parte', visible: false},
+        {data: 'costo', visible: false},
         { data: 'action', name: 'acciones', orderable: false, searchable: false },
     ],
         "language": {

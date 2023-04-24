@@ -11,6 +11,12 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\Destinatario;
+use App\Mail\CambioEquipo;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
+
+
+
 
 
 
@@ -29,7 +35,7 @@ class CpuEquipoController extends Controller
 
     public function equipos(){
         $equipos = CpuEquipo::with(['marca', 'categoria', 'empleado'])->select('id','id_empleado' ,'id_categoria', 
-        'id_marca', 'n_activo', 'n_serial', 'serie', 'n_parte', 'memoria_ram', 'procesador', 'discoduro')->get();
+        'id_marca', 'n_activo', 'costo', 'n_serial', 'serie', 'n_parte', 'memoria_ram', 'procesador', 'discoduro')->get();
         return datatables()->of($equipos)
             ->addColumn('action', function ($equipo) {
                 return '
@@ -80,6 +86,7 @@ class CpuEquipoController extends Controller
         $equipos->id_marca = $request->get('id_marca');
         $equipos->serie = $request->get('serie');
         $equipos->n_activo = $request->get('n_activo');
+        $equipos->costo = $request->get('costo');
         $equipos->n_serial = $request->get('n_serial');
         $equipos->n_parte = $request->get('n_parte');
         $equipos->memoria_ram = $request->get('memoria_ram');
@@ -89,6 +96,10 @@ class CpuEquipoController extends Controller
         $equipos->id_empleado = $request->get('id_empleado');
         $equipos->nom_equipo = $request->get('nom_equipo');
 
+
+        $destinatario = DB::table('destinatarios')->where('id', 1)->first();
+        $correo = new CambioEquipo($equipos);
+        Mail::to($destinatario->correo_notificacion)->send($correo);
 
         $equipos->save();
 
@@ -135,6 +146,7 @@ class CpuEquipoController extends Controller
         $equipo->id_marca = $request->input('id_marca');
         $equipo->serie = $request->input('serie');
         $equipo->n_activo = $request->input('n_activo');
+        $equipo->costo = $request->input('costo');
         $equipo->n_serial = $request->input('n_serial');
         $equipo->n_parte = $request->input('n_parte');
         $equipo->memoria_ram = $request->input('memoria_ram');

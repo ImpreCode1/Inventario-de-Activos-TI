@@ -15,6 +15,7 @@ class CpuEquipo extends Model
         'id_marca',
         'serie',
         'n_activo',
+        'costo',
         'n_serial',
         'n_parte',
         'memoria_ram',

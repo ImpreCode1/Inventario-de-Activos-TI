@@ -49,39 +49,45 @@
                                 tabindex="4">
                         </div>
                         <div>
+                            <label for="" class="form-label">Costo del equipo</label>
+                            <input type="text" name="costo" id="costo" class="form-control"
+                                placeholder="Numero de Activo" value="{{ $equipo->costo ?? 'No existe' }}"
+                                tabindex="5">
+                        </div>
+                        <div>
                             <label for="" class="form-label">Serial del equipo</label>
                             <input type="text" name="n_serial" id="n_serial" class="form-control" placeholder="Serial"
-                                value="{{ $equipo->n_serial ?? 'No existe' }}" tabindex="5">
+                                value="{{ $equipo->n_serial ?? 'No existe' }}" tabindex="6">
                         </div>
                         <div>
                             <label for="" class="form-label">Numero de parte</label>
                             <input type="text" name="n_parte" id="n_parte" class="form-control"
-                                placeholder="Numero de parte" value="{{ $equipo->n_parte ?? 'No existe' }}" tabindex="6">
+                                placeholder="Numero de parte" value="{{ $equipo->n_parte ?? 'No existe' }}" tabindex="7">
                         </div>
                         <div>
                             <label for="" class="form-label">Memoria Ram</label>
                             <input type="text" name="memoria_ram" id="memoria_ram" class="form-control"
-                                placeholder="memoria_ram" value="{{ $equipo->memoria_ram ?? 'No existe' }}" tabindex="7">
+                                placeholder="memoria_ram" value="{{ $equipo->memoria_ram ?? 'No existe' }}" tabindex="8">
                         </div>
                         <div>
                             <label for="" class="form-label">Procesador</label>
                             <input type="text" name="procesador" id="procesador" class="form-control"
-                                placeholder="Procesador" value="{{ $equipo->procesador ?? 'No existe' }}" tabindex="8">
+                                placeholder="Procesador" value="{{ $equipo->procesador ?? 'No existe' }}" tabindex="9">
                         </div>
                         <div>
                             <label for="" class="form-label">Discoduro</label>
                             <input type="text" name="discoduro" id="discoduro" class="form-control"
-                                placeholder="Discoduro" value="{{ $equipo->discoduro ?? 'No existe' }}" tabindex="9">
+                                placeholder="Discoduro" value="{{ $equipo->discoduro ?? 'No existe' }}" tabindex="10">
                         </div>
                         <div>
                             <label for="" class="form-label">Observaciones acerca del equipo</label>
                             <input type="text" name="observaciones" id="observaciones" class="form-control"
                                 placeholder="Observaciones" value="{{ $equipo->observaciones ?? 'No existe' }}"
-                                tabindex="10">
+                                tabindex="11">
                         </div>
                         <div>
                             <label for="" class="form-label">Empleado al que se le asigna</label>
-                            <select name="id_empleado" id="id_empleado" class="form-control" tabindex="11">
+                            <select name="id_empleado" id="id_empleado" class="form-control" tabindex="12">
                                 <option value="">-- Escoja el empleado al que pertenecerá el equipo --</option>
                                 @foreach ($empleados as $empleado)
                                     <option value="{{ $empleado->id }}" @if(old('id_marca', $equipo->id_empleado) == $empleado->id) selected @endif>{{ $empleado->nombre }}</option>
@@ -92,11 +98,11 @@
                             <label for="" class="form-label">Nombre del equipo</label>
                             <input type="text" name="nom_equipo" id="nom_equipo" class="form-control"
                                 placeholder="Nombre del equipo" value="{{ $equipo->nom_equipo ?? 'No existe' }}"
-                                tabindex="12">
+                                tabindex="13">
                         </div>
                         <br>
-                        <a href="/equipos" class="btn btn-secondary" tabindex="13">Cancelar</a>
-                        <button type="submit" class="btn btn-primary" tabindex="14">Guardar</button>
+                        <a href="/equipos" class="btn btn-secondary" tabindex="14">Cancelar</a>
+                        <button type="submit" class="btn btn-primary" tabindex="15">Guardar</button>
                     </form>
                 </div>
             </div>
