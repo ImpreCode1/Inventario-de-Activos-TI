@@ -16,7 +16,9 @@
 @section('content')
 <div class="card">
 <div class="card-body">
+    @can('crear-equipo')
     <a href="equipos/create" class="btn btn-primary">CREAR</a>
+    @endcan
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editDestinatarioModal">
         Editar correo destinatario
     </button>
@@ -50,12 +52,14 @@
         <div class="modal-content">
 
             <!-- Modal Header -->
+            @can('crear-equipo')
             <div class="modal-header">
                 <h5 class="modal-title" id="editDestinatarioModalLabel">Editar correo destinatario</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            @endcan
 
             <!-- Modal Body -->
             <form id="editDestinatarioForm" action="{{ route('destinatarios.update', $destinatario->id) }}" method="POST">

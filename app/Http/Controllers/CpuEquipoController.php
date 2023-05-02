@@ -14,6 +14,8 @@ use App\Models\Destinatario;
 use App\Mail\CambioEquipo;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Gate;
+
 
 
 
@@ -22,6 +24,14 @@ use Illuminate\Support\Facades\Notification;
 
 class CpuEquipoController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:ver-equipo|crear-equipo|editar-equipo|borrar-equipo|pdf-equipo')->only('index');
+        $this->middleware('permission:crear-equipo', ['only'=>['create', 'store', 'updateDestinatario']]);
+        $this->middleware('permission:editar-equipo', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:borrar-equipo', ['only'=>['destroy']]);
+        $this->middleware('permission:pdf-equipo', ['only'=>['pdf']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,14 +48,21 @@ class CpuEquipoController extends Controller
         'id_marca', 'n_activo', 'costo', 'n_serial', 'serie', 'n_parte', 'memoria_ram', 'procesador', 'discoduro')->get();
         return datatables()->of($equipos)
             ->addColumn('action', function ($equipo) {
-                return '
-                    <form id="form-eliminar-' . $equipo->id . '" action="' . route('equipos.destroy', $equipo->id) . '" method="POST">
-                        <a href="/equipos/' . $equipo->id . '/edit" class="btn btn-info btn-sm">Editar</a>
-                        <a href="/equipos/' . $equipo->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad usu</a>
-                        ' . csrf_field() . '
-                        ' . method_field('DELETE') . '
-                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$equipo->id.')">Eliminar</button>
+                $html = '';
+                if (Gate::allows('editar-equipo', $equipo)) {
+                    $html .= '<a href="/equipos/'.$equipo->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
+                }
+                if (Gate::allows('pdf-equipo', $equipo)) {
+                    $html .= '<a href="/equipos/' . $equipo->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad Usu</a>';
+                }
+                if (Gate::allows('borrar-equipo', $equipo)) {
+                    $html .= '<form id="form-eliminar-' . $equipo->id . '" action="'. route('equipos.destroy', $equipo->id) .'" method="POST" style="display: inline-block;">
+                        '.csrf_field().'
+                        '.method_field('DELETE').'
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $equipo->id . ')">Eliminar</button>
                     </form>';
+                }
+                return $html;
             })
             ->rawColumns(['action'])
             ->toJson();

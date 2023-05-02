@@ -8,10 +8,19 @@ use App\Models\Empleado;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+
 
 
 class SoftwareController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:ver-software|crear-software|editar-software|borrar-software|pdf-software')->only('index');
+        $this->middleware('permission:crear-software', ['only'=>['create', 'store']]);
+        $this->middleware('permission:borrar-software', ['only'=>['destroy']]);
+        $this->middleware('permission:pdf-software', ['only'=>['pdf']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,14 +39,18 @@ class SoftwareController extends Controller
                 return $software->created_at->format('Y-m-d');
             })
             ->addColumn('action', function ($software) {
-                return '
-                <form id="form-eliminar-' . $software->id . '" action="' . route('softwares.destroy', $software->id) . '" method="POST">
-                        ' . csrf_field() . '
-                        ' . method_field('DELETE') . '
-                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$software->id.')">Eliminar</button>
-                        <a href="/softwares/' . $software->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad Software</a>
-                    </form>
-                ';
+                $html = '';
+                if (Gate::allows('pdf-software', $software)) {
+                    $html .= '<a href="/softwares/' . $software->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad Software</a>';
+                }
+                if (Gate::allows('borrar-software', $software)) {
+                    $html .= '<form id="form-eliminar-' . $software->id . '" action="'. route('softwares.destroy', $software->id) .'" method="POST" style="display: inline-block;">
+                        '.csrf_field().'
+                        '.method_field('DELETE').'
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $software->id . ')">Eliminar</button>
+                    </form>';
+                }
+                return $html;
             })
             ->rawColumns(['action'])
             ->toJson();
@@ -98,9 +111,7 @@ class SoftwareController extends Controller
      */
     public function edit($id)
     {
-        $software = Software::find($id);
-        $empleado = Empleado::all();
-        return view('software.edit', compact( 'software', 'empleado'));
+
     }
 
     /**
@@ -112,8 +123,6 @@ class SoftwareController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $software = Software::find($id);
-        $software-> id_empleado = $request->get('id_empleado');
 
     }
 

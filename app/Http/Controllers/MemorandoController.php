@@ -9,9 +9,18 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Empleado;
 use Illuminate\Support\Carbon;
 use App\Models\Encargado;
+use Illuminate\Support\Facades\Gate;
+
 
 class MemorandoController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:ver-memorando|crear-memorando|editar-memorando|borrar-memorando|pdf-memorando')->only('index');
+        $this->middleware('permission:crear-memorando', ['only'=>['create', 'store']]);
+        $this->middleware('permission:borrar-memorando', ['only'=>['destroy']]);
+        $this->middleware('permission:pdf-memorando', ['only'=>['pdf']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,13 +38,18 @@ class MemorandoController extends Controller
             $id_memorando = $memorando->id;
             $id_empleado = $memorando->id_empleado;
             $url_pdf = route('memorandos.pdf', [$id_memorando, $id_empleado]);
-            return '
-            <a href="' . $url_pdf . '" target="_blank" class="btn btn-success btn-sm">Memorando</a>
-            <form id="form-eliminar-' . $memorando->id . '" action="' . route('memorandos.destroy', $memorando->id) . '" method="POST">
-                ' . csrf_field() . '
-                ' . method_field('DELETE') . '
-                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $memorando->id . ')">Eliminar</button>
-            </form>';
+            $html = '';
+            if (Gate::allows('pdf-memorando', $memorando)) {
+                $html .= '<a href="' . $url_pdf . '" target="_blank" class="btn btn-success btn-sm">Memorando</a>';
+            }
+            if (Gate::allows('borrar-memorando', $memorando)) {
+                $html .= '<form id="form-eliminar-' . $memorando->id . '" action="'. route('memorandos.destroy', $memorando->id) .'" method="POST" style="display: inline-block;">
+                    '.csrf_field().'
+                    '.method_field('DELETE').'
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $memorando->id . ')">Eliminar</button>
+                </form>';
+            }
+            return $html;
         })
         ->rawColumns(['acciones'])->toJson();
     }

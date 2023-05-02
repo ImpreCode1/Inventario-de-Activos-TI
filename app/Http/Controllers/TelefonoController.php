@@ -10,9 +10,19 @@ use App\Models\Empleado;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+
 
 class TelefonoController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:ver-telefono|crear-telefono|editar-telefono|borrar-telefono|pdf-telefono')->only('index');
+        $this->middleware('permission:crear-telefono', ['only'=>['create', 'store']]);
+        $this->middleware('permission:editar-telefono', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:borrar-telefono', ['only'=>['destroy']]);
+        $this->middleware('permission:pdf-telefono', ['only'=>['pdf']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,14 +38,21 @@ class TelefonoController extends Controller
         'id_marca', 'serial', 'modelo', 'n_telefono', 'email_1', 'email_2', 'serial_sim', 'ram', 'rom')->get();
         return datatables()->of($celulares)
         ->addColumn('action', function ($celulares) {
-            return '
-                <form id="form-eliminar-' . $celulares->id . '" action="' . route('celulares.destroy', $celulares->id) . '" method="POST">
-                    <a href="/celulares/' . $celulares->id . '/edit" class="btn btn-info btn-sm">Editar</a>
-                    <a href="/celulares/' . $celulares->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad usu</a>
-                    ' . csrf_field() . '
-                    ' . method_field('DELETE') . '
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$celulares->id.')">Eliminar</button>
+            $html = '';
+            if (Gate::allows('editar-telefono', $celulares)) {
+                $html .= '<a href="/celulares/'.$celulares->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
+            }
+            if (Gate::allows('pdf-telefono', $celulares)) {
+                $html .= '<a href="/celulares/' . $celulares->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad Usu</a>';
+            }
+            if (Gate::allows('borrar-telefono', $celulares)) {
+                $html .= '<form id="form-eliminar-' . $celulares->id . '" action="'. route('celulares.destroy', $celulares->id) .'" method="POST" style="display: inline-block;">
+                    '.csrf_field().'
+                    '.method_field('DELETE').'
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $celulares->id . ')">Eliminar</button>
                 </form>';
+            }
+            return $html;
         })
         ->rawColumns(['action'])->toJson();
 

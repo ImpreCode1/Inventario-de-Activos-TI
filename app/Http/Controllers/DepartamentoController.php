@@ -4,9 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Departamento;
+use Illuminate\Support\Facades\Gate;
+
 
 class DepartamentoController extends Controller
 {
+
+    function __construct()
+{
+    $this->middleware('permission:ver-departamento|crear-departamento|editar-departamento|borrar-departamento')->only('index');
+    $this->middleware('permission:crear-departamento', ['only'=>['create', 'store']]);
+    $this->middleware('permission:editar-departamento', ['only'=>['edit', 'update']]);
+    $this->middleware('permission:borrar-departamento', ['only'=>['destroy']]);
+}
     /**
      * Display a listing of the resource.
      *
@@ -22,13 +32,18 @@ class DepartamentoController extends Controller
         $departamentos = Departamento::select('id', 'nombre')->get();
         return datatables()->of($departamentos)
             ->addColumn('action', function ($departamento) {
-                return '
-                <form id="form-eliminar-' . $departamento->id . '" action="' . route('departamentos.destroy', $departamento->id) . '" method="POST">
-                    <a href="/departamentos/' . $departamento->id . '/edit" class="btn btn-info btn-sm">Editar</a>
-                    ' . csrf_field() . '
-                    ' . method_field('DELETE') . '
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$departamento->id.')">Eliminar</button>
-                </form>';
+                $html = '';
+                if (Gate::allows('editar-departamento', $departamento)) {
+                    $html .= '<a href="/departamentos/'.$departamento->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
+                }
+                if (Gate::allows('borrar-departamento', $departamento)) {
+                    $html .= '<form id="form-eliminar-' . $departamento->id . '" action="'. route('departamentos.destroy', $departamento->id) .'" method="POST" style="display: inline-block;">
+                        '.csrf_field().'
+                        '.method_field('DELETE').'
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $departamento->id . ')">Eliminar</button>
+                    </form>';
+                }
+                return $html;
             })
             ->rawColumns(['action'])
             ->toJson();

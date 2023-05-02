@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\HistorialEquipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 class HistorialEquipoController extends Controller
 {
+    function __construct()
+{
+    $this->middleware('permission:ver-HistorialEquipo|borrar-HistorialEquipo')->only('index');
+    $this->middleware('permission:borrar-HistorialEquipo', ['only'=>['destroy']]);
+}
     /**
      * Display a listing of the resource.
      *
@@ -21,12 +28,15 @@ class HistorialEquipoController extends Controller
         $equiposHistorial = HistorialEquipo::with(['empleado', 'cpuequipo.categoria'])->select('id', 'id_empleado', 'id_portatiles', 'fecha_asignacion', 'fecha_devolucion')->get();
         return datatables()->of($equiposHistorial)
         ->addColumn('action', function ($equipo) {
-            return '
-                <form id="form-eliminar-' . $equipo->id . '" action="' . route('equiposHistorial.destroy', $equipo->id) . '" method="POST">
-                    ' . csrf_field() . '
-                    ' . method_field('DELETE') . '
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$equipo->id.')">Eliminar</button>
+            $html = '';
+            if (Gate::allows('borrar-HistorialEquipo', $equipo)) {
+                $html .= '<form id="form-eliminar-' . $equipo->id . '" action="'. route('equiposHistorial.destroy', $equipo->id) .'" method="POST" style="display: inline-block;">
+                    '.csrf_field().'
+                    '.method_field('DELETE').'
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $equipo->id . ')">Eliminar</button>
                 </form>';
+            }
+            return $html;
         })
         ->rawColumns(['action'])
         ->toJson();

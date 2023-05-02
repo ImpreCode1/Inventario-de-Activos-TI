@@ -16,7 +16,10 @@
 @section('content')
 <div class="card">
 <div class="card-body">
+    @can('crear-empleado')
     <a href="empleados/create" class="btn btn-primary">CREAR</a>
+    @endcan
+    
     <p></p>
     <table id="empleados" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
         <thead class="bg-prymary">

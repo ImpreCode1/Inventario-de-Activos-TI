@@ -298,11 +298,6 @@ return [
 
         // Sidebar items:,
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
             'text'        => 'Empleados',
             'url'         => 'empleados',
             'icon'        => 'far fa fa-search',
@@ -386,6 +381,23 @@ return [
             'text'        => 'Responsabilidad de Software',
             'url'         => 'softwares',
             'icon'        => 'fa fa-microchip',
+        ],
+        ['header' => 'ADMINISTRACION'],
+        [
+            'text'    => 'Asignaciones',
+            'icon'    => 'fa-shield-alt',
+            'submenu' => [
+                [
+                    'text' => 'Usuarios',
+                    'url'  => 'users',
+                    'icon' => 'fa fa-users'
+                ],
+                [
+                    'text' => 'roles',
+                    'url'  => 'roles',
+                    'icon' => 'fa fa-user-lock'
+                ],
+            ],
         ],
     ],
 

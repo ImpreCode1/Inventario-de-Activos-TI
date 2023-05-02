@@ -32,7 +32,7 @@
             <img src="{{ public_path('/img/LogoIMpreAltaconfondo.jpg') }}" class="logo" alt="">
             <h3 class="fecha">{{ $fechaActual }}</h3>
         </div>
-        <br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
         @foreach ($softwares as $software)
             <p>Distinguido Señor (a):</p>
             <p> <strong> {{ $software->empleado->nombre ?? '' }}</strong></p>
@@ -54,25 +54,25 @@
                 </ol>
                 <p>En caso de ir en contravía de estos compromisos, se procederá a imponer un memorando por falta grave,
                     con copia a la hoja de vida.</p>
+                    <br>
                 <p>Agradezco su amable y acostumbrada atención.</p>
             </div>
             <p>Atentamente.</p>
             <div style="display: flex; align-items: center;">
                 <div style="float: left;">
-                    <p><strong> Freddy Javier Alonso </strong></p>
-                    <p>Coordinador de Infraestructura</p>
-                    <p>FIRMA ________________________</p>
-                    <p>C.C ___________________________</p>
+                    <p style="font-size: 16px;"> <b>Freddy Javier Alonso </b><br>
+                        Coordinador de Infraestructura</p>
+                    <p style="font-size: 13px;">FIRMA _____________________________ <br><br>
+                        C.C ________________________________</p>
                 </div>
                 <div style="float:right; text-align: left;">
-                    <p> <strong> {{ $software->empleado->nombre ?? '' }}</strong></p>
-                    <p>{{ $software->empleado->cargos->nombre ?? '' }}</p>
-                    <p>FIRMA _____________________________</p>
-                    <p>C.C ________________________________</p>
+                <p style="font-size: 14px;"> <b>{{ $software->empleado->nombre ?? '' }}</b> <br>
+                    {{ $software->empleado->cargos->nombre ?? '' }}</p>
+                <p style="font-size: 13px;">FIRMA __________________________________ <br><br>
+                C.C _____________________________________</p>
                 </div>
-            </div>
+        </div>
         @endforeach
     </main>
 </body>
-
 </html>

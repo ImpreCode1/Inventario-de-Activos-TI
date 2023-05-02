@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateDestinatariosTable extends Migration
 {
@@ -18,6 +19,11 @@ class CreateDestinatariosTable extends Migration
             $table->string('correo_notificacion')->nullable();
             $table->timestamps();
         });
+
+        DB::table('destinatarios')->insert([
+            'id' => 1,
+            'correo_notificacion' => 'editar@impresistem.com',
+        ]);
     }
 
     /**

@@ -14,7 +14,9 @@
 @section('content')
 <div class="card">
 <div class="card-body">
+    @can('crear-memorando')
     <a href="memorandos/create" class="btn btn-primary">CREAR</a>
+    @endcan
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editEncargadoModal">
         Editar Nombre Encargado
     </button>

@@ -8,26 +8,52 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Registro de Cargos</h1>
+    <h1>Usuarios</h1>
 @stop
 
 @section('content')
 <div class="card">
 <div class="card-body">
-    @can('crear-cargo')
-    <a href="{{route('cargos.create')}}" class="btn btn-primary">CREAR</a>
+    @can('crear-usuario')
+    <a href="{{route('users.create')}}" class="btn btn-primary">CREAR</a>
     @endcan
     <p></p>
-    <table id="cargos" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
+    <table id="users" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
         <thead class="bg-prymary">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Cargo</th>
-                <th scope="col">Detalle</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Email</th>
+                <th scope="col">Rol</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($users as $user)
+                <tr>
+                    <td>{{$user->id}}</td>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>
+                        @if(!@empty($user->getRoleNames()))
+                            @foreach($user->getRoleNames() as $rolName)
+                            <h5><span>{{$rolName}}</span></h5>
+                            @endforeach
+                        @endif
+                    </td>
+                    <td>
+                        @can('editar-usuario')
+                        <a class="btn btn-info" href="{{route('users.edit', $user->id)}}">Editar</a>
+                        @endcan
+                        
+                        @can('borrar-usuario')
+                        {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline']) !!}
+                        {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
+                        {!! Form::close() !!}
+                        @endcan
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
@@ -49,17 +75,7 @@
     </script>
 <script>
   $(document).ready(function () {
-    $('#cargos').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('cargos.lista') }}",
-        lengthMenu: [[25, 50, 100, -1], ['25', '50', '100', 'Todos']],
-        columns: [
-            {data: 'id'},
-            {data: 'nombre', defaultContent: ''},
-            {data: 'detalle', defaultContent: ''},
-            {data: 'acciones', orderable: false, searchable: false}
-        ],
+    $('#users').DataTable({
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "Nada encontrado - disculpa",

@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Marca;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 class MarcaController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:ver-marca|crear-marca|editar-marca|borrar-marca')->only('index');
+        $this->middleware('permission:crear-marca', ['only'=>['create', 'store']]);
+        $this->middleware('permission:editar-marca', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:borrar-marca', ['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,14 +30,18 @@ class MarcaController extends Controller
         $marcas = Marca::select('id', 'marca')->get();
         return datatables()->of($marcas)
             ->addColumn('acciones', function ($marca) {
-                return '<td>
-                            <form action="'.route('marcas.destroy', $marca->id).'" method="POST" id="form-eliminar-'.$marca->id.'">
-                                <a href="/marcas/'.$marca->id.'/edit" class="btn btn-info btn-sm">Editar</a>
-                                '.csrf_field().'
-                                '.method_field('DELETE').'
-                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$marca->id.')">Eliminar</button>
-                            </form>
-                        </td>';
+                $html = '';
+                if (Gate::allows('editar-departamento', $marca)) {
+                    $html .= '<a href="/marcas/'.$marca->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
+                }
+                if (Gate::allows('borrar-departamento', $marca)) {
+                    $html .= '<form id="form-eliminar-' . $marca->id . '" action="'. route('marcas.destroy', $marca->id) .'" method="POST" style="display: inline-block;">
+                        '.csrf_field().'
+                        '.method_field('DELETE').'
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $marca->id . ')">Eliminar</button>
+                    </form>';
+                }
+                return $html;
             })
             ->rawColumns(['acciones'])
             ->toJson();

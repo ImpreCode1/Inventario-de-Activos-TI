@@ -15,36 +15,35 @@ use Illuminate\Support\Facades\Mail;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('empleados/{id}/pdf',  [App\Http\Controllers\EmpleadoController::class, 'pdf' ])->name('empleados.pdf');
-Route::get('equipos/{id}/pdf',  [App\Http\Controllers\CpuEquipoController::class, 'pdf' ])->name('equipos.pdf');
-Route::get('accesorios/{id}/pdf',  [App\Http\Controllers\AccesorioController::class, 'pdf' ])->name('accesorios.pdf');
-Route::get('celulares/{id}/pdf',  [App\Http\Controllers\TelefonoController::class, 'pdf' ])->name('celulares.pdf');
-Route::get('softwares/{id}/pdf',  [App\Http\Controllers\SoftwareController::class, 'pdf' ])->name('softwares.pdf');
-Route::get('memorandos/{id_memorando}-{id_empleado}/pdf', [App\Http\Controllers\MemorandoController::class, 'pdf'])->name('memorandos.pdf');
-Route::put('destinatarios/{id}',  [App\Http\Controllers\CpuEquipoController::class, 'updateDestinatario' ])->name('destinatarios.update');
-Route::put('encargados/{id}',  [App\Http\Controllers\MemorandoController::class, 'updateEncargado' ])->name('encargado.update');
+Route::get('empleados/{id}/pdf',  [App\Http\Controllers\EmpleadoController::class, 'pdf' ])->name('empleados.pdf')->middleware('auth');
+Route::get('equipos/{id}/pdf',  [App\Http\Controllers\CpuEquipoController::class, 'pdf' ])->name('equipos.pdf')->middleware('auth');
+Route::get('accesorios/{id}/pdf',  [App\Http\Controllers\AccesorioController::class, 'pdf' ])->name('accesorios.pdf')->middleware('auth');
+Route::get('celulares/{id}/pdf',  [App\Http\Controllers\TelefonoController::class, 'pdf' ])->name('celulares.pdf')->middleware('auth');
+Route::get('softwares/{id}/pdf',  [App\Http\Controllers\SoftwareController::class, 'pdf' ])->name('softwares.pdf')->middleware('auth');
+Route::get('memorandos/{id_memorando}-{id_empleado}/pdf', [App\Http\Controllers\MemorandoController::class, 'pdf'])->name('memorandos.pdf')->middleware('auth');
+Route::put('destinatarios/{id}',  [App\Http\Controllers\CpuEquipoController::class, 'updateDestinatario' ])->name('destinatarios.update')->middleware('auth');
+Route::put('encargados/{id}',  [App\Http\Controllers\MemorandoController::class, 'updateEncargado' ])->name('encargado.update')->middleware('auth');
 
 
 
-Route::get('cargos/lista', [App\Http\Controllers\CargoController::class, 'datos'])->name('cargos.lista');
-Route::get('departamentos/lista', [App\Http\Controllers\DepartamentoController::class, 'departamentos'])->name('departamentos.lista');
-Route::get('marcas/lista', [App\Http\Controllers\MarcaController::class, 'marcas'])->name('marcas.lista');
-Route::get('empleados/lista', [App\Http\Controllers\EmpleadoController::class, 'empleados'])->name('empleados.lista');
+Route::get('cargos/lista', [App\Http\Controllers\CargoController::class, 'datos'])->name('cargos.lista')->middleware('auth');
+Route::get('departamentos/lista', [App\Http\Controllers\DepartamentoController::class, 'departamentos'])->name('departamentos.lista')->middleware('auth');
+Route::get('marcas/lista', [App\Http\Controllers\MarcaController::class, 'marcas'])->name('marcas.lista')->middleware('auth');
+Route::get('empleados/lista', [App\Http\Controllers\EmpleadoController::class, 'empleados'])->name('empleados.lista')->middleware('auth');
 Route::get('equipos/lista', [App\Http\Controllers\CpuEquipoController::class, 'equipos'])->name('equipos.lista');
-Route::get('accesesorios/lista', [App\Http\Controllers\AccesorioController::class, 'accesesorios'])->name('accesesorios.lista');
-Route::get('celulares/lista', [App\Http\Controllers\TelefonoController::class, 'celulares'])->name('celulares.lista');
-Route::get('historialequipos/lista', [App\Http\Controllers\HistorialEquipoController::class, 'historialEquipos'])->name('historialequipos.lista');
-Route::get('accesesorioshistorial/lista', [App\Http\Controllers\HistorialAccesorioController::class, 'historialaccesesorio'])->name('accesesorioshistorial.lista');
-Route::get('historialtelefonos/lista', [App\Http\Controllers\HistorialTelefonoController::class, 'historialTelefonos'])->name('historialtelefonos.lista');
-Route::get('softwares/lista', [App\Http\Controllers\SoftwareController::class, 'softwares'])->name('softwares.lista');
-Route::get('memorandos/lista', [App\Http\Controllers\MemorandoController::class, 'memorandos'])->name('memorandos.lista');
+Route::get('accesesorios/lista', [App\Http\Controllers\AccesorioController::class, 'accesesorios'])->name('accesesorios.lista')->middleware('auth');
+Route::get('celulares/lista', [App\Http\Controllers\TelefonoController::class, 'celulares'])->name('celulares.lista')->middleware('auth');
+Route::get('historialequipos/lista', [App\Http\Controllers\HistorialEquipoController::class, 'historialEquipos'])->name('historialequipos.lista')->middleware('auth');
+Route::get('accesesorioshistorial/lista', [App\Http\Controllers\HistorialAccesorioController::class, 'historialaccesesorio'])->name('accesesorioshistorial.lista')->middleware('auth');
+Route::get('historialtelefonos/lista', [App\Http\Controllers\HistorialTelefonoController::class, 'historialTelefonos'])->name('historialtelefonos.lista')->middleware('auth');
+Route::get('softwares/lista', [App\Http\Controllers\SoftwareController::class, 'softwares'])->name('softwares.lista')->middleware('auth');
+Route::get('memorandos/lista', [App\Http\Controllers\MemorandoController::class, 'memorandos'])->name('memorandos.lista')->middleware('auth');
 
-Route::get('/empleados/{id}/clave', 'EmpleadoController@getClaveDominio')->name('empleados.clave');
+
 //Route::get('prueba', function(){
     //$correo = new CambioEquipo;
   //  Mail::to('johnny1678m@gmail.com')->send($correo);
@@ -65,6 +64,8 @@ Route::resource('equiposHistorial', App\Http\Controllers\HistorialEquipoControll
 Route::resource('accesesoriosHistorial', App\Http\Controllers\HistorialAccesorioController::class)->middleware('auth');
 Route::resource('telefonosHistorial', App\Http\Controllers\HistorialTelefonoController::class)->middleware('auth');
 Route::resource('memorandos', App\Http\Controllers\MemorandoController::class)->middleware('auth');
+Route::resource('users', App\Http\Controllers\UserController::class)->middleware('auth');
+Route::resource('roles', App\Http\Controllers\RolController::class)->middleware('auth');
 
 
 Auth::routes();

@@ -178,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+
 
 
     ],

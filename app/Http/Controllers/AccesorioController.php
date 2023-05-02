@@ -10,10 +10,19 @@ use App\Models\Empleado;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 
 class AccesorioController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:ver-accesesorio|crear-accesesorio|editar-accesesorio|borrar-accesesorio|pdf-accesesorio')->only('index');
+        $this->middleware('permission:crear-accesesorio', ['only'=>['create', 'store']]);
+        $this->middleware('permission:editar-accesesorio', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:borrar-accesesorio', ['only'=>['destroy']]);
+        $this->middleware('permission:pdf-accesesorio', ['only'=>['pdf']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -27,14 +36,21 @@ class AccesorioController extends Controller
             $accesorios = Accesorio::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria', 'id_marca', 'n_serial', 'n_parte', 'observaciones', 'serie')->get();
             return datatables()->of($accesorios)
             ->addColumn('action', function ($accesorio) {
-                return '
-                    <form id="form-eliminar-' . $accesorio->id . '" action="' . route('accesorios.destroy', $accesorio->id) . '" method="POST">
-                        <a href="/accesorios/' . $accesorio->id . '/edit" class="btn btn-info btn-sm">Editar</a>
-                        <a href="/accesorios/' . $accesorio->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad usu</a>
-                        ' . csrf_field() . '
-                        ' . method_field('DELETE') . '
-                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$accesorio->id.')">Eliminar</button>
+                $html = '';
+                if (Gate::allows('editar-accesesorio', $accesorio)) {
+                    $html .= '<a href="/accesorios/'.$accesorio->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
+                }
+                if (Gate::allows('pdf-accesesorio', $accesorio)) {
+                    $html .= '<a href="/accesorios/' . $accesorio->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad Usu</a>';
+                }
+                if (Gate::allows('borrar-accesesorio', $accesorio)) {
+                    $html .= '<form id="form-eliminar-' . $accesorio->id . '" action="'. route('accesorios.destroy', $accesorio->id) .'" method="POST" style="display: inline-block;">
+                        '.csrf_field().'
+                        '.method_field('DELETE').'
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $accesorio->id . ')">Eliminar</button>
                     </form>';
+                }
+                return $html;
             })
             ->rawColumns(['action'])->toJson();
         }

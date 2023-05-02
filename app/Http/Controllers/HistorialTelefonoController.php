@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\HistorialTelefono;
 use App\Models\Telefono;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 class HistorialTelefonoController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:ver-HistorialTelefono|borrar-HistorialTelefono')->only('index');
+        $this->middleware('permission:borrar-HistorialTelefono', ['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,12 +30,15 @@ class HistorialTelefonoController extends Controller
         $telefonosHistorial = HistorialTelefono::with(['empleado', 'telefono'])->select('id', 'id_empleado', 'id_telefonos', 'fecha_asignacion', 'fecha_devolucion')->get();
         return datatables()->of($telefonosHistorial)
         ->addColumn('action', function ($telefono) {
-            return '
-                <form id="form-eliminar-' . $telefono->id . '" action="' . route('telefonosHistorial.destroy', $telefono->id) . '" method="POST">
-                    ' . csrf_field() . '
-                    ' . method_field('DELETE') . '
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('.$telefono->id.')">Eliminar</button>
+            $html = '';
+            if (Gate::allows('borrar-HistorialTelefono', $telefono)) {
+                $html .= '<form id="form-eliminar-' . $telefono->id . '" action="'. route('telefonosHistorial.destroy', $telefono->id) .'" method="POST" style="display: inline-block;">
+                    '.csrf_field().'
+                    '.method_field('DELETE').'
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $telefono->id . ')">Eliminar</button>
                 </form>';
+            }
+            return $html;
         })
         ->rawColumns(['action'])->toJson();
 

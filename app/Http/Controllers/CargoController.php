@@ -4,12 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cargo;
+use Illuminate\Support\Facades\Gate;
 
 
 
 
 class CargoController extends Controller
 {
+
+    
+function __construct()
+{
+    $this->middleware('permission:ver-cargo|crear-cargo|editar-cargo|borrar-cargo')->only('index');
+    $this->middleware('permission:crear-cargo', ['only'=>['create', 'store']]);
+    $this->middleware('permission:editar-cargo', ['only'=>['edit', 'update']]);
+    $this->middleware('permission:borrar-cargo', ['only'=>['destroy']]);
+}
     /**
      * Display a listing of the resource.
      *
@@ -21,16 +31,23 @@ class CargoController extends Controller
     }
 
     public function datos(){
-    $cargos = Cargo::select('id', 'nombre', 'detalle')->get();
-    return datatables()->of($cargos)->addColumn('acciones', function($cargo){
-        return '<a href="/cargos/'.$cargo->id.'/edit" class="btn btn-info btn-sm">Editar</a>' .
-            '<form id="form-eliminar-' . $cargo->id . '" action="'. route('cargos.destroy', $cargo->id) .'" method="POST" style="display: inline-block;">
-                '.csrf_field().'
-                '.method_field('DELETE').'
-                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $cargo->id . ')">Eliminar</button>
-            </form>';
-    })->rawColumns(['acciones'])->toJson();
-}
+        $cargos = Cargo::select('id', 'nombre', 'detalle')->get();
+        return datatables()->of($cargos)->addColumn('acciones', function($cargo){
+            $html = '';
+            if (Gate::allows('editar-cargo', $cargo)) {
+                $html .= '<a href="/cargos/'.$cargo->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
+            }
+            if (Gate::allows('borrar-cargo', $cargo)) {
+                $html .= '<form id="form-eliminar-' . $cargo->id . '" action="'. route('cargos.destroy', $cargo->id) .'" method="POST" style="display: inline-block;">
+                    '.csrf_field().'
+                    '.method_field('DELETE').'
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $cargo->id . ')">Eliminar</button>
+                </form>';
+            }
+            return $html;
+        })->rawColumns(['acciones'])->toJson();
+    }
+    
 
     /**
      * Show the form for creating a new resource.

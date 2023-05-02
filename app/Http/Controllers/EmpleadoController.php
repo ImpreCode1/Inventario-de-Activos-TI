@@ -10,12 +10,22 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+
 
 
 
 
 class EmpleadoController extends Controller
 {
+        function __construct()
+{
+    $this->middleware('permission:ver-empleado|crear-empleado|editar-empleado|borrar-empleado|pdf-empleado')->only('index');
+    $this->middleware('permission:crear-empleado', ['only'=>['create', 'store']]);
+    $this->middleware('permission:editar-empleado', ['only'=>['edit', 'update']]);
+    $this->middleware('permission:borrar-empleado', ['only'=>['destroy']]);
+    $this->middleware('permission:pdf-empleado', ['only'=>['pdf']]);
+}
     /**
      * Display a listing of the resource.
      *
@@ -39,14 +49,21 @@ class EmpleadoController extends Controller
         $empleados = Empleado::with(['departamentos', 'cargos'])->select('id', 'nombre', 'usu_dominio', 'num_exten', 'email', 'id_cargo', 'id_depto', 'clave_dominio')->where('id', '<>', 0)->get();
         return datatables()->of($empleados)
         ->addColumn('acciones', function ($empleado) {
-            return '
-            <form id="form-eliminar-' . $empleado->id . '" action="' . route('empleados.destroy', $empleado->id) . '" method="POST">
-                <a href="/empleados/' . $empleado->id . '/edit" class="btn btn-info btn-sm">Editar</a>
-                <a href="/empleados/' . $empleado->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Act contraseñas</a>
-                ' . csrf_field() . '
-                ' . method_field('DELETE') . '
-                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $empleado->id . ')">Eliminar</button>
-            </form>';
+            $html = '';
+            if (Gate::allows('editar-empleado', $empleado)) {
+                $html .= '<a href="/empleados/'.$empleado->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
+            }
+            if (Gate::allows('pdf-empleado', $empleado)) {
+                $html .= '<a href="/empleados/' . $empleado->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Act contraseñas</a>';
+            }
+            if (Gate::allows('borrar-empleado', $empleado)) {
+                $html .= '<form id="form-eliminar-' . $empleado->id . '" action="'. route('empleados.destroy', $empleado->id) .'" method="POST" style="display: inline-block;">
+                    '.csrf_field().'
+                    '.method_field('DELETE').'
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $empleado->id . ')">Eliminar</button>
+                </form>';
+            }
+            return $html;
         })
         ->rawColumns(['acciones'])
         ->toJson();
