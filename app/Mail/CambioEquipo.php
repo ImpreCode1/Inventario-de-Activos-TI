@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\CpuEquipo;
 
 class CambioEquipo extends Mailable
 {
@@ -13,14 +14,16 @@ class CambioEquipo extends Mailable
 
     public $subject = "Registros de Nuevo(s) Equipos";
     public $equipos;
+    public $url_edicion;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct( $equipos)
+    public function __construct(CpuEquipo $equipos, $url_edicion )
     {
         $this->equipos = $equipos;
+        $this->url_edicion = $url_edicion;
     }
 
     /**
@@ -30,7 +33,8 @@ class CambioEquipo extends Mailable
      */
     public function build()
     {
-        return $this->view('email.notificacion')->with('equipos', $this->equipos);
+        return $this->view('email.notificacion')->with(['equipos' => $this->equipos, 'url_edicion' => $this->url_edicion]);
+
     }
     
 }

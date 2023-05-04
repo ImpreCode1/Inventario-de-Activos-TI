@@ -97,31 +97,31 @@ class CpuEquipoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $equipos = new CpuEquipo();
-        $equipos->id_categoria = $request->get('id_categoria');
-        $equipos->id_marca = $request->get('id_marca');
-        $equipos->serie = $request->get('serie');
-        $equipos->n_activo = $request->get('n_activo');
-        $equipos->costo = $request->get('costo');
-        $equipos->n_serial = $request->get('n_serial');
-        $equipos->n_parte = $request->get('n_parte');
-        $equipos->memoria_ram = $request->get('memoria_ram');
-        $equipos->procesador = $request->get('procesador');
-        $equipos->discoduro = $request->get('discoduro');
-        $equipos->observaciones = $request->get('observaciones');
-        $equipos->id_empleado = $request->get('id_empleado');
-        $equipos->nom_equipo = $request->get('nom_equipo');
+{
+    $equipos = new CpuEquipo();
+    $equipos->id_categoria = $request->get('id_categoria');
+    $equipos->id_marca = $request->get('id_marca');
+    $equipos->serie = $request->get('serie');
+    $equipos->n_activo = $request->get('n_activo');
+    $equipos->costo = $request->get('costo');
+    $equipos->n_serial = $request->get('n_serial');
+    $equipos->n_parte = $request->get('n_parte');
+    $equipos->memoria_ram = $request->get('memoria_ram');
+    $equipos->procesador = $request->get('procesador');
+    $equipos->discoduro = $request->get('discoduro');
+    $equipos->observaciones = $request->get('observaciones');
+    $equipos->id_empleado = $request->get('id_empleado');
+    $equipos->nom_equipo = $request->get('nom_equipo');
+    $equipos->save();
 
+    $url_edicion = route('equipos.edit', ['equipo' => $equipos->id]);
 
-        $destinatario = DB::table('destinatarios')->where('id', 1)->first();
-        $correo = new CambioEquipo($equipos);
-        Mail::to($destinatario->correo_notificacion)->send($correo);
+    $destinatario = DB::table('destinatarios')->where('id', 1)->first();
+    $correo = new CambioEquipo($equipos,  $url_edicion);
+    Mail::to($destinatario->correo_notificacion)->send($correo);
 
-        $equipos->save();
-
-        return redirect('/equipos');
-    }
+    return redirect('/equipos');
+}
 
     /**
      * Display the specified resource.

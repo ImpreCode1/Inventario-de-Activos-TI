@@ -301,101 +301,123 @@ return [
             'text'        => 'Empleados',
             'url'         => 'empleados',
             'icon'        => 'far fa fa-search',
+            'can'         => 'ver-empleado',
         ],
-        ['header' => 'REGISTROS VARIOS'],
+        ['header' => 'REGISTROS VARIOS',
+        'can'  => ['ver-cargo', 'ver-departamento', 'ver-marca']],
         [
             'text'    => 'Registros',
             'icon'    => 'fas fa-fw fa-share',
+            'can'  => ['ver-cargo', 'ver-departamento', 'ver-marca'],
             'submenu' => [
                 [
                     'text' => 'Registro cargo',
                     'url'  => 'cargos',
-                    'icon' => 'far fa fa-address-card'
+                    'icon' => 'far fa fa-address-card',
+                    'can'  => 'ver-cargo',
                 ],
                 [
                     'text' => 'Registro departamento',
                     'url'  => 'departamentos',
-                    'icon' => 'far fa fa-users'
+                    'icon' => 'far fa fa-users',
+                    'can'  => 'ver-departamento',
                 ],
                 [
                     'text' => 'Registro marca',
                     'url'  => 'marcas',
                     'icon' => 'far fa fa-bars'
+                    ,'can' => 'ver-marca',
                 ],
             ],
-            
         ],
-        ['header' => 'INVENTARIO ACTIVOS'],
+        ['header' => 'INVENTARIO ACTIVOS',
+        'can'  => ['ver-equipo', 'ver-accesesorio', 'ver-telefono']],
         [
             'text'    => 'Inventario',
             'icon'    => 'fa fa-book',
+            'can'  => ['ver-equipo', 'ver-accesesorio', 'ver-telefono'],
             'submenu' => [
                 [
                     'text' => 'Portatiles y Cpus',
                     'url'  => 'equipos',
-                    'icon' => 'fa fa-laptop'
+                    'icon' => 'fa fa-laptop',
+                    'can'  => 'ver-equipo',
                 ],
                 [
                     'text' => 'Accesorios',
                     'url'  => 'accesorios',
-                    'icon' => 'fa fa-random'
+                    'icon' => 'fa fa-random',
+                    'can'  => 'ver-accesesorio',
                 ],
                 [
                     'text' => 'Celulares',
                     'url'  => 'celulares',
-                    'icon' => 'fa fa-mobile'
+                    'icon' => 'fa fa-mobile',
+                    'can'  => 'ver-telefono',
                 ],
             ],
             
         ],
-        ['header' => 'HISTORIAL ACTIVOS'],
+        ['header' => 'HISTORIAL ACTIVOS',
+        'can'  => ['ver-HistorialEquipo', 'ver-HistorialAccesesorio', 'ver-HistorialTelefono'],],
         [
             'text'    => 'Historiales',
             'icon'    => 'fas fa-fw fa-clock',
+            'can'  => ['ver-HistorialEquipo', 'ver-HistorialAccesesorio', 'ver-HistorialTelefono'],
             'submenu' => [
                 [
                     'text' => 'Historial Portatiles',
                     'url'  => 'equiposHistorial',
-                    'icon' => 'fa fa-laptop'
+                    'icon' => 'fa fa-laptop',
+                    'can'  => 'ver-HistorialEquipo',
                 ],
                 [
                     'text' => 'Historial Accesorios',
                     'url'  => 'accesesoriosHistorial',
-                    'icon' => 'fa fa-random'
+                    'icon' => 'fa fa-random',
+                    'can'  => 'ver-HistorialAccesesorio',
                 ],
                 [
                     'text' => 'Historial Celulares',
                     'url'  => 'telefonosHistorial',
-                    'icon' => 'fa fa-mobile'
+                    'icon' => 'fa fa-mobile',
+                    'can'  => 'ver-HistorialTelefono',
                 ],
             ],
             
         ],
-        ['header' => 'VARIOS'],
+        ['header' => 'VARIOS',
+        'can'  => ['ver-memorando', 'ver-software'],],
         [
             'text'        => 'Memorandos Bodega',
             'url'         => 'memorandos',
             'icon'        => 'fa fa-paper-plane',
+            'can'         => 'ver-memorando',
         ],
         [
             'text'        => 'Responsabilidad de Software',
             'url'         => 'softwares',
             'icon'        => 'fa fa-microchip',
+            'can'         => 'ver-software',
         ],
-        ['header' => 'ADMINISTRACION'],
+        ['header' => 'ADMINISTRACION',
+        'can'  => ['ver-usuario', 'ver-rol'],],
         [
             'text'    => 'Asignaciones',
             'icon'    => 'fa-shield-alt',
+            'can'  => ['ver-usuario', 'ver-rol'],
             'submenu' => [
                 [
                     'text' => 'Usuarios',
                     'url'  => 'users',
-                    'icon' => 'fa fa-users'
+                    'icon' => 'fa fa-users',
+                    'can'  => 'ver-usuario',
                 ],
                 [
                     'text' => 'roles',
                     'url'  => 'roles',
-                    'icon' => 'fa fa-user-lock'
+                    'icon' => 'fa fa-user-lock',
+                    'can'  => 'ver-rol',
                 ],
             ],
         ],
