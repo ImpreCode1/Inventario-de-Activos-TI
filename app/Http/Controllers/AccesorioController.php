@@ -61,7 +61,7 @@ class AccesorioController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::whereIn('nombre', ['DIADEMA', 'MOUSE', 'MONITOR', 'TECLADO', 'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH'])->get();
+        $categorias = Categoria::whereIn('nombre', ['DIADEMA', 'MOUSE', 'MONITOR', 'TECLADO', 'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH', 'TABLET', 'BASE REFRIGERANTE'])->get();
         $marcas =  DB::table('marcas')->orderBy('marca', 'asc')->get();
         $marcas_ordenadas = array();
         foreach ($marcas as $marca) {
@@ -117,7 +117,7 @@ class AccesorioController extends Controller
     public function edit($id)
     {
         $accesorio = Accesorio::find($id);
-        $categoria = Categoria::whereIn('nombre', ['DIADEMA', 'MOUSE', 'MONITOR', 'TECLADO', 'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH'])->get();
+        $categoria = Categoria::whereIn('nombre', ['DIADEMA', 'MOUSE', 'MONITOR', 'TECLADO', 'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH', 'TABLET', 'BASE REFRIGERANTE'])->get();
         $marca = Marca::orderBy('marca', 'asc')->get();
         $empleado =  DB::table('empleados')->orderByRaw("CASE WHEN id=0 THEN 0 ELSE 1 END, nombre ASC")->get();
         return view('accesorio.edit', compact( 'accesorio', 'categoria', 'marca', 'empleado'));

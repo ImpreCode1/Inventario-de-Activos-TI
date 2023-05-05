@@ -26,7 +26,7 @@
     <main>
         <h3>¡Hola!</h3>
         <p>Espero que se encuentre bien. Se informa sobre un nuevo registro de un nuevo Equipo en la página de inventario del Área de Tecnología y se solicita su colaboración en el proceso de registro del equipo en nuestro sistema de inventario.</p>
-        <p>El equipo fue registrado a la persona <strong>{{ $equipos->empleado->nombre }}</strong>.</p>
+        <p>El equipo se le asigno a: <strong>{{ $equipos->empleado->nombre }}</strong>.</p>
         <p>Ingresando el <b>NUMERO DE ACTIVO</b> que está actualmente como <b>{{ $equipos->n_activo }}</b>, y también el <b>COSTO DEL EQUIPO</b>, que también está registrado como: <b>{{ $equipos->costo }}.</b></p>
         <p>Para ingresar es necesario que se dirija a la página de Inventario de Tecnología e INICIE SESIÓN. Después se dirija a la sección de INVENTARIO ACTIVOS - INVENTARIO - Portátiles y CPUS.</p>
         <p>O, puede ingresar por medio del siguiente enlace al formulario del Equipo recién creado en el inventario:</p>
