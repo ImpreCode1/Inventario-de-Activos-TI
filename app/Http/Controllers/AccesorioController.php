@@ -33,6 +33,12 @@ class AccesorioController extends Controller
         return view('accesorio.index');
     }
         public function accesesorios(){
+
+                    
+        if (Gate::denies('ver-accesesorio')) {
+            abort(403); // Acceso no autorizado
+        }
+
             $accesorios = Accesorio::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria', 'id_marca', 'n_serial', 'n_parte', 'observaciones', 'serie')->get();
             return datatables()->of($accesorios)
             ->addColumn('action', function ($accesorio) {

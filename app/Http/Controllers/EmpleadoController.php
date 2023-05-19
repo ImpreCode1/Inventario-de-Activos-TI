@@ -46,6 +46,11 @@ class EmpleadoController extends Controller
 
 
     public function empleados(){
+
+        if (Gate::denies('ver-empleado')) {
+            abort(403); // Acceso no autorizado
+        }
+
         $empleados = Empleado::with(['departamentos', 'cargos'])->select('id', 'nombre', 'usu_dominio', 'num_exten', 'email', 'id_cargo', 'id_depto', 'clave_dominio')->where('id', '<>', 0)->get();
         return datatables()->of($empleados)
         ->addColumn('acciones', function ($empleado) {

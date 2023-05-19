@@ -27,6 +27,10 @@ class MarcaController extends Controller
 
     }
     public function marcas(){
+
+        if (Gate::denies('ver-marca')) {
+            abort(403); // Acceso no autorizado
+        }
         $marcas = Marca::select('id', 'marca')->get();
         return datatables()->of($marcas)
             ->addColumn('acciones', function ($marca) {

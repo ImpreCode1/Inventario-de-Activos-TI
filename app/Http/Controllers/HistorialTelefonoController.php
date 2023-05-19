@@ -27,6 +27,9 @@ class HistorialTelefonoController extends Controller
     }
 
     public function historialTelefonos(){
+        if (Gate::denies('ver-HistorialTelefono')) {
+            abort(403); // Acceso no autorizado
+        }
         $telefonosHistorial = HistorialTelefono::with(['empleado', 'telefono'])->select('id', 'id_empleado', 'id_telefonos', 'fecha_asignacion', 'fecha_devolucion')->get();
         return datatables()->of($telefonosHistorial)
         ->addColumn('action', function ($telefono) {

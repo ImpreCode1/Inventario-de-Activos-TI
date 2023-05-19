@@ -44,6 +44,10 @@ class CpuEquipoController extends Controller
     }
 
     public function equipos(){
+
+        if (Gate::denies('ver-equipo')) {
+            abort(403); // Acceso no autorizado
+        }
         $equipos = CpuEquipo::with(['marca', 'categoria', 'empleado'])->select('id','id_empleado' ,'id_categoria', 
         'id_marca', 'n_activo', 'costo', 'n_serial', 'serie', 'n_parte', 'memoria_ram', 'procesador', 'discoduro')->get();
         return datatables()->of($equipos)

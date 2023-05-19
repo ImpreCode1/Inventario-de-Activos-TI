@@ -27,6 +27,10 @@ class HistorialAccesorioController extends Controller
 
     public function historialaccesesorio()
 {
+    if (Gate::denies('ver-HistorialAccesesorio')) {
+        abort(403); // Acceso no autorizado
+    }
+
     $historialAccesesorio = HistorialAccesorio::with(['empleado', 'accesesorio.categoria'])
         ->select('id','id_empleado', 'id_accesorio', 'fecha_asignacion', 'fecha_devolucion')->get();
     return datatables()->of($historialAccesesorio)

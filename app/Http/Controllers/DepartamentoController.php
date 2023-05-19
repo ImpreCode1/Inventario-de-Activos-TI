@@ -29,6 +29,10 @@ class DepartamentoController extends Controller
 
     public function departamentos()
     {
+        if (Gate::denies('ver-departamento')) {
+            abort(403); // Acceso no autorizado
+        }
+        
         $departamentos = Departamento::select('id', 'nombre')->get();
         return datatables()->of($departamentos)
             ->addColumn('action', function ($departamento) {

@@ -33,6 +33,9 @@ class MemorandoController extends Controller
     }
 
     public function memorandos(){
+        if (Gate::denies('ver-memorando')) {
+            abort(403); // Acceso no autorizado
+        }
         $memorandos = Memorando::with(['empleado'])->select('id', 'id_empleado', 'ciudad', 'direccion', 'n_contacto', 'correo_encargado')->get();
         return datatables()->of($memorandos)->addColumn('acciones', function ($memorando) {
             $id_memorando = $memorando->id;

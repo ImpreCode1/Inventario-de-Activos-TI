@@ -31,6 +31,10 @@ function __construct()
     }
 
     public function datos(){
+
+        if (Gate::denies('ver-cargo')) {
+            abort(403); // Acceso no autorizado
+        }
         $cargos = Cargo::select('id', 'nombre', 'detalle')->get();
         return datatables()->of($cargos)->addColumn('acciones', function($cargo){
             $html = '';

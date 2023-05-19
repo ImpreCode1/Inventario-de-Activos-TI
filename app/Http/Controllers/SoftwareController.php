@@ -33,6 +33,9 @@ class SoftwareController extends Controller
     }
 
     public function softwares(){
+        if (Gate::denies('ver-software')) {
+            abort(403); // Acceso no autorizado
+        }
         $softwares = Software::with(['empleado'])->select('id', 'id_empleado', 'created_at')->get();
         return datatables()->of($softwares)
             ->addColumn('created_at', function ($software) {
