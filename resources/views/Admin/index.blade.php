@@ -47,8 +47,8 @@
                         @endcan
                         
                         @can('borrar-usuario')
-                        {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline']) !!}
-                        {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
+                        {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline', 'id' => 'form-eliminar-' . $user->id]) !!}
+                        {!! Form::submit('Borrar', ['class' => 'btn btn-danger', 'onclick' => 'confirmDelete(' . $user->id . ')']) !!}
                         {!! Form::close() !!}
                         @endcan
                     </td>
@@ -59,19 +59,16 @@
 </div>
 </div>
 @stop
-
-
-
 @section('js')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
 <script>
-    function confirmDelete(cargoId) {
-        if (confirm("¿Estás seguro de que quieres eliminar este cargo?")) {
-            document.getElementById('form-eliminar-' + cargoId).submit();
-        }
+  function confirmDelete(userId) {
+    if (confirm("¿Estás seguro de que quieres eliminar este usuario?")) {
+        document.getElementById('form-eliminar-' + userId).submit();
     }
+}
     </script>
 <script>
   $(document).ready(function () {

@@ -37,7 +37,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name', 'name')->all();
+        $roles = ['' => 'Seleccione un Rol'] + Role::pluck('name', 'name')->all();
         return view('admin.create', compact('roles'));
 
     }
@@ -86,7 +86,7 @@ class UserController extends Controller
     public function edit($id)
     {
        $user = User::find($id);
-       $roles = Role::pluck('name', 'name')->all();
+       $roles = ['' => 'Seleccione un Rol'] + Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
         return view('admin.edit', compact('user', 'roles', 'userRole'));
@@ -133,6 +133,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('admin.index');
+        return redirect()->route('users.index');
     }
 }
