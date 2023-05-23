@@ -145,8 +145,8 @@ class EmpleadoController extends Controller
     public function edit($id)
     {
         $empleado = Empleado::find($id);
-        $cargo = Cargo::all();
-        $departamento = Departamento::all();
+        $cargo = Cargo::orderBy('nombre', 'asc')->get();
+        $departamento = Departamento::orderBy('nombre', 'asc')->get();
         $modoUsuario = ModoUsuario::all();
         return view('empleado.edit', compact( 'empleado', 'cargo', 'departamento', 'modoUsuario'));
     }
