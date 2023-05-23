@@ -130,9 +130,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        User::find($id)->delete();
-        return redirect()->route('users.index');
-    }
+       public function destroy($id)
+        {
+            User::findOrFail($id)->delete();
+            return redirect()->route('usuarios.index');
+        }
 }

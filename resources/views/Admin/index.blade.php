@@ -47,9 +47,11 @@
                         @endcan
                         
                         @can('borrar-usuario')
-                        {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline', 'id' => 'form-eliminar-' . $user->id]) !!}
-                        {!! Form::submit('Borrar', ['class' => 'btn btn-danger', 'onclick' => 'confirmDelete(' . $user->id . ')']) !!}
-                        {!! Form::close() !!}
+                        <button class="btn btn-danger" onclick="confirmDelete({{$user->id}})">Borrar</button>
+                        <form id="form-eliminar-{{$user->id}}" action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                         @endcan
                     </td>
                 </tr>
@@ -64,12 +66,12 @@
 <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
 <script>
-  function confirmDelete(userId) {
-    if (confirm("¿Estás seguro de que quieres eliminar este usuario?")) {
-        document.getElementById('form-eliminar-' + userId).submit();
+    function confirmDelete(userId) {
+        if (confirm("¿Estás seguro de que quieres eliminar este usuario?")) {
+            document.getElementById('form-eliminar-' + userId).submit();
+        }
     }
-}
-    </script>
+</script>
 <script>
   $(document).ready(function () {
     $('#users').DataTable({
