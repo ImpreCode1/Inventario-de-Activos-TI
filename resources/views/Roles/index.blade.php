@@ -34,9 +34,11 @@
                         <a class="btn btn-info" href="{{route('roles.edit', $role->id)}}">Editar</a>
                         @endcan
                         @can('borrar-rol')
-                        {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'style' => 'display:inline']) !!}
-                        {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
-                        {!! Form::close() !!}
+                        <button class="btn btn-danger" onclick="confirmDelete({{$role->id}})">Borrar</button>
+                        <form id="form-eliminar-{{$role->id}}" action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                         @endcan
                     </td>
                 </tr>
@@ -51,12 +53,12 @@
 <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
 <script>
-    function confirmDelete(cargoId) {
-        if (confirm("¿Estás seguro de que quieres eliminar este cargo?")) {
-            document.getElementById('form-eliminar-' + cargoId).submit();
+    function confirmDelete(rolId) {
+        if (confirm("¿Estás seguro de que quieres eliminar este Rol?")) {
+            document.getElementById('form-eliminar-' + rolId).submit();
         }
     }
-    </script>
+</script>
 <script>
   $(document).ready(function () {
     $('#roles').DataTable({
