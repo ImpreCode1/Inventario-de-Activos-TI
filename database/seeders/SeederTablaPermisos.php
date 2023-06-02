@@ -56,6 +56,7 @@ class SeederTablaPermisos extends Seeder
             'editar-telefono',
             'borrar-telefono',
             'pdf-telefono',
+            'SIM-PDF-telefono',
             //tabla HistorialEquipos
             'ver-HistorialEquipo',
             'borrar-HistorialEquipo',

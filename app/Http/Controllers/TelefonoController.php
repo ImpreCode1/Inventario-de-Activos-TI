@@ -19,7 +19,7 @@ class TelefonoController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:ver-telefono|crear-telefono|editar-telefono|borrar-telefono|pdf-telefono')->only('index');
+        $this->middleware('permission:ver-telefono|crear-telefono|editar-telefono|borrar-telefono|pdf-telefono|SIM-PDF-telefono')->only('index');
         $this->middleware('permission:crear-telefono', ['only'=>['create', 'store']]);
         $this->middleware('permission:editar-telefono', ['only'=>['edit', 'update']]);
         $this->middleware('permission:borrar-telefono', ['only'=>['destroy']]);
