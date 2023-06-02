@@ -47,7 +47,7 @@ class AccesorioController extends Controller
                     $html .= '<a href="/accesorios/'.$accesorio->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
                 }
                 if (Gate::allows('pdf-accesesorio', $accesorio)) {
-                    $html .= '<a href="/accesorios/' . $accesorio->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad Usu</a>';
+                    $html .= '<a href="/accesorios/' . $accesorio->id . '/pdf" target="_blank" class="btn btn-success btn-sm">R.D.U</a>';
                 }
                 if (Gate::allows('borrar-accesesorio', $accesorio)) {
                     $html .= '<form id="form-eliminar-' . $accesorio->id . '" action="'. route('accesorios.destroy', $accesorio->id) .'" method="POST" style="display: inline-block;">
@@ -67,7 +67,7 @@ class AccesorioController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::whereIn('nombre', ['DIADEMA', 'MOUSE', 'MONITOR', 'TECLADO', 'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH', 'TABLET', 'BASE REFRIGERANTE'])->get();
+        $categorias = Categoria::whereIn('nombre', ['DIADEMA', 'MOUSE', 'MONITOR', 'TECLADO', 'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH', 'TABLET', 'BASE REFRIGERANTE', 'CARGADOR'])->get();
         $marcas =  DB::table('marcas')->orderBy('marca', 'asc')->get();
         $marcas_ordenadas = array();
         foreach ($marcas as $marca) {

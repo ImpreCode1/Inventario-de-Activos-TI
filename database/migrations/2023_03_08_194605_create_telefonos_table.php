@@ -20,13 +20,15 @@ class CreateTelefonosTable extends Migration
             $table->string('serial', 70)->nullable(true);
             $table->string('modelo', 50)->nullable(true);
             $table->string('n_telefono', 50)->nullable(true);
+            $table->string('operador', 50)->nullable(true);
             $table->string('email_1', 50)->nullable(true);
             $table->string('email_2', 50)->nullable(true);
             $table->string('serial_sim', 50)->nullable(true);
             $table->string('ram', 50)->nullable(true);
             $table->string('rom', 50)->nullable(true);
-            $table->string('observaciones', 100)->nullable(true);
             $table->unsignedBigInteger('id_empleado')->nullable(true);
+            $table->string('cedula', 50)->nullable(true);
+            $table->string('observaciones', 100)->nullable(true);
             $table->softDeletes();
 
             $table->timestamps();

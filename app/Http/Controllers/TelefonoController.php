@@ -11,6 +11,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 
 class TelefonoController extends Controller
@@ -22,6 +24,7 @@ class TelefonoController extends Controller
         $this->middleware('permission:editar-telefono', ['only'=>['edit', 'update']]);
         $this->middleware('permission:borrar-telefono', ['only'=>['destroy']]);
         $this->middleware('permission:pdf-telefono', ['only'=>['pdf']]);
+        $this->middleware('permission:SIM-PDF-telefono', ['only'=>['numero']]);
     }
     /**
      * Display a listing of the resource.
@@ -34,11 +37,11 @@ class TelefonoController extends Controller
     }
 
     public function celulares(){
-        if (Gate::denies('ver-software')) {
+        if (Gate::denies('ver-telefono')) {
             abort(403); // Acceso no autorizado
         }
         $celulares = Telefono::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria', 
-        'id_marca', 'serial', 'modelo', 'n_telefono', 'email_1', 'email_2', 'serial_sim', 'ram', 'rom')->get();
+        'id_marca', 'serial', 'modelo', 'n_telefono', 'email_1', 'email_2', 'serial_sim', 'ram', 'rom', 'cedula', 'operador' )->get();
         return datatables()->of($celulares)
         ->addColumn('action', function ($celulares) {
             $html = '';
@@ -46,7 +49,10 @@ class TelefonoController extends Controller
                 $html .= '<a href="/celulares/'.$celulares->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
             }
             if (Gate::allows('pdf-telefono', $celulares)) {
-                $html .= '<a href="/celulares/' . $celulares->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad Usu</a>';
+                $html .= '<a href="/celulares/' . $celulares->id . '/pdf" target="_blank" class="btn btn-success btn-sm">R.D.U</a>';
+            }
+            if (Gate::allows('pdf-telefono', $celulares)) {
+                $html .= '<a href="/celulares/' . $celulares->id . '/numero" target="_blank" class="btn btn-warning btn-sm">Acta SIM</a>';
             }
             if (Gate::allows('borrar-telefono', $celulares)) {
                 $html .= '<form id="form-eliminar-' . $celulares->id . '" action="'. route('celulares.destroy', $celulares->id) .'" method="POST" style="display: inline-block;">
@@ -95,6 +101,8 @@ class TelefonoController extends Controller
         $celular-> serial = $request->get('serial');
         $celular-> modelo = $request->get('modelo');
         $celular-> n_telefono = $request->get('n_telefono');
+        $celular-> operador = $request->get('operador');
+        $celular-> cedula = $request->get('cedula');
         $celular-> email_1 = $request->get('email_1');
         $celular-> email_2 = $request->get('email_2');
         $celular-> serial_sim = $request->get('serial_sim');
@@ -149,6 +157,8 @@ class TelefonoController extends Controller
         $celular->serial = $request->input('serial');
         $celular->modelo = $request->input('modelo');
         $celular->n_telefono = $request->input('n_telefono');
+        $celular-> operador = $request->get('operador');
+        $celular-> cedula = $request->get('cedula');
         $celular->email_1 = $request->input('email_1');
         $celular->email_2 = $request->input('email_2');
         $celular->serial_sim = $request->input('serial_sim');
@@ -189,4 +199,14 @@ class TelefonoController extends Controller
         return $pdf->stream('Responsabilidad_equipos.pdf');
     }
     
+
+    public function numero($id)
+    {
+        $fechaActual = Carbon::now()->format('d/m/Y');
+        $celulares = Telefono::where('id', $id)->get();
+        $nombreUsuario = Auth::user()->name; // Suponiendo que el nombre del usuario está en el campo 'nombre'
+
+        $pdf = Pdf::loadView('celular.numero', compact('celulares', 'fechaActual', 'nombreUsuario'));
+        return $pdf->stream('Acta_SIM.pdf');
+    }
 }

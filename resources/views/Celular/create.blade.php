@@ -45,9 +45,19 @@
                                 placeholder="Modelo del celular" tabindex="3" required>
                         </div>
                         <div>
+                            <label for="" class="form-label">Operador</label>
+                            <input type="text" name="operador" id="operador" class="form-control"
+                                placeholder="Operador" tabindex="4" >
+                        </div>
+                        <div>
+                            <label for="" class="form-label">Serial SIM</label>
+                            <input type="text" name="serial_sim" id="serial_sim" class="form-control"
+                                placeholder="Serial SIM" tabindex="7" >
+                        </div>
+                        <div>
                             <label for="" class="form-label">Numero de de telefono</label>
                             <input type="text" name="n_telefono" id="n_telefono" class="form-control"
-                                placeholder="Numero de telefono" tabindex="4" required>
+                                placeholder="Numero de telefono" tabindex="4" >
                         </div>
                         <div>
                             <label for="" class="form-label">IMEI 1</label>
@@ -74,11 +84,7 @@
                             <input type="text" name="rom" id="rom" class="form-control"
                                 placeholder="Almacenamiento" tabindex="9" required>
                         </div>
-                        <div>
-                            <label for="" class="form-label">Observaciones acerca del Celular</label>
-                            <input type="text" name="observaciones" id="observaciones" class="form-control"
-                                placeholder="Observaciones" tabindex="10">
-                        </div>
+
                         <div>
                             <label for="" class="form-label">Empleado al que se le asigna</label>
                             <select name="id_empleado" id="id_empleado" class="form-control" tabindex="11" required>
@@ -87,6 +93,16 @@
                                     <option value="{{ $id }}">{{ $nombre }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div>
+                            <label for="" class="form-label">Cedula del Empleado</label>
+                            <input type="text" name="cedula" id="cedula" class="form-control"
+                                placeholder="Escriba la cedula" tabindex="9" required>
+                        </div>
+                        <div>
+                            <label for="" class="form-label">Observaciones acerca del Celular</label>
+                            <input type="text" name="observaciones" id="observaciones" class="form-control"
+                                placeholder="Observaciones" tabindex="10">
                         </div>
                         <br>
                         <a href="/celulares" class="btn btn-secondary" tabindex="12">Cancelar</a>

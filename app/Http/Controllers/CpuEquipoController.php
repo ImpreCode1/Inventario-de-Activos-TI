@@ -57,7 +57,7 @@ class CpuEquipoController extends Controller
                     $html .= '<a href="/equipos/'.$equipo->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
                 }
                 if (Gate::allows('pdf-equipo', $equipo)) {
-                    $html .= '<a href="/equipos/' . $equipo->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad Usu</a>';
+                    $html .= '<a href="/equipos/' . $equipo->id . '/pdf" target="_blank" class="btn btn-success btn-sm">R.D.U</a>';
                 }
                 if (Gate::allows('borrar-equipo', $equipo)) {
                     $html .= '<form id="form-eliminar-' . $equipo->id . '" action="'. route('equipos.destroy', $equipo->id) .'" method="POST" style="display: inline-block;">

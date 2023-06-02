@@ -15,6 +15,8 @@ class Telefono extends Model
         'serial',
         'modelo',
         'n_telefono',
+        'operador',
+        'cedula',
         'email_1',
         'email_2',
         'serial_sim',

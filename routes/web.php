@@ -20,9 +20,11 @@ Route::get('/', function () {
 });
 
 Route::get('empleados/{id}/pdf',  [App\Http\Controllers\EmpleadoController::class, 'pdf' ])->name('empleados.pdf')->middleware('auth');
+Route::get('empleados/{id}/activos',  [App\Http\Controllers\EmpleadoController::class, 'activos' ])->name('empleados.activos')->middleware('auth');
 Route::get('equipos/{id}/pdf',  [App\Http\Controllers\CpuEquipoController::class, 'pdf' ])->name('equipos.pdf')->middleware('auth');
 Route::get('accesorios/{id}/pdf',  [App\Http\Controllers\AccesorioController::class, 'pdf' ])->name('accesorios.pdf')->middleware('auth');
 Route::get('celulares/{id}/pdf',  [App\Http\Controllers\TelefonoController::class, 'pdf' ])->name('celulares.pdf')->middleware('auth');
+Route::get('celulares/{id}/numero',  [App\Http\Controllers\TelefonoController::class, 'numero' ])->name('celulares.numero')->middleware('auth');
 Route::get('softwares/{id}/pdf',  [App\Http\Controllers\SoftwareController::class, 'pdf' ])->name('softwares.pdf')->middleware('auth');
 Route::get('memorandos/{id_memorando}-{id_empleado}/pdf', [App\Http\Controllers\MemorandoController::class, 'pdf'])->name('memorandos.pdf')->middleware('auth');
 Route::put('destinatarios/{id}',  [App\Http\Controllers\CpuEquipoController::class, 'updateDestinatario' ])->name('destinatarios.update')->middleware('auth');

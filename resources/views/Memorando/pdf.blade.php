@@ -11,7 +11,7 @@
         .logo {
             float: left;
             margin-right: 10px;
-            width: 250px;
+            width: 230px;
         }
 
         .fecha {
@@ -40,7 +40,7 @@
     <main>
         <br>
         <div>
-            <img src="{{ public_path('/img/LogoIMpreAltaconfondo.jpg') }}" class="logo" alt="">
+            <img src="{{ public_path('/img/logo_principal.png') }}" class="logo" alt="">
             <h3 class="fecha">{{ $fechaActual ?? '' }}</h3>
         </div>
         <br><br><br><br><br><br><br>

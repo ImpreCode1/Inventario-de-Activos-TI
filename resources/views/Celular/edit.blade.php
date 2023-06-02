@@ -46,6 +46,16 @@
                                 value="{{ $celular->modelo ?? 'No existe' }}" tabindex="3">
                         </div>
                         <div>
+                            <label for="" class="form-label">Operador</label>
+                            <input type="text" name="operador" id="operador" class="form-control"
+                                placeholder="serial_sim" value="{{ $celular->operador ?? 'No existe' }}" tabindex="7">
+                        </div>
+                        <div>
+                            <label for="" class="form-label">Serial SIM</label>
+                            <input type="text" name="serial_sim" id="serial_sim" class="form-control"
+                                placeholder="serial_sim" value="{{ $celular->serial_sim ?? 'No existe' }}" tabindex="7">
+                        </div>
+                        <div>
                             <label for="" class="form-label">Numero de de telefono</label>
                             <input type="text" name="n_telefono" id="n_telefono" class="form-control"
                                 placeholder="Numero de Activo" value="{{ $celular->n_telefono ?? 'No existe' }}"
@@ -63,11 +73,6 @@
                                 tabindex="6">
                         </div>
                         <div>
-                            <label for="" class="form-label">Serial SIM</label>
-                            <input type="text" name="serial_sim" id="serial_sim" class="form-control"
-                                placeholder="serial_sim" value="{{ $celular->serial_sim ?? 'No existe' }}" tabindex="7">
-                        </div>
-                        <div>
                             <label for="" class="form-label">Memoria RAM</label>
                             <input type="text" name="ram" id="ram" class="form-control"
                                 placeholder="Procesador" value="{{ $celular->ram ?? 'No existe' }}" tabindex="8">
@@ -78,11 +83,6 @@
                                 placeholder="Almacenamiento" value="{{ $celular->rom ?? 'No existe' }}" tabindex="9">
                         </div>
                         <div>
-                            <label for="" class="form-label">Observaciones acerca del celular</label>
-                            <input type="text" name="observaciones" id="observaciones" class="form-control"
-                                placeholder="Observaciones" value="{{ $celular->observaciones ?? 'No existe' }}"
-                                tabindex="10">
-                        </div>
                         <div>
                             <label for="" class="form-label">Empleado al que se le asigna</label>
                             <select name="id_empleado" id="id_empleado" class="form-control" tabindex="11">
@@ -92,6 +92,17 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div>
+                            <label for="" class="form-label">Cedula</label>
+                            <input type="text" name="cedula" id="cedula" class="form-control"
+                                placeholder="Escriba la cedula del empleado" value="{{ $celular->rom ?? 'No existe' }}" tabindex="9">
+                        </div>
+                        <div>
+                        <label for="" class="form-label">Observaciones</label>
+                        <input type="text" name="observaciones" id="observaciones" class="form-control"
+                            placeholder="Observaciones" value="{{ $celular->observaciones ?? 'No existe' }}"
+                            tabindex="10">
+                    </div>
                         <br>
                         <a href="/celulares" class="btn btn-secondary" tabindex="13">Cancelar</a>
                         <button type="submit" class="btn btn-primary" tabindex="14">Guardar</button>

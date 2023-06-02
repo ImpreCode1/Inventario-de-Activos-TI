@@ -25,10 +25,12 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Cedula</th>
                 <th scope="col">Categoria</th>
                 <th scope="col">Marca</th>
                 <th scope="col">Modelo</th>
                 <th scope="col">Serial</th>
+                <th scope="col">Operador</th>
                 <th scope="col">RAM</th>
                 <th scope="col">ROM</th>
                 <th scope="col">N° Telefono</th>
@@ -77,17 +79,19 @@
                 extend: 'excelHtml5',
                 title: 'Reporte de Telefonos',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12,13 ]
                 }
             }
         ],
         columns: [
         {data: 'id'},
         {data: 'empleado.nombre', name: 'empleado.nombre', defaultContent: ''},
+        {data: 'cedula', visible: false},
         {data: 'categoria.nombre', name:'categoria.nombre', defaultContent: ''},
         {data: 'marca.marca', name:'marca.marca', defaultContent: ''},
         {data: 'modelo', defaultContent: ''},
         {data: 'serial', defaultContent: ''},
+        {data: 'operador', visible: false},
         {data: 'ram', visible: false},
         {data: 'rom', visible: false},
         {data: 'n_telefono', visible: false},

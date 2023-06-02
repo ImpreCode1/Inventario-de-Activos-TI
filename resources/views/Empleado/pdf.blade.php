@@ -14,7 +14,7 @@
     @foreach ($empleados as $empleado)
         <main>
             <div>
-                <img src="{{ public_path('/img/LogoIMpreAltaconfondo.jpg') }}" style="width:250px; float:center"
+                <img src="{{ public_path('/img/logo_principal.png') }}" style="width:250px; float:center"
                     alt="">
                 <h3 style="text-align:center">
                     Departamento De Tecnologia <br>

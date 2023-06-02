@@ -11,7 +11,7 @@
         .logo {
             float: left;
             margin-right: 10px;
-            width: 250px;
+            width: 230px;
         }
 
         .fecha {
@@ -41,7 +41,7 @@
         <br>
         <br>
         <div>
-            <img src="{{ public_path('/img/LogoIMpreAltaconfondo.jpg') }}" class="logo" alt="">
+            <img src="{{ public_path('/img/logo_principal.png') }}" class="logo" alt="">
             <h3 class="fecha">{{ $fechaActual }}</h3>
         </div>
         <br><br><br><br><br><br>
@@ -61,7 +61,6 @@
                     <td>N° Telefono</td>
                     <td>Email 1</td>
                     <td>Email 2</td>
-                    <td>Serial SIM</td>
                     <td>RAM</td>
                     <td>Memoria</td>
                 </tr>
@@ -71,7 +70,6 @@
                     <td>{{ $celular->n_telefono ?? '' }}</td>
                     <td>{{ $celular->email_1 ?? '' }}</td>
                     <td>{{ $celular->email_2 ?? '' }}</td>
-                    <td>{{ $celular->serial_sim ?? '' }}</td>
                     <td>{{ $celular->ram ?? '' }}</td>
                     <td>{{ $celular->rom ?? '' }}</td>
                 </tr>

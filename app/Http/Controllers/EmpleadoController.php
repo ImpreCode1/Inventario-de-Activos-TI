@@ -11,6 +11,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Carbon;
+
 
 
 
@@ -20,11 +22,12 @@ class EmpleadoController extends Controller
 {
         function __construct()
 {
-    $this->middleware('permission:ver-empleado|crear-empleado|editar-empleado|borrar-empleado|pdf-empleado')->only('index');
+    $this->middleware('permission:ver-empleado|crear-empleado|editar-empleado|borrar-empleado|Contraseñas-empleado|Activos-empleado')->only('index');
     $this->middleware('permission:crear-empleado', ['only'=>['create', 'store']]);
     $this->middleware('permission:editar-empleado', ['only'=>['edit', 'update']]);
     $this->middleware('permission:borrar-empleado', ['only'=>['destroy']]);
-    $this->middleware('permission:pdf-empleado', ['only'=>['pdf']]);
+    $this->middleware('permission:Contraseñas-empleado', ['only'=>['pdf']]);
+    $this->middleware('permission:Activos-empleado', ['only'=>['activos']]);
 }
     /**
      * Display a listing of the resource.
@@ -59,7 +62,10 @@ class EmpleadoController extends Controller
                 $html .= '<a href="/empleados/'.$empleado->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
             }
             if (Gate::allows('pdf-empleado', $empleado)) {
-                $html .= '<a href="/empleados/' . $empleado->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Act contraseñas</a>';
+                $html .= '<a href="/empleados/' . $empleado->id . '/pdf" target="_blank" class="btn btn-success btn-sm">ActaC</a>';
+            }
+            if (Gate::allows('pdf-empleado', $empleado)) {
+                $html .= '<a href="/empleados/' . $empleado->id . '/activos" target="_blank" class="btn btn-warning btn-sm">Activos</a>';
             }
             if (Gate::allows('borrar-empleado', $empleado)) {
                 $html .= '<form id="form-eliminar-' . $empleado->id . '" action="'. route('empleados.destroy', $empleado->id) .'" method="POST" style="display: inline-block;">
@@ -194,5 +200,44 @@ class EmpleadoController extends Controller
 
         $pdf = Pdf::loadView('empleado.pdf', compact('empleados'));
         return $pdf->setPaper('a4', 'landscape')-> stream('Acta_contraseñas.pdf');
+    }
+
+    public function activos($id){
+        $fechaActual = Carbon::now()->format('d/m/Y');
+        $empleados =  Empleado::where('id', $id)->get();
+
+        $resultados = DB::table('empleados')
+        ->leftJoin('cpu_equipos', 'cpu_equipos.id_empleado', '=', 'empleados.id')
+        ->leftJoin('accesorios', 'accesorios.id_empleado', '=', 'empleados.id')
+        ->leftJoin('telefonos', 'telefonos.id_empleado', '=', 'empleados.id')
+        ->leftJoin('categorias', 'categorias.id', '=', 'cpu_equipos.id_categoria')
+        ->leftJoin('categorias as cat2', 'cat2.id', '=', 'accesorios.id_categoria')
+        ->leftJoin('categorias as cat3', 'cat3.id', '=', 'telefonos.id_categoria')
+        ->leftJoin('marcas', 'marcas.id', '=', 'cpu_equipos.id_marca')
+        ->leftJoin('marcas as mar2', 'mar2.id', '=', 'accesorios.id_marca')
+        ->leftJoin('marcas as mar3', 'mar3.id', '=', 'telefonos.id_marca')
+        ->select('empleados.nombre as empleado_nombre',
+            DB::raw('GROUP_CONCAT(DISTINCT cpu_equipos.id SEPARATOR ", ") as cpu_id'),
+            DB::raw('GROUP_CONCAT(categorias.nombre SEPARATOR ", ") as cpu_categoria'),
+            DB::raw('GROUP_CONCAT(DISTINCT marcas.marca SEPARATOR ", ") as cpu_marca'),
+            DB::raw('GROUP_CONCAT(DISTINCT cpu_equipos.serie SEPARATOR ", ") as cpu_serie'),
+            DB::raw('GROUP_CONCAT(DISTINCT cpu_equipos.n_serial SEPARATOR ", ") as cpu_serial'),
+            DB::raw('GROUP_CONCAT(DISTINCT cpu_equipos.n_activo SEPARATOR ", ") as n_activo'),
+            DB::raw('GROUP_CONCAT(DISTINCT accesorios.id SEPARATOR ", ") as accesorio_id'),
+            DB::raw('GROUP_CONCAT(cat2.nombre SEPARATOR ", ") as accesorio_categoria'),
+            DB::raw('GROUP_CONCAT(DISTINCT mar2.marca SEPARATOR ", ") as accesorio_marca'),
+            DB::raw('GROUP_CONCAT(DISTINCT accesorios.n_serial SEPARATOR ", ") as accesorio_n_serial'),
+            DB::raw('GROUP_CONCAT(DISTINCT accesorios.serie SEPARATOR ", ") as accesorio_serie'),
+            DB::raw('GROUP_CONCAT(DISTINCT telefonos.id SEPARATOR ", ") as telefono_id'),
+            DB::raw('GROUP_CONCAT(cat3.nombre SEPARATOR ", ") as telefono_categoria'),
+            DB::raw('GROUP_CONCAT(DISTINCT mar3.marca SEPARATOR ", ") as telefono_marca'),
+            DB::raw('GROUP_CONCAT(DISTINCT telefonos.modelo SEPARATOR ", ") as telefono_modelo'),
+            DB::raw('GROUP_CONCAT(DISTINCT telefonos.serial SEPARATOR ", ") as telefono_serial'))
+        ->where('empleados.id', '=', $id)
+        ->groupBy('empleados.nombre')
+        ->get();
+    
+    $pdf = Pdf::loadView('empleado.activos', compact('resultados', 'empleados', 'fechaActual'));
+    return $pdf->stream('Activos.pdf');
     }
 }

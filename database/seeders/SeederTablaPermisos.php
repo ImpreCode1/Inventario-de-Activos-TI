@@ -22,6 +22,7 @@ class SeederTablaPermisos extends Seeder
             'editar-empleado',
             'borrar-empleado',
             'pdf-empleado',
+            'Activos-empleado',
             //tabla cargos
             'ver-cargo',
             'crear-cargo',
