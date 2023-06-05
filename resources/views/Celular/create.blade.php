@@ -35,9 +35,9 @@
                             </select>
                         </div>
                         <div>
-                            <label for="" class="form-label">Escriba el Serial del celular</label>
+                            <label for="" class="form-label">Escriba el Serial del CELULAR</label>
                             <input type="text" name="serial" id="serial" class="form-control"
-                                placeholder="Modelo del celular" tabindex="3" required>
+                                placeholder="XXXX-XXXXX-XXXX" tabindex="3" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Escriba el modelo del celular</label>
@@ -52,7 +52,7 @@
                         <div>
                             <label for="" class="form-label">Serial SIM</label>
                             <input type="text" name="serial_sim" id="serial_sim" class="form-control"
-                                placeholder="Serial SIM" tabindex="7" >
+                                placeholder="XXXX-XXXXX-XXXX" tabindex="7" >
                         </div>
                         <div>
                             <label for="" class="form-label">Numero de de telefono</label>
@@ -70,11 +70,6 @@
                                 tabindex="6" >
                         </div>
                         <div>
-                            <label for="" class="form-label">Serial SIM</label>
-                            <input type="text" name="serial_sim" id="serial_sim" class="form-control"
-                                placeholder="Serial SIM" tabindex="7" required>
-                        </div>
-                        <div>
                             <label for="" class="form-label">Memoria RAM</label>
                             <input type="text" name="ram" id="ram" class="form-control"
                                 placeholder="Memoria RAM" tabindex="8" required>
@@ -82,7 +77,7 @@
                         <div>
                             <label for="" class="form-label">Almacenamiento</label>
                             <input type="text" name="rom" id="rom" class="form-control"
-                                placeholder="Almacenamiento" tabindex="9" required>
+                                placeholder="ROM" tabindex="9" required>
                         </div>
 
                         <div>
@@ -97,10 +92,10 @@
                         <div>
                             <label for="" class="form-label">Cedula del Empleado</label>
                             <input type="text" name="cedula" id="cedula" class="form-control"
-                                placeholder="Escriba la cedula" tabindex="9" required>
+                                placeholder="C.C" tabindex="9" required>
                         </div>
                         <div>
-                            <label for="" class="form-label">Observaciones acerca del Celular</label>
+                            <label for="" class="form-label">Observaciones</label>
                             <input type="text" name="observaciones" id="observaciones" class="form-control"
                                 placeholder="Observaciones" tabindex="10">
                         </div>

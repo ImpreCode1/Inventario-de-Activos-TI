@@ -94,7 +94,7 @@
         {data: 'operador', visible: false},
         {data: 'ram', visible: false},
         {data: 'rom', visible: false},
-        {data: 'n_telefono', visible: false},
+        {data: 'n_telefono', defaultContent: ''},
         {data: 'serial_sim', visible: false},
         {data: 'email_1', visible: false},
         {data: 'email_2', visible: false},

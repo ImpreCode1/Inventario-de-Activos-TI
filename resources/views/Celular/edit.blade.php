@@ -37,7 +37,7 @@
                         </div>
                         <div>
                             <label for="" class="form-label">Escriba el nuevo serial del celular</label>
-                            <input type="text" name="serial" id="serial" class="form-control" placeholder="serie"
+                            <input type="text" name="serial" id="serial" class="form-control" placeholder="XXXX-XXXXX-XXXX"
                                 value="{{ $celular->serial ?? 'No existe' }}" tabindex="3">
                         </div>
                         <div>
@@ -53,34 +53,34 @@
                         <div>
                             <label for="" class="form-label">Serial SIM</label>
                             <input type="text" name="serial_sim" id="serial_sim" class="form-control"
-                                placeholder="serial_sim" value="{{ $celular->serial_sim ?? 'No existe' }}" tabindex="7">
+                                placeholder="XXXX-XXXXX-XXXX" value="{{ $celular->serial_sim ?? 'No existe' }}" tabindex="7">
                         </div>
                         <div>
                             <label for="" class="form-label">Numero de de telefono</label>
                             <input type="text" name="n_telefono" id="n_telefono" class="form-control"
-                                placeholder="Numero de Activo" value="{{ $celular->n_telefono ?? 'No existe' }}"
+                                placeholder="Numero de telefono" value="{{ $celular->n_telefono ?? 'No existe' }}"
                                 tabindex="4">
                         </div>
                         <div>
                             <label for="" class="form-label">IMEI 1</label>
-                            <input type="text" name="email_1" id="email_1" class="form-control" placeholder="Serial"
+                            <input type="text" name="email_1" id="email_1" class="form-control" placeholder="IMEI 1"
                                 value="{{ $celular->email_1 ?? 'No existe' }}" tabindex="5">
                         </div>
                         <div>
                             <label for="" class="form-label">IMEI 2</label>
                             <input type="text" name="Email 2" id="Email 2" class="form-control"
-                                placeholder="Numero de parte" value="{{ $celular->email_2 ?? 'No existe' }}"
+                                placeholder="IMEI 2" value="{{ $celular->email_2 ?? 'No existe' }}"
                                 tabindex="6">
                         </div>
                         <div>
                             <label for="" class="form-label">Memoria RAM</label>
                             <input type="text" name="ram" id="ram" class="form-control"
-                                placeholder="Procesador" value="{{ $celular->ram ?? 'No existe' }}" tabindex="8">
+                                placeholder="RAM" value="{{ $celular->ram ?? 'No existe' }}" tabindex="8">
                         </div>
                         <div>
                             <label for="" class="form-label">Almacenamiento</label>
                             <input type="text" name="rom" id="rom" class="form-control"
-                                placeholder="Almacenamiento" value="{{ $celular->rom ?? 'No existe' }}" tabindex="9">
+                                placeholder="ROM" value="{{ $celular->rom ?? 'No existe' }}" tabindex="9">
                         </div>
                         <div>
                         <div>
@@ -95,7 +95,7 @@
                         <div>
                             <label for="" class="form-label">Cedula</label>
                             <input type="text" name="cedula" id="cedula" class="form-control"
-                                placeholder="Escriba la cedula del empleado" value="{{ $celular->rom ?? 'No existe' }}" tabindex="9">
+                                placeholder="Cedula del empleado" value="{{ $celular->rom ?? 'No existe' }}" tabindex="9">
                         </div>
                         <div>
                         <label for="" class="form-label">Observaciones</label>

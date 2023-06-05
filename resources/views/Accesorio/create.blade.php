@@ -37,11 +37,11 @@
                         <div>
                             <label for="" class="form-label">Escriba el Modelo del accesorio</label>
                             <input type="text" name="serie" id="serie" class="form-control"
-                                placeholder="Serie del accesorio" tabindex="3">
+                                placeholder="Modelo" tabindex="3">
                         </div>
                         <div>
                             <label for="" class="form-label">Serial del Accesorio</label>
-                            <input type="text" name="n_serial" id="n_serial" class="form-control" placeholder="Serial"
+                            <input type="text" name="n_serial" id="n_serial" class="form-control" placeholder="XXXX-XXXX-XXXX"
                                 tabindex="5">
                         </div>
                         <div>

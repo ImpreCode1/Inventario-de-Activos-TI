@@ -18,12 +18,12 @@
                         @csrf
                         <div>
                             <label for="" class="form-label">Cargo</label>
-                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Cargo"
+                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Escriba el Cargo"
                                 tabindex="1" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Detalle</label>
-                            <input type="text" name="detalle" id="detalle" class="form-control" placeholder="Detalle"
+                            <input type="text" name="detalle" id="detalle" class="form-control" placeholder="Escriba el Detalle"
                                 tabindex="2" >
                         </div>
                         <br>

@@ -36,13 +36,13 @@
                             </select>
                         </div>
                         <div>
-                            <label for="" class="form-label">Escriba la serie del accesorio</label>
-                            <input type="text" name="serie" id="serie" class="form-control" placeholder="serie"
+                            <label for="" class="form-label">Escriba la serie o modelo del accesorio</label>
+                            <input type="text" name="serie" id="serie" class="form-control" placeholder="Serie o Modelo"
                                 value="{{ $accesorio->serie ?? 'No existe' }}" tabindex="3">
                         </div>
                         <div>
                             <label for="" class="form-label">Serial del accesorio</label>
-                            <input type="text" name="n_serial" id="n_serial" class="form-control" placeholder="Serial"
+                            <input type="text" name="n_serial" id="n_serial" class="form-control" placeholder="XXXX-XXXX-XXXX"
                                 value="{{ $accesorio->n_serial ?? 'No existe' }}" tabindex="5">
                         </div>
                         <div>

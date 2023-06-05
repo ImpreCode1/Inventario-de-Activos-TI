@@ -44,7 +44,7 @@
             <img src="{{ public_path('/img/logo_principal.png') }}" class="logo" alt="">
             <h3 class="fecha">{{ $fechaActual }}</h3>
         </div>
-        <br><br><br><br><br><br>
+        <br><br><br><br><br>
         @foreach ($celulares as $celular)
             <p>Señor (a):</p>
             <h4>{{ $celular->empleado->nombre ?? '' }}</h4>
@@ -65,6 +65,10 @@
                 <tr>
                     <td>Departamento</td>
                     <td>{{ $celular->empleado->departamentos->nombre ?? '' }}</td>
+                </tr>
+                <tr>
+                    <td>Serial SIM</td>
+                    <td>{{ $celular->serial_sim ?? '' }}</td>
                 </tr>
                 <tr>
                     <td>Linea Celular</td>
