@@ -37,7 +37,7 @@ class EmpleadoController extends Controller
     public function index()
     {
        return view('empleado.index');
-        // return view('empleado.index')->with('empleados', $empleados);
+        
     }
     public function getClaveDominio($id)
 {
@@ -46,8 +46,6 @@ class EmpleadoController extends Controller
         'clave' => $empleado->clave_dominio
     ]);
 }
-
-
     public function empleados(){
 
         if (Gate::denies('ver-empleado')) {

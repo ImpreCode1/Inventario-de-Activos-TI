@@ -74,7 +74,7 @@ class LoginController extends Controller
         }elseif (Gate::allows('ver-rol')) {
             return route('roles.index');
         }else {
-            return route('/empleados');
+            return route('/empleados.index');
         }
     }
 
