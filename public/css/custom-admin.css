@@ -1,0 +1,344 @@
+/* ============================================================
+   IMPRESISTEM ADMIN PANEL — DISEÑO CORPORATIVO MODERNO
+   Minimalista, profesional, azul-grisáceo con jerarquía visual
+   ============================================================ */
+
+:root {
+    --black: #000000ff;
+    --rich-black: #0c1821ff;
+    --oxford-blue: #1b2a41ff;
+    --charcoal: #324a5fff;
+    --sky-accent: #4ea8deff;
+    --hover-blue: #20486e;
+}
+
+/* --- Sidebar principal --- */
+.main-sidebar {
+    background: linear-gradient(180deg, var(--rich-black) 0%, var(--oxford-blue) 100%) !important;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+    overflow-x: hidden !important;
+}
+
+.sidebar {
+    overflow-x: hidden !important;  /* 🔹 También dentro del contenedor */
+}
+
+/* Asegura que el contenido no desborde */
+.nav-sidebar .nav-item > .nav-link {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    padding-right: 0.9rem !important;
+    padding-left: 0.9rem !important;
+    box-sizing: border-box;
+}
+
+/* Opcional: suaviza el scroll vertical */
+.main-sidebar, .sidebar {
+    scroll-behavior: smooth;
+}
+
+/* --- Logo / Marca --- */
+.brand-link {
+    background-color: var(--oxford-blue) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.brand-text {
+    color: #f3f4f6 !important;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    margin-left: 10px;
+}
+
+/* --- Usuario --- */
+.user-panel {
+    border: none !important;
+    padding: 1rem 1rem 0.5rem 1rem;
+    background: transparent;
+}
+.user-panel .info a {
+    color: #d1d5db !important;
+    font-weight: 500;
+}
+.user-panel .image img {
+    border-radius: 50%;
+    border: 2px solid var(--charcoal);
+    transition: all 0.3s ease;
+}
+.user-panel .image img:hover {
+    transform: scale(1.05);
+}
+
+/* --- Encabezados --- */
+.nav-header {
+    color: var(--sky-accent) !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.8rem 1rem 0.3rem 1rem !important;
+    background: none !important;
+    border: none;
+    opacity: 0.85;
+}
+
+/* --- Items del menú --- */
+.nav-sidebar .nav-item > .nav-link {
+    color: #cbd5e1 !important;
+    border-radius: 8px;
+    margin: 3px 8px;
+    padding: 0.6rem 0.9rem;
+    transition: background 0.15s ease-in-out, color 0.15s ease-in-out, transform 0.15s;
+}
+
+.nav-sidebar .nav-item > .nav-link:hover {
+    background-color: var(--hover-blue) !important;
+    color: #fff !important;
+    transform: translateX(2px);
+}
+
+.nav-sidebar .nav-item > .nav-link.active {
+    background-color: var(--charcoal) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 0 var(--sky-accent);
+}
+
+/* --- Iconos --- */
+.nav-icon {
+    font-size: 1.05rem !important;
+    margin-right: 10px !important;
+    width: 22px;
+    text-align: center;
+    color: #9fb3c8 !important;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+.nav-link.active .nav-icon {
+    color: #ffffff !important;
+    opacity: 1;
+}
+.nav-link:hover .nav-icon {
+    opacity: 1;
+    color: #ffffff !important;
+}
+
+/* --- Submenú --- */
+.nav-treeview {
+    background: transparent;
+    margin-left: 4px;
+    padding-left: 10px;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+.nav-treeview > .nav-item > .nav-link {
+    color: #9ca3af !important;
+    font-size: 0.88rem;
+    padding: 0.45rem 1rem;
+}
+.nav-treeview > .nav-item > .nav-link:hover {
+    background: var(--charcoal) !important;
+    color: #fff !important;
+}
+
+/* --- Scrollbar --- */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+/* --- Badges --- */
+.badge {
+    font-weight: 600;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+}
+.badge-info {
+    background-color: #3b82f6 !important;
+}
+.badge-success {
+    background-color: #10b981 !important;
+}
+.badge-warning {
+    background-color: #f59e0b !important;
+    color: #111827 !important;
+}
+.badge-danger {
+    background-color: #ef4444 !important;
+}
+
+/* --- Topbar (franja superior) --- */
+.main-header.navbar {
+    background: linear-gradient(90deg, #0b1d33 0%, #122b47 100%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    height: 56px;
+    display: flex;
+    align-items: center;
+}
+.navbar .nav-link {
+    color: #e5e7eb !important;
+    transition: color 0.2s ease;
+    font-weight: 500;
+}
+.navbar .nav-link:hover {
+    color: #60a5fa !important;
+}
+.navbar-brand {
+    color: #f3f4f6 !important;
+    font-weight: 600;
+}
+
+/* Avatar usuario en la barra */
+.navbar .user-image {
+    border: 2px solid var(--sky-accent);
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 991.98px) {
+    .main-sidebar {
+        border-right: none;
+        box-shadow: none;
+    }
+}
+
+.main-header.navbar {
+    min-height: 63px !important; /* Valor por defecto suele ser 56px */
+    background-color: #1f2937 !important;
+    display: flex;
+    align-items: center;
+}
+
+/* =============================
+   ESTILO CORPORATIVO PARA TABLAS (con bordes redondeados)
+   ============================= */
+
+/* --- Contenedor general de la tabla --- */
+table.dataTable {
+    border-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px; /* 🔹 Bordes redondeados */
+    overflow: hidden; /* Evita que las celdas sobresalgan del borde */
+}
+
+/* --- Cabecera --- */
+table.dataTable thead {
+    background-color: var(--oxford-blue);
+    color: #f3f4f6;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* --- Filas alternadas --- */
+table.dataTable tbody tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* --- Hover sobre fila --- */
+table.dataTable tbody tr:hover {
+    background-color: var(--sky-accent) !important;
+    color: #fff !important;
+    transition: background 0.2s ease;
+}
+
+/* --- Celdas --- */
+table.dataTable td, 
+table.dataTable th {
+    border-color: rgba(255, 255, 255, 0.05);
+    vertical-align: middle;
+}
+
+/* --- Botones (Excel, PDF, etc.) --- */
+.dt-buttons .dt-button {
+    background-color: var(--charcoal) !important;
+    border: none !important;
+    border-radius: 8px !important; /* 🔹 Botones redondeados */
+    color: #e5e7eb !important;
+    padding: 0.45rem 1rem !important;
+    margin-right: 0.3rem !important;
+    font-weight: 500;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.dt-buttons .dt-button:hover {
+    background-color: var(--oxford-blue) !important;
+    color: #fff !important;
+    transform: translateY(-1px);
+}
+
+/* --- Paginación --- */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: transparent !important;
+    color: #e5e7eb !important;
+    border: none !important;
+    margin: 0 3px;
+    border-radius: 6px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: var(--charcoal) !important;
+    color: #fff !important;
+    border-radius: 6px;
+}
+
+/* =============================
+   Loader limpio centrado (solo logo girando)
+   ============================= */
+
+/* 🔹 Neutraliza el contenedor por defecto de DataTables */
+.dataTables_processing {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90px !important;
+    height: 90px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    text-align: center !important;
+    color: transparent !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000 !important;
+}
+
+/* 🔹 Quita cualquier texto o div interno que agregue DataTables */
+.dataTables_processing * {
+    display: none !important;
+}
+
+/* 🔹 Logo girando */
+.dataTables_processing::before {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 80px;
+    background-image: url('/vendor/adminlte/dist/img/logo_impresistem.png'); /* cambia ruta si es necesario */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: spin 1.5s linear infinite;
+}
+
+/* 🔹 Animación de giro */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
