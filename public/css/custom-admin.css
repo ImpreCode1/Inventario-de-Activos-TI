@@ -10,20 +10,27 @@
     --charcoal: #324a5fff;
     --sky-accent: #4ea8deff;
     --hover-blue: #20486e;
+    --hover-light: #c7e0ef;
+/* Azul cielo claro */
+
 }
 
 /* --- Sidebar principal --- */
 .main-sidebar {
-    background: linear-gradient(180deg, var(--rich-black) 0%, var(--oxford-blue) 100%) !important;
+    background: linear-gradient(
+        180deg,
+        var(--rich-black) 0%,
+        var(--oxford-blue) 100%
+    ) !important;
     font-family: "Inter", sans-serif;
     font-size: 0.95rem;
     border-right: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
     overflow-x: hidden !important;
 }
 
 .sidebar {
-    overflow-x: hidden !important;  /* 🔹 También dentro del contenedor */
+    overflow-x: hidden !important; /* 🔹 También dentro del contenedor */
 }
 
 /* Asegura que el contenido no desborde */
@@ -36,7 +43,8 @@
 }
 
 /* Opcional: suaviza el scroll vertical */
-.main-sidebar, .sidebar {
+.main-sidebar,
+.sidebar {
     scroll-behavior: smooth;
 }
 
@@ -95,7 +103,8 @@
     border-radius: 8px;
     margin: 3px 8px;
     padding: 0.6rem 0.9rem;
-    transition: background 0.15s ease-in-out, color 0.15s ease-in-out, transform 0.15s;
+    transition: background 0.15s ease-in-out, color 0.15s ease-in-out,
+        transform 0.15s;
 }
 
 .nav-sidebar .nav-item > .nav-link:hover {
@@ -249,13 +258,14 @@ table.dataTable tbody tr:nth-child(odd) {
 
 /* --- Hover sobre fila --- */
 table.dataTable tbody tr:hover {
-    background-color: var(--sky-accent) !important;
-    color: #fff !important;
-    transition: background 0.2s ease;
+    background-color: var(--hover-light) !important;
+    color: var(--rich-black) !important;
+    transition: background 0.25s ease;
 }
 
+
 /* --- Celdas --- */
-table.dataTable td, 
+table.dataTable td,
 table.dataTable th {
     border-color: rgba(255, 255, 255, 0.05);
     vertical-align: middle;
@@ -330,7 +340,7 @@ table.dataTable th {
     display: block;
     width: 80px;
     height: 80px;
-    background-image: url('/vendor/adminlte/dist/img/logo_impresistem.png'); /* cambia ruta si es necesario */
+    background-image: url("/vendor/adminlte/dist/img/logo_impresistem.png"); /* cambia ruta si es necesario */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -339,6 +349,90 @@ table.dataTable th {
 
 /* 🔹 Animación de giro */
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==== Botones redondos de acciones (outline) ==== */
+/* ==== Contenedor de botones de acción ==== */
+.action-buttons {
+    display: flex;
+    flex-direction: row;       /* Asegura orientación horizontal */
+    justify-content: center;   /* Centra horizontalmente */
+    align-items: center;       /* Centra verticalmente */
+    gap: 0.5rem;               /* Espaciado uniforme entre íconos */
+    flex-wrap: nowrap;         /* Evita que salten de línea */
+    min-width: max-content;    /* Previene que se compriman */
+}
+
+
+.btn-icon {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 14px;
+    transition: all 0.25s ease;
+    border: 2px solid transparent;
+    background-color: transparent;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+
+/* ==== Colores base (outline) ==== */
+.btn-icon.text-primary {
+    color: #0d6efd;
+    border-color: #0d6efd;
+}
+.btn-icon.text-success {
+    color: #198754;
+    border-color: #198754;
+}
+.btn-icon.text-warning {
+    color: #ffc107;
+    border-color: #ffc107;
+}
+.btn-icon.text-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* ==== Hover con relleno suave ==== */
+.btn-icon.text-primary:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+.btn-icon.text-success:hover {
+    background-color: #198754;
+    color: white;
+}
+.btn-icon.text-warning:hover {
+    background-color: #ffc107;
+    color: #212529;
+}
+.btn-icon.text-danger:hover {
+    background-color: #d75663;
+    color: white;
+}
+
+/* ==== Animación y elevación ==== */
+.btn-icon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.btn-icon i {
+    pointer-events: none;
+}
+
+/* ==== Centrado y ajuste en tabla ==== */
+table#empleados td:last-child {
+    text-align: center;
+    white-space: nowrap;
 }

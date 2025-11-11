@@ -55,25 +55,55 @@ class EmpleadoController extends Controller
         $empleados = Empleado::with(['departamentos', 'cargos'])->select('id', 'nombre', 'usu_dominio', 'num_exten', 'email', 'id_cargo', 'id_depto', 'clave_dominio')->where('id', '<>', 0)->get();
         return datatables()->of($empleados)
         ->addColumn('acciones', function ($empleado) {
-            $html = '';
+            $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
+
             if (Gate::allows('editar-empleado', $empleado)) {
-                $html .= '<a href="/empleados/'.$empleado->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
+                $html .= '
+                <a href="/empleados/'.$empleado->id.'/edit" 
+                class="btn-icon text-primary" 
+                title="Editar">
+                <i class="fas fa-pen"></i>
+                </a>';
             }
+
             if (Gate::allows('pdf-empleado', $empleado)) {
-                $html .= '<a href="/empleados/' . $empleado->id . '/pdf" target="_blank" class="btn btn-success btn-sm">ActaC</a>';
+                $html .= '
+                <a href="/empleados/'.$empleado->id.'/pdf" target="_blank" 
+                class="btn-icon text-success" 
+                title="Acta de Contraseña">
+                <i class="fas fa-file-pdf"></i>
+                </a>';
             }
+
             if (Gate::allows('pdf-empleado', $empleado)) {
-                $html .= '<a href="/empleados/' . $empleado->id . '/activos" target="_blank" class="btn btn-warning btn-sm">Activos</a>';
+                $html .= '
+                <a href="/empleados/'.$empleado->id.'/activos" target="_blank" 
+                class="btn-icon text-warning" 
+                title="Activos">
+                <i class="fas fa-laptop"></i>
+                </a>';
             }
+
             if (Gate::allows('borrar-empleado', $empleado)) {
-                $html .= '<form id="form-eliminar-' . $empleado->id . '" action="'. route('empleados.destroy', $empleado->id) .'" method="POST" style="display: inline-block;">
-                    '.csrf_field().'
-                    '.method_field('DELETE').'
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $empleado->id . ')">Eliminar</button>
+                $html .= '
+                <form id="form-eliminar-' . $empleado->id . '" 
+                    action="'. route('empleados.destroy', $empleado->id) .'" 
+                    method="POST" style="display:inline;">
+                    '.csrf_field().method_field('DELETE').'
+                    <button type="button" 
+                            class="btn-icon text-danger" 
+                            title="Eliminar"
+                            onclick="confirmDelete(' . $empleado->id . ')">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </form>';
             }
+
+            $html .= '</div>';
             return $html;
         })
+
+
         ->rawColumns(['acciones'])
         ->toJson();
     }

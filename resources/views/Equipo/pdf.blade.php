@@ -87,7 +87,7 @@
             <p>Atentamente.</p>
             <div style="float: left;">
                 <p style="font-size: 16px;"> <b>Freddy Javier Alonso </b><br>
-                Ingeniero de Soporte</p>
+                ADMINISTRATIVE DIRECTOR</p>
                 <p style="font-size: 13px;">FIRMA _____________________________ <br><br>
                     C.C ________________________________</p>
             </div>

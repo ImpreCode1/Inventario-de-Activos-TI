@@ -137,7 +137,7 @@
             <div style="display: flex; align-items: center;">
                 <div style="float: left;">
                     <p><b>Freddy Javier Alonso<br>
-                    Ingeniero de Soporte<br>
+                    ADMINISTRATIVE DIRECTOR<br>
                     IMPRESISTEM S.A.S
                     </b>
                 </p>
