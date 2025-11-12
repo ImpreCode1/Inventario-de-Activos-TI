@@ -31,15 +31,30 @@
                     <td>{{$role->name}}</td>
                     <td>
                         @can('editar-rol')
-                        <a class="btn btn-info" href="{{route('roles.edit', $role->id)}}">Editar</a>
+                            <a href="{{ route('roles.edit', $role->id) }}" 
+                            class="btn-icon btn-outline-primary" 
+                            title="Editar">
+                                <i class="fas fa-pen"></i>
+                            </a>
                         @endcan
+
                         @can('borrar-rol')
-                        <button class="btn btn-danger" onclick="confirmDelete({{$role->id}})">Borrar</button>
-                        <form id="form-eliminar-{{$role->id}}" action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display: none;">
-                            @csrf
-                            @method('DELETE')
-                        </form>
+                            <button type="button" 
+                                    class="btn-icon btn-outline-danger" 
+                                    title="Eliminar" 
+                                    onclick="confirmDelete({{ $role->id }})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+
+                            <form id="form-eliminar-{{ $role->id }}" 
+                                action="{{ route('roles.destroy', $role->id) }}" 
+                                method="POST" 
+                                style="display: none;">
+                                @csrf
+                                @method('DELETE')
+                            </form>
                         @endcan
+
                     </td>
                 </tr>
             @endforeach

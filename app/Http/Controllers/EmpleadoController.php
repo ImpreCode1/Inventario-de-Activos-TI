@@ -60,7 +60,7 @@ class EmpleadoController extends Controller
             if (Gate::allows('editar-empleado', $empleado)) {
                 $html .= '
                 <a href="/empleados/'.$empleado->id.'/edit" 
-                class="btn-icon text-primary" 
+                class="btn-icon btn-outline-primary" 
                 title="Editar">
                 <i class="fas fa-pen"></i>
                 </a>';
@@ -69,7 +69,7 @@ class EmpleadoController extends Controller
             if (Gate::allows('pdf-empleado', $empleado)) {
                 $html .= '
                 <a href="/empleados/'.$empleado->id.'/pdf" target="_blank" 
-                class="btn-icon text-success" 
+                class="btn-icon btn-outline-success" 
                 title="Acta de Contraseña">
                 <i class="fas fa-file-pdf"></i>
                 </a>';
@@ -78,7 +78,7 @@ class EmpleadoController extends Controller
             if (Gate::allows('pdf-empleado', $empleado)) {
                 $html .= '
                 <a href="/empleados/'.$empleado->id.'/activos" target="_blank" 
-                class="btn-icon text-warning" 
+                class="btn-icon btn-outline-warning" 
                 title="Activos">
                 <i class="fas fa-laptop"></i>
                 </a>';
@@ -91,7 +91,7 @@ class EmpleadoController extends Controller
                     method="POST" style="display:inline;">
                     '.csrf_field().method_field('DELETE').'
                     <button type="button" 
-                            class="btn-icon text-danger" 
+                            class="btn-icon btn-outline-danger" 
                             title="Eliminar"
                             onclick="confirmDelete(' . $empleado->id . ')">
                         <i class="fas fa-trash"></i>

@@ -35,16 +35,26 @@ class HistorialAccesorioController extends Controller
         ->select('id','id_empleado', 'id_accesorio', 'fecha_asignacion', 'fecha_devolucion')->get();
     return datatables()->of($historialAccesesorio)
         ->addColumn('action', function ($historial) {
-            $html = '';
-            if (Gate::allows('borrar-HistorialAccesesorio', $historial)) {
-                $html .= '<form id="form-eliminar-' . $historial->id . '" action="'. route('accesesoriosHistorial.destroy', $historial->id) .'" method="POST" style="display: inline-block;">
-                    '.csrf_field().'
-                    '.method_field('DELETE').'
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $historial->id . ')">Eliminar</button>
-                </form>';
-            }
-            return $html;
-        })
+        $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
+
+        if (Gate::allows('borrar-HistorialAccesesorio', $historial)) {
+            $html .= '
+            <form id="form-eliminar-' . $historial->id . '"
+                action="'. route('accesesoriosHistorial.destroy', $historial->id) .'"
+                method="POST" style="display:inline;">
+                '.csrf_field().method_field('DELETE').'
+                <button type="button"
+                        class="btn-icon btn-outline-danger"
+                        title="Eliminar"
+                        onclick="confirmDelete(' . $historial->id . ')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>';
+        }
+
+        $html .= '</div>';
+        return $html;
+    })
         ->rawColumns(['action'])
         ->toJson();
 }

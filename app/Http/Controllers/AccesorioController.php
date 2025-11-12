@@ -42,22 +42,45 @@ class AccesorioController extends Controller
             $accesorios = Accesorio::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria', 'id_marca', 'n_serial', 'n_parte', 'observaciones', 'serie')->get();
             return datatables()->of($accesorios)
             ->addColumn('action', function ($accesorio) {
-                $html = '';
-                if (Gate::allows('editar-accesesorio', $accesorio)) {
-                    $html .= '<a href="/accesorios/'.$accesorio->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
-                }
-                if (Gate::allows('pdf-accesesorio', $accesorio)) {
-                    $html .= '<a href="/accesorios/' . $accesorio->id . '/pdf" target="_blank" class="btn btn-success btn-sm">R.D.U</a>';
-                }
-                if (Gate::allows('borrar-accesesorio', $accesorio)) {
-                    $html .= '<form id="form-eliminar-' . $accesorio->id . '" action="'. route('accesorios.destroy', $accesorio->id) .'" method="POST" style="display: inline-block;">
-                        '.csrf_field().'
-                        '.method_field('DELETE').'
-                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $accesorio->id . ')">Eliminar</button>
-                    </form>';
-                }
-                return $html;
-            })
+            $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
+
+            if (Gate::allows('editar-accesesorio', $accesorio)) {
+                $html .= '
+                <a href="/accesorios/'.$accesorio->id.'/edit" 
+                class="btn-icon btn-outline-primary" 
+                title="Editar">
+                <i class="fas fa-pen"></i>
+                </a>';
+            }
+
+            if (Gate::allows('pdf-accesesorio', $accesorio)) {
+                $html .= '
+                <a href="/accesorios/' . $accesorio->id . '/pdf" target="_blank" 
+                class="btn-icon btn-outline-success" 
+                title="R.D.U">
+                <i class="fas fa-file-pdf"></i>
+                </a>';
+            }
+
+            if (Gate::allows('borrar-accesesorio', $accesorio)) {
+                $html .= '
+                <form id="form-eliminar-' . $accesorio->id . '" 
+                    action="'. route('accesorios.destroy', $accesorio->id) .'" 
+                    method="POST" style="display:inline;">
+                    '.csrf_field().method_field('DELETE').'
+                    <button type="button" 
+                            class="btn-icon btn-outline-danger" 
+                            title="Eliminar"
+                            onclick="confirmDelete(' . $accesorio->id . ')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>';
+            }
+
+            $html .= '</div>';
+            return $html;
+        })
+
             ->rawColumns(['action'])->toJson();
         }
     /**

@@ -37,15 +37,22 @@ function __construct()
         }
         $cargos = Cargo::select('id', 'nombre', 'detalle')->get();
         return datatables()->of($cargos)->addColumn('acciones', function($cargo){
-            $html = '';
+            $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
             if (Gate::allows('editar-cargo', $cargo)) {
-                $html .= '<a href="/cargos/'.$cargo->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
+                $html .= '
+                <a href="/cargos/'.$cargo->id.'/edit" 
+                class="btn-icon btn-outline-primary" 
+                title="Editar">
+                <i class="fas fa-pen"></i>
+                </a>';
             }
             if (Gate::allows('borrar-cargo', $cargo)) {
-                $html .= '<form id="form-eliminar-' . $cargo->id . '" action="'. route('cargos.destroy', $cargo->id) .'" method="POST" style="display: inline-block;">
+                $html .= '<form id="form-eliminar-' . $cargo->id . '" action="'. route('cargos.destroy', $cargo->id) .'" method="POST" style="display: inline;">
                     '.csrf_field().'
                     '.method_field('DELETE').'
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $cargo->id . ')">Eliminar</button>
+                    <button type="button" class="btn-icon btn-outline-danger" title="Eliminar" onclick="confirmDelete(' . $cargo->id . ')">
+                    <i class="fas fa-trash"></i>
+                    </button>
                 </form>';
             }
             return $html;

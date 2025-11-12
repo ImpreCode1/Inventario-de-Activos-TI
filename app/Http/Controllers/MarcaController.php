@@ -34,15 +34,23 @@ class MarcaController extends Controller
         $marcas = Marca::select('id', 'marca')->get();
         return datatables()->of($marcas)
             ->addColumn('acciones', function ($marca) {
-                $html = '';
+                $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
                 if (Gate::allows('editar-departamento', $marca)) {
-                    $html .= '<a href="/marcas/'.$marca->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
+                    $html .= '<a href="/marcas/'.$marca->id.'/edit" 
+                    class="btn-icon btn-outline-primary"
+                    title="Editar">
+                    <i class="fas fa-pen"></i>
+                    </a>';
                 }
                 if (Gate::allows('borrar-departamento', $marca)) {
-                    $html .= '<form id="form-eliminar-' . $marca->id . '" action="'. route('marcas.destroy', $marca->id) .'" method="POST" style="display: inline-block;">
+                    $html .= '<form id="form-eliminar-' . $marca->id . '" action="'. route('marcas.destroy', $marca->id) .'" method="POST" style="display: inline;">
                         '.csrf_field().'
                         '.method_field('DELETE').'
-                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $marca->id . ')">Eliminar</button>
+                        <button type="button" class="btn-icon btn-outline-danger" 
+                        title="Eliminar"
+                        onclick="confirmDelete(' . $marca->id . ')">
+                        <i class="fas fa-trash"></i>
+                        </button>
                     </form>';
                 }
                 return $html;

@@ -37,24 +37,44 @@ class MemorandoController extends Controller
             abort(403); // Acceso no autorizado
         }
         $memorandos = Memorando::with(['empleado'])->select('id', 'id_empleado', 'ciudad', 'direccion', 'n_contacto', 'correo_encargado')->get();
-        return datatables()->of($memorandos)->addColumn('acciones', function ($memorando) {
-            $id_memorando = $memorando->id;
-            $id_empleado = $memorando->id_empleado;
-            $url_pdf = route('memorandos.pdf', [$id_memorando, $id_empleado]);
-            $html = '';
-            if (Gate::allows('pdf-memorando', $memorando)) {
-                $html .= '<a href="' . $url_pdf . '" target="_blank" class="btn btn-success btn-sm">Memorando</a>';
-            }
-            if (Gate::allows('borrar-memorando', $memorando)) {
-                $html .= '<form id="form-eliminar-' . $memorando->id . '" action="'. route('memorandos.destroy', $memorando->id) .'" method="POST" style="display: inline-block;">
-                    '.csrf_field().'
-                    '.method_field('DELETE').'
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $memorando->id . ')">Eliminar</button>
-                </form>';
-            }
-            return $html;
-        })
-        ->rawColumns(['acciones'])->toJson();
+        return datatables()->of($memorandos)
+        ->addColumn('acciones', function ($memorando) {
+        $id_memorando = $memorando->id;
+        $id_empleado = $memorando->id_empleado;
+        $url_pdf = route('memorandos.pdf', [$id_memorando, $id_empleado]);
+
+        $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
+
+        if (Gate::allows('pdf-memorando', $memorando)) {
+            $html .= '
+            <a href="' . $url_pdf . '" 
+            target="_blank" 
+            class="btn-icon btn-outline-success" 
+            title="Ver Memorando">
+                <i class="fas fa-file-pdf"></i>
+            </a>';
+        }
+
+        if (Gate::allows('borrar-memorando', $memorando)) {
+            $html .= '
+            <form id="form-eliminar-' . $memorando->id . '" 
+                action="'. route('memorandos.destroy', $memorando->id) .'" 
+                method="POST" style="display:inline;">
+                '.csrf_field().method_field('DELETE').'
+                <button type="button" 
+                        class="btn-icon btn-outline-danger" 
+                        title="Eliminar"
+                        onclick="confirmDelete(' . $memorando->id . ')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>';
+        }
+
+        $html .= '</div>';
+        return $html;
+    })
+    ->rawColumns(['acciones'])
+    ->toJson();
     }
     
     /**

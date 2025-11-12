@@ -42,21 +42,38 @@ class SoftwareController extends Controller
                 return $software->created_at->format('Y-m-d');
             })
             ->addColumn('action', function ($software) {
-                $html = '';
-                if (Gate::allows('pdf-software', $software)) {
-                    $html .= '<a href="/softwares/' . $software->id . '/pdf" target="_blank" class="btn btn-success btn-sm">Responsabilidad Software</a>';
-                }
-                if (Gate::allows('borrar-software', $software)) {
-                    $html .= '<form id="form-eliminar-' . $software->id . '" action="'. route('softwares.destroy', $software->id) .'" method="POST" style="display: inline-block;">
-                        '.csrf_field().'
-                        '.method_field('DELETE').'
-                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $software->id . ')">Eliminar</button>
-                    </form>';
-                }
-                return $html;
-            })
-            ->rawColumns(['action'])
-            ->toJson();
+            $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
+
+            if (Gate::allows('pdf-software', $software)) {
+                $html .= '
+                <a href="/softwares/' . $software->id . '/pdf" 
+                target="_blank" 
+                class="btn-icon btn-outline-success" 
+                title="Responsabilidad Software">
+                    <i class="fas fa-file-pdf"></i>
+                </a>';
+            }
+
+            if (Gate::allows('borrar-software', $software)) {
+                $html .= '
+                <form id="form-eliminar-' . $software->id . '" 
+                    action="'. route('softwares.destroy', $software->id) .'" 
+                    method="POST" style="display:inline;">
+                    '.csrf_field().method_field('DELETE').'
+                    <button type="button" 
+                            class="btn-icon btn-outline-danger" 
+                            title="Eliminar"
+                            onclick="confirmDelete(' . $software->id . ')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>';
+            }
+
+            $html .= '</div>';
+            return $html;
+        })
+        ->rawColumns(['action'])
+        ->toJson();
     }
     
     /**

@@ -33,18 +33,28 @@ class HistorialEquipoController extends Controller
         $equiposHistorial = HistorialEquipo::with(['empleado', 'cpuequipo.categoria'])->select('id', 'id_empleado', 'id_portatiles', 'fecha_asignacion', 'fecha_devolucion')->get();
         return datatables()->of($equiposHistorial)
         ->addColumn('action', function ($equipo) {
-            $html = '';
-            if (Gate::allows('borrar-HistorialEquipo', $equipo)) {
-                $html .= '<form id="form-eliminar-' . $equipo->id . '" action="'. route('equiposHistorial.destroy', $equipo->id) .'" method="POST" style="display: inline-block;">
-                    '.csrf_field().'
-                    '.method_field('DELETE').'
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $equipo->id . ')">Eliminar</button>
-                </form>';
-            }
-            return $html;
-        })
-        ->rawColumns(['action'])
-        ->toJson();
+        $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
+
+        if (Gate::allows('borrar-HistorialEquipo', $equipo)) {
+            $html .= '
+            <form id="form-eliminar-' . $equipo->id . '"
+                action="'. route('equiposHistorial.destroy', $equipo->id) .'"
+                method="POST" style="display:inline;">
+                '.csrf_field().method_field('DELETE').'
+                <button type="button"
+                        class="btn-icon btn-outline-danger"
+                        title="Eliminar"
+                        onclick="confirmDelete(' . $equipo->id . ')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>';
+        }
+
+        $html .= '</div>';
+        return $html;
+    })
+    ->rawColumns(['action'])
+    ->toJson();
     }
 
     /**

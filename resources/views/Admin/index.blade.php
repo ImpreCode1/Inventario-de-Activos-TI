@@ -42,17 +42,33 @@
                         @endif
                     </td>
                     <td>
+                        <div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">
                         @can('editar-usuario')
-                        <a class="btn btn-info" href="{{route('users.edit', $user->id)}}">Editar</a>
+                            <a href="{{ route('users.edit', $user->id) }}" 
+                            class="btn-icon btn-outline-primary" 
+                            title="Editar">
+                                <i class="fas fa-pen"></i>
+                            </a>
                         @endcan
-                        
+
                         @can('borrar-usuario')
-                        <button class="btn btn-danger" onclick="confirmDelete({{$user->id}})">Borrar</button>
-                        <form id="form-eliminar-{{$user->id}}" action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: none;">
-                            @csrf
-                            @method('DELETE')
-                        </form>
+                            <button type="button" 
+                                    class="btn-icon btn-outline-danger" 
+                                    title="Eliminar" 
+                                    onclick="confirmDelete({{ $user->id }})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+
+                            <form id="form-eliminar-{{ $user->id }}" 
+                                action="{{ route('users.destroy', $user->id) }}" 
+                                method="POST" 
+                                style="display: none;">
+                                @csrf
+                                @method('DELETE')
+                            </form>
                         @endcan
+                    </div>
+
                     </td>
                 </tr>
             @endforeach

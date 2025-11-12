@@ -44,25 +44,53 @@ class TelefonoController extends Controller
         'id_marca', 'serial', 'modelo', 'n_telefono', 'email_1', 'email_2', 'serial_sim', 'ram', 'rom', 'cedula', 'operador' )->get();
         return datatables()->of($celulares)
         ->addColumn('action', function ($celulares) {
-            $html = '';
-            if (Gate::allows('editar-telefono', $celulares)) {
-                $html .= '<a href="/celulares/'.$celulares->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
-            }
-            if (Gate::allows('pdf-telefono', $celulares)) {
-                $html .= '<a href="/celulares/' . $celulares->id . '/pdf" target="_blank" class="btn btn-success btn-sm">R.D.U</a>';
-            }
-            if (Gate::allows('pdf-telefono', $celulares)) {
-                $html .= '<a href="/celulares/' . $celulares->id . '/numero" target="_blank" class="btn btn-warning btn-sm">Acta SIM</a>';
-            }
-            if (Gate::allows('borrar-telefono', $celulares)) {
-                $html .= '<form id="form-eliminar-' . $celulares->id . '" action="'. route('celulares.destroy', $celulares->id) .'" method="POST" style="display: inline-block;">
-                    '.csrf_field().'
-                    '.method_field('DELETE').'
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $celulares->id . ')">Eliminar</button>
-                </form>';
-            }
-            return $html;
-        })
+        $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
+
+        if (Gate::allows('editar-telefono', $celulares)) {
+            $html .= '
+            <a href="/celulares/'.$celulares->id.'/edit" 
+            class="btn-icon btn-outline-primary" 
+            title="Editar">
+            <i class="fas fa-pen"></i>
+            </a>';
+        }
+
+        if (Gate::allows('pdf-telefono', $celulares)) {
+            $html .= '
+            <a href="/celulares/' . $celulares->id . '/pdf" target="_blank" 
+            class="btn-icon btn-outline-success" 
+            title="R.D.U">
+            <i class="fas fa-file-pdf"></i>
+            </a>';
+        }
+
+        if (Gate::allows('pdf-telefono', $celulares)) {
+            $html .= '
+            <a href="/celulares/' . $celulares->id . '/numero" target="_blank" 
+            class="btn-icon btn-outline-warning" 
+            title="Acta SIM">
+            <i class="fas fa-sim-card"></i>
+            </a>';
+        }
+
+        if (Gate::allows('borrar-telefono', $celulares)) {
+            $html .= '
+            <form id="form-eliminar-' . $celulares->id . '" 
+                action="'. route('celulares.destroy', $celulares->id) .'" 
+                method="POST" style="display:inline;">
+                '.csrf_field().method_field('DELETE').'
+                <button type="button" 
+                        class="btn-icon btn-outline-danger" 
+                        title="Eliminar"
+                        onclick="confirmDelete(' . $celulares->id . ')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>';
+        }
+
+        $html .= '</div>';
+        return $html;
+    })
         ->rawColumns(['action'])->toJson();
 
     }

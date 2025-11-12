@@ -33,18 +33,28 @@ class HistorialTelefonoController extends Controller
         $telefonosHistorial = HistorialTelefono::with(['empleado', 'telefono'])->select('id', 'id_empleado', 'id_telefonos', 'fecha_asignacion', 'fecha_devolucion')->get();
         return datatables()->of($telefonosHistorial)
         ->addColumn('action', function ($telefono) {
-            $html = '';
-            if (Gate::allows('borrar-HistorialTelefono', $telefono)) {
-                $html .= '<form id="form-eliminar-' . $telefono->id . '" action="'. route('telefonosHistorial.destroy', $telefono->id) .'" method="POST" style="display: inline-block;">
-                    '.csrf_field().'
-                    '.method_field('DELETE').'
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $telefono->id . ')">Eliminar</button>
-                </form>';
-            }
-            return $html;
-        })
-        ->rawColumns(['action'])->toJson();
+        $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
 
+        if (Gate::allows('borrar-HistorialTelefono', $telefono)) {
+            $html .= '
+            <form id="form-eliminar-' . $telefono->id . '"
+                action="'. route('telefonosHistorial.destroy', $telefono->id) .'"
+                method="POST" style="display:inline;">
+                '.csrf_field().method_field('DELETE').'
+                <button type="button"
+                        class="btn-icon btn-outline-danger"
+                        title="Eliminar"
+                        onclick="confirmDelete(' . $telefono->id . ')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>';
+        }
+
+        $html .= '</div>';
+        return $html;
+    })
+    ->rawColumns(['action'])
+    ->toJson();
     }
 
     /**

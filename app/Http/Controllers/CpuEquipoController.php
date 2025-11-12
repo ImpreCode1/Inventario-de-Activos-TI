@@ -52,22 +52,44 @@ class CpuEquipoController extends Controller
         'id_marca', 'n_activo', 'costo', 'n_serial', 'serie', 'n_parte', 'memoria_ram', 'procesador', 'discoduro')->get();
         return datatables()->of($equipos)
             ->addColumn('action', function ($equipo) {
-                $html = '';
-                if (Gate::allows('editar-equipo', $equipo)) {
-                    $html .= '<a href="/equipos/'.$equipo->id.'/edit" class="btn btn-info btn-sm">Editar</a>';
-                }
-                if (Gate::allows('pdf-equipo', $equipo)) {
-                    $html .= '<a href="/equipos/' . $equipo->id . '/pdf" target="_blank" class="btn btn-success btn-sm">R.D.U</a>';
-                }
-                if (Gate::allows('borrar-equipo', $equipo)) {
-                    $html .= '<form id="form-eliminar-' . $equipo->id . '" action="'. route('equipos.destroy', $equipo->id) .'" method="POST" style="display: inline-block;">
-                        '.csrf_field().'
-                        '.method_field('DELETE').'
-                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $equipo->id . ')">Eliminar</button>
-                    </form>';
-                }
-                return $html;
-            })
+            $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
+
+            if (Gate::allows('editar-equipo', $equipo)) {
+                $html .= '
+                <a href="/equipos/'.$equipo->id.'/edit"
+                class="btn-icon btn-outline-primary"
+                title="Editar">
+                    <i class="fas fa-pen"></i>
+                </a>';
+            }
+
+            if (Gate::allows('pdf-equipo', $equipo)) {
+                $html .= '
+                <a href="/equipos/' . $equipo->id . '/pdf" target="_blank"
+                class="btn-icon btn-outline-success"
+                title="R.D.U">
+                    <i class="fas fa-file-pdf"></i>
+                </a>';
+            }
+
+            if (Gate::allows('borrar-equipo', $equipo)) {
+                $html .= '
+                <form id="form-eliminar-' . $equipo->id . '"
+                    action="'. route('equipos.destroy', $equipo->id) .'"
+                    method="POST" style="display:inline;">
+                    '.csrf_field().method_field('DELETE').'
+                    <button type="button"
+                            class="btn-icon btn-outline-danger"
+                            title="Eliminar"
+                            onclick="confirmDelete(' . $equipo->id . ')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>';
+            }
+
+            $html .= '</div>';
+            return $html;
+        })
             ->rawColumns(['action'])
             ->toJson();
     }
