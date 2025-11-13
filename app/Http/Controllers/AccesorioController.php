@@ -90,7 +90,7 @@ class AccesorioController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::whereIn('nombre', ['DIADEMA', 'MOUSE', 'MONITOR', 'TECLADO', 'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH', 'TABLET', 'BASE REFRIGERANTE', 'CARGADOR'])->get();
+        $categorias = DB::table('categorias')->whereNotIn('nombre', ['CELULAR', 'PORTATIL'])->orderBy('nombre', 'asc')->get();
         $marcas =  DB::table('marcas')->orderBy('marca', 'asc')->get();
         $marcas_ordenadas = array();
         foreach ($marcas as $marca) {

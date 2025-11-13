@@ -53,6 +53,8 @@ class LoginController extends Controller
             return route('departamentos.index');
         }elseif (Gate::allows('ver-marca')) {
             return route('marcas.index');
+        }elseif (Gate::allows('ver-categoria')) {
+            return route('categorias.index');    
         }elseif (Gate::allows('ver-equipo')) {
             return route('equipos.index');
         }elseif (Gate::allows('ver-accesesorio')) {

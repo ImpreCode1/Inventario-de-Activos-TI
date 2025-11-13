@@ -37,7 +37,12 @@ class SeederTablaPermisos extends Seeder
             'ver-marca',
             'crear-marca',
             'editar-marca',
-            'borrar-marca',  
+            'borrar-marca', 
+            //tabla marcas
+            'ver-categoria',
+            'crear-categoria',
+            'editar-categoria',
+            'borrar-categoria',  
             //tabla cpu_equipos
             'ver-equipo',
             'crear-equipo',
@@ -89,7 +94,7 @@ class SeederTablaPermisos extends Seeder
         ];
 
         foreach ($permisos as $permiso) {
-            Permission::create(['name' => $permiso]);
+            Permission::firstOrCreate(['name' => $permiso]);
         }
     }
 }

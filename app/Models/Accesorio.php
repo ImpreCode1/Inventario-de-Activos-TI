@@ -19,7 +19,7 @@ class Accesorio extends Model
     use HasFactory;
 
     public function categoria(){
-        return $this->belongsTo(Categoria::class, 'id_categoria')->whereIn('nombre', ['DIADEMA', 'MOUSE',  'TECLADO', 'MONITOR', 'BASE REFRIGERANTE',  'TERMINAL', 'IMPRESORA', 'VIDEOPROYECTOR','SWITCH']);
+        return $this->belongsTo(Categoria::class, 'id_categoria');
     }
 
     public function empleado(){

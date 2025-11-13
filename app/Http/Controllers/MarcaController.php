@@ -35,14 +35,14 @@ class MarcaController extends Controller
         return datatables()->of($marcas)
             ->addColumn('acciones', function ($marca) {
                 $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
-                if (Gate::allows('editar-departamento', $marca)) {
+                if (Gate::allows('editar-marca', $marca)) {
                     $html .= '<a href="/marcas/'.$marca->id.'/edit" 
                     class="btn-icon btn-outline-primary"
                     title="Editar">
                     <i class="fas fa-pen"></i>
                     </a>';
                 }
-                if (Gate::allows('borrar-departamento', $marca)) {
+                if (Gate::allows('borrar-marca', $marca)) {
                     $html .= '<form id="form-eliminar-' . $marca->id . '" action="'. route('marcas.destroy', $marca->id) .'" method="POST" style="display: inline;">
                         '.csrf_field().'
                         '.method_field('DELETE').'

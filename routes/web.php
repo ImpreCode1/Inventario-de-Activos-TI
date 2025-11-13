@@ -35,6 +35,7 @@ Route::put('encargados/{id}',  [App\Http\Controllers\MemorandoController::class,
 Route::get('cargos/lista', [App\Http\Controllers\CargoController::class, 'datos'])->name('cargos.lista')->middleware('auth');
 Route::get('departamentos/lista', [App\Http\Controllers\DepartamentoController::class, 'departamentos'])->name('departamentos.lista')->middleware('auth');
 Route::get('marcas/lista', [App\Http\Controllers\MarcaController::class, 'marcas'])->name('marcas.lista')->middleware('auth');
+Route::get('categorias/lista', [App\Http\Controllers\CategoriaController::class, 'categorias'])->name('categorias.lista')->middleware('auth');
 Route::get('empleados/lista', [App\Http\Controllers\EmpleadoController::class, 'empleados'])->name('empleados.lista')->middleware('auth');
 Route::get('equipos/lista', [App\Http\Controllers\CpuEquipoController::class, 'equipos'])->name('equipos.lista');
 Route::get('accesesorios/lista', [App\Http\Controllers\AccesorioController::class, 'accesesorios'])->name('accesesorios.lista')->middleware('auth');
@@ -58,6 +59,7 @@ Route::resource('cargos', App\Http\Controllers\CargoController::class)->middlewa
 Route::resource('departamentos', App\Http\Controllers\DepartamentoController::class)->middleware('auth');
 Route::resource('empleados', App\Http\Controllers\EmpleadoController::class)->middleware('auth');
 Route::resource('marcas', App\Http\Controllers\MarcaController::class)->middleware('auth');
+Route::resource('categorias', App\Http\Controllers\CategoriaController::class)->middleware('auth');
 Route::resource('equipos', App\Http\Controllers\CpuEquipoController::class)->middleware('auth');
 Route::resource('accesorios', App\Http\Controllers\AccesorioController::class)->middleware('auth');
 Route::resource('celulares', App\Http\Controllers\TelefonoController::class)->middleware('auth');

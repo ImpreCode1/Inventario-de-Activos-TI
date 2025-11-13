@@ -21,7 +21,7 @@
                             <select name="id_categoria" id="id_categoria" class="form-control" tabindex="1">
                                 <option value="">-- Seleccione la categoria del accesorio --</option>
                                 @foreach ($categorias as $categoria)
-                                    <option value="{{ $categoria['id'] }}">{{ $categoria['nombre'] }}</option>
+                                    <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
                                 @endforeach
                             </select>
                         </div>
