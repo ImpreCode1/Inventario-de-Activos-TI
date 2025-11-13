@@ -11,8 +11,7 @@
     --sky-accent: #4ea8deff;
     --hover-blue: #20486e;
     --hover-light: #c7e0ef;
-/* Azul cielo claro */
-
+    /* Azul cielo claro */
 }
 
 /* --- Sidebar principal --- */
@@ -263,7 +262,6 @@ table.dataTable tbody tr:hover {
     transition: background 0.25s ease;
 }
 
-
 /* --- Celdas --- */
 table.dataTable td,
 table.dataTable th {
@@ -361,14 +359,13 @@ table.dataTable th {
 /* ==== Contenedor de botones de acción ==== */
 .action-buttons {
     display: flex;
-    flex-direction: row;       /* Asegura orientación horizontal */
-    justify-content: center;   /* Centra horizontalmente */
-    align-items: center;       /* Centra verticalmente */
-    gap: 0.5rem;               /* Espaciado uniforme entre íconos */
-    flex-wrap: nowrap;         /* Evita que salten de línea */
-    min-width: max-content;    /* Previene que se compriman */
+    flex-direction: row; /* Asegura orientación horizontal */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    gap: 0.5rem; /* Espaciado uniforme entre íconos */
+    flex-wrap: nowrap; /* Evita que salten de línea */
+    min-width: max-content; /* Previene que se compriman */
 }
-
 
 .btn-icon {
     width: 34px;
@@ -424,7 +421,7 @@ table.dataTable th {
 /* ==== Animación y elevación ==== */
 .btn-icon:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .btn-icon i {
@@ -435,4 +432,62 @@ table.dataTable th {
 table#empleados td:last-child {
     text-align: center;
     white-space: nowrap;
+}
+/* ======= LOGIN PAGE CUSTOM STYLE ======= */
+body.login-page {
+    font-family: "Poppins", "Segoe UI", sans-serif;
+}
+
+.login-box {
+    background-color: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+    padding: 35px 30px;
+    width: 420px;
+    max-width: 90%;
+}
+
+.login-box .form-label {
+    font-weight: 500;
+}
+
+.login-box input.form-control {
+    height: 42px; /* asegura altura uniforme */
+    padding: 0.45rem 0.75rem !important; /* centra el texto verticalmente */
+    line-height: 1.4 !important;
+    display: flex;
+    align-items: center;
+}
+
+.login-box input.form-control:focus {
+    border-color: #0077b6;
+    box-shadow: 0 0 5px rgba(0, 119, 182, 0.3);
+}
+
+.login-box button.btn-primary {
+    background-color: #0077b6;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.login-box button.btn-primary:hover {
+    background-color: #005b8e;
+}
+
+.login-box a {
+    text-decoration: none;
+}
+
+.login-box a:hover {
+    text-decoration: underline;
+}
+
+.login-box input.form-control::placeholder {
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+.login-box .form-label {
+    margin-bottom: 0.3rem;
+    color: #374151;
 }
