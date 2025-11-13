@@ -15,12 +15,7 @@ use App\Mail\CambioEquipo;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Gate;
-
-
-
-
-
-
+use Illuminate\Support\Facades\Log;
 
 class CpuEquipoController extends Controller
 {
@@ -144,7 +139,14 @@ class CpuEquipoController extends Controller
 
     $destinatario = DB::table('destinatarios')->where('id', 1)->first();
     $correo = new CambioEquipo($equipos,  $url_edicion);
-    Mail::to($destinatario->correo_notificacion)->send($correo);
+    try {
+        Mail::to($destinatario->correo_notificacion)->send($correo);
+    } catch (\Throwable $e) {
+        Log::error('❌ Error al enviar correo: ' . $e->getMessage(), [
+            'destinatario' => $destinatario->correo_notificacion,
+            'contexto' => 'envío de notificación',
+        ]);
+    }
 
     return redirect('/equipos');
 }
