@@ -421,6 +421,14 @@ return [
             'active' => ['softwares*', 'softwares/create'],
         ],
 
+        ['header' => 'PRESTAMO DE ACCESORIOS', 'can'  => []],
+        [
+            'text'    => 'Prestamos',
+            'url'     => 'prestamos',
+            'icon'    => 'fas fa-exchange-alt',
+            'can'     => [''],
+        ],
+
         ['header' => 'ADMINISTRACIÓN', 'can'  => ['ver-usuario', 'ver-rol']],
         [
             'text'    => 'Asignaciones',
