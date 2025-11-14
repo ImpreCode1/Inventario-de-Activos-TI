@@ -2,6 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @stop
 
 @section('content_header')
@@ -39,7 +40,6 @@
                             </select>
                         </div>
 
-
                         <div class="mb-3">
                             <label class="form-label">Fecha de préstamo</label>
                             <input type="date" name="fecha_prestamo" class="form-control" value="{{ date('Y-m-d') }}"
@@ -61,4 +61,20 @@
         </div>
     </div>
 
+@stop
+
+@section('js')
+    <!-- Dependencias de Select2 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#usuario_id').select2({
+                placeholder: "Buscar empleado...",
+                allowClear: true,
+                width: '100%'
+            });
+        });
+    </script>
 @stop

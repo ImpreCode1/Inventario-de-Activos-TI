@@ -176,18 +176,31 @@ class PrestamoController extends Controller
     // ==========================================================
     //                      ACTUALIZAR PRÉSTAMO
     // ==========================================================
+    // ==========================================================
+    //              ACTUALIZAR PRÉSTAMO
+    // ==========================================================
     public function update(Request $request, $id)
     {
+        // --- 1. VALIDACIÓN ---
+        $request->validate([
+            'item_nombre' => 'required|string|max:255',
+            'usuario_id' => 'required|exists:empleados,id',
+            'fecha_prestamo' => 'required|date',
+            'estado' => 'required|string|in:Prestado,Perdido',
+            'observaciones' => 'nullable|string',
+        ]);
+
         $prestamo = Prestamo::find($id);
 
         $prestamo->usuario_id = $request->usuario_id;
         $prestamo->item_nombre = $request->item_nombre;
-        $prestamo->observaciones = $request->observaciones;
         $prestamo->fecha_prestamo = $request->fecha_prestamo;
+        $prestamo->observaciones = $request->observaciones; // Asignación
+        $prestamo->estado = $request->estado;
 
-        $prestamo->save();
+        $resultado = $prestamo->save(); // Capturamos el resultado (true o false)
 
-        return redirect('/prestamos');
+        return redirect()->route('prestamos.index')->with('success', 'Préstamo actualizado correctamente.');
     }
 
     // ==========================================================
