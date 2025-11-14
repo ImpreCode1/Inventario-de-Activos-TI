@@ -2,7 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/vendor/select2/css/select2.min.css">
 @stop
 
 @section('content_header')
@@ -31,7 +31,6 @@
                             <label for="usuario_id">Prestado a</label>
                             <select name="usuario_id" id="usuario_id" class="form-control" required>
                                 <option value="">Seleccione un empleado</option>
-
                                 @foreach ($empleados as $empleado)
                                     <option value="{{ $empleado->id }}">
                                         {{ $empleado->nombre }}
@@ -64,9 +63,9 @@
 @stop
 
 @section('js')
-    <!-- Dependencias de Select2 -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Archivos locales -->
+    <script src="/vendor/jquery/jquery-3.5.1.min.js"></script>
+    <script src="/vendor/select2/js/select2.min.js"></script>
 
     <script>
         $(document).ready(function() {

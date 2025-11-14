@@ -2,14 +2,14 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/vendor/select2/css/select2.min.css">
 
     <style>
         .select2-container {
             width: 100% !important;
         }
     </style>
-
+@stop
 
 @section('content_header')
     <center>
@@ -41,7 +41,6 @@
                             <label class="form-label">Usuario que recibe</label>
                             <select name="usuario_id" id="usuario_id" class="form-control" required>
                                 <option value="">Seleccione...</option>
-
                                 @foreach ($empleados as $empleado)
                                     <option value="{{ $empleado->id }}"
                                         {{ $prestamo->usuario_id == $empleado->id ? 'selected' : '' }}>
@@ -58,11 +57,6 @@
                                 value="{{ old('fecha_prestamo', \Carbon\Carbon::parse($prestamo->fecha_prestamo)->format('Y-m-d')) }}"
                                 required>
                         </div>
-
-
-                        {{-- =================================== --}}
-                        {{-- ==       CAMPOS AÑADIDOS         == --}}
-                        {{-- =================================== --}}
 
                         {{-- Estado --}}
                         <div class="mb-3">
@@ -92,11 +86,6 @@
                             @enderror
                         </div>
 
-                        {{-- =================================== --}}
-                        {{-- ==     FIN CAMPOS AÑADIDOS       == --}}
-                        {{-- =================================== --}}
-
-
                         <a href="{{ route('prestamos.index') }}" class="btn btn-secondary">Cancelar</a>
                         <button type="submit" class="btn btn-primary">Actualizar</button>
 
@@ -110,7 +99,7 @@
 @stop
 
 @section('js')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="/vendor/select2/js/select2.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -120,12 +109,6 @@
                 allowClear: true,
                 width: "100%"
             });
-
-            // Opcional: Si quieres que el select de "Estado" no se pueda buscar:
-            // $('.form-control').not('#usuario_id').select2({
-            //     minimumResultsForSearch: Infinity,
-            //     width: "100%"
-            // });
         });
     </script>
 @stop
