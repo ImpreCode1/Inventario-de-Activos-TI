@@ -19,7 +19,7 @@ class CreatePrestamosTable extends Migration
             $table->unsignedBigInteger('creado_por');
             $table->timestamps();
 
-            $table->foreign('usuario_id')->references('id')->on('users');
+            $table->foreign('usuario_id')->references('id')->on('empleados');
             $table->foreign('creado_por')->references('id')->on('users');
         });
     }

@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use  Illuminate\Support\Facades\Auth;
 use App\Mail\CambioEquipo;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,18 +19,16 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('empleados/{id}/pdf',  [App\Http\Controllers\EmpleadoController::class, 'pdf' ])->name('empleados.pdf')->middleware('auth');
-Route::get('empleados/{id}/activos',  [App\Http\Controllers\EmpleadoController::class, 'activos' ])->name('empleados.activos')->middleware('auth');
-Route::get('equipos/{id}/pdf',  [App\Http\Controllers\CpuEquipoController::class, 'pdf' ])->name('equipos.pdf')->middleware('auth');
-Route::get('accesorios/{id}/pdf',  [App\Http\Controllers\AccesorioController::class, 'pdf' ])->name('accesorios.pdf')->middleware('auth');
-Route::get('celulares/{id}/pdf',  [App\Http\Controllers\TelefonoController::class, 'pdf' ])->name('celulares.pdf')->middleware('auth');
-Route::get('celulares/{id}/numero',  [App\Http\Controllers\TelefonoController::class, 'numero' ])->name('celulares.numero')->middleware('auth');
-Route::get('softwares/{id}/pdf',  [App\Http\Controllers\SoftwareController::class, 'pdf' ])->name('softwares.pdf')->middleware('auth');
+Route::get('empleados/{id}/pdf', [App\Http\Controllers\EmpleadoController::class, 'pdf'])->name('empleados.pdf')->middleware('auth');
+Route::get('empleados/{id}/activos', [App\Http\Controllers\EmpleadoController::class, 'activos'])->name('empleados.activos')->middleware('auth');
+Route::get('equipos/{id}/pdf', [App\Http\Controllers\CpuEquipoController::class, 'pdf'])->name('equipos.pdf')->middleware('auth');
+Route::get('accesorios/{id}/pdf', [App\Http\Controllers\AccesorioController::class, 'pdf'])->name('accesorios.pdf')->middleware('auth');
+Route::get('celulares/{id}/pdf', [App\Http\Controllers\TelefonoController::class, 'pdf'])->name('celulares.pdf')->middleware('auth');
+Route::get('celulares/{id}/numero', [App\Http\Controllers\TelefonoController::class, 'numero'])->name('celulares.numero')->middleware('auth');
+Route::get('softwares/{id}/pdf', [App\Http\Controllers\SoftwareController::class, 'pdf'])->name('softwares.pdf')->middleware('auth');
 Route::get('memorandos/{id_memorando}-{id_empleado}/pdf', [App\Http\Controllers\MemorandoController::class, 'pdf'])->name('memorandos.pdf')->middleware('auth');
-Route::put('destinatarios/{id}',  [App\Http\Controllers\CpuEquipoController::class, 'updateDestinatario' ])->name('destinatarios.update')->middleware('auth');
-Route::put('encargados/{id}',  [App\Http\Controllers\MemorandoController::class, 'updateEncargado' ])->name('encargado.update')->middleware('auth');
-
-
+Route::put('destinatarios/{id}', [App\Http\Controllers\CpuEquipoController::class, 'updateDestinatario'])->name('destinatarios.update')->middleware('auth');
+Route::put('encargados/{id}', [App\Http\Controllers\MemorandoController::class, 'updateEncargado'])->name('encargado.update')->middleware('auth');
 
 Route::get('cargos/lista', [App\Http\Controllers\CargoController::class, 'datos'])->name('cargos.lista')->middleware('auth');
 Route::get('departamentos/lista', [App\Http\Controllers\DepartamentoController::class, 'departamentos'])->name('departamentos.lista')->middleware('auth');
@@ -45,15 +43,14 @@ Route::get('accesesorioshistorial/lista', [App\Http\Controllers\HistorialAccesor
 Route::get('historialtelefonos/lista', [App\Http\Controllers\HistorialTelefonoController::class, 'historialTelefonos'])->name('historialtelefonos.lista')->middleware('auth');
 Route::get('softwares/lista', [App\Http\Controllers\SoftwareController::class, 'softwares'])->name('softwares.lista')->middleware('auth');
 Route::get('memorandos/lista', [App\Http\Controllers\MemorandoController::class, 'memorandos'])->name('memorandos.lista')->middleware('auth');
+Route::get('prestamos/lista', [App\Http\Controllers\PrestamoController::class, 'prestamos'])->name('prestamos.lista')->middleware('auth');
 
-
-//Route::get('prueba', function(){
-    //$correo = new CambioEquipo;
-  //  Mail::to('johnny1678m@gmail.com')->send($correo);
+Route::post('prestamos/{prestamo}/devolver', [App\Http\Controllers\PrestamoController::class, 'devolver'])->name('prestamos.devolver');
+// Route::get('prueba', function(){
+// $correo = new CambioEquipo;
+//  Mail::to('johnny1678m@gmail.com')->send($correo);
 //    return "Mensaje enviado"
-//});
-
-
+// });
 
 Route::resource('cargos', App\Http\Controllers\CargoController::class)->middleware('auth');
 Route::resource('departamentos', App\Http\Controllers\DepartamentoController::class)->middleware('auth');
@@ -70,7 +67,7 @@ Route::resource('telefonosHistorial', App\Http\Controllers\HistorialTelefonoCont
 Route::resource('memorandos', App\Http\Controllers\MemorandoController::class)->middleware('auth');
 Route::resource('users', App\Http\Controllers\UserController::class)->middleware('auth');
 Route::resource('roles', App\Http\Controllers\RolController::class)->middleware('auth');
-
+Route::resource('prestamos', App\Http\Controllers\PrestamoController::class)->middleware('auth');
 
 Auth::routes();
 

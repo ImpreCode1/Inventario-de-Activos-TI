@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Title
@@ -74,7 +73,6 @@ return [
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Impresistem Logo',
-
 
     /*
     |--------------------------------------------------------------------------
@@ -298,161 +296,161 @@ return [
     'menu' => [
         // 🔹 Navbar
         [
-            'type'         => 'fullscreen-widget',
+            'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
         // 🔹 Sidebar
         [
-            'text'        => 'Empleados',
-            'url'         => 'empleados',
-            'icon'        => 'fas fa-id-badge',
-            'can'         => 'ver-empleado',
-            'active'      => ['empleados*', 'empleados/create', 'empleados/*/edit'],
+            'text' => 'Empleados',
+            'url' => 'empleados',
+            'icon' => 'fas fa-id-badge',
+            'can' => 'ver-empleado',
+            'active' => ['empleados*', 'empleados/create', 'empleados/*/edit'],
         ],
 
-        ['header' => 'REGISTROS VARIOS', 'can'  => ['ver-cargo', 'ver-departamento', 'ver-marca','ver-categoria']],
+        ['header' => 'REGISTROS VARIOS', 'can' => ['ver-cargo', 'ver-departamento', 'ver-marca', 'ver-categoria']],
         [
-            'text'    => 'Registros',
-            'icon'    => 'fas fa-folder-open',
-            'can'     => ['ver-cargo', 'ver-departamento', 'ver-marca', 'ver-categoria'],
+            'text' => 'Registros',
+            'icon' => 'fas fa-folder-open',
+            'can' => ['ver-cargo', 'ver-departamento', 'ver-marca', 'ver-categoria'],
             'submenu' => [
                 [
-                    'text'   => 'Cargos',
-                    'url'    => 'cargos',
-                    'icon'   => 'fas fa-briefcase',
-                    'can'    => 'ver-cargo',
+                    'text' => 'Cargos',
+                    'url' => 'cargos',
+                    'icon' => 'fas fa-briefcase',
+                    'can' => 'ver-cargo',
                     'active' => ['cargos*', 'cargos/create', 'cargos/*/edit'],
                 ],
                 [
-                    'text'   => 'Departamentos',
-                    'url'    => 'departamentos',
-                    'icon'   => 'fas fa-building',
-                    'can'    => 'ver-departamento',
+                    'text' => 'Departamentos',
+                    'url' => 'departamentos',
+                    'icon' => 'fas fa-building',
+                    'can' => 'ver-departamento',
                     'active' => ['departamentos*', 'departamentos/create', 'departamentos/*/edit'],
                 ],
                 [
-                    'text'   => 'Marcas',
-                    'url'    => 'marcas',
-                    'icon'   => 'fas fa-tags',
-                    'can'    => 'ver-marca',
+                    'text' => 'Marcas',
+                    'url' => 'marcas',
+                    'icon' => 'fas fa-tags',
+                    'can' => 'ver-marca',
                     'active' => ['marcas*', 'marcas/create', 'marcas/*/edit'],
                 ],
                 [
-                    'text'   => 'Categorias',
-                    'url'    => 'categorias',
-                    'icon'   => 'fas fa-layer-group',
-                    'can'    => 'ver-categoria',
+                    'text' => 'Categorias',
+                    'url' => 'categorias',
+                    'icon' => 'fas fa-layer-group',
+                    'can' => 'ver-categoria',
                     'active' => ['categorias*', 'categorias/create', 'categorias/*/edit'],
                 ],
             ],
         ],
 
-        ['header' => 'INVENTARIO ACTIVOS', 'can'  => ['ver-equipo', 'ver-accesesorio', 'ver-telefono']],
+        ['header' => 'INVENTARIO ACTIVOS', 'can' => ['ver-equipo', 'ver-accesesorio', 'ver-telefono']],
         [
-            'text'    => 'Inventario',
-            'icon'    => 'fas fa-boxes',
-            'can'     => ['ver-equipo', 'ver-accesesorio', 'ver-telefono'],
+            'text' => 'Inventario',
+            'icon' => 'fas fa-boxes',
+            'can' => ['ver-equipo', 'ver-accesesorio', 'ver-telefono'],
             'submenu' => [
                 [
-                    'text'   => 'Portátiles y CPUs',
-                    'url'    => 'equipos',
-                    'icon'   => 'fas fa-laptop-code',
-                    'can'    => 'ver-equipo',
+                    'text' => 'Portátiles y CPUs',
+                    'url' => 'equipos',
+                    'icon' => 'fas fa-laptop-code',
+                    'can' => 'ver-equipo',
                     'active' => ['equipos/create', 'equipos/*/edit'],
                 ],
                 [
-                    'text'   => 'Accesorios',
-                    'url'    => 'accesorios',
-                    'icon'   => 'fas fa-keyboard',
-                    'can'    => 'ver-accesesorio',
+                    'text' => 'Accesorios',
+                    'url' => 'accesorios',
+                    'icon' => 'fas fa-keyboard',
+                    'can' => 'ver-accesesorio',
                     'active' => ['accesorios*', 'accesorios/create', 'accesorios/*/edit'],
                 ],
                 [
-                    'text'   => 'Celulares',
-                    'url'    => 'celulares',
-                    'icon'   => 'fas fa-mobile-alt',
-                    'can'    => 'ver-telefono',
+                    'text' => 'Celulares',
+                    'url' => 'celulares',
+                    'icon' => 'fas fa-mobile-alt',
+                    'can' => 'ver-telefono',
                     'active' => ['celulares*', 'celulares/create', 'celulares/*/edit'],
                 ],
             ],
         ],
 
-        ['header' => 'HISTORIAL ACTIVOS', 'can'  => ['ver-HistorialEquipo', 'ver-HistorialAccesesorio', 'ver-HistorialTelefono']],
+        ['header' => 'HISTORIAL ACTIVOS', 'can' => ['ver-HistorialEquipo', 'ver-HistorialAccesesorio', 'ver-HistorialTelefono']],
         [
-            'text'    => 'Historiales',
-            'icon'    => 'fas fa-history',
-            'can'     => ['ver-HistorialEquipo', 'ver-HistorialAccesesorio', 'ver-HistorialTelefono'],
+            'text' => 'Historiales',
+            'icon' => 'fas fa-history',
+            'can' => ['ver-HistorialEquipo', 'ver-HistorialAccesesorio', 'ver-HistorialTelefono'],
             'submenu' => [
                 [
                     'text' => 'Historial Portátiles',
-                    'url'  => 'equiposHistorial',
+                    'url' => 'equiposHistorial',
                     'icon' => 'fas fa-laptop',
-                    'can'  => 'ver-HistorialEquipo',
+                    'can' => 'ver-HistorialEquipo',
                 ],
                 [
                     'text' => 'Historial Accesorios',
-                    'url'  => 'accesesoriosHistorial',
+                    'url' => 'accesesoriosHistorial',
                     'icon' => 'fas fa-mouse',
-                    'can'  => 'ver-HistorialAccesesorio',
+                    'can' => 'ver-HistorialAccesesorio',
                 ],
                 [
                     'text' => 'Historial Celulares',
-                    'url'  => 'telefonosHistorial',
+                    'url' => 'telefonosHistorial',
                     'icon' => 'fas fa-mobile',
-                    'can'  => 'ver-HistorialTelefono',
+                    'can' => 'ver-HistorialTelefono',
                 ],
             ],
         ],
 
-        ['header' => 'VARIOS', 'can'  => ['ver-memorando', 'ver-software']],
+        ['header' => 'VARIOS', 'can' => ['ver-memorando', 'ver-software']],
         [
-            'text'   => 'Memorandos Bodega',
-            'url'    => 'memorandos',
-            'icon'   => 'fas fa-envelope-open-text',
-            'can'    => 'ver-memorando',
+            'text' => 'Memorandos Bodega',
+            'url' => 'memorandos',
+            'icon' => 'fas fa-envelope-open-text',
+            'can' => 'ver-memorando',
             'active' => ['memorandos*', 'memorandos/create'],
         ],
         [
-            'text'   => 'Responsabilidad de Software',
-            'url'    => 'softwares',
-            'icon'   => 'fas fa-microchip',
-            'can'    => 'ver-software',
+            'text' => 'Responsabilidad de Software',
+            'url' => 'softwares',
+            'icon' => 'fas fa-microchip',
+            'can' => 'ver-software',
             'active' => ['softwares*', 'softwares/create'],
         ],
 
-        ['header' => 'PRESTAMO DE ACCESORIOS', 'can'  => []],
+        ['header' => 'PRESTAMO DE ACCESORIOS', 'can' => ['ver-prestamo']],
         [
-            'text'    => 'Prestamos',
-            'url'     => 'prestamos',
-            'icon'    => 'fas fa-exchange-alt',
-            'can'     => [''],
+            'text' => 'Prestamos',
+            'url' => 'prestamos',
+            'icon' => 'fas fa-exchange-alt',
+            'can' => ['ver-prestamo', 'crear-prestamo', 'editar-prestamo', 'borrar-prestamo'],
+            'active' => ['prestamos*', 'prestamos/create', 'prestamos/*/edit'],
         ],
 
-        ['header' => 'ADMINISTRACIÓN', 'can'  => ['ver-usuario', 'ver-rol']],
+        ['header' => 'ADMINISTRACIÓN', 'can' => ['ver-usuario', 'ver-rol']],
         [
-            'text'    => 'Asignaciones',
-            'icon'    => 'fas fa-user-shield',
-            'can'     => ['ver-usuario', 'ver-rol'],
+            'text' => 'Asignaciones',
+            'icon' => 'fas fa-user-shield',
+            'can' => ['ver-usuario', 'ver-rol'],
             'submenu' => [
                 [
-                    'text'   => 'Usuarios',
-                    'url'    => 'users',
-                    'icon'   => 'fas fa-user',
-                    'can'    => 'ver-usuario',
+                    'text' => 'Usuarios',
+                    'url' => 'users',
+                    'icon' => 'fas fa-user',
+                    'can' => 'ver-usuario',
                     'active' => ['users*', 'users/create', 'users/*/edit'],
                 ],
                 [
-                    'text'   => 'Roles',
-                    'url'    => 'roles',
-                    'icon'   => 'fas fa-user-lock',
-                    'can'    => 'ver-rol',
+                    'text' => 'Roles',
+                    'url' => 'roles',
+                    'icon' => 'fas fa-user-lock',
+                    'can' => 'ver-rol',
                     'active' => ['roles*', 'roles/create', 'roles/*/edit'],
                 ],
             ],
         ],
     ],
-
 
     /*
     |--------------------------------------------------------------------------
