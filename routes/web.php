@@ -1,8 +1,6 @@
 <?php
 
-use App\Mail\CambioEquipo;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,11 +44,6 @@ Route::get('memorandos/lista', [App\Http\Controllers\MemorandoController::class,
 Route::get('prestamos/lista', [App\Http\Controllers\PrestamoController::class, 'prestamos'])->name('prestamos.lista')->middleware('auth');
 
 Route::post('prestamos/{prestamo}/devolver', [App\Http\Controllers\PrestamoController::class, 'devolver'])->name('prestamos.devolver');
-// Route::get('prueba', function(){
-// $correo = new CambioEquipo;
-//  Mail::to('johnny1678m@gmail.com')->send($correo);
-//    return "Mensaje enviado"
-// });
 
 Route::resource('cargos', App\Http\Controllers\CargoController::class)->middleware('auth');
 Route::resource('departamentos', App\Http\Controllers\DepartamentoController::class)->middleware('auth');
