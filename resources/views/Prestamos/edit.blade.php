@@ -109,6 +109,10 @@
                 allowClear: true,
                 width: "100%"
             });
+
+            $('#usuario_id').on('select2:open', function(e) {
+                document.querySelector('.select2-search__field').focus();
+            });
         });
     </script>
 @stop
