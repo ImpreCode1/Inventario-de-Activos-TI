@@ -3,6 +3,7 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="/vendor/select2/css/select2.min.css">
 @stop
 
 @section('content_header')
@@ -107,4 +108,23 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('js')
+    <script src="/vendor/select2/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Inicializar Select2
+            $('#id_empleado').select2({
+                placeholder: "-- Escoja el empleado al que pertenecera el celular --",
+                allowClear: true,
+                width: "100%"
+            });
+
+            $('#id_empleado').on('select2:open', function(e) {
+                document.querySelector('.select2-search__field').focus();
+            });
+        });
+    </script>
 @stop
