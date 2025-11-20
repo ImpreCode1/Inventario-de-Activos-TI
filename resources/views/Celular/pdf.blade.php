@@ -20,7 +20,7 @@
         }
 
         .cuerpo {
-            margin: 2cm;
+            margin: 1cm;
         }
 
         table {
@@ -59,8 +59,9 @@
                     <td>Marca</td>
                     <td>Modelo</td>
                     <td>N° Telefono</td>
-                    <td>Email 1</td>
-                    <td>Email 2</td>
+		    <td>Serial</td>
+                    <td>IMEI 1</td>
+                    <td>IMEI 2</td>
                     <td>RAM</td>
                     <td>Memoria</td>
                 </tr>
@@ -68,6 +69,7 @@
                     <td>{{ $celular->marca->marca ?? '' }}</td>
                     <td>{{ $celular->modelo ?? '' }}</td>
                     <td>{{ $celular->n_telefono ?? '' }}</td>
+                    <td>{{ $celular->serial ?? '' }}</td>
                     <td>{{ $celular->email_1 ?? '' }}</td>
                     <td>{{ $celular->email_2 ?? '' }}</td>
                     <td>{{ $celular->ram ?? '' }}</td>
@@ -78,9 +80,11 @@
             <p>Dicho celular puede ser utilizado de acuerdo a sus criterios en pro de los trabajos derivados de su
                 actividad dentro de la compañía.
             </p>
-            <p>La responsabilidad del manejo adecuado del mismo y de la pérdida total o parcial del mismo es
-                del usuario. El celular se encuentra asegurado, en caso de pérdida, el usuario debera pagar el valor deducible
-                del seguro. En caso de averia por daños causados por el ususario, el costo de los repuestos sera asumido por el ususario.
+            <p>El usuario es responsable del manejo adecuado del equipo y de cualquier pérdida total o parcial del mismo. 
+		Si el equipo sufre daños debido a mal uso o negligencia que requieran reparación o reemplazo de piezas, en la primera incidencia 
+		el usuario asumirá el 50% del costo, mientras que la empresa cubrirá el 50% restante. En una segunda incidencia o posteriores, 
+		el usuario será responsable del 100% del costo. En caso de pérdida o robo, el usuario deberá cubrir el 100% del deducible 
+		correspondiente al seguro vigente del equipo, sin excepciones.
             </p>
             <br>
             <p>Agradezco su amable y acostumbrada atención</p>
@@ -88,7 +92,7 @@
             <br>
             <div style="display: flex; align-items: center;">
                 <div style="float: left;">
-                    <p style="font-size: 16px;"> <b>Freddy Javier Alonso </b><br>
+                    <p style="font-size: 16px;"> <b>FREDDY JAVIER ALONSO </b><br>
                     ADMINISTRATIVE DIRECTOR</p>
                     <p style="font-size: 13px;">FIRMA _____________________________ <br><br>
                         C.C ________________________________</p>

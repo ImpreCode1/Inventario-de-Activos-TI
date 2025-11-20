@@ -136,7 +136,7 @@
             <p>Atentamente.</p>
             <div style="display: flex; align-items: center;">
                 <div style="float: left;">
-                    <p><b>Freddy Javier Alonso<br>
+                    <p><b>FREDDY JAVIER ALONSO<br>
                     ADMINISTRATIVE DIRECTOR<br>
                     IMPRESISTEM S.A.S
                     </b>
