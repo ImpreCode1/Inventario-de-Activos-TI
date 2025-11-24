@@ -137,6 +137,7 @@
                 processing: true,
                 serverSide: true,
                 order: [[0, 'desc']],
+                searching: false,
                 ajax: {
                     url: "{{ route('historialequipos.lista') }}",
                     data: function(d) {
