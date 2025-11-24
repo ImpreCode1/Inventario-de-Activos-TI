@@ -72,6 +72,7 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Empleado</th>
+                        <th scope="col">Serie</th>
                         <th scope="col">Categoria</th>
                         <th scope="col">N° de activo del Equipo</th>
                         <th scope="col">Fecha Asignacion</th>
@@ -165,6 +166,11 @@
                     {
                         data: 'empleado.nombre',
                         name: 'empleado.nombre',
+                        defaultContent: ''
+                    },
+                    {
+                        data: 'cpuequipo.serie',
+                        name: 'cpuequipo.serie',
                         defaultContent: ''
                     },
                     {

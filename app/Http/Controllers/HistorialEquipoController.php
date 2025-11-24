@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CpuEquipo;
-use App\Models\Empleado;  // <--- Asegúrate de importar tus modelos
+use App\Models\Empleado;
 use App\Models\HistorialEquipo;
 use DataTables;
 use Illuminate\Http\Request;
@@ -46,10 +46,8 @@ class HistorialEquipoController extends Controller
             abort(403); // Acceso no autorizado
         }
 
-        // 1. Preparamos la consulta (QUERY BUILDER), PERO NO HACEMOS ->get() TODAVÍA
-        // Nota: Usamos 'historial_equipos.*' para evitar conflictos de columnas con los joins
         $query = HistorialEquipo::with(['empleado', 'cpuequipo.categoria'])
-                 ->select('historial_equipos.*');
+                ->select('historial_equipos.*');
 
         return datatables()->of($query)
             // 2. Agregamos la lógica de filtrado personalizado
