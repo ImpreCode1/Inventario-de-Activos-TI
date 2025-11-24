@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 
 class CpuEquipo extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'id_categoria',
         'id_marca',
@@ -23,80 +22,105 @@ class CpuEquipo extends Model
         'discoduro',
         'observaciones',
         'id_empleado',
-        'nom_equipo'
+        'nom_equipo',
     ];
 
+    protected $casts = [
+        'id_empleado' => 'integer',
+    ];
 
-
-    public function categoria(){
+    public function categoria()
+    {
         return $this->belongsTo(Categoria::class, 'id_categoria')->whereIn('nombre', ['CPU', 'PORTATIL', 'ALL-IN-ONE']);
     }
 
-    public function empleado(){
+    public function empleado()
+    {
         return $this->belongsTo(Empleado::class, 'id_empleado');
     }
-    public function marca(){
+
+    public function marca()
+    {
         return $this->belongsTo(Marca::class, 'id_marca');
     }
-    public function historialEquipo(){
-        return $this->hasMany(HistorialEquipo::class, 'id');
+
+    public function historialEquipo()
+    {
+        return $this->hasMany(HistorialEquipo::class, 'id_portatiles', 'id');
     }
 
     public static function boot()
     {
         parent::boot();
-    
-        self::created(function ($cpuEquipo) {
-            if ($cpuEquipo->id_empleado > 0) { // Se asigna a un empleado específico
-                $historialEquipo = new HistorialEquipo();
-                $historialEquipo->id_empleado = $cpuEquipo->id_empleado;
-                $historialEquipo->id_portatiles = $cpuEquipo->id;
-                $historialEquipo->fecha_asignacion = now();
-                $historialEquipo->save();
+
+        // Cuando se crea un equipo
+        static::created(function ($equipo) {
+            if ($equipo->id_empleado > 0) {
+                self::actualizarHistorial($equipo->id, $equipo->id_empleado);
+            }
+        });
+
+        // Cuando se actualiza y cambia el id_empleado
+        static::updated(function ($equipo) {
+            if ($equipo->isDirty('id_empleado')) {
+                self::actualizarHistorial($equipo->id, $equipo->id_empleado);
             }
         });
     }
 
-public function setEstadoDisponible()
-{
-    if ($this->id_empleado !== 0) { // Se asigna a un empleado específico
-        $this->actualizarHistorial($this->id, 0); // Agregar fecha de devolución en el historial
+    public function setEstadoDisponible()
+    {
+        if (!empty($this->id_empleado)) {
+            self::actualizarHistorial($this->id, 0);
+        }
+        $this->id_empleado = 0; // Lo mantenemos para no romper nada
+        $this->save();
     }
-    $this->id_empleado = 0;
-    $this->save();
-}
 
-public static function actualizarHistorial($equipo_id, $empleado_id)
-{
-    //Buscar el registro de historial del equipo actual
-    $historialActual = HistorialEquipo::where('id_portatiles', $equipo_id)->whereNull('fecha_devolucion')->first();
+    public static function actualizarHistorial($equipo_id, $empleado_id)
+    {
+        // Buscar el registro de historial del equipo actual
+        $historialActual = self::historialAbierto($equipo_id);
 
-    if ($empleado_id === 0) { // Cambiar estado a disponible
+        if ($empleado_id === 0) { // Cambiar estado a disponible
+            if ($historialActual) {
+                // Agregar fecha de devolución en el registro actual de historial del equipo
+                $historialActual->fecha_devolucion = now()->format('Y-m-d');
+                $historialActual->save();
+            }
+
+            // Crear historial para "Infraestructura"
+            $nuevoHistorial = new HistorialEquipo();
+            $nuevoHistorial->id_empleado = 0; // Infraestructura
+            $nuevoHistorial->id_portatiles = $equipo_id;
+            $nuevoHistorial->fecha_asignacion = now();
+            $nuevoHistorial->save();
+
+            return;
+        }
+
         if ($historialActual) {
-            // Agregar fecha de devolución en el registro actual de historial del equipo
+            // Si el empleado es el mismo, no hacemos nada
+            if ($historialActual->id_empleado == $empleado_id) {
+                return;
+            }
+            // Actualizar la fecha de devolución en el registro actual de historial del equipo
             $historialActual->fecha_devolucion = now()->format('Y-m-d');
             $historialActual->save();
         }
-        return;
+
+        // Crear un nuevo registro de historial del equipo para el nuevo empleado
+        $nuevoHistorial = new HistorialEquipo();
+        $nuevoHistorial->id_empleado = $empleado_id;
+        $nuevoHistorial->id_portatiles = $equipo_id;
+        $nuevoHistorial->fecha_asignacion = now()->format('Y-m-d');
+        $nuevoHistorial->save();
     }
 
-    if ($historialActual) {
-        // Si el empleado es el mismo, no hacemos nada
-        if ($historialActual->id_empleado == $empleado_id) {
-            return;
-        }
-        //Actualizar la fecha de devolución en el registro actual de historial del equipo
-        $historialActual->fecha_devolucion = now()->format('Y-m-d');
-        $historialActual->save();
+    private static function historialAbierto($equipo_id)
+    {
+        return HistorialEquipo::where('id_portatiles', $equipo_id)
+            ->whereNull('fecha_devolucion')
+            ->first();
     }
-
-    //Crear un nuevo registro de historial del equipo para el nuevo empleado
-    $nuevoHistorial = new HistorialEquipo();
-    $nuevoHistorial->id_empleado = $empleado_id;
-    $nuevoHistorial->id_portatiles = $equipo_id;
-    $nuevoHistorial->fecha_asignacion = now()->format('Y-m-d');
-    $nuevoHistorial->save();
 }
-
-}
-
