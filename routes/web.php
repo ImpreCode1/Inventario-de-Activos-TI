@@ -62,6 +62,9 @@ Route::resource('users', App\Http\Controllers\UserController::class)->middleware
 Route::resource('roles', App\Http\Controllers\RolController::class)->middleware('auth');
 Route::resource('prestamos', App\Http\Controllers\PrestamoController::class)->middleware('auth');
 
+Route::post('equipo-hoja-vida/registrar', [App\Http\Controllers\EquipoHojaVidaController::class, 'registrar'])->name('hojavida.registrar')->middleware('auth');
+Route::get('equipos/{tipo}/{id}/hoja-vida', [App\Http\Controllers\EquipoHojaVidaController::class, 'historial'])->name('hojavida.historial')->middleware('auth');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -34,6 +34,11 @@ class CpuEquipo extends Model
         return $this->belongsTo(Categoria::class, 'id_categoria')->whereIn('nombre', ['CPU', 'PORTATIL', 'ALL-IN-ONE']);
     }
 
+    public function hojaVida()
+    {
+        return $this->morphMany(EquipoHojaVida::class, 'equipo', 'equipo_tipo', 'equipo_id');
+    }
+
     public function empleado()
     {
         return $this->belongsTo(Empleado::class, 'id_empleado');

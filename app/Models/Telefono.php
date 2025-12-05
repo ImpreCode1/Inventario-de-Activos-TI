@@ -30,6 +30,11 @@ class Telefono extends Model
         'id_empleado' => 'integer',
     ];
 
+    public function hojaVida()
+    {
+        return $this->morphMany(EquipoHojaVida::class, 'equipo', 'equipo_tipo', 'equipo_id');
+    }
+
     public function categoria()
     {
         return $this->belongsTo(Categoria::class, 'id_categoria')->whereIn('nombre', ['CELULAR']);
