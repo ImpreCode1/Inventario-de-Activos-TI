@@ -376,6 +376,14 @@ return [
             ],
         ],
 
+        ['header' => 'HOJAS DE VIDA', 'can' => ['ver-HojasVida']],
+        [
+            'text' => 'Hojas de Vida',
+            'url' => 'hojasvida',
+            'icon' => 'fas fa-newspaper',
+            'can' => ['ver-HojasVida'],
+        ],
+
         ['header' => 'HISTORIAL ACTIVOS', 'can' => ['ver-HistorialEquipo', 'ver-HistorialAccesesorio', 'ver-HistorialTelefono']],
         [
             'text' => 'Historiales',

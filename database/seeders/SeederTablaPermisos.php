@@ -96,6 +96,8 @@ class SeederTablaPermisos extends Seeder
             'crear-prestamo',
             'editar-prestamo',
             'borrar-prestamo',
+            //
+            'ver-hojasvida'
         ];
 
         foreach ($permisos as $permiso) {
