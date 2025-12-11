@@ -39,10 +39,9 @@ class TelefonoController extends Controller
         if (Gate::denies('ver-telefono')) {
             abort(403); // Acceso no autorizado
         }
-        $celulares = Telefono::with(['categoria', 'marca', 'empleado'])->select('id', 'id_empleado', 'id_categoria',
-            'id_marca', 'serial', 'modelo', 'n_telefono', 'email_1', 'email_2', 'serial_sim', 'ram', 'rom', 'cedula', 'operador')->get();
+        $query = Telefono::with(['categoria', 'marca', 'empleado'])->select('telefonos.*');
 
-        return datatables()->of($celulares)
+        return datatables()->of($query)
         ->addColumn('action', function ($celulares) {
             $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
 

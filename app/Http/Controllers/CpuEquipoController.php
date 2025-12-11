@@ -43,10 +43,10 @@ class CpuEquipoController extends Controller
         if (Gate::denies('ver-equipo')) {
             abort(403); // Acceso no autorizado
         }
-        $equipos = CpuEquipo::with(['marca', 'categoria', 'empleado'])->select('id', 'id_empleado', 'id_categoria',
-            'id_marca', 'n_activo', 'costo', 'n_serial', 'serie', 'n_parte', 'memoria_ram', 'procesador', 'discoduro')->get();
+        $query = CpuEquipo::with(['marca', 'categoria', 'empleado'])
+        ->select('cpu_equipos.*');
 
-        return datatables()->of($equipos)
+        return datatables()->eloquent($query)
             ->addColumn('action', function ($equipo) {
                 $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
 
