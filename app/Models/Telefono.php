@@ -32,7 +32,9 @@ class Telefono extends Model
 
     public function hojaVida()
     {
-        return $this->morphMany(EquipoHojaVida::class, 'equipo', 'equipo_tipo', 'equipo_id');
+        return $this->hasMany(EquipoHojaVida::class, 'equipo_id')
+                    ->where('equipo_tipo', 'telefono')
+                    ->orderBy('created_at', 'desc');
     }
 
     public function categoria()

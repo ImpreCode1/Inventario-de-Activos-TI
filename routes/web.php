@@ -62,7 +62,9 @@ Route::resource('users', App\Http\Controllers\UserController::class)->middleware
 Route::resource('roles', App\Http\Controllers\RolController::class)->middleware('auth');
 Route::resource('prestamos', App\Http\Controllers\PrestamoController::class)->middleware('auth');
 
-Route::get('hojasvida', [App\Http\Controllers\HojasVidaController::class, 'index'])->name('hojasvida')->middleware('auth');
+Route::get('hojasvida', [App\Http\Controllers\HojasVidaController::class, 'index'])->name('hojasvida.index')->middleware('auth');
+Route::get('hojasvida/{tipo}/{id}', [App\Http\Controllers\HojasVidaController::class, 'show'])->name('hojasvida.show')->middleware('auth');
+Route::post('hojasvida/{tipo}/{id}', [App\Http\Controllers\HojasVidaController::class, 'store'])->name('hojasvida.store')->middleware('auth');
 
 Auth::routes();
 
