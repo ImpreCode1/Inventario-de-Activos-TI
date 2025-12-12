@@ -22,9 +22,40 @@ class HojasVidaController extends Controller
 
         $modelo = $map[$tipo];
 
-        $equipo = $modelo::with('hojaVida.usuario')->findOrFail($id);
+        $equipo = $modelo::with([
+            'hojaVida.usuario',
+            'historialAsignaciones.empleado',
+        ])->findOrFail($id);
 
-        return view('hojasvida.show', compact('equipo', 'tipo'));
+        // 🔥 Unificación de todos los eventos
+        $historial = collect();
+
+        // Eventos técnicos
+        foreach ($equipo->hojaVida as $item) {
+            $historial->push((object) [
+                'fecha' => $item->created_at,
+                'tipo' => 'tecnico',
+                'evento' => strtoupper($item->evento),
+                'descripcion' => $item->descripcion ?? 'Sin detalles',
+                'usuario' => $item->usuario->name,
+            ]);
+        }
+
+        // Asignaciones
+        foreach ($equipo->historialAsignaciones as $asig) {
+            $historial->push((object) [
+                'fecha' => $asig->created_at, // ← ✔ CORRECTO
+                'tipo' => 'asignacion',
+                'evento' => 'ASIGNACIÓN',
+                'descripcion' => 'Asignado a: '.$asig->empleado->nombre,
+                'usuario' => 'Sistema',
+            ]);
+        }
+
+        // 🔥 Ordenar de más reciente a más antiguo
+        $historial = $historial->sortByDesc('fecha')->values();
+
+        return view('hojasvida.show', compact('equipo', 'tipo', 'historial'));
     }
 
     public function store(Request $request, $tipo, $id)

@@ -129,4 +129,9 @@ class Telefono extends Model
             ->whereNull('fecha_devolucion')
             ->first();
     }
+
+    public function historialAsignaciones()
+    {
+        return $this->hasMany(HistorialTelefono::class, 'id_telefonos');
+    }
 }

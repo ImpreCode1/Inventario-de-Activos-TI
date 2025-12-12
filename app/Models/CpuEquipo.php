@@ -130,4 +130,9 @@ class CpuEquipo extends Model
             ->whereNull('fecha_devolucion')
             ->first();
     }
+
+    public function historialAsignaciones()
+    {
+        return $this->hasMany(HistorialEquipo::class, 'id_portatiles');
+    }
 }

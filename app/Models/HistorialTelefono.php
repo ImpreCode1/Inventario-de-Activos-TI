@@ -13,15 +13,16 @@ class HistorialTelefono extends Model
         'id_empleado',
         'id_telefonos',
         'fecha_asignacion',
-        'fecha_devolucion'
+        'fecha_devolucion',
     ];
 
-    public function empleado(){
+    public function empleado()
+    {
         return $this->belongsTo(Empleado::class, 'id_empleado');
     }
 
-    public function telefono(){
+    public function telefono()
+    {
         return $this->belongsTo(Telefono::class, 'id_telefonos');
     }
-    
 }
