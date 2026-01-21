@@ -46,13 +46,28 @@
         </div>
 
         <div class="card-body p-0">
-            <table class="table custom-table m-0">
+            <table class="table custom-table m-0" id="tablaHistorial">
                 <thead class="custom-table-header">
                     <tr>
                         <th style="width: 150px">Fecha</th>
                         <th>Evento</th>
                         <th>Descripción</th>
                         <th style="width: 150px">Usuario</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="text" class="form-control form-control-sm filtro" placeholder="Filtrar fecha">
+                        </th>
+                        <th>
+                            <input type="text" class="form-control form-control-sm filtro" placeholder="Filtrar evento">
+                        </th>
+                        <th>
+                            <input type="text" class="form-control form-control-sm filtro"
+                                placeholder="Filtrar descripción">
+                        </th>
+                        <th>
+                            <input type="text" class="form-control form-control-sm filtro" placeholder="Filtrar usuario">
+                        </th>
                     </tr>
                 </thead>
 
@@ -155,4 +170,24 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filtros = document.querySelectorAll('.filtro');
+            const filas = document.querySelectorAll('#tablaHistorial tbody tr');
+
+            filtros.forEach((input, index) => {
+                input.addEventListener('keyup', () => {
+                    const valor = input.value.toLowerCase();
+
+                    filas.forEach(fila => {
+                        const celda = fila.cells[index];
+                        if (!celda) return;
+
+                        const texto = celda.textContent.toLowerCase();
+                        fila.style.display = texto.includes(valor) ? '' : 'none';
+                    });
+                });
+            });
+        });
+    </script>
 @stop
