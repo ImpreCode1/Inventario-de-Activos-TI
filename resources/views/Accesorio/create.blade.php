@@ -18,8 +18,8 @@
                     <form action="/accesorios" method="POST">
                         @csrf
                         <div>
-                            <label for="" class="form-label">Categoria</label>
-                            <select name="id_categoria" id="id_categoria" class="form-control" tabindex="1">
+                            <label for="" class="form-label">Categoria<span style="color:red">*</span></label>
+                            <select name="id_categoria" id="id_categoria" class="form-control" tabindex="1" required>
                                 <option value="">-- Seleccione la categoria del accesorio --</option>
                                 @foreach ($categorias as $categoria)
                                     <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
@@ -27,8 +27,8 @@
                             </select>
                         </div>
                         <div>
-                            <label for="" class="form-label">Marca</label>
-                            <select name="id_marca" id="id_marca" class="form-control" tabindex="2">
+                            <label for="" class="form-label">Marca<span style="color:red">*</span></label>
+                            <select name="id_marca" id="id_marca" class="form-control" tabindex="2" required>
                                 <option value="">-- Escoja la marca del accesorio --</option>
                                 @foreach ($marcas_ordenadas as $id => $nombre)
                                     <option value="{{ $id }}">{{ $nombre }}</option>
@@ -36,19 +36,19 @@
                             </select>
                         </div>
                         <div>
-                            <label for="" class="form-label">Escriba el Modelo del accesorio</label>
+                            <label for="" class="form-label">Escriba el Modelo del accesorio<span style="color:red">*</span></label>
                             <input type="text" name="serie" id="serie" class="form-control"
-                                placeholder="Modelo" tabindex="3">
+                                placeholder="Modelo" tabindex="3" required>
                         </div>
                         <div>
-                            <label for="" class="form-label">Serial del Accesorio</label>
+                            <label for="" class="form-label">Serial del Accesorio<span style="color:red">*</span></label>
                             <input type="text" name="n_serial" id="n_serial" class="form-control" placeholder="XXXX-XXXX-XXXX"
-                                tabindex="5">
+                                tabindex="5" required>
                         </div>
                         <div>
-                            <label for="" class="form-label">Numero de parte</label>
+                            <label for="" class="form-label">Numero de parte<span style="color:red">*</span></label>
                             <input type="text" name="n_parte" id="n_parte" class="form-control"
-                                placeholder="Numero de parte" tabindex="6">
+                                placeholder="Numero de parte" tabindex="6" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Observaciones acerca del Accesorio</label>
@@ -56,8 +56,8 @@
                                 placeholder="Observaciones" tabindex="7">
                         </div>
                         <div>
-                            <label for="" class="form-label">Empleado al que se le asigna</label>
-                            <select name="id_empleado" id="id_empleado" class="form-control" tabindex="8">
+                            <label for="" class="form-label">Empleado al que se le asigna<span style="color:red">*</span></label>
+                            <select name="id_empleado" id="id_empleado" class="form-control" tabindex="8" required>
                                 <option value="">-- Escoja el empleado al que pertenecera el equipo --</option>
                                 @foreach ($empleados_ordenados as $id => $nombre)
                                     <option value="{{ $id }}">{{ $nombre }}</option>

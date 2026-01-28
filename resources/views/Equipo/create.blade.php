@@ -20,7 +20,7 @@
                     <form action="/equipos" method="POST">
                         @csrf
                         <div>
-                            <label for="" class="form-label">Categoria</label>
+                            <label for="" class="form-label">Categoria<span style="color:red">*</span></label>
                             <select name="id_categoria" id="id_categoria" class="form-control" tabindex="1" required>
                                 <option value="">-- Seleccione la categoria del equipo --</option>
                                 @foreach ($categorias as $categoria)
@@ -29,7 +29,7 @@
                             </select>
                         </div>
                         <div>
-                            <label for="" class="form-label">Marca</label>
+                            <label for="" class="form-label">Marca<span style="color:red">*</span></label>
                             <select name="id_marca" id="id_marca" class="form-control" tabindex="2" required>
                                 <option value="">-- Escoja la marca del equipo --</option>
                                 @foreach ($marcas_ordenadas as $id => $nombre)
@@ -38,44 +38,44 @@
                             </select>
                         </div>
                         <div>
-                            <label for="" class="form-label">Escriba el Modelo del equipo</label>
+                            <label for="" class="form-label">Escriba el Modelo del equipo<span style="color:red">*</span></label>
                             <input type="text" name="serie" id="serie" class="form-control" placeholder="serie"
                                 tabindex="3"required>
                         </div>
                         <div>
-                            <label for="" class="form-label">Numero de Activo</label>
+                            <label for="" class="form-label">Numero de Activo<span style="color:red">*</span></label>
                             <input type="text" name="n_activo" id="n_activo" class="form-control"
-                                placeholder="Numero de Activo" tabindex="4" >
+                                placeholder="Numero de Activo" tabindex="4" required>
                         </div>
                         <div>
-                            <label for="" class="form-label">Costo  del Equipo</label>
+                            <label for="" class="form-label">Costo  del Equipo<span style="color:red">*</span></label>
                             <input type="text" name="costo" id="costo" class="form-control"
-                                placeholder="Costo  del Equipo" tabindex="5" >
+                                placeholder="Costo  del Equipo" tabindex="5" required>
                         </div>
                         <div>
-                            <label for="" class="form-label">Serial del equipo</label>
+                            <label for="" class="form-label">Serial del equipo<span style="color:red">*</span></label>
                             <input type="text" name="n_serial" id="n_serial" class="form-control" placeholder="Serial"
                                 tabindex="6" required>
                         </div>
                         <div>
-                            <label for="" class="form-label">Numero de parte</label>
+                            <label for="" class="form-label">Numero de parte<span style="color:red">*</span></label>
                             <input type="text" name="n_parte" id="n_parte" class="form-control"
-                                placeholder="Numero de parte" tabindex="7">
+                                placeholder="Numero de parte" tabindex="7" required>
                         </div>
                         <div>
-                            <label for="" class="form-label">Memoria Ram</label>
+                            <label for="" class="form-label">Memoria Ram<span style="color:red">*</span></label>
                             <input type="text" name="memoria_ram" id="memoria_ram" class="form-control"
                                 placeholder="Memoria Ram" tabindex="8" required>
                         </div>
                         <div>
-                            <label for="" class="form-label">Procesador</label>
+                            <label for="" class="form-label">Procesador<span style="color:red">*</span></label>
                             <input type="text" name="procesador" id="procesador" class="form-control"
                                 placeholder="Procesador" tabindex="10" required>
                         </div>
                         <div>
-                            <label for="" class="form-label">Discoduro</label>
+                            <label for="" class="form-label">Disco duro<span style="color:red">*</span></label>
                             <input type="text" name="discoduro" id="discoduro" class="form-control"
-                                placeholder="Discoduro" tabindex="9" required>
+                                placeholder="Disco duro" tabindex="9" required>
                         </div>
                         <div>
                             <label for="" class="form-label">Observaciones acerca del equipo</label>
@@ -83,7 +83,7 @@
                                 placeholder="Observaciones" tabindex="10">
                         </div>
                         <div>
-                            <label for="" class="form-label">Empleado al que se le asigna</label>
+                            <label for="" class="form-label">Empleado al que se le asigna<span style="color:red">*</span></label>
                             <select name="id_empleado" id="id_empleado" class="form-control" tabindex="11" required>
                                 <option value="">-- Escoja el empleado al que pertenecera el equipo --</option>
                                 @foreach ($empleados_ordenados as $id => $nombre)
@@ -92,7 +92,7 @@
                             </select>
                         </div>
                         <div>
-                            <label for="" class="form-label">Nombre del equipo</label>
+                            <label for="" class="form-label">Nombre del equipo<span style="color:red">*</span></label>
                             <input type="text" name="nom_equipo" id="nom_equipo" class="form-control"
                                 placeholder="Nombre del equipo" tabindex="12" required>
                         </div>

@@ -18,7 +18,7 @@
                     <form action="/celulares" method="POST">
                         @csrf
                         <div>
-                            <label for="" class="form-label">Categoria</label>
+                            <label for="" class="form-label">Categoria <span style="color:red">*</span></label>
                             <select name="id_categoria" id="id_categoria" class="form-control" tabindex="1" required>
                                 <option value="">-- Seleccione la categoria --</option>
                                 @foreach ($categorias as $categoria)
@@ -27,7 +27,7 @@
                             </select>
                         </div>
                         <div>
-                            <label for="" class="form-label">Marca</label>
+                            <label for="" class="form-label">Marca<span style="color:red">*</span></label>
                             <select name="id_marca" id="id_marca" class="form-control" tabindex="2" required>
                                 <option value="">-- Escoja la marca del Celular --</option>
                                 @foreach ($marcas_ordenadas as $id => $nombre)
@@ -36,12 +36,12 @@
                             </select>
                         </div>
                         <div>
-                            <label for="" class="form-label">Escriba el Serial del CELULAR</label>
+                            <label for="" class="form-label">Escriba el Serial del CELULAR<span style="color:red">*</span></label>
                             <input type="text" name="serial" id="serial" class="form-control"
                                 placeholder="XXXX-XXXXX-XXXX" tabindex="3" required>
                         </div>
                         <div>
-                            <label for="" class="form-label">Escriba el modelo del celular</label>
+                            <label for="" class="form-label">Escriba el modelo del celular<span style="color:red">*</span></label>
                             <input type="text" name="modelo" id="modelo" class="form-control"
                                 placeholder="Modelo del celular" tabindex="3" required>
                         </div>
@@ -71,18 +71,18 @@
                                 tabindex="6" >
                         </div>
                         <div>
-                            <label for="" class="form-label">Memoria RAM</label>
+                            <label for="" class="form-label">Memoria RAM<span style="color:red">*</span></label>
                             <input type="text" name="ram" id="ram" class="form-control"
                                 placeholder="Memoria RAM" tabindex="8" required>
                         </div>
                         <div>
-                            <label for="" class="form-label">Almacenamiento</label>
+                            <label for="" class="form-label">Almacenamiento<span style="color:red">*</span></label>
                             <input type="text" name="rom" id="rom" class="form-control"
                                 placeholder="ROM" tabindex="9" required>
                         </div>
 
                         <div>
-                            <label for="" class="form-label">Empleado al que se le asigna</label>
+                            <label for="" class="form-label">Empleado al que se le asigna<span style="color:red">*</span></label>
                             <select name="id_empleado" id="id_empleado" class="form-control" tabindex="11" required>
                                 <option value="">-- Escoja el empleado al que pertenecera el celular --</option>
                                 @foreach ($empleados_ordenados as $id => $nombre)
@@ -91,7 +91,7 @@
                             </select>
                         </div>
                         <div>
-                            <label for="" class="form-label">Cedula del Empleado</label>
+                            <label for="" class="form-label">Cedula del Empleado<span style="color:red">*</span></label>
                             <input type="text" name="cedula" id="cedula" class="form-control"
                                 placeholder="C.C" tabindex="9" required>
                         </div>
