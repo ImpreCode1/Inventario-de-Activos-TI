@@ -26,7 +26,7 @@
                     {{-- Buscar por activo/serial/imei --}}
                     {{-- SELECT2 para activo/serial/imei --}}
                     <div class="col-md-4">
-                        <label for="filtro_equipo">Activo / Serial </label>
+                        <label for="filtro_equipo">No. Activo</label>
                         <select id="filtro_equipo" name="q" class="form-control select2">
                             <option value="">-- Buscar equipo --</option>
                             @foreach ($equipos as $e)
@@ -72,7 +72,7 @@
                 <thead>
                     <tr>
                         <th>Tipo</th>
-                        <th>Activo / Serial </th>
+                        <th>No. Activo</th>
                         <th>Usuario</th>
                         <th style="width: 130px">Acciones</th>
                     </tr>
@@ -122,7 +122,7 @@
 <script>
     $(document).ready(function() {
 
-        // EQUIPOS - Activo / Serial / IMEI
+        // EQUIPOS - Activo
         $('#filtro_equipo').select2({
             placeholder: "-- Buscar equipo --",
             allowClear: true,
