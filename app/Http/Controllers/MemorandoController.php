@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Memorando;
-use Illuminate\Support\Facades\DB;
-use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Empleado;
-use Illuminate\Support\Carbon;
 use App\Models\Encargado;
+use App\Models\Memorando;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-
 
 class MemorandoController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:ver-memorando|crear-memorando|editar-memorando|borrar-memorando|pdf-memorando')->only('index');
-        $this->middleware('permission:crear-memorando', ['only'=>['create', 'store']]);
-        $this->middleware('permission:borrar-memorando', ['only'=>['destroy']]);
-        $this->middleware('permission:pdf-memorando', ['only'=>['pdf']]);
+        $this->middleware('permission:crear-memorando', ['only' => ['create', 'store']]);
+        $this->middleware('permission:borrar-memorando', ['only' => ['destroy']]);
+        $this->middleware('permission:pdf-memorando', ['only' => ['pdf']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,80 +29,83 @@ class MemorandoController extends Controller
     public function index()
     {
         $encargado = Encargado::findOrFail(1);
-        return view('Memorando.index')->with('encargado', $encargado);;
+
+        return view('Memorando.index')->with('encargado', $encargado);
     }
 
-    public function memorandos(){
+    public function memorandos()
+    {
         if (Gate::denies('ver-memorando')) {
             abort(403); // Acceso no autorizado
         }
         $memorandos = Memorando::with(['empleado'])->select('id', 'id_empleado', 'ciudad', 'direccion', 'n_contacto', 'correo_encargado')->get();
+
         return datatables()->of($memorandos)
         ->addColumn('acciones', function ($memorando) {
-        $id_memorando = $memorando->id;
-        $id_empleado = $memorando->id_empleado;
-        $url_pdf = route('memorandos.pdf', [$id_memorando, $id_empleado]);
+            $id_memorando = $memorando->id;
+            $id_empleado = $memorando->id_empleado;
+            $url_pdf = route('memorandos.pdf', [$id_memorando, $id_empleado]);
 
-        $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
+            $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
 
-        if (Gate::allows('pdf-memorando', $memorando)) {
-            $html .= '
-            <a href="' . $url_pdf . '" 
+            if (Gate::allows('pdf-memorando', $memorando)) {
+                $html .= '
+            <a href="'.$url_pdf.'" 
             target="_blank" 
             class="btn-icon btn-outline-success" 
             title="Ver Memorando">
                 <i class="fas fa-file-pdf"></i>
             </a>';
-        }
+            }
 
-        if (Gate::allows('borrar-memorando', $memorando)) {
-            $html .= '
-            <form id="form-eliminar-' . $memorando->id . '" 
-                action="'. route('memorandos.destroy', $memorando->id) .'" 
+            if (Gate::allows('borrar-memorando', $memorando)) {
+                $html .= '
+            <form id="form-eliminar-'.$memorando->id.'" 
+                action="'.route('memorandos.destroy', $memorando->id).'" 
                 method="POST" style="display:inline;">
                 '.csrf_field().method_field('DELETE').'
                 <button type="button" 
                         class="btn-icon btn-outline-danger" 
                         title="Eliminar"
-                        onclick="confirmDelete(' . $memorando->id . ')">
+                        onclick="confirmDelete('.$memorando->id.')">
                     <i class="fas fa-trash"></i>
                 </button>
             </form>';
-        }
+            }
 
-        $html .= '</div>';
-        return $html;
-    })
+            $html .= '</div>';
+
+            return $html;
+        })
     ->rawColumns(['acciones'])
     ->toJson();
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-{
-    $empleados =  DB::table('empleados')
-        ->where('id', '<>', 0)
-        ->orderBy('nombre', 'asc')
-        ->get();
-    $empleados_ordenados = [];
-    foreach ($empleados as $empleado) {
-        $empleados_ordenados[$empleado->id] = $empleado->nombre;
+    {
+        $empleados = DB::table('empleados')
+            ->where('id', '<>', 0)
+            ->orderBy('nombre', 'asc')
+            ->get();
+        $empleados_ordenados = [];
+        foreach ($empleados as $empleado) {
+            $empleados_ordenados[$empleado->id] = $empleado->nombre;
+        }
+
+        // Obtener los datos del empleado y sus asignaciones
+        $empleado = Empleado::with(['equipos', 'accesorios', 'telefonos'])->find($request->input('id_empleado'));
+
+        return view('memorando.create', compact('empleados_ordenados', 'empleado'));
     }
-
-    // Obtener los datos del empleado y sus asignaciones
-    $empleado = Empleado::with(['equipos', 'accesorios', 'telefonos'])->find($request->input('id_empleado'));
-
-    return view('memorando.create', compact('empleados_ordenados', 'empleado'));
-}
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -114,24 +117,24 @@ class MemorandoController extends Controller
         $memorando->n_contacto = $request->input('n_contacto');
         $memorando->correo_encargado = $request->input('correo_encargado');
         $memorando->save();
+
         return redirect('/memorandos');
-    
-     
     }
+
     public function updateEncargado(Request $request, $id)
     {
         $encargado = Encargado::find($id);
         $encargado->encargado_bodega = $request->input('encargado');
         $encargado->save();
-    
+
         return redirect('/memorandos')->with('success', 'Encargado actualizado exitosamente.');
     }
-    
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -142,37 +145,37 @@ class MemorandoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        
         $memorando = Memorando::find($id);
         $memorando->delete();
+
         return redirect('/memorandos');
     }
 
@@ -210,14 +213,11 @@ class MemorandoController extends Controller
         ->where('empleados.id', '=', $id_empleado)
         ->groupBy('empleados.nombre')
         ->get();
-    
-    $memorandos = Memorando::where('id', $id_memorando)->get();
-    $encargado = DB::table('encargados')->where('id', 1)->first();
-    $pdf = Pdf::loadView('memorando.pdf', compact('resultados', 'memorandos', 'fechaActual', 'encargado'));
-    return $pdf->stream('Memorando.pdf');
-    
+
+        $memorandos = Memorando::where('id', $id_memorando)->get();
+        $encargado = DB::table('encargados')->where('id', 1)->first();
+        $pdf = Pdf::loadView('Memorando.pdf', compact('resultados', 'memorandos', 'fechaActual', 'encargado'));
+
+        return $pdf->stream('Memorando.pdf');
     }
-    
-    
-    
 }

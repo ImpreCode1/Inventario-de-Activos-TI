@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Software;
-use Illuminate\Http\Request;
 use App\Models\Empleado;
+use App\Models\Software;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
-
-
 class SoftwareController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:ver-software|crear-software|editar-software|borrar-software|pdf-software')->only('index');
-        $this->middleware('permission:crear-software', ['only'=>['create', 'store']]);
-        $this->middleware('permission:borrar-software', ['only'=>['destroy']]);
-        $this->middleware('permission:pdf-software', ['only'=>['pdf']]);
+        $this->middleware('permission:crear-software', ['only' => ['create', 'store']]);
+        $this->middleware('permission:borrar-software', ['only' => ['destroy']]);
+        $this->middleware('permission:pdf-software', ['only' => ['pdf']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,54 +27,56 @@ class SoftwareController extends Controller
      */
     public function index()
     {
-       
         return view('Software.index');
     }
 
-    public function softwares(){
+    public function softwares()
+    {
         if (Gate::denies('ver-software')) {
             abort(403); // Acceso no autorizado
         }
         $softwares = Software::with(['empleado'])->select('id', 'id_empleado', 'created_at')->get();
+
         return datatables()->of($softwares)
             ->addColumn('created_at', function ($software) {
                 return $software->created_at->format('Y-m-d');
             })
             ->addColumn('action', function ($software) {
-            $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
+                $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
 
-            if (Gate::allows('pdf-software', $software)) {
-                $html .= '
-                <a href="/softwares/' . $software->id . '/pdf" 
+                if (Gate::allows('pdf-software', $software)) {
+                    $html .= '
+                <a href="/softwares/'.$software->id.'/pdf" 
                 target="_blank" 
                 class="btn-icon btn-outline-success" 
                 title="Responsabilidad Software">
                     <i class="fas fa-file-pdf"></i>
                 </a>';
-            }
+                }
 
-            if (Gate::allows('borrar-software', $software)) {
-                $html .= '
-                <form id="form-eliminar-' . $software->id . '" 
-                    action="'. route('softwares.destroy', $software->id) .'" 
+                if (Gate::allows('borrar-software', $software)) {
+                    $html .= '
+                <form id="form-eliminar-'.$software->id.'" 
+                    action="'.route('softwares.destroy', $software->id).'" 
                     method="POST" style="display:inline;">
                     '.csrf_field().method_field('DELETE').'
                     <button type="button" 
                             class="btn-icon btn-outline-danger" 
                             title="Eliminar"
-                            onclick="confirmDelete(' . $software->id . ')">
+                            onclick="confirmDelete('.$software->id.')">
                         <i class="fas fa-trash"></i>
                     </button>
                 </form>';
-            }
+                }
 
-            $html .= '</div>';
-            return $html;
-        })
+                $html .= '</div>';
+
+                return $html;
+            })
         ->rawColumns(['action'])
         ->toJson();
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -83,29 +84,28 @@ class SoftwareController extends Controller
      */
     public function create()
     {
-        $empleados =  DB::table('empleados')
+        $empleados = DB::table('empleados')
                         ->where('id', '<>', 0) // excluye el empleado con id 0
                         ->orderBy('nombre', 'asc')
                         ->get();
-    
+
         $empleados_ordenados = [];
         foreach ($empleados as $empleado) {
             $empleados_ordenados[$empleado->id] = $empleado->nombre;
         }
-    
+
         return view('software.create', compact('empleados_ordenados'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $softwares = new Software();
-        $softwares -> id_empleado = $request->get('id_empleado');
+        $softwares->id_empleado = $request->get('id_empleado');
 
         $softwares->save();
 
@@ -115,47 +115,48 @@ class SoftwareController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $software = Software::find($id);
         $software->delete();
+
         return redirect('/softwares');
     }
 
@@ -164,8 +165,8 @@ class SoftwareController extends Controller
         $fechaActual = Carbon::now()->format('d/m/Y');
         $softwares = Software::where('id', $id)->get();
 
-        $pdf = Pdf::loadView('software.pdf', compact('softwares', 'fechaActual'));
+        $pdf = Pdf::loadView('Software.pdf', compact('softwares', 'fechaActual'));
+
         return $pdf->stream('Responsabilidad_equipos.pdf');
     }
-    
 }
