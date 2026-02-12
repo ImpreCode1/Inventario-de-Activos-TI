@@ -100,7 +100,7 @@ class MemorandoController extends Controller
         // Obtener los datos del empleado y sus asignaciones
         $empleado = Empleado::with(['equipos', 'accesorios', 'telefonos'])->find($request->input('id_empleado'));
 
-        return view('memorando.create', compact('empleados_ordenados', 'empleado'));
+        return view('Memorando.create', compact('empleados_ordenados', 'empleado'));
     }
 
     /**
@@ -139,7 +139,7 @@ class MemorandoController extends Controller
      */
     public function show($id)
     {
-        return view('memorando.show');
+        return view('Memorando.show');
     }
 
     /**
