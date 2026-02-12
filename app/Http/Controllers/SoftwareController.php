@@ -94,7 +94,7 @@ class SoftwareController extends Controller
             $empleados_ordenados[$empleado->id] = $empleado->nombre;
         }
 
-        return view('software.create', compact('empleados_ordenados'));
+        return view('Software.create', compact('empleados_ordenados'));
     }
 
     /**
