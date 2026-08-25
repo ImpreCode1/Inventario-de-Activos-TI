@@ -1,0 +1,2 @@
+Coloca aqui los dumps .sql para auto-import en el primer arranque de MySQL.
+Los archivos *.sql de esta carpeta estan ignorados por .gitignore.
