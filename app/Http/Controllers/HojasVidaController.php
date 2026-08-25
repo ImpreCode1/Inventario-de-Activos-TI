@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\CpuEquipo;
 use App\Models\Empleado;
 use App\Models\EquipoHojaVida;
+use App\Models\EquipoHojaVidaAdjunto;
 use App\Models\Telefono;
 // <-- Asegurar el modelo correcto
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class HojasVidaController extends Controller
 {
@@ -24,6 +27,7 @@ class HojasVidaController extends Controller
 
         $equipo = $modelo::with([
             'hojaVida.usuario',
+            'hojaVida.adjuntos',
             'historialAsignaciones.empleado',
         ])->findOrFail($id);
 
@@ -33,10 +37,13 @@ class HojasVidaController extends Controller
         // Eventos técnicos
         foreach ($equipo->hojaVida as $item) {
             $historial->push((object) [
+                'id' => $item->id,
                 'fecha' => $item->created_at,
                 'tipo' => 'tecnico',
                 'evento' => strtoupper($item->evento),
                 'descripcion' => $item->descripcion ?? 'Sin detalles',
+                'estado' => $item->estado,
+                'adjuntos' => $item->adjuntos,
                 'usuario' => $item->usuario->name,
             ]);
         }
@@ -44,10 +51,13 @@ class HojasVidaController extends Controller
         // Asignaciones
         foreach ($equipo->historialAsignaciones as $asig) {
             $historial->push((object) [
+                'id' => null,
                 'fecha' => $asig->created_at, // ← ✔ CORRECTO
                 'tipo' => 'asignacion',
                 'evento' => 'ASIGNACIÓN',
                 'descripcion' => 'Asignado a: '.$asig->empleado->nombre,
+                'estado' => null,
+                'adjuntos' => collect(),
                 'usuario' => 'Sistema',
             ]);
         }
@@ -63,15 +73,38 @@ class HojasVidaController extends Controller
         $request->validate([
             'evento' => 'required|string',
             'descripcion' => 'nullable|string',
+            'estado' => ['required', Rule::in(['pendiente', 'en_progreso', 'completado', 'cancelado'])],
+            'adjuntos' => 'nullable|array|max:5',
+            'adjuntos.*' => 'file|mimes:pdf,jpg,jpeg,png,webp,doc,docx,xls,xlsx|max:10240',
         ]);
 
-        EquipoHojaVida::create([
-            'equipo_id' => $id,
-            'equipo_tipo' => $tipo,
-            'evento' => $request->evento,
-            'descripcion' => $request->descripcion,
-            'user_id' => auth()->id(),
-        ]);
+        abort_if(!in_array($tipo, ['cpu', 'telefono']), 404);
+        $tipo === 'cpu'
+            ? CpuEquipo::findOrFail($id)
+            : Telefono::findOrFail($id);
+
+        DB::transaction(function () use ($request, $tipo, $id, &$evento) {
+            $evento = EquipoHojaVida::create([
+                'equipo_id' => $id,
+                'equipo_tipo' => $tipo,
+                'evento' => $request->evento,
+                'descripcion' => $request->descripcion,
+                'estado' => $request->estado,
+                'user_id' => auth()->id(),
+            ]);
+
+            foreach ($request->file('adjuntos', []) as $archivo) {
+                $ruta = $archivo->store("hojasvida/{$tipo}/{$id}", 'public');
+
+                EquipoHojaVidaAdjunto::create([
+                    'hoja_vida_id' => $evento->id,
+                    'nombre_archivo' => $archivo->getClientOriginalName(),
+                    'ruta_archivo' => $ruta,
+                    'tipo_mime' => $archivo->getMimeType(),
+                    'uploaded_at' => now(),
+                ]);
+            }
+        });
 
         return redirect()->route('hojasvida.show', [$tipo, $id])
             ->with('success', 'Evento registrado correctamente.');

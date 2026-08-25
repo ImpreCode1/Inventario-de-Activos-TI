@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 
 class EquipoHojaVida extends Model
@@ -13,12 +11,18 @@ class EquipoHojaVida extends Model
         'equipo_tipo',
         'evento',
         'descripcion',
+        'estado',
         'user_id',
     ];
 
     public function usuario()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function adjuntos()
+    {
+        return $this->hasMany(EquipoHojaVidaAdjunto::class, 'hoja_vida_id');
     }
 
     public function equipoCpu()

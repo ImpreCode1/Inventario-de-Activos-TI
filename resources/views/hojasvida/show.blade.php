@@ -51,6 +51,8 @@
                     <tr>
                         <th style="width: 150px">Fecha</th>
                         <th>Evento</th>
+                        <th style="width: 130px">Estado</th>
+                        <th style="width: 180px">Adjuntos</th>
                         <th>Descripción</th>
                         <th style="width: 150px">Usuario</th>
                     </tr>
@@ -60,6 +62,12 @@
                         </th>
                         <th>
                             <input type="text" class="form-control form-control-sm filtro" placeholder="Filtrar evento">
+                        </th>
+                        <th>
+                            <input type="text" class="form-control form-control-sm filtro" placeholder="Filtrar estado">
+                        </th>
+                        <th>
+                            <input type="text" class="form-control form-control-sm filtro" placeholder="Filtrar adjunto">
                         </th>
                         <th>
                             <input type="text" class="form-control form-control-sm filtro"
@@ -94,20 +102,48 @@
                                 'OTRO' => 'badge-light',
                             ];
 
+                            $estadosColores = [
+                                'pendiente' => 'badge-warning',
+                                'en_progreso' => 'badge-info',
+                                'completado' => 'badge-success',
+                                'cancelado' => 'badge-secondary',
+                            ];
+
                             $eventoClave = strtoupper($item->evento);
                             $color = $colores[$eventoClave] ?? 'badge-primary';
+                            $estadoColor = $estadosColores[$item->estado] ?? 'badge-secondary';
                         @endphp
 
                         <tr>
                             <td>{{ \Carbon\Carbon::parse($item->fecha)->format('Y-m-d H:i') }}</td>
                             <td><span class="badge {{ $color }}">{{ $item->evento }}</span></td>
+                            <td>
+                                @if ($item->tipo === 'tecnico')
+                                    <span class="badge {{ $estadoColor }}">
+                                        {{ ucfirst(str_replace('_', ' ', $item->estado)) }}
+                                    </span>
+                                @else
+                                    ---
+                                @endif
+                            </td>
+                            <td>
+                                @forelse(($item->adjuntos ?? collect()) as $adjunto)
+                                    <a href="{{ $adjunto->url() }}" target="_blank" class="d-block text-truncate"
+                                        title="{{ $adjunto->nombre_archivo }}">
+                                        <i class="fas fa-paperclip"></i>
+                                        {{ \Illuminate\Support\Str::limit($adjunto->nombre_archivo, 20) }}
+                                    </a>
+                                @empty
+                                    ---
+                                @endforelse
+                            </td>
                             <td>{{ $item->descripcion }}</td>
                             <td>{{ $item->usuario }}</td>
                         </tr>
 
                     @empty
                         <tr>
-                            <td colspan="4" class="text-center py-3">Sin registros todavía</td>
+                            <td colspan="6" class="text-center py-3">Sin registros todavía</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -120,7 +156,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ route('hojasvida.store', [$tipo, $equipo->id]) }}" method="POST">
+                <form action="{{ route('hojasvida.store', [$tipo, $equipo->id]) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
 
                     <div class="modal-header bg-primary text-white">
@@ -152,9 +189,26 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="estado">Estado del evento</label>
+                            <select name="estado" id="estado" class="form-control" required>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="en_progreso">En progreso</option>
+                                <option value="completado" selected>Completado</option>
+                                <option value="cancelado">Cancelado</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label for="descripcion">Descripción detallada</label>
                             <textarea name="descripcion" id="descripcion" rows="4" class="form-control"
                                 placeholder="Describe lo que se le hizo al equipo... (opcional)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adjuntos">Evidencias (máx. 5 archivos, 10 MB c/u)</label>
+                            <input type="file" name="adjuntos[]" id="adjuntos" class="form-control-file"
+                                multiple accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx,.xls,.xlsx">
+                            <small class="form-text text-muted">PDF, imágenes o documentos de Office.</small>
                         </div>
 
                     </div>

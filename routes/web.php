@@ -42,6 +42,7 @@ Route::get('historialtelefonos/lista', [App\Http\Controllers\HistorialTelefonoCo
 Route::get('softwares/lista', [App\Http\Controllers\SoftwareController::class, 'softwares'])->name('softwares.lista')->middleware('auth');
 Route::get('memorandos/lista', [App\Http\Controllers\MemorandoController::class, 'memorandos'])->name('memorandos.lista')->middleware('auth');
 Route::get('prestamos/lista', [App\Http\Controllers\PrestamoController::class, 'prestamos'])->name('prestamos.lista')->middleware('auth');
+Route::get('mantenimientos/lista', [App\Http\Controllers\MantenimientosController::class, 'lista'])->name('mantenimientos.lista')->middleware('auth');
 
 Route::post('prestamos/{prestamo}/devolver', [App\Http\Controllers\PrestamoController::class, 'devolver'])->name('prestamos.devolver');
 
@@ -65,6 +66,8 @@ Route::resource('prestamos', App\Http\Controllers\PrestamoController::class)->mi
 Route::get('hojasvida', [App\Http\Controllers\HojasVidaController::class, 'index'])->name('hojasvida.index')->middleware('auth');
 Route::get('hojasvida/{tipo}/{id}', [App\Http\Controllers\HojasVidaController::class, 'show'])->name('hojasvida.show')->middleware('auth');
 Route::post('hojasvida/{tipo}/{id}', [App\Http\Controllers\HojasVidaController::class, 'store'])->name('hojasvida.store')->middleware('auth');
+
+Route::resource('mantenimientos', App\Http\Controllers\MantenimientosController::class)->only(['index'])->middleware('auth');
 
 Auth::routes();
 

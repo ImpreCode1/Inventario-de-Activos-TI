@@ -383,6 +383,13 @@ return [
             'icon' => 'fas fa-newspaper',
             'can' => ['ver-HojasVida'],
         ],
+        [
+            'text' => 'Mantenimientos',
+            'url' => 'mantenimientos',
+            'icon' => 'fas fa-tools',
+            'can' => ['ver-HojasVida'],
+            'active' => ['mantenimientos*'],
+        ],
 
         ['header' => 'HISTORIAL ACTIVOS', 'can' => ['ver-HistorialEquipo', 'ver-HistorialAccesesorio', 'ver-HistorialTelefono']],
         [
