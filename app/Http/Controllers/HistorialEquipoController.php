@@ -83,6 +83,14 @@ class HistorialEquipoController extends Controller
             ->addColumn('action', function ($equipo) {
                 $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
 
+                if ($equipo->id_portatiles && Gate::allows('ver-HojasVida')) {
+                    $html .= '<a href="'.route('hojasvida.show', ['cpu', $equipo->id_portatiles]).'"
+                            class="btn-icon btn-outline-warning"
+                            title="Ver mantenimientos / hoja de vida">
+                            <i class="fas fa-wrench"></i>
+                        </a>';
+                }
+
                 if (Gate::allows('borrar-HistorialEquipo', $equipo)) {
                     $html .= '
                     <form id="form-eliminar-'.$equipo->id.'"

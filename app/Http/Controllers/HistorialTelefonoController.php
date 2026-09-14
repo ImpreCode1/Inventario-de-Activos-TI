@@ -59,6 +59,14 @@ class HistorialTelefonoController extends Controller
             ->addColumn('action', function ($telefono) {
                 $html = '<div class="d-flex justify-content-center align-items-center flex-wrap action-buttons">';
 
+                if ($telefono->id_telefonos && Gate::allows('ver-HojasVida')) {
+                    $html .= '<a href="'.route('hojasvida.show', ['telefono', $telefono->id_telefonos]).'"
+                            class="btn-icon btn-outline-warning"
+                            title="Ver mantenimientos / hoja de vida">
+                            <i class="fas fa-wrench"></i>
+                        </a>';
+                }
+
                 if (Gate::allows('borrar-HistorialTelefono', $telefono)) {
                     $html .= '
             <form id="form-eliminar-'.$telefono->id.'"
